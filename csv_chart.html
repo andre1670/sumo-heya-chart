@@ -1,0 +1,87 @@
+    <!DOCTYPE HTML>
+    <html>
+    <head>  
+    <script>
+    window.onload = function () {
+     
+    var dataPoints = [];
+     
+    var chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+        exportEnabled: true,
+        title:{
+            text: "Sumo"
+        },
+        axisY: {
+            title: "rikishi"
+        },
+        legend: {
+        cursor: "pointer",
+        itemmouseover: function(e) {
+            e.dataSeries.lineThickness = e.chart.data[e.dataSeriesIndex].lineThickness * 2;
+            e.dataSeries.markerSize = e.chart.data[e.dataSeriesIndex].markerSize + 2;
+            e.chart.render();
+        },
+        itemmouseout: function(e) {
+            e.dataSeries.lineThickness = e.chart.data[e.dataSeriesIndex].lineThickness / 2;
+            e.dataSeries.markerSize = e.chart.data[e.dataSeriesIndex].markerSize - 2;
+            e.chart.render();
+        },
+        itemclick: function (e) {
+            if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                e.dataSeries.visible = false;
+            } else {
+                e.dataSeries.visible = true;
+            }
+            e.chart.render();
+        }
+    },
+        data: [{
+            type: "spline",
+            //toolTipContent: "{x}: {y} rikishi",
+            xValueFormatString: "####.##",
+            yValueFormatString: "## rikishi",
+            showInLegend: true,
+            name: "Dewanoumi",
+            dataPoints: dataPoints
+        }]
+    });
+     
+    $.get("https://raw.githubusercontent.com/andre1670/sumo-heya-chart/main/active.csv", getDataPointsFromCSV);
+     
+    //CSV Format
+    function getDataPointsFromCSV(csv) {
+        var csvLines = points = [];
+        csvLines = csv.split(/[\r?\n|\r|\n]+/);
+
+        for (var i = 1; i < csvLines.length; i++) {
+            if (csvLines[i].length > 0) {
+                points = csvLines[i].split(",");
+                //legendText: points[]
+                dataPoints.push({
+                    label: points[1],
+                    y: parseInt(points[2])
+                });
+            }
+        }
+        chart.render();
+    }
+
+    $("#chartType").change(function () {     
+        var selectedChartType = $("#chartType option:selected").text();
+        chart.options.data[0].type = selectedChartType;
+        chart.options.title.text = "Basic" +" "+ selectedChartType +" "+ "chart";
+        chart.render();
+    })
+
+    }
+
+
+    </script>
+    </head>
+    <body>
+    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    </body>
+    </html>                              
