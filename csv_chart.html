@@ -1,10 +1,10 @@
-    <!DOCTYPE HTML>
+<!DOCTYPE HTML>
     <html>
     <head>  
     <script>
     window.onload = function () {
      
-    var dataPoints = [];
+    var dataPoints1 = dataPoints2 = [];
      
     var chart = new CanvasJS.Chart("chartContainer", {
         animationEnabled: true,
@@ -14,6 +14,9 @@
         },
         axisY: {
             title: "rikishi"
+        },
+        toolTip: {
+        shared: true
         },
         legend: {
         cursor: "pointer",
@@ -35,7 +38,7 @@
             }
             e.chart.render();
         }
-    },
+        },
         data: [{
             type: "spline",
             //toolTipContent: "{x}: {y} rikishi",
@@ -43,28 +46,71 @@
             yValueFormatString: "## rikishi",
             showInLegend: true,
             name: "Dewanoumi",
-            dataPoints: dataPoints
-        }]
+            dataPoints: dataPoints1
+        },
+        {
+            type: "spline",
+            //toolTipContent: "{x}: {y} rikishi",
+            xValueFormatString: "####.##",
+            yValueFormatString: "## rikishi",
+            showInLegend: true,
+            name: "Fujishima",
+            dataPoints: dataPoints2
+        }
+        ]
     });
      
-    $.get("https://raw.githubusercontent.com/andre1670/sumo-heya-chart/main/active.csv", getDataPointsFromCSV);
+    $.get("https://raw.githubusercontent.com/andre1670/sumo-heya-chart/main/chart.csv", getDataPointsFromCSV);
      
     //CSV Format
     function getDataPointsFromCSV(csv) {
-        var csvLines = points = [];
+        var csvLines = points = rikishi1 = rikishi2 = [];
         csvLines = csv.split(/[\r?\n|\r|\n]+/);
 
-        for (var i = 1; i < csvLines.length; i++) {
+        for (var i = 329; i < csvLines.length; i++) {
             if (csvLines[i].length > 0) {
                 points = csvLines[i].split(",");
+                rikishi1 = points[1].split("-");
+                rikishi2 = points[2].split("-");
                 //legendText: points[]
-                dataPoints.push({
-                    label: points[1],
-                    y: parseInt(points[2])
+                dataPoints1.push({
+                    label: points[0],
+                    y: parseInt(rikishi1[0])
                 });
+                dataPoints2.push({
+                    label: points[0],
+                    y: parseInt(rikishi2[0])
+                
+                });
+
             }
         }
         chart.render();
+    }
+
+    /*function addDataPoint(legendText,xValue,yValue){
+        var tempX = xValue.split("/");
+        var xData = new Date(tempX[0],tempX[1],tempX[2],tempX[3]);
+        var yData = parseInt(yValue);
+
+        var dataFlag = false;
+        for(var i=0;i<data.length;i++){
+            if(data[i].legendText == legendText){
+                data[i].dataPoints.push({x:xData, y:yData});
+                dataFlag = true;
+            }
+        }
+        if(!dataFlag){
+            data.push({
+                type : "column",
+                showInLegend : true,
+                legendText : legendText,
+                axisYType: "secondary",
+                dataPoints : [
+                    {x: xData, y:yData}
+                ]
+            });
+        }
     }
 
     $("#chartType").change(function () {     
@@ -73,6 +119,17 @@
         chart.options.title.text = "Basic" +" "+ selectedChartType +" "+ "chart";
         chart.render();
     })
+
+
+    function toggleDataSeries(e) {
+    if(typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+        e.dataSeries.visible = false;
+    }
+    else {
+        e.dataSeries.visible = true;            
+    }
+    chart.render();
+    }*/
 
     }
 
