@@ -1,144 +1,137 @@
 <!DOCTYPE HTML>
-    <html>
-    <head>  
-    <script>
-    window.onload = function () {
-     
-    var dataPoints1 = dataPoints2 = [];
+<html>
+<head>  
+<script>
+window.onload = function () {
+
+    const HEYA_COUNT = 3;
+    for (var i = 1; i <= HEYA_COUNT; i++) {
+        this["dataPoints" + i] = [];
+    }
      
     var chart = new CanvasJS.Chart("chartContainer", {
-        animationEnabled: true,
+        // backgroundColor: "#2A3E50",
+        theme: "light1",
+        backgroundColor: "transparent",
+        animationEnabled: false,
         exportEnabled: true,
-        title:{
-            text: "Sumo"
+        zoomEnabled: true,
+
+        title: {
+            text: "Description"
         },
         axisY: {
-            title: "rikishi"
+            title: "rikishi number"
         },
-        toolTip: {
-        shared: true
+        axisX: {
+            title: "basho"
         },
         legend: {
-        cursor: "pointer",
-        itemmouseover: function(e) {
-            e.dataSeries.lineThickness = e.chart.data[e.dataSeriesIndex].lineThickness * 2;
-            e.dataSeries.markerSize = e.chart.data[e.dataSeriesIndex].markerSize + 2;
-            e.chart.render();
-        },
-        itemmouseout: function(e) {
-            e.dataSeries.lineThickness = e.chart.data[e.dataSeriesIndex].lineThickness / 2;
-            e.dataSeries.markerSize = e.chart.data[e.dataSeriesIndex].markerSize - 2;
-            e.chart.render();
-        },
-        itemclick: function (e) {
-            if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-                e.dataSeries.visible = false;
-            } else {
-                e.dataSeries.visible = true;
+            cursor: "pointer",
+            // itemclick: toggleDataSeries
+            itemmouseover: function(e) {
+                e.dataSeries.lineThickness = e.chart.data[e.dataSeriesIndex].lineThickness * 2;
+                e.dataSeries.markerSize = e.chart.data[e.dataSeriesIndex].markerSize + 2;
+                e.chart.render();
+            },
+            itemmouseout: function(e) {
+                e.dataSeries.lineThickness = e.chart.data[e.dataSeriesIndex].lineThickness / 2;
+                e.dataSeries.markerSize = e.chart.data[e.dataSeriesIndex].markerSize - 2;
+                e.chart.render();
+            },
+            itemclick: function (e) {
+                if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                    e.dataSeries.visible = false;
+                } else {
+                    e.dataSeries.visible = true;
+                }
+                e.chart.render();
             }
-            e.chart.render();
-        }
         },
         data: [{
-            type: "spline",
-            //toolTipContent: "{x}: {y} rikishi",
-            xValueFormatString: "####.##",
-            yValueFormatString: "## rikishi",
+            type: "rangeSplineArea",
+            toolTipContent: "{x}: {y} rikishi",
+            //xValueFormatString: "####.##",
+            //yValueFormatString: "Dewanoumi ## rikishi",
             showInLegend: true,
             name: "Dewanoumi",
             dataPoints: dataPoints1
         },
         {
-            type: "spline",
+            type: "rangeSplineArea",
             //toolTipContent: "{x}: {y} rikishi",
-            xValueFormatString: "####.##",
-            yValueFormatString: "## rikishi",
+            //xValueFormatString: "####.##",
+            //yValueFormatString: "Fujishima ## rikishi",
             showInLegend: true,
             name: "Fujishima",
             dataPoints: dataPoints2
-        }
-        ]
+        },
+        {
+            type: "rangeSplineArea",
+            //toolTipContent: "{x}: {y} rikishi",
+            //xValueFormatString: "####.##",
+            //yValueFormatString: "Futagoyama ## rikishi",
+            showInLegend: true,
+            name: "Futagoyama",
+            dataPoints: dataPoints3
+        }]
     });
      
     $.get("https://raw.githubusercontent.com/andre1670/sumo-heya-chart/main/chart.csv", getDataPointsFromCSV);
-     
-    //CSV Format
+    
     function getDataPointsFromCSV(csv) {
-        var csvLines = points = rikishi1 = rikishi2 = [];
-        csvLines = csv.split(/[\r?\n|\r|\n]+/);
+        var csvLines = points = date = [];
+        for (var i = 1; i <= HEYA_COUNT; i++) {
+            this["rikishiNum" + i] = [];
+        }
 
+        csvLines = csv.split(/[\r?\n|\r|\n]+/);
         for (var i = 329; i < csvLines.length; i++) {
             if (csvLines[i].length > 0) {
                 points = csvLines[i].split(",");
-                rikishi1 = points[1].split("-");
-                rikishi2 = points[2].split("-");
-                //legendText: points[]
+                date = points[0].split(".");
+                /*for (var j = 1; j <= HEYA_COUNT; j++) {
+                    this("rikishiNum" + j) = points[j].split('-');
+                    this("dataPoints" + j).push({
+                        label: points[0],
+                        y: parseInt(this("rikishiNum" + j)[0]);
+                    })
+                }*/
+                /*for (var j = 1; j <= HEYA_COUNT; j++) {
+                    eval("rikishiNum" + j + " = " + points[j].split("-") + ';');
+                    eval("dataPoints" + j + '.' + push({
+                        label: points[0],
+                        y: parseInt + "(rikishiNum" + j + ")[0];")
+                    }))
+                }*/
+                rikishiNum1 = points[1].split("-");
+                rikishiNum2 = points[2].split("-");
+                rikishiNum3 = points[3].split("-");
                 dataPoints1.push({
                     label: points[0],
-                    y: parseInt(rikishi1[0])
+                    y: [parseInt(rikishiNum1[0]), parseInt(rikishiNum1[0]) - parseInt(rikishiNum1[1])]
                 });
                 dataPoints2.push({
                     label: points[0],
-                    y: parseInt(rikishi2[0])
+                    y: [parseInt(rikishiNum2[0]), parseInt(rikishiNum2[0]) - parseInt(rikishiNum2[1])]
                 
                 });
-
+                dataPoints3.push({
+                    label: points[0],
+                    y: [parseInt(rikishiNum3[0]), parseInt(rikishiNum3[0]) - parseInt(rikishiNum3[1])]
+                
+                });
             }
         }
         chart.render();
     }
+}
 
-    /*function addDataPoint(legendText,xValue,yValue){
-        var tempX = xValue.split("/");
-        var xData = new Date(tempX[0],tempX[1],tempX[2],tempX[3]);
-        var yData = parseInt(yValue);
-
-        var dataFlag = false;
-        for(var i=0;i<data.length;i++){
-            if(data[i].legendText == legendText){
-                data[i].dataPoints.push({x:xData, y:yData});
-                dataFlag = true;
-            }
-        }
-        if(!dataFlag){
-            data.push({
-                type : "column",
-                showInLegend : true,
-                legendText : legendText,
-                axisYType: "secondary",
-                dataPoints : [
-                    {x: xData, y:yData}
-                ]
-            });
-        }
-    }
-
-    $("#chartType").change(function () {     
-        var selectedChartType = $("#chartType option:selected").text();
-        chart.options.data[0].type = selectedChartType;
-        chart.options.title.text = "Basic" +" "+ selectedChartType +" "+ "chart";
-        chart.render();
-    })
-
-
-    function toggleDataSeries(e) {
-    if(typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-        e.dataSeries.visible = false;
-    }
-    else {
-        e.dataSeries.visible = true;            
-    }
-    chart.render();
-    }*/
-
-    }
-
-
-    </script>
-    </head>
-    <body>
-    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
-    <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
-    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-    </body>
-    </html>                              
+</script>
+</head>
+<body>
+<div id="chartContainer" style="height: 450px; width: 100%;"></div>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</body>
+</html>
