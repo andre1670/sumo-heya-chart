@@ -48,7 +48,7 @@ Basho,Dewanoumi,Fujishima,Futagoyama
 1921.05,35-18,,
 1922.01,35-20,,
 1922.05,34-19,,
-1923.01,37-22-K Ryogoku,,
+1923.01,37-22-K Ryogoku-HT,,
 1923.05,34-21-K Ryogoku,,
 1924.01,33-19-K Ryogoku,,
 1924.05,31-18-K Ryogoku,,
@@ -207,7 +207,7 @@ Basho,Dewanoumi,Fujishima,Futagoyama
 1967.09,52-6-M1 Dewanohana,,
 1967.11,51-6-M1 Dewanohana,,
 1968.01,55-6-M1 Dewanohana,,
-1968.03,54-6-Y Sadanoyama,,
+1968.03,54-6-Y Sadanoyama-HT,,
 1968.05,58-4-Y Sadanoyama,,
 1968.07,57-4-Y Sadanoyama,,
 1968.09,58-4-Y Sadanoyama,,
@@ -288,7 +288,7 @@ Basho,Dewanoumi,Fujishima,Futagoyama
 1981.03,47-4-Y Sadanoyama,,
 1981.05,47-4-Y Sadanoyama,,
 1981.07,45-4-Y Sadanoyama,,
-1981.09,41-4-Y Sadanoyama,5-0-Y Mienoumi,
+1981.09,41-4-Y Sadanoyama,5-0-Y Mienoumi-HB,
 1981.11,40-4-Y Sadanoyama,5-0-Y Mienoumi,
 1982.01,40-4-Y Sadanoyama,6-0-Y Mienoumi,
 1982.03,41-4-Y Sadanoyama,13-0-Y Mienoumi,
@@ -375,7 +375,7 @@ Basho,Dewanoumi,Fujishima,Futagoyama
 1995.09,37-4-Y Sadanoyama,31-2-Y Mienoumi,
 1995.11,36-4-Y Sadanoyama,30-4-Y Mienoumi,
 1996.01,35-4-Y Sadanoyama,30-4-Y Mienoumi,
-1996.03,38-4-S Washuyama,34-4-Y Mienoumi,
+1996.03,38-4-S Washuyama-HT,34-4-Y Mienoumi,
 1996.05,38-4-S Washuyama,33-3-Y Mienoumi,
 1996.07,38-5-S Washuyama,32-3-Y Mienoumi,
 1996.09,38-5-S Washuyama,30-3-Y Mienoumi,
@@ -463,7 +463,7 @@ Basho,Dewanoumi,Fujishima,Futagoyama
 2010.05,19-1-S Washuyama,17-4-Y Mienoumi,
 2010.07,19-0-S Washuyama,16-4-Y Mienoumi,
 2010.09,19-0-S Washuyama,16-4-Y Mienoumi,
-2010.11,18-0-S Washuyama,16-5-O Musoyama,
+2010.11,18-0-S Washuyama,16-5-O Musoyama-HT,
 2011.01,19-0-S Washuyama,16-5-O Musoyama,
 2011.05,18-0-S Washuyama,16-4-O Musoyama,
 2011.07,16-0-S Washuyama,16-5-O Musoyama,
@@ -482,7 +482,7 @@ Basho,Dewanoumi,Fujishima,Futagoyama
 2013.09,22-0-S Washuyama,11-1-O Musoyama,
 2013.11,21-0-S Washuyama,11-1-O Musoyama,
 2014.01,21-0-S Washuyama,13-1-O Musoyama,
-2014.03,18-0-M2 Oginohana,13-1-O Musoyama,
+2014.03,18-0-M2 Oginohana-HT,13-1-O Musoyama,
 2014.05,18-0-M2 Oginohana,13-1-O Musoyama,
 2014.07,18-0-M2 Oginohana,13-1-O Musoyama,
 2014.09,18-0-M2 Oginohana,13-1-O Musoyama,
@@ -507,7 +507,7 @@ Basho,Dewanoumi,Fujishima,Futagoyama
 2017.11,14-1-M2 Oginohana,16-0-O Musoyama,
 2018.01,14-1-M2 Oginohana,16-0-O Musoyama,
 2018.03,15-1-M2 Oginohana,18-0-O Musoyama,
-2018.05,15-1-M2 Oginohana,12-0-O Musoyama,7-0-O Miyabiyama
+2018.05,15-1-M2 Oginohana,12-0-O Musoyama,7-0-O Miyabiyama-HB
 2018.07,15-1-M2 Oginohana,12-0-O Musoyama,6-0-O Miyabiyama
 2018.09,15-1-M2 Oginohana,12-0-O Musoyama,7-0-O Miyabiyama
 2018.11,14-1-M2 Oginohana,12-0-O Musoyama,7-0-O Miyabiyama
