@@ -13,7 +13,7 @@ window.onload = function () {
     var chart = new CanvasJS.Chart("chartContainer", {
         // backgroundColor: "#2A3E50",
         theme: "light1",
-        backgroundColor: "#F5DEB3",
+        backgroundColor: "white",
         animationEnabled: false,
         exportEnabled: true,
         zoomEnabled: true,
@@ -24,10 +24,14 @@ window.onload = function () {
         },
         axisY: {
             includeZero: true,
+            titleFontColor: "red",
             title: "rikishi number"
         },
         axisX: {
             title: "date",
+            labelFontSize: 14,
+            titleFontColor: "red",
+            //margin: 30,
             includeZero: false,
             //labelFormatString: "YYYY MM"
             // interval: 6
@@ -51,18 +55,14 @@ window.onload = function () {
                 e.dataSeries.fillOpacity = .3;
                 e.chart.render();
             },
-            itemclick: function(e) {       
-                var totalVisibleSeries = 0;
-                for(var i = 0; i < e.chart.data.length; i++)  
-                    if(e.chart.data[i].visible)
-                        totalVisibleSeries++;
-                    if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-                        if(totalVisibleSeries > 1)
-                            e.dataSeries.visible = false;
-                    } else {
-                        e.dataSeries.visible = true;
-                    }
-                    e.chart.render();
+            itemclick: function(e) {
+                if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                    e.dataSeries.visible = false;
+                }
+                else {
+                    e.dataSeries.visible = true;
+                }
+                chart.render();
             }
         },
         toolTip: {
@@ -79,56 +79,41 @@ window.onload = function () {
             }
         },
         data: [{
-            type: "rangeSplineArea",
+            type: "rangeArea",
             //legendMarkerType: "triangle",
             showInLegend: true,
             name: "Dewanoumi",
             fillOpacity: .3,
             lineThickness: 1,
-            indexLabelFormatter: function(e) {
-                if (e.dataPoint.indexLabel == null)
-                    return '';           
-                else
-                    return e.dataPoint.indexLabel;               
-            },
+            click: onClick,
             indexLabelFontSize: 12,
             dataPoints: dps1
         },
         {
-            type: "rangeSplineArea",
+            type: "rangeArea",
             //legendMarkerType: "triangle",
             showInLegend: true,
             name: "Fujishima",
             fillOpacity: .3,
             lineThickness: 1,
-            indexLabelFormatter: function(e) {
-                if (e.dataPoint.indexLabel == null)
-                    return '';           
-                else
-                    return e.dataPoint.indexLabel;               
-            },
             indexLabelFontSize: 12,
             dataPoints: dps2
         },
         {
-            type: "rangeSplineArea",
+            type: "rangeArea",
             //legendMarkerType: "triangle",
             showInLegend: true,
             name: "Futagoyama",
             fillOpacity: .3,
             lineThickness: 1,
-            indexLabelFormatter: function(e) {
-                if (e.dataPoint.indexLabel == null)
-                    return '';           
-                else
-                    return e.dataPoint.indexLabel;               
-            },
             indexLabelFontSize: 12,
             dataPoints: dps3
         }]
     });
     
-    
+    function onClick(e) {      
+        window.open(e.dataPoint.url);    
+    }
 
     /*chart.options.data[0].click = function(e) { 
         var dataSeries = e.dataSeries;
@@ -137,15 +122,16 @@ window.onload = function () {
         window.open(dataPoint.link,'_blank');      
     };*/
 
-    var button = document.getElementById( "toggleDewanoumi" );
-    button.addEventListener( "click",  toggleDewanoumi);
+    var button = document.getElementById("toggleDewanoumi");
+    button.addEventListener("click", toggleDewanoumi);
 
     function toggleDewanoumi(e) {
         var data = chart.data;
 
-        for(var i = 0; i < 3; i++) {
+        for (var i = 0; i < 3; i++) {
             chart.options.data[i].visible = !data[i].visible;
         }
+
 
         chart.render();
     }
@@ -164,13 +150,12 @@ window.onload = function () {
     chart.axisX[0].set("viewportMinimum", $("#slider1").slider("values", 0), false);
     chart.axisX[0].set("viewportMaximum", $("#slider1").slider("values", 1));
     */
-    var button = document.getElementById( "changeType" );
-    button.addEventListener( "click",  changeType);
+    var button = document.getElementById("changeType");
+    button.addEventListener("click", changeType);
 
     function changeType(e) {
-        chart.data[0].set("type", "spline", false);
-        chart.data[0].set("name", "My Chart");
-        this.disabled = true;
+        chart.data[0].set("type", "rangeSplineArea", false);
+        //this.disabled = true;
 
         chart.render();
     }
@@ -178,51 +163,41 @@ window.onload = function () {
     $.get("https://raw.githubusercontent.com/andre1670/sumo-heya-chart/main/chart.csv", getDataPointsFromCSV);
     
     function getDataPointsFromCSV(csv) {
-        var csvLines = points = date = [];
+        var csvLines = heya = date = [];
         for (var i = 1; i <= HEYA_COUNT; i++) {
-            this["rikishiNum" + i] = [];
+            this["element" + i] = [];
         }
 
         csvLines = csv.split(/[\r?\n|\r|\n]+/);
         for (var i = 1; i < csvLines.length; i++) {
             if (csvLines[i].length > 0) {
-                points = csvLines[i].split(",");
-                date = points[0].split(".");
+                heya = csvLines[i].split(",");
+                date = heya[0].split(".");
+                
                 /*for (var j = 1; j <= HEYA_COUNT; j++) {
-                    this("rikishiNum" + j) = points[j].split('-');
-                    this("dataPoints" + j).push({
-                        label: points[0],
-                        y: parseInt(this("rikishiNum" + j)[0]);
+                    this("element" + j) = heya[j].split('-');
+                    this("dataheya" + j).push({
+                        label: heya[0],
+                        y: parseInt(this("element" + j)[0]);
                     })
                 }*/
                 /*for (var j = 1; j <= HEYA_COUNT; j++) {
-                    eval("rikishiNum" + j + " = " + points[j].split("-") + ';');
-                    eval("dataPoints" + j + '.' + push({
-                        label: points[0],
-                        y: parseInt + "(rikishiNum" + j + ")[0];")
+                    eval("element" + j + " = " + heya[j].split("-") + ';');
+                    eval("dataheya" + j + '.' + push({
+                        label: heya[0],
+                        y: parseInt + "(element" + j + ")[0];")
                     }))
                 }*/
-                rikishiNum1 = points[1].split("-");
-                rikishiNum2 = points[2].split("-");
-                rikishiNum3 = points[3].split("-");
-                dps1.push({
-                    label: rikishiNum1[2],
-                    indexLabel: rikishiNum1[3],
-                    x: new Date(date[0], date[1]-1),
-                    y: [parseInt(rikishiNum1[0]), parseInt(rikishiNum1[0]) - parseInt(rikishiNum1[1])]
-                });
-                dps2.push({
-                    label: rikishiNum2[2],
-                    indexLabel: rikishiNum2[3],
-                    x: new Date(date[0], date[1]-1),
-                    y: [parseInt(rikishiNum2[0]), parseInt(rikishiNum2[0]) - parseInt(rikishiNum2[1])]
-                });
-                dps3.push({
-                    label: rikishiNum3[2],
-                    indexLabel: rikishiNum3[3],
-                    x: new Date(date[0], date[1]-1),
-                    y: [parseInt(rikishiNum3[0]), parseInt(rikishiNum3[0]) - parseInt(rikishiNum3[1])]
-                });
+                element1 = heya[1].split("-");
+                element2 = heya[2].split("-");
+                element3 = heya[3].split("-");
+                dps1.push({ label: element1[2], indexLabel: element1[3],
+                    url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + date[0] + date[1] + "&heya=9&shusshin=-1",
+                    x: new Date(date[0], date[1]-1), y: [parseInt(element1[0]), parseInt(element1[0]) - parseInt(element1[1])] });
+                dps2.push({ label: element2[2], indexLabel: element2[3],
+                    x: new Date(date[0], date[1]-1), y: [parseInt(element2[0]), parseInt(element2[0]) - parseInt(element2[1])] });
+                dps3.push({ label: element3[2], indexLabel: element3[3],
+                    x: new Date(date[0], date[1]-1), y: [parseInt(element3[0]), parseInt(element3[0]) - parseInt(element3[1])] });
             }
         }
         chart.render();
@@ -234,7 +209,7 @@ window.onload = function () {
 <body>
 <div id="chartContainer" style="height: 450px; width: 100%;"></div>
 <button id="toggleDewanoumi" type = "button" >Dewanoumi ichimon</button>
-</div><button id="changeType">Change Chart Type</button>
+</div><button id="changeType" type = "button" >Change Chart Type</button>
         <span id="display"></span>
 <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
