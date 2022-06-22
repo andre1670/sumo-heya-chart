@@ -11,9 +11,8 @@ window.onload = function () {
     }
      
     var chart = new CanvasJS.Chart("chartContainer", {
-        // backgroundColor: "#2A3E50",
         theme: "light1",
-        backgroundColor: "white",
+        backgroundColor: "transparent",
         animationEnabled: false,
         exportEnabled: true,
         zoomEnabled: true,
@@ -23,9 +22,10 @@ window.onload = function () {
             text: "Description"
         },
         axisY: {
-            includeZero: true,
+            title: "rikishi number",
+            labelFontSize: 14,
             titleFontColor: "red",
-            title: "rikishi number"
+            includeZero: true
         },
         axisX: {
             title: "date",
@@ -44,22 +44,28 @@ window.onload = function () {
             // dockInsidePlotArea: true,
             // itemclick: toggleDataSeries
             itemmouseover: function(e) {
-                e.dataSeries.lineThickness = e.chart.data[e.dataSeriesIndex].lineThickness * 2;
-                e.dataSeries.markerSize = e.chart.data[e.dataSeriesIndex].markerSize + 2;
-                e.dataSeries.fillOpacity = .5;
+                e.dataSeries.lineThickness = e.chart.data[e.dataSeriesIndex].lineThickness + 1;
                 e.chart.render();
             },
             itemmouseout: function(e) {
-                e.dataSeries.lineThickness = e.chart.data[e.dataSeriesIndex].lineThickness / 2;
-                e.dataSeries.markerSize = e.chart.data[e.dataSeriesIndex].markerSize - 2;
-                e.dataSeries.fillOpacity = .3;
+                e.dataSeries.lineThickness = e.chart.data[e.dataSeriesIndex].lineThickness - 1;
                 e.chart.render();
             },
             itemclick: function(e) {
-                if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                if (e.dataSeries.name == "Dewanoumi Ichimon") {
+                    if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
                     e.dataSeries.visible = false;
+                    for (var i = 1; i <= 3; i++)
+                        chart.options.data[i].visible = false;
+                } else {
+                    e.dataSeries.visible = true;
+                    for (var i = 1; i <= 3; i++)
+                        chart.options.data[i].visible = true;
                 }
-                else {
+                }
+                else if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                    e.dataSeries.visible = false;
+                } else {
                     e.dataSeries.visible = true;
                 }
                 chart.render();
@@ -72,93 +78,99 @@ window.onload = function () {
             contentFormatter: function(e) {
                 var str = "";
                 for (var i = 0; i < e.entries.length; i++) {
-                    var  temp = CanvasJS.formatDate(e.entries[i].dataPoint.x, "YYYY.MM") + " - " + "<strong>" + e.entries[i].dataSeries.name + "</strong><br/>Shisho: " + e.entries[i].dataPoint.label + "<br/>" + e.entries[i].dataPoint.y[0] + " rikishi, " + (e.entries[i].dataPoint.y[0] - e.entries[i].dataPoint.y[1]) + " sekitori<br/>";
+                    var  temp = CanvasJS.formatDate(e.entries[i].dataPoint.x, "YYYY.MM") + " - " + "<strong>" + e.entries[i].dataSeries.name + "</strong><br/>Shisho: " + e.entries[i].dataPoint.label + "<br/><strong>" + e.entries[i].dataPoint.y[0] + "</strong> rikishi, <strong>" + (e.entries[i].dataPoint.y[0] - e.entries[i].dataPoint.y[1]) + "</strong> sekitori<br/>";
                     str = str.concat(temp);
                 }
-                return (str);
+                return str;
             }
         },
-        data: [{
-            type: "rangeArea",
-            //legendMarkerType: "triangle",
-            showInLegend: true,
-            name: "Dewanoumi",
-            fillOpacity: .3,
-            lineThickness: 1,
-            click: onClick,
-            indexLabelFontSize: 12,
-            dataPoints: dps1
-        },
+        data: [
         {
-            type: "rangeArea",
-            //legendMarkerType: "triangle",
+            name: "Dewanoumi Ichimon",
+            type: "line",
             showInLegend: true,
-            name: "Fujishima",
-            fillOpacity: .3,
-            lineThickness: 1,
-            indexLabelFontSize: 12,
-            dataPoints: dps2
-        },
-        {
-            type: "rangeArea",
-            //legendMarkerType: "triangle",
-            showInLegend: true,
-            name: "Futagoyama",
-            fillOpacity: .3,
-            lineThickness: 1,
-            indexLabelFontSize: 12,
-            dataPoints: dps3
+            dataPoints: [
+                { x: 0 }
+            ]
+        }, {
+            indexLabelFormatter: function (e) {
+                if (e.index == 0 && e.dataPoint.dataPointLabel)
+                    return e.dataPoint.dataPointLabel;
+                else return "";
+            },
+            type: "rangeArea", showInLegend: true, name: "Dewanoumi",
+            fillOpacity: .4, lineThickness: 1.5, click: onClick,
+            indexLabelFontSize: 14, dataPoints: dps1
+        }, {
+            indexLabelFormatter: function (e) {
+                if (e.index == 0 && e.dataPoint.dataPointLabel)
+                    return e.dataPoint.dataPointLabel;
+                else return "";
+            },
+            type: "rangeArea", showInLegend: true, name: "Fujishima",
+            fillOpacity: .4, lineThickness: 1.5, click: onClick,
+            indexLabelFontSize: 14, dataPoints: dps2
+        }, {
+            indexLabelFormatter: function (e) {
+                if (e.index == 0 && e.dataPoint.dataPointLabel)
+                    return e.dataPoint.dataPointLabel;
+                else return "";
+            },
+            type: "rangeArea", showInLegend: true, name: "Futagoyama",
+            fillOpacity: .4, lineThickness: 1.5, click: onClick,
+            indexLabelFontSize: 14, dataPoints: dps3
         }]
     });
     
+
     function onClick(e) {      
         window.open(e.dataPoint.url);    
     }
 
-    /*chart.options.data[0].click = function(e) { 
-        var dataSeries = e.dataSeries;
-        var dataPoint = e.dataPoint;
-        
-        window.open(dataPoint.link,'_blank');      
-    };*/
 
-    var button = document.getElementById("toggleDewanoumi");
-    button.addEventListener("click", toggleDewanoumi);
+    var checkbox = document.querySelector("input[name=checkbox]");
+    checkbox.addEventListener("change", changeType);
 
-    function toggleDewanoumi(e) {
-        var data = chart.data;
-
-        for (var i = 0; i < 3; i++) {
-            chart.options.data[i].visible = !data[i].visible;
+    function changeType() {
+        for (var i = 1; i <= 4; i++) {
+            if (this.checked)
+                chart.data[i].set("type", "rangeSplineArea");
+            else chart.data[i].set("type", "rangeArea");
         }
-
 
         chart.render();
     }
+
+
+    var checkbox = document.querySelector("input[name=checkbox]");
+    checkbox.addEventListener("change", toggleSekitori);
+
+    function toggleSekitori() {
+        if (this.checked)
+            chart.data[1].set("type", "rangeSplineArea");
+        else {
+            chart.data[1].set("type", "spline");
+            chart.data[1].set("dataPoint", "dps2");
+        }
+
+        chart.render();
+    }
+
 
     /*$("#slider1").slider({
         range: true,
         min: chart.axisX[0].get("minimum"),
         max: chart.axisX[0].get("maximum"),
-        values: [Date(1899, 05), Date(2022, 05)], //Defalt zoom state
-        slide: function( event, ui ) {
+        values: [1, 111], //Defalt zoom state
+        slide: function(event, ui) {
             chart.axisX[0].set("viewportMinimum", ui.values[0], false);
             chart.axisX[0].set("viewportMaximum", ui.values[1]);    
         }
     });
 
     chart.axisX[0].set("viewportMinimum", $("#slider1").slider("values", 0), false);
-    chart.axisX[0].set("viewportMaximum", $("#slider1").slider("values", 1));
-    */
-    var button = document.getElementById("changeType");
-    button.addEventListener("click", changeType);
+    chart.axisX[0].set("viewportMaximum", $("#slider1").slider("values", 1));*/
 
-    function changeType(e) {
-        chart.data[0].set("type", "rangeSplineArea", false);
-        //this.disabled = true;
-
-        chart.render();
-    }
 
     $.get("https://raw.githubusercontent.com/andre1670/sumo-heya-chart/main/chart.csv", getDataPointsFromCSV);
     
@@ -191,12 +203,14 @@ window.onload = function () {
                 element1 = heya[1].split("-");
                 element2 = heya[2].split("-");
                 element3 = heya[3].split("-");
-                dps1.push({ label: element1[2], indexLabel: element1[3],
+                dps1.push({ label: element1[2], dataPointLabel: element1[3],
                     url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + date[0] + date[1] + "&heya=9&shusshin=-1",
                     x: new Date(date[0], date[1]-1), y: [parseInt(element1[0]), parseInt(element1[0]) - parseInt(element1[1])] });
-                dps2.push({ label: element2[2], indexLabel: element2[3],
+                dps2.push({ label: element2[2], dataPointLabel: element2[3],
+                    url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + date[0] + date[1] + "&heya=" + element2[4] + "&shusshin=-1",
                     x: new Date(date[0], date[1]-1), y: [parseInt(element2[0]), parseInt(element2[0]) - parseInt(element2[1])] });
-                dps3.push({ label: element3[2], indexLabel: element3[3],
+                dps3.push({ label: element3[2], dataPointLabel: element3[3],
+                    url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + date[0] + date[1] + "&heya=14&shusshin=-1",
                     x: new Date(date[0], date[1]-1), y: [parseInt(element3[0]), parseInt(element3[0]) - parseInt(element3[1])] });
             }
         }
@@ -207,10 +221,10 @@ window.onload = function () {
 </script>
 </head>
 <body>
-<div id="chartContainer" style="height: 450px; width: 100%;"></div>
-<button id="toggleDewanoumi" type = "button" >Dewanoumi ichimon</button>
-</div><button id="changeType" type = "button" >Change Chart Type</button>
-        <span id="display"></span>
+<div id="chartContainer" style="height: 450px; width: 100%;">
+<center><img src="https://i.imgur.com/Pdr7Mvk.gif" id="loader"/><br/>Loading...</center>
+</div><label><input id="toggleSekitori" type = "checkbox" name="checkbox" value="">Show Sekitori</label>
+<span id="display"></span>
 <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </body>
