@@ -24,13 +24,15 @@ window.onload = function () {
         axisY: {
             title: "rikishi number",
             labelFontSize: 14,
-            titleFontColor: "red",
+            titleFontSize: 20,
+            titleFontColor: "blue",
             includeZero: true
         },
         axisX: {
             title: "date",
             labelFontSize: 14,
-            titleFontColor: "red",
+            titleFontSize: 20,
+            titleFontColor: "blue",
             //margin: 30,
             includeZero: false,
             //labelFormatString: "YYYY MM"
@@ -89,7 +91,7 @@ window.onload = function () {
             name: "Dewanoumi Ichimon",
             type: "line",
             showInLegend: true,
-            dataPoints: [
+            dataPoints: [   
                 { x: 0 }
             ]
         }, {
@@ -177,7 +179,7 @@ window.onload = function () {
     function getDataPointsFromCSV(csv) {
         var csvLines = heya = date = [];
         for (var i = 1; i <= HEYA_COUNT; i++) {
-            this["element" + i] = [];
+            this["datas" + i] = [];
         }
 
         csvLines = csv.split(/[\r?\n|\r|\n]+/);
@@ -185,19 +187,19 @@ window.onload = function () {
             if (csvLines[i].length > 0) {
                 heya = csvLines[i].split(",");
                 date = heya[0].split(".");
-                
-                element1 = heya[1].split("-");
-                element2 = heya[2].split("-");
-                element3 = heya[3].split("-");
-                dps1.push({ label: element1[2], dataPointLabel: element1[3],
+
+                datas1 = heya[1].split("-");
+                datas2 = heya[2].split("-");
+                datas3 = heya[3].split("-");
+                dps1.push({ label: datas1[2], dataPointLabel: datas1[3],
                     url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + date[0] + date[1] + "&heya=9&shusshin=-1",
-                    x: new Date(date[0], date[1]-1), y: [parseInt(element1[0]), parseInt(element1[0]) - parseInt(element1[1])] });
-                dps2.push({ label: element2[2], dataPointLabel: element2[3],
-                    url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + date[0] + date[1] + "&heya=" + element2[4] + "&shusshin=-1",
-                    x: new Date(date[0], date[1]-1), y: [parseInt(element2[0]), parseInt(element2[0]) - parseInt(element2[1])] });
-                dps3.push({ label: element3[2], dataPointLabel: element3[3],
+                    x: new Date(date[0], date[1]-1), y: [parseInt(datas1[0]), parseInt(datas1[0]) - parseInt(datas1[1])] });
+                dps2.push({ label: datas2[2], dataPointLabel: datas2[3],
+                    url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + date[0] + date[1] + "&heya=" + datas2[4] + "&shusshin=-1",
+                    x: new Date(date[0], date[1]-1), y: [parseInt(datas2[0]), parseInt(datas2[0]) - parseInt(datas2[1])] });
+                dps3.push({ label: datas3[2], dataPointLabel: datas3[3],
                     url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + date[0] + date[1] + "&heya=14&shusshin=-1",
-                    x: new Date(date[0], date[1]-1), y: [parseInt(element3[0]), parseInt(element3[0]) - parseInt(element3[1])] });
+                    x: new Date(date[0], date[1]-1), y: [parseInt(datas3[0]), parseInt(datas3[0]) - parseInt(datas3[1])] });
             }
         }
         chart.render();
