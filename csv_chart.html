@@ -33,6 +33,8 @@ window.onload = function () {
             labelFontSize: 14,
             titleFontSize: 20,
             titleFontColor: "blue",
+            viewportMinimum: new Date(1988, 3),
+            viewportMaximum: new Date(2022, 5),
             //margin: 30,
             includeZero: false,
             //labelFormatString: "YYYY MM"
@@ -46,37 +48,40 @@ window.onload = function () {
             // dockInsidePlotArea: true,
             // itemclick: toggleDataSeries
             itemmouseover: function(e) {
-                e.dataSeries.lineThickness = e.chart.data[e.dataSeriesIndex].lineThickness + 1;
+                e.dataSeries.lineThickness = 2.5;
+                //e.chart.data[e.dataSeriesIndex].lineThickness
                 e.chart.render();
             },
             itemmouseout: function(e) {
-                e.dataSeries.lineThickness = e.chart.data[e.dataSeriesIndex].lineThickness - 1;
+                e.dataSeries.lineThickness = 1.5;
                 e.chart.render();
             },
             itemclick: function(e) {
+
                 if (e.dataSeries.name == "Dewanoumi Ichimon") {
                     if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
                     e.dataSeries.visible = false;
                     for (var i = 1; i <= 3; i++)
                         chart.options.data[i].visible = false;
-                } else {
-                    e.dataSeries.visible = true;
-                    for (var i = 1; i <= 3; i++)
-                        chart.options.data[i].visible = true;
-                }
+                    } else {
+                        e.dataSeries.visible = true;
+                        for (var i = 1; i <= 3; i++)
+                            chart.options.data[i].visible = true;
+                    }
                 }
                 else if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
                     e.dataSeries.visible = false;
                 } else {
                     e.dataSeries.visible = true;
                 }
-                chart.render();
+                
             }
         },
         toolTip: {
             shared: false,
-            cornerRadius: 10,
-            xValueFormatString: "YYYY MM",
+            //cornerRadius: 10,
+            fontFamily: "arial",
+            borderColor: "black",
             contentFormatter: function(e) {
                 var str = "";
                 for (var i = 0; i < e.entries.length; i++) {
@@ -91,11 +96,9 @@ window.onload = function () {
             name: "Dewanoumi Ichimon",
             type: "line",
             showInLegend: true,
-            dataPoints: [   
-                { x: 0 }
-            ]
+            dataPoints: [{ x: 0 }]
         }, {
-            indexLabelFormatter: function (e) {
+            indexLabelFormatter: function(e) {
                 if (e.index == 0 && e.dataPoint.dataPointLabel)
                     return e.dataPoint.dataPointLabel;
                 else return "";
@@ -104,7 +107,7 @@ window.onload = function () {
             fillOpacity: .4, lineThickness: 1.5, click: onClick,
             indexLabelFontSize: 14, dataPoints: dps1
         }, {
-            indexLabelFormatter: function (e) {
+            indexLabelFormatter: function(e) {
                 if (e.index == 0 && e.dataPoint.dataPointLabel)
                     return e.dataPoint.dataPointLabel;
                 else return "";
@@ -113,7 +116,7 @@ window.onload = function () {
             fillOpacity: .4, lineThickness: 1.5, click: onClick,
             indexLabelFontSize: 14, dataPoints: dps2
         }, {
-            indexLabelFormatter: function (e) {
+            indexLabelFormatter: function(e) {
                 if (e.index == 0 && e.dataPoint.dataPointLabel)
                     return e.dataPoint.dataPointLabel;
                 else return "";
@@ -130,29 +133,36 @@ window.onload = function () {
     }
 
 
-    var checkbox = document.querySelector("input[name=checkbox]");
-    checkbox.addEventListener("change", changeType);
-
-    function changeType() {
-        for (var i = 1; i <= 4; i++) {
-            if (this.checked)
-                chart.data[i].set("type", "rangeSplineArea");
-            else chart.data[i].set("type", "rangeArea");
-        }
-
-        chart.render();
-    }
+    
 
 
     var checkbox = document.querySelector("input[name=checkbox]");
     checkbox.addEventListener("change", toggleSekitori);
 
     function toggleSekitori() {
-        if (this.checked)
-            chart.data[1].set("type", "rangeSplineArea");
-        else {
-            chart.data[1].set("type", "spline");
-            chart.data[1].set("dataPoint", "dps2");
+        var y1 = [];
+
+        if (this.checked) {
+            for (var i = 1; i <= 3; i++) {
+                for (var j = 0; j < chart.options.data[i].dataPoints.length; j++) {
+                    y1[j] = chart.options.data[i].dataPoints[j].y[1];
+                    chart.options.data[i].dataPoints[j].y[1] = chart.options.data[i].dataPoints[j].y[0];
+                }
+            }
+        }
+    }
+
+
+    var checkbox = document.querySelector("input[name=checkbox]");
+    checkbox.addEventListener("change", smoothLines);
+
+    function smoothLines() {
+        if (this.checked) {
+            for (var i = 1; i <=3; i++)
+                chart.data[i].set("type", "rangeSplineArea");
+        }
+        else for (var i = 1; i <=3; i++) {
+            chart.data[i].set("type", "rangeArea");
         }
 
         chart.render();
@@ -204,6 +214,21 @@ window.onload = function () {
         }
         chart.render();
     }
+
+    $("#updateDataPoint").click(function () {
+
+        //var length = chart.options.data[0].dataPoints.length;
+        //chart.options.title.text = "Last DataPoint Updated";
+        var y1 = [];
+        for (var i = 1; i <= 3; i++) {
+            for (var j = 0; j < chart.options.data[i].dataPoints.length; j++) {
+                y1[j] = chart.options.data[i].dataPoints[j].y[1];
+                chart.options.data[i].dataPoints[j].y[1] = chart.options.data[i].dataPoints[j].y[0];
+            }
+        }
+        chart.render();
+
+    });
 }
 
 </script>
@@ -211,7 +236,9 @@ window.onload = function () {
 <body>
 <div id="chartContainer" style="height: 450px; width: 100%;">
 <center><img src="https://i.imgur.com/Pdr7Mvk.gif" id="loader"/><br/>Loading...</center>
-</div><label><input id="toggleSekitori" type = "checkbox" name="checkbox" value="">Show Sekitori</label>
+</div><label><input id="smoothLines" type = "checkbox" name="checkbox" value="">Smooth Lines</label>
+</div><label><input id="toggleSekitori" type = "checkbox" name="checkbox" value="">Enable Sekitori</label>
+<button id="updateDataPoint">Update Data Point</button>
 <span id="display"></span>
 <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
