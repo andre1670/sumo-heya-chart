@@ -1,15 +1,17 @@
 <!DOCTYPE HTML>
 <html>
-<head>  
-<script>
-window.onload = function () {
+
+<head>
+    <script>
+
+window.onload = function() {
 
     const HEYA_COUNT = 3;
 
     for (var i = 1; i <= HEYA_COUNT; i++) {
         this["dps" + i] = [];
     }
-     
+
     var chart = new CanvasJS.Chart("chartContainer", {
         theme: "light1",
         backgroundColor: "transparent",
@@ -19,64 +21,78 @@ window.onload = function () {
         zoomType: "x",
 
         title: {
-            text: "Description"
+            text: "Description",
+            fontFamily: "arial"
         },
+
         axisY: {
             title: "rikishi number",
+            titleFontFamily: "arial",
+            labelFontFamily: "arial",
             labelFontSize: 14,
             titleFontSize: 20,
             titleFontColor: "blue",
             includeZero: true
         },
+
         axisX: {
             title: "date",
+            titleFontFamily: "arial",
+            labelFontFamily: "arial",
             labelFontSize: 14,
             titleFontSize: 20,
             titleFontColor: "blue",
-            viewportMinimum: new Date(1988, 3),
-            viewportMaximum: new Date(2022, 5),
+            //viewportMinimum: new Date(1988, 3),
+            //viewportMaximum: new Date(2022, 5),
             //margin: 30,
             includeZero: false,
             //labelFormatString: "YYYY MM"
             // interval: 6
             labelFormatter: function(e) {
                 return CanvasJS.formatDate(e.value, "YYYY.MM");
-            }   
+            },
+            stripLines: [{
+                value: new Date(1988, 1)
+            }]
         },
+
         legend: {
-            cursor: "pointer",
+            cursor: "cursor",
+            fontFamily: "arial",
+            fontWeight: "normal",
             // dockInsidePlotArea: true,
             // itemclick: toggleDataSeries
             itemmouseover: function(e) {
                 e.dataSeries.lineThickness = 2.5;
                 //e.chart.data[e.dataSeriesIndex].lineThickness
+
                 e.chart.render();
             },
             itemmouseout: function(e) {
                 e.dataSeries.lineThickness = 1.5;
+
                 e.chart.render();
             },
             itemclick: function(e) {
-
-                if (e.dataSeries.name == "Dewanoumi Ichimon") {
+                if (e.dataSeries.name == chart.options.data[0].name) {
                     if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-                    e.dataSeries.visible = false;
-                    for (var i = 1; i <= 3; i++)
-                        chart.options.data[i].visible = false;
+                        e.dataSeries.visible = false;
+                        for (var i = 1; i <= 3; i++)
+                            chart.options.data[i].visible = false;
                     } else {
                         e.dataSeries.visible = true;
                         for (var i = 1; i <= 3; i++)
                             chart.options.data[i].visible = true;
                     }
-                }
-                else if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                } else if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible)
                     e.dataSeries.visible = false;
-                } else {
+                else
                     e.dataSeries.visible = true;
-                }
-                
+
+                e.chart.render();
             }
         },
+
         toolTip: {
             shared: false,
             //cornerRadius: 10,
@@ -85,55 +101,69 @@ window.onload = function () {
             contentFormatter: function(e) {
                 var str = "";
                 for (var i = 0; i < e.entries.length; i++) {
-                    var  temp = CanvasJS.formatDate(e.entries[i].dataPoint.x, "YYYY.MM") + " - " + "<strong>" + e.entries[i].dataSeries.name + "</strong><br/>Shisho: " + e.entries[i].dataPoint.label + "<br/><strong>" + e.entries[i].dataPoint.y[0] + "</strong> rikishi, <strong>" + (e.entries[i].dataPoint.y[0] - e.entries[i].dataPoint.y[1]) + "</strong> sekitori<br/>";
+                    var temp = CanvasJS.formatDate(e.entries[i].dataPoint.x, "YYYY.MM") + " - " + "<strong>" + e.entries[i].dataSeries.name + "</strong><br/>Shisho: " + e.entries[i].dataPoint.label + "<br/><strong>" + e.entries[i].dataPoint.y[0] + "</strong> rikishi, <strong>" + (e.entries[i].dataPoint.y[0] - e.entries[i].dataPoint.y[1]) + "</strong> sekitori<br/>";
                     str = str.concat(temp);
                 }
                 return str;
             }
         },
-        data: [
-        {
+
+        data: [{
             name: "Dewanoumi Ichimon",
             type: "line",
             showInLegend: true,
-            dataPoints: [{ x: 0 }]
+            dataPoints: [{
+                x: 0
+            }]
+        }, {
+            indexLabelFormatter: function(e) {
+                if (e.index === 0 && e.dataPoint.dataPointLabel)
+                    return e.dataPoint.dataPointLabel;
+                else return "";
+            },
+            type: "rangeSplineArea",
+            showInLegend: true,
+            name: "Dewanoumi",
+            fillOpacity: .4,
+            lineThickness: 1.5,
+            click: onClick,
+            indexLabelFontSize: 14,
+            dataPoints: dps1
         }, {
             indexLabelFormatter: function(e) {
                 if (e.index == 0 && e.dataPoint.dataPointLabel)
                     return e.dataPoint.dataPointLabel;
                 else return "";
             },
-            type: "rangeArea", showInLegend: true, name: "Dewanoumi",
-            fillOpacity: .4, lineThickness: 1.5, click: onClick,
-            indexLabelFontSize: 14, dataPoints: dps1
+            type: "rangeSplineArea",
+            showInLegend: true,
+            name: "Fujishima",
+            fillOpacity: .4,
+            lineThickness: 1.5,
+            click: onClick,
+            indexLabelFontSize: 14,
+            dataPoints: dps2
         }, {
             indexLabelFormatter: function(e) {
                 if (e.index == 0 && e.dataPoint.dataPointLabel)
                     return e.dataPoint.dataPointLabel;
                 else return "";
             },
-            type: "rangeArea", showInLegend: true, name: "Fujishima",
-            fillOpacity: .4, lineThickness: 1.5, click: onClick,
-            indexLabelFontSize: 14, dataPoints: dps2
-        }, {
-            indexLabelFormatter: function(e) {
-                if (e.index == 0 && e.dataPoint.dataPointLabel)
-                    return e.dataPoint.dataPointLabel;
-                else return "";
-            },
-            type: "rangeArea", showInLegend: true, name: "Futagoyama",
-            fillOpacity: .4, lineThickness: 1.5, click: onClick,
-            indexLabelFontSize: 14, dataPoints: dps3
+            type: "rangeSplineArea",
+            showInLegend: true,
+            name: "Futagoyama",
+            fillOpacity: .4,
+            lineThickness: 1.5,
+            click: onClick,
+            indexLabelFontSize: 14,
+            dataPoints: dps3
         }]
     });
-    
 
-    function onClick(e) {      
-        window.open(e.dataPoint.url);    
+
+    function onClick(e) {
+        window.open(e.dataPoint.url);
     }
-
-
-    
 
 
     var checkbox = document.querySelector("input[name=checkbox]");
@@ -158,12 +188,12 @@ window.onload = function () {
 
     function smoothLines() {
         if (this.checked) {
-            for (var i = 1; i <=3; i++)
+            for (var i = 1; i <= 3; i++)
                 chart.data[i].set("type", "rangeSplineArea");
-        }
-        else for (var i = 1; i <=3; i++) {
-            chart.data[i].set("type", "rangeArea");
-        }
+        } else
+            for (var i = 1; i <= 3; i++) {
+                chart.data[i].set("type", "rangeArea");
+            }
 
         chart.render();
     }
@@ -185,7 +215,7 @@ window.onload = function () {
 
 
     $.get("https://raw.githubusercontent.com/andre1670/sumo-heya-chart/main/chart.csv", getDataPointsFromCSV);
-    
+
     function getDataPointsFromCSV(csv) {
         var csvLines = heya = date = [];
         for (var i = 1; i <= HEYA_COUNT; i++) {
@@ -201,21 +231,38 @@ window.onload = function () {
                 datas1 = heya[1].split("-");
                 datas2 = heya[2].split("-");
                 datas3 = heya[3].split("-");
-                dps1.push({ label: datas1[2], dataPointLabel: datas1[3],
+                dps1.push({
+                    label: datas1[2],
+                    dataPointLabel: datas1[3],
+                    indexLabelLineThickness: 1,
                     url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + date[0] + date[1] + "&heya=9&shusshin=-1",
-                    x: new Date(date[0], date[1]-1), y: [parseInt(datas1[0]), parseInt(datas1[0]) - parseInt(datas1[1])] });
-                dps2.push({ label: datas2[2], dataPointLabel: datas2[3],
+                    x: new Date(date[0], date[1] - 1),
+                    y: [parseInt(datas1[0]), parseInt(datas1[0]) - parseInt(datas1[1])]
+                });
+                dps2.push({
+                    label: datas2[2],
+                    dataPointLabel: datas2[3],
+                    indexLabelLineThickness: 1,
+                    indexLabelLineColor: "black",
                     url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + date[0] + date[1] + "&heya=" + datas2[4] + "&shusshin=-1",
-                    x: new Date(date[0], date[1]-1), y: [parseInt(datas2[0]), parseInt(datas2[0]) - parseInt(datas2[1])] });
-                dps3.push({ label: datas3[2], dataPointLabel: datas3[3],
+                    x: new Date(date[0], date[1] - 1),
+                    y: [parseInt(datas2[0]), parseInt(datas2[0]) - parseInt(datas2[1])]
+                });
+                dps3.push({
+                    label: datas3[2],
+                    dataPointLabel: datas3[3],
+                    indexLabelLineThickness: 1,
+                    indexLabelLineColor: "black",
                     url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + date[0] + date[1] + "&heya=14&shusshin=-1",
-                    x: new Date(date[0], date[1]-1), y: [parseInt(datas3[0]), parseInt(datas3[0]) - parseInt(datas3[1])] });
+                    x: new Date(date[0], date[1] - 1),
+                    y: [parseInt(datas3[0]), parseInt(datas3[0]) - parseInt(datas3[1])]
+                });
             }
         }
         chart.render();
     }
 
-    $("#updateDataPoint").click(function () {
+    $("#updateDataPoint").click(function() {
 
         //var length = chart.options.data[0].dataPoints.length;
         //chart.options.title.text = "Last DataPoint Updated";
@@ -227,20 +274,21 @@ window.onload = function () {
             }
         }
         chart.render();
-
     });
 }
 
 </script>
 </head>
+
 <body>
-<div id="chartContainer" style="height: 450px; width: 100%;">
-<center><img src="https://i.imgur.com/Pdr7Mvk.gif" id="loader"/><br/>Loading...</center>
-</div><label><input id="smoothLines" type = "checkbox" name="checkbox" value="">Smooth Lines</label>
-</div><label><input id="toggleSekitori" type = "checkbox" name="checkbox" value="">Enable Sekitori</label>
-<button id="updateDataPoint">Update Data Point</button>
-<span id="display"></span>
-<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <div id="chartContainer" style="height: 450px; width: 100%;">
+        <center><img src="https://i.imgur.com/Pdr7Mvk.gif" id="loader" /><br />Loading...</center>
+    </div><label><input id="smoothLines" type="checkbox" name="checkbox" value="">Smooth Lines</label>
+    </div><label><input id="toggleSekitori" type="checkbox" name="checkbox" value="">Enable Sekitori</label>
+    <button id="updateDataPoint">Update Data Point</button>
+    <span id="display"></span>
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </body>
+
 </html>
