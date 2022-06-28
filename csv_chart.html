@@ -7,7 +7,9 @@
 window.onload = function() {
 
     const HEYA_COUNT = 3;
+    var xDatesDps = [];
 
+    // Initialize data points for individual heya; dps1, dps2, dps3...
     for (var i = 1; i <= HEYA_COUNT; i++) {
         this["dps" + i] = [];
     }
@@ -108,7 +110,8 @@ window.onload = function() {
             }
         },
 
-        data: [{
+        data: [
+        {
             name: "Dewanoumi Ichimon",
             type: "line",
             showInLegend: true,
@@ -157,6 +160,14 @@ window.onload = function() {
             click: onClick,
             indexLabelFontSize: 14,
             dataPoints: dps3
+        }, {
+            name: "dummy for when all legends are disabled",
+            type: "line",
+            lineThickness: 0,
+            toolTipContent: "{x}",
+            xValueFormatString: "YYYY.MM",
+            showInLegend: false,
+            dataPoints: xDatesDps
         }]
     });
 
@@ -169,19 +180,6 @@ window.onload = function() {
     var checkbox = document.querySelector("input[name=checkbox]");
     checkbox.addEventListener("change", toggleSekitori);
 
-    function toggleSekitori() {
-        var y1 = [];
-
-        if (this.checked) {
-            for (var i = 1; i <= 3; i++) {
-                for (var j = 0; j < chart.options.data[i].dataPoints.length; j++) {
-                    y1[j] = chart.options.data[i].dataPoints[j].y[1];
-                    chart.options.data[i].dataPoints[j].y[1] = chart.options.data[i].dataPoints[j].y[0];
-                }
-            }
-        }
-    }
-
 
     var checkbox = document.querySelector("input[name=checkbox]");
     checkbox.addEventListener("change", smoothLines);
@@ -190,10 +188,11 @@ window.onload = function() {
         if (this.checked) {
             for (var i = 1; i <= 3; i++)
                 chart.data[i].set("type", "rangeSplineArea");
-        } else
+        } else {
             for (var i = 1; i <= 3; i++) {
                 chart.data[i].set("type", "rangeArea");
             }
+        }
 
         chart.render();
     }
@@ -228,6 +227,12 @@ window.onload = function() {
                 heya = csvLines[i].split(",");
                 date = heya[0].split(".");
 
+                xDatesDps.push({
+                    x: new Date(date[0], date[1] - 1),
+                    y: 0,
+                    highlightEnabled: false
+                });
+
                 datas1 = heya[1].split("-");
                 datas2 = heya[2].split("-");
                 datas3 = heya[3].split("-");
@@ -239,6 +244,7 @@ window.onload = function() {
                     x: new Date(date[0], date[1] - 1),
                     y: [parseInt(datas1[0]), parseInt(datas1[0]) - parseInt(datas1[1])]
                 });
+
                 dps2.push({
                     label: datas2[2],
                     dataPointLabel: datas2[3],
