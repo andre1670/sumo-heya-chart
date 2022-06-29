@@ -54,7 +54,9 @@ window.onload = function() {
                 return CanvasJS.formatDate(e.value, "YYYY.MM");
             },
             stripLines: [{
-                value: new Date(1988, 1)
+                //value: new Date(1988, 1)
+                color:"#FF0000",
+                showOnTop: true
             }]
         },
 
@@ -65,25 +67,25 @@ window.onload = function() {
             // dockInsidePlotArea: true,
             // itemclick: toggleDataSeries
             itemmouseover: function(e) {
-                e.dataSeries.lineThickness = 2.5;
+                e.dataSeries.lineThickness = 3;
                 //e.chart.data[e.dataSeriesIndex].lineThickness
 
                 e.chart.render();
             },
             itemmouseout: function(e) {
-                e.dataSeries.lineThickness = 1.5;
+                e.dataSeries.lineThickness = 2;
 
                 e.chart.render();
             },
             itemclick: function(e) {
-                if (e.dataSeries.name == chart.options.data[0].name) {
+                if (e.dataSeries.name == chart.options.data[1].name) {
                     if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
                         e.dataSeries.visible = false;
-                        for (var i = 1; i <= 3; i++)
+                        for (var i = 2; i <= 4; i++)
                             chart.options.data[i].visible = false;
                     } else {
                         e.dataSeries.visible = true;
-                        for (var i = 1; i <= 3; i++)
+                        for (var i = 2; i <= 4; i++)
                             chart.options.data[i].visible = true;
                     }
                 } else if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible)
@@ -112,6 +114,14 @@ window.onload = function() {
 
         data: [
         {
+            name: "dummy for when all legends are disabled",
+            type: "line",
+            lineThickness: 0,
+            toolTipContent: "{x}",
+            xValueFormatString: "YYYY.MM",
+            showInLegend: false,
+            dataPoints: xDatesDps
+        }, {
             name: "Dewanoumi Ichimon",
             type: "line",
             showInLegend: true,
@@ -128,7 +138,7 @@ window.onload = function() {
             showInLegend: true,
             name: "Dewanoumi",
             fillOpacity: .4,
-            lineThickness: 1.5,
+            lineThickness: 2,
             click: onClick,
             indexLabelFontSize: 14,
             dataPoints: dps1
@@ -142,7 +152,7 @@ window.onload = function() {
             showInLegend: true,
             name: "Fujishima",
             fillOpacity: .4,
-            lineThickness: 1.5,
+            lineThickness: 2,
             click: onClick,
             indexLabelFontSize: 14,
             dataPoints: dps2
@@ -156,18 +166,10 @@ window.onload = function() {
             showInLegend: true,
             name: "Futagoyama",
             fillOpacity: .4,
-            lineThickness: 1.5,
+            lineThickness: 2,
             click: onClick,
             indexLabelFontSize: 14,
             dataPoints: dps3
-        }, {
-            name: "dummy for when all legends are disabled",
-            type: "line",
-            lineThickness: 0,
-            toolTipContent: "{x}",
-            xValueFormatString: "YYYY.MM",
-            showInLegend: false,
-            dataPoints: xDatesDps
         }]
     });
 
@@ -186,10 +188,10 @@ window.onload = function() {
 
     function smoothLines() {
         if (this.checked) {
-            for (var i = 1; i <= 3; i++)
+            for (var i = 2; i <= 4; i++)
                 chart.data[i].set("type", "rangeSplineArea");
         } else {
-            for (var i = 1; i <= 3; i++) {
+            for (var i = 2; i <= 4; i++) {
                 chart.data[i].set("type", "rangeArea");
             }
         }
