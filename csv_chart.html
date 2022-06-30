@@ -15,7 +15,7 @@ window.onload = function() {
     }
 
     var chart = new CanvasJS.Chart("chartContainer", {
-        theme: "light1",
+        theme: "light2",
         backgroundColor: "transparent",
         animationEnabled: false,
         exportEnabled: true,
@@ -25,16 +25,6 @@ window.onload = function() {
         title: {
             text: "Description",
             fontFamily: "arial"
-        },
-
-        axisY: {
-            title: "rikishi number",
-            titleFontFamily: "arial",
-            labelFontFamily: "arial",
-            labelFontSize: 14,
-            titleFontSize: 20,
-            titleFontColor: "blue",
-            includeZero: true
         },
 
         axisX: {
@@ -49,19 +39,28 @@ window.onload = function() {
             //margin: 30,
             includeZero: false,
             //labelFormatString: "YYYY MM"
-            // interval: 6
+            interval: 30,
             labelFormatter: function(e) {
                 return CanvasJS.formatDate(e.value, "YYYY.MM");
             },
             stripLines: [{
-                //value: new Date(1988, 1)
-                color:"#FF0000",
-                showOnTop: true
+                value: new Date(1988, 1),
+                color: "orange"
             }]
         },
 
+        axisY: {
+            title: "total rikishi",
+            titleFontFamily: "arial",
+            labelFontFamily: "arial",
+            labelFontSize: 14,
+            titleFontSize: 20,
+            titleFontColor: "blue",
+            includeZero: true
+        },
+
         legend: {
-            cursor: "cursor",
+            cursor: "pointer",
             fontFamily: "arial",
             fontWeight: "normal",
             // dockInsidePlotArea: true,
@@ -69,11 +68,17 @@ window.onload = function() {
             itemmouseover: function(e) {
                 e.dataSeries.lineThickness = 3;
                 //e.chart.data[e.dataSeriesIndex].lineThickness
+                e.dataSeries.fillOpacity = .5;
+                e.dataSeries.indexLabelFontWeight = "bold";
+                e.dataSeries.indexLabelLineThickness = 1;
 
                 e.chart.render();
             },
             itemmouseout: function(e) {
                 e.dataSeries.lineThickness = 2;
+                e.dataSeries.fillOpacity = .4;
+                e.dataSeries.indexLabelFontWeight = "normal";
+                e.dataSeries.indexLabelLineThickness = 0.5;
 
                 e.chart.render();
             },
@@ -99,9 +104,9 @@ window.onload = function() {
 
         toolTip: {
             shared: false,
-            //cornerRadius: 10,
+            //cornerRadius: 7,
             fontFamily: "arial",
-            borderColor: "black",
+            //borderColor: "black",
             contentFormatter: function(e) {
                 var str = "";
                 for (var i = 0; i < e.entries.length; i++) {
@@ -114,12 +119,15 @@ window.onload = function() {
 
         data: [
         {
-            name: "dummy for when all legends are disabled",
+            name: "The Dates on the X-axis",
             type: "line",
-            lineThickness: 0,
+            cursor: "pointer",
+            showInLegend: false,
+            lineThickness: 1,
+            markerType: "triangle",
             toolTipContent: "{x}",
             xValueFormatString: "YYYY.MM",
-            showInLegend: false,
+            click: onClick,
             dataPoints: xDatesDps
         }, {
             name: "Dewanoumi Ichimon",
@@ -129,49 +137,54 @@ window.onload = function() {
                 x: 0
             }]
         }, {
-            indexLabelFormatter: function(e) {
-                if (e.index === 0 && e.dataPoint.dataPointLabel)
-                    return e.dataPoint.dataPointLabel;
-                else return "";
-            },
-            type: "rangeSplineArea",
-            showInLegend: true,
             name: "Dewanoumi",
+            type: "rangeArea",
+            cursor: "pointer",
+            showInLegend: true,
             fillOpacity: .4,
             lineThickness: 2,
-            click: onClick,
             indexLabelFontSize: 14,
+            indexLabelLineThickness: 0.5,
+            indexLabelLineColor: "black",
+            indexLabelFormatter: heyaLabel,
+            click: onClick,
             dataPoints: dps1
         }, {
-            indexLabelFormatter: function(e) {
-                if (e.index == 0 && e.dataPoint.dataPointLabel)
-                    return e.dataPoint.dataPointLabel;
-                else return "";
-            },
-            type: "rangeSplineArea",
-            showInLegend: true,
             name: "Fujishima",
+            type: "rangeArea",
+            cursor: "pointer",
+            showInLegend: true,
             fillOpacity: .4,
             lineThickness: 2,
-            click: onClick,
             indexLabelFontSize: 14,
+            indexLabelLineThickness: 0.5,
+            indexLabelLineColor: "black",
+            indexLabelFormatter: heyaLabel,
+            click: onClick,
             dataPoints: dps2
         }, {
-            indexLabelFormatter: function(e) {
-                if (e.index == 0 && e.dataPoint.dataPointLabel)
-                    return e.dataPoint.dataPointLabel;
-                else return "";
-            },
-            type: "rangeSplineArea",
-            showInLegend: true,
             name: "Futagoyama",
+            type: "rangeArea",
+            cursor: "pointer",
+            showInLegend: true,
             fillOpacity: .4,
             lineThickness: 2,
-            click: onClick,
             indexLabelFontSize: 14,
+            markerSize: 0,      // For data series with no sekitori
+            indexLabelLineThickness: 0.5,
+            indexLabelLineColor: "black",
+            indexLabelFormatter: heyaLabel,
+            click: onClick,
             dataPoints: dps3
         }]
     });
+
+    
+    function heyaLabel(e) {
+        if (e.index === 0 && e.dataPoint.dataPointLabel)
+            return e.dataPoint.dataPointLabel;
+        else return "";
+    }
 
 
     function onClick(e) {
@@ -230,41 +243,42 @@ window.onload = function() {
                 date = heya[0].split(".");
 
                 xDatesDps.push({
+                    url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + date[0] + date[1],
                     x: new Date(date[0], date[1] - 1),
-                    y: 0,
-                    highlightEnabled: false
+                    y: 0
                 });
 
                 datas1 = heya[1].split("-");
                 datas2 = heya[2].split("-");
                 datas3 = heya[3].split("-");
+
                 dps1.push({
                     label: datas1[2],
                     dataPointLabel: datas1[3],
-                    indexLabelLineThickness: 1,
                     url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + date[0] + date[1] + "&heya=9&shusshin=-1",
                     x: new Date(date[0], date[1] - 1),
                     y: [parseInt(datas1[0]), parseInt(datas1[0]) - parseInt(datas1[1])]
                 });
 
-                dps2.push({
-                    label: datas2[2],
-                    dataPointLabel: datas2[3],
-                    indexLabelLineThickness: 1,
-                    indexLabelLineColor: "black",
-                    url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + date[0] + date[1] + "&heya=" + datas2[4] + "&shusshin=-1",
-                    x: new Date(date[0], date[1] - 1),
-                    y: [parseInt(datas2[0]), parseInt(datas2[0]) - parseInt(datas2[1])]
-                });
-                dps3.push({
-                    label: datas3[2],
-                    dataPointLabel: datas3[3],
-                    indexLabelLineThickness: 1,
-                    indexLabelLineColor: "black",
-                    url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + date[0] + date[1] + "&heya=14&shusshin=-1",
-                    x: new Date(date[0], date[1] - 1),
-                    y: [parseInt(datas3[0]), parseInt(datas3[0]) - parseInt(datas3[1])]
-                });
+                if (heya[2] !== "") {
+                    dps2.push({
+                        label: datas2[2],
+                        dataPointLabel: datas2[3],
+                        url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + date[0] + date[1] + "&heya=" + datas2[4] + "&shusshin=-1",
+                        x: new Date(date[0], date[1] - 1),
+                        y: [parseInt(datas2[0]), parseInt(datas2[0]) - parseInt(datas2[1])]
+                    });
+                }
+
+                if (heya[3] !== "") {
+                    dps3.push({
+                        label: datas3[2],
+                        dataPointLabel: datas3[3],
+                        url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + date[0] + date[1] + "&heya=14&shusshin=-1",
+                        x: new Date(date[0], date[1] - 1),
+                        y: [parseInt(datas3[0]), parseInt(datas3[0]) - parseInt(datas3[1])]
+                    });
+                }
             }
         }
         chart.render();
@@ -275,7 +289,7 @@ window.onload = function() {
         //var length = chart.options.data[0].dataPoints.length;
         //chart.options.title.text = "Last DataPoint Updated";
         var y1 = [];
-        for (var i = 1; i <= 3; i++) {
+        for (var i = 2; i <= 4; i++) {
             for (var j = 0; j < chart.options.data[i].dataPoints.length; j++) {
                 y1[j] = chart.options.data[i].dataPoints[j].y[1];
                 chart.options.data[i].dataPoints[j].y[1] = chart.options.data[i].dataPoints[j].y[0];
@@ -285,12 +299,12 @@ window.onload = function() {
     });
 }
 
-</script>
+    </script>
 </head>
 
 <body>
     <div id="chartContainer" style="height: 450px; width: 100%;">
-        <center><img src="https://i.imgur.com/Pdr7Mvk.gif" id="loader" /><br />Loading...</center>
+        <center><img src="https://i.imgur.com/Pdr7Mvk.gif" id="loader"/><br/>Loading...</center>
     </div><label><input id="smoothLines" type="checkbox" name="checkbox" value="">Smooth Lines</label>
     </div><label><input id="toggleSekitori" type="checkbox" name="checkbox" value="">Enable Sekitori</label>
     <button id="updateDataPoint">Update Data Point</button>
