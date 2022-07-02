@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <script>
+  <script>
 
 window.onload = function() {
 
@@ -44,8 +44,16 @@ window.onload = function() {
         return CanvasJS.formatDate(e.value, "YYYY.MM");
       },
       stripLines: [{
-        value: new Date(1988, 1),
-        color: "orange"
+        //value: new Date(1988, 1),
+        startValue: new Date(1898, 5),
+        endValue: new Date(1988, 1),               
+        color: "red",
+        opacity: .1
+      }, {
+        startValue: new Date(1898, 5),
+        endValue: new Date(1934, 2),               
+        color: "red",
+        opacity: .1
       }]
     },
 
@@ -107,18 +115,7 @@ window.onload = function() {
       //cornerRadius: 7,
       fontFamily: "arial",
       //borderColor: "black",
-      contentFormatter: function(e) {
-        var str = "";
-        for (var i = 0; i < e.entries.length; i++) {
-          var temp = CanvasJS.formatDate(e.entries[i].dataPoint.x, "YYYY.MM") + 
-          " - " + "<strong>" + e.entries[i].dataSeries.name + "</strong><br/>Shisho: " + 
-          e.entries[i].dataPoint.label + "<br/><strong>" + e.entries[i].dataPoint.y[0] + 
-          "</strong> rikishi, <strong>" + (e.entries[i].dataPoint.y[0] - 
-            e.entries[i].dataPoint.y[1]) + "</strong> sekitori<br/>";
-          str = str.concat(temp);
-        }
-        return str;
-      }
+      contentFormatter: tooltipSekitori
     },
 
     data: [{
@@ -147,10 +144,42 @@ window.onload = function() {
       dataPoints: dps2
     }, {
       name: "Futagoyama",
-      markerSize: 0,      // For data series with no sekitori
+      markerSize: 0,      // For data series with 0 sekitori throughout
+                          // It makes the dataPoint marker only appear on hover
       dataPoints: dps3
     }]
   });
+
+
+  function tooltipNoSekitori(e) {
+    var str = "";
+
+    for (var i = 0; i < e.entries.length; i++) {
+      var temp = CanvasJS.formatDate(e.entries[i].dataPoint.x, "YYYY.MM") + 
+      " - " + "<strong>" + e.entries[i].dataSeries.name + 
+      "</strong><br/>Shisho: " + e.entries[i].dataPoint.label + 
+      "<br/><strong>" + e.entries[i].dataPoint.y[0] + "</strong> rikishi";
+      str = str.concat(temp);
+    }
+
+    return str;
+  }
+
+
+  function tooltipSekitori(e) {
+    var str = "";
+
+    for (var i = 0; i < e.entries.length; i++) {
+      var temp = CanvasJS.formatDate(e.entries[i].dataPoint.x, "YYYY.MM") + 
+      " - " + "<strong>" + e.entries[i].dataSeries.name + "</strong><br/>Shisho: " + 
+      e.entries[i].dataPoint.label + "<br/><strong>" + e.entries[i].dataPoint.y[0] + 
+      "</strong> rikishi, <strong>" + (e.entries[i].dataPoint.y[0] - 
+        e.entries[i].dataPoint.y[1]) + "</strong> sekitori<br/>";
+      str = str.concat(temp);
+    }
+
+    return str;
+  }
 
 
   function configureDataSeries() {
@@ -179,17 +208,20 @@ window.onload = function() {
   }
 
 
+  // Function that opens link of particular basho and/or heya
   function openLink(e) {
     window.open(e.dataPoint.url);
   }
 
 
-  var checkbox = document.querySelector("input[name=checkbox]");
-  checkbox.addEventListener("change", toggleSekitori);
+  var sekitoriCheckbox = document.querySelector("input[name=checkbox]");
+  sekitoriCheckbox.addEventListener("change", toggleSekitori);
+
+  
 
 
-  var checkbox = document.querySelector("input[name=checkbox]");
-  checkbox.addEventListener("change", smoothLines);
+  var linesCheckbox = document.querySelector("input[name=checkbox]");
+  linesCheckbox.addEventListener("change", smoothLines);
 
   function smoothLines() {
     if (this.checked) {
@@ -248,18 +280,18 @@ window.onload = function() {
         dps1.push({
           label: datas1[2],
           dataPointLabel: datas1[3],
-          url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + date[0] + date[1] + 
-          "&heya=9&shusshin=-1",
+          url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + date[0] + 
+          date[1] + "&heya=9&shusshin=-1",
           x: new Date(date[0], date[1] - 1),
           y: [parseInt(datas1[0]), parseInt(datas1[0]) - parseInt(datas1[1])]
         });
-
+        
         if (heya[2] !== "") {
           dps2.push({
             label: datas2[2],
             dataPointLabel: datas2[3],
-            url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + date[0] + date[1] + 
-            "&heya=" + datas2[4] + "&shusshin=-1",
+            url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + date[0] + 
+            date[1] + "&heya=" + datas2[4] + "&shusshin=-1",
             x: new Date(date[0], date[1] - 1),
             y: [parseInt(datas2[0]), parseInt(datas2[0]) - parseInt(datas2[1])]
           });
@@ -269,8 +301,8 @@ window.onload = function() {
           dps3.push({
             label: datas3[2],
             dataPointLabel: datas3[3],
-            url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + date[0] + date[1] + 
-            "&heya=14&shusshin=-1",
+            url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + date[0] + 
+            date[1] + "&heya=14&shusshin=-1",
             x: new Date(date[0], date[1] - 1),
             y: [parseInt(datas3[0]), parseInt(datas3[0]) - parseInt(datas3[1])]
           });
@@ -281,16 +313,13 @@ window.onload = function() {
   }
 
   $("#updateDataPoint").click(function() {
-
-    //var length = chart.options.data[0].dataPoints.length;
-    //chart.options.title.text = "Last DataPoint Updated";
-    var y1 = [];
     for (var i = 2; i <= 4; i++) {
       for (var j = 0; j < chart.options.data[i].dataPoints.length; j++) {
-        y1[j] = chart.options.data[i].dataPoints[j].y[1];
-        chart.options.data[i].dataPoints[j].y[1] = chart.options.data[i].dataPoints[j].y[0];
+        chart.options.data[i].dataPoints[j].y[1] = 
+        chart.options.data[i].dataPoints[j].y[0];
       }
     }
+    chart.options.toolTip.contentFormatter = tooltipNoSekitori;
     chart.render();
   });
 }
@@ -299,14 +328,14 @@ window.onload = function() {
 </head>
 
 <body>
-    <div id="chartContainer" style="height: 450px; width: 100%;">
-        <center><img src="https://i.imgur.com/Pdr7Mvk.gif" id="loader"/><br/>Loading...</center>
-    </div><label><input id="smoothLines" type="checkbox" name="checkbox" value="">Smooth Lines</label>
-    </div><label><input id="toggleSekitori" type="checkbox" name="checkbox" value="">Enable Sekitori</label>
-    <button id="updateDataPoint">Update Data Point</button>
-    <span id="display"></span>
-    <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
-    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+  <div id="chartContainer" style="height: 450px; width: 100%;">
+      <center><img src="https://i.imgur.com/Pdr7Mvk.gif" id="loader"/><br/>Loading...</center>
+  </div><label><input id="smoothLines" type="checkbox" name="checkbox" value="">Smooth Lines</label>
+  </div><label><input id="toggleSekitori" type="checkbox" name="checkbox" value="">Disable Sekitori</label>
+  <button id="updateDataPoint">Update Data Point</button>
+  <span id="display"></span>
+  <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </body>
 
 </html>
