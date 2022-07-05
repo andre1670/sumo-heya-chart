@@ -7,7 +7,6 @@
 window.onload = function() {
 
   const HEYA_COUNT = 3;
-  var xDatesDps = [];
 
   // Initialize array of dataPoint arrays with sekitori
   var dps = Create2DArray(HEYA_COUNT);
@@ -34,25 +33,24 @@ window.onload = function() {
       labelFontFamily: "arial",
       labelFontSize: 14,
       titleFontSize: 20,
-      titleFontColor: "blue",
-      //viewportMinimum: new Date(1988, 3),
-      //viewportMaximum: new Date(2022, 5),
+      titleFontColor: "red",
+      //viewportMinimum: new Date(1988, 2),
+      //viewportMaximum: new Date(2022, 7),
       //margin: 30,
-      includeZero: false,
       //labelFormatString: "YYYY MM"
-      interval: 5,
-      intervalType: "year",
+      //interval: 5,
+      //intervalType: "year",
       labelFormatter: function(e) {
         return CanvasJS.formatDate(e.value, "YYYY.MM");
       },
       stripLines: [{
         //value: new Date(1988, 1),
-        startValue: new Date(1898, 5),
+        startValue: new Date(1898, 4),
         endValue: new Date(1988, 1),               
         color: "red",
         opacity: .1
       }, {
-        startValue: new Date(1898, 5),
+        startValue: new Date(1898, 4),
         endValue: new Date(1934, 2),               
         color: "red",
         opacity: .1
@@ -65,16 +63,18 @@ window.onload = function() {
       labelFontFamily: "arial",
       labelFontSize: 14,
       titleFontSize: 20,
-      titleFontColor: "blue",
-      includeZero: true
+      titleFontColor: "red",
+      includeZero: true,
+      minimum: 0
     },
 
     legend: {
       cursor: "pointer",
       fontFamily: "arial",
       fontWeight: "normal",
+      //itemWidth: 1000,
+      horizontalAlign: "center",
       // dockInsidePlotArea: true,
-      // itemclick: toggleDataSeries
       itemmouseover: function(e) {
         e.dataSeries.lineThickness = 3;
         //e.chart.data[e.dataSeriesIndex].lineThickness
@@ -93,14 +93,14 @@ window.onload = function() {
         e.chart.render();
       },
       itemclick: function(e) {
-        if (e.dataSeries.name == chart.options.data[1].name) {
+        if (e.dataSeries.name === "Dewanoumi Ichimon") {
           if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
             e.dataSeries.visible = false;
-            for (var i = 2; i <= 4; i++)
+            for (var i = 1; i < HEYA_COUNT + 1; i++)
               chart.options.data[i].visible = false;
           } else {
             e.dataSeries.visible = true;
-            for (var i = 2; i <= 4; i++)
+            for (var i = 1; i < HEYA_COUNT + 1; i++)
               chart.options.data[i].visible = true;
           }
         } else if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible)
@@ -114,30 +114,17 @@ window.onload = function() {
 
     toolTip: {
       shared: false,
-      //cornerRadius: 7,
+      cornerRadius: 13,
       fontFamily: "arial",
       //borderColor: "black",
       contentFormatter: tooltipSekitori
     },
 
     data: [{
-      name: "The Dates on the X-axis",
-      type: "line",
-      cursor: "pointer",
-      showInLegend: false,
-      lineThickness: 1,
-      markerType: "triangle",
-      toolTipContent: "{x}",
-      xValueFormatString: "YYYY.MM",
-      click: openLink,
-      dataPoints: xDatesDps
-    }, {
       name: "Dewanoumi Ichimon",
       type: "line",
       showInLegend: true,
-      dataPoints: [{
-        x: 0
-      }]
+      dataPoints: [ { x: 0 } ]
     }, {
       name: "Dewanoumi",
       type: "rangeSplineArea",
@@ -149,14 +136,14 @@ window.onload = function() {
     }, {
       name: "Futagoyama",
       type: "rangeSplineArea",
-      markerSize: 0,      // For data series with 0 sekitori throughout
-                          // Makes its dataPoint marker only appear on hover
+      markerSize: 0,  // For heya with 0 sekitori throughout
+                      // Without it, the markers appear on all of its dataPoints
       dataPoints: dps[2]
     }]
   });
 
 
-  for (var i = 2; i < HEYA_COUNT + 2; i++)
+  for (var i = 1; i < HEYA_COUNT + 1; i++)
     configureDataSeries(i);
 
 
@@ -178,9 +165,8 @@ window.onload = function() {
 
   // Returns HB and HT labels
   function getHeyaLabel(e) {
-    //if (e.index === 0 && e.dataPoint.dataPointLabel)
-    if (e.index !== 1 && e.dataPoint.dataPointLabel)
-      return e.dataPoint.dataPointLabel;
+    if (e.index !== 1 && e.dataPoint.label)
+      return e.dataPoint.label;
     else return "";
   }
 
@@ -207,15 +193,15 @@ window.onload = function() {
 
   function toggleSekitori() {
     if (this.checked) {
-      for (var i = 2; i < HEYA_COUNT + 2; i++) {
+      for (var i = 1; i < HEYA_COUNT + 1; i++) {
         chart.data[i].set("type", "spline");
-        chart.options.data[i].dataPoints = dpsB[i-2];
+        chart.options.data[i].dataPoints = dpsB[i-1];
       }
       chart.options.toolTip.contentFormatter = tooltipNoSekitori;
     } else {
-      for (var i = 2; i < HEYA_COUNT + 2; i++) {
+      for (var i = 1; i < HEYA_COUNT + 1; i++) {
         chart.data[i].set("type", "rangeSplineArea");
-        chart.options.data[i].dataPoints = dps[i-2];
+        chart.options.data[i].dataPoints = dps[i-1];
       }
       chart.options.toolTip.contentFormatter = tooltipSekitori;
     }
@@ -228,8 +214,8 @@ window.onload = function() {
 
     for (var i = 0; i < e.entries.length; i++) {
       var temp = CanvasJS.formatDate(e.entries[i].dataPoint.x, "YYYY.MM") + 
-      " - " + "<strong>" + e.entries[i].dataSeries.name + 
-      "</strong><br/>Shisho: " + e.entries[i].dataPoint.label + 
+      " - <strong>" + e.entries[i].dataSeries.name + 
+      "</strong><br/>Shisho: " + e.entries[i].dataPoint.shisho + 
       "<br/><strong>" + e.entries[i].dataPoint.y + "</strong> rikishi";
       str = str.concat(temp);
     }
@@ -243,8 +229,8 @@ window.onload = function() {
 
     for (var i = 0; i < e.entries.length; i++) {
       var temp = CanvasJS.formatDate(e.entries[i].dataPoint.x, "YYYY.MM") + 
-      " - " + "<strong>" + e.entries[i].dataSeries.name + "</strong><br/>Shisho: " + 
-      e.entries[i].dataPoint.label + "<br/><strong>" + e.entries[i].dataPoint.y[0] + 
+      " - <strong>" + e.entries[i].dataSeries.name + "</strong><br/>Shisho: " + 
+      e.entries[i].dataPoint.shisho + "<br/><strong>" + e.entries[i].dataPoint.y[0] + 
       "</strong> rikishi, <strong>" + (e.entries[i].dataPoint.y[0] - 
         e.entries[i].dataPoint.y[1]) + "</strong> sekitori<br/>";
       str = str.concat(temp);
@@ -303,25 +289,19 @@ window.onload = function() {
         heya = csvLines[i].split(",");
         date = heya[0].split(".");
 
-        xDatesDps.push({
-          url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + date[0] + date[1],
-          x: new Date(date[0], date[1] - 1),
-          y: 0
-        });
-
         for (var j = 0; j < HEYA_COUNT; j++) {
           datas[j] = heya[j+1].split("-");
           if (heya[j+1] !== "") {
             dps[j].push({
-              label: datas[j][2],
-              dataPointLabel: datas[j][3],
+              shisho: datas[j][2],
+              label: datas[j][3],
               x: new Date(date[0], date[1] - 1),
               y: [parseInt(datas[j][0]), parseInt(datas[j][0]) - 
               parseInt(datas[j][1])]
             });
             dpsB[j].push({
-              label: datas[j][2],
-              dataPointLabel: datas[j][3],
+              shisho: datas[j][2],
+              label: datas[j][3],
               x: new Date(date[0], date[1] - 1),
               y: parseInt(datas[j][0])
             })
@@ -357,8 +337,9 @@ window.onload = function() {
 
 <body>
   <div id="chartContainer" style="height: 450px; width: 100%;">
-      <center><img src="https://i.imgur.com/Pdr7Mvk.gif" id="loader"/><br/>Loading...</center>
-  </div><label><input id="toggleSekitori" type="checkbox" name="checkbox" value="">Disable Sekitori</label>  <span id="display"></span>
+    <center><img src="https://i.imgur.com/Pdr7Mvk.gif" id="loader"/><br/>Loading...</center>
+  </div><label><input id="toggleSekitori" type="checkbox" name="checkbox" value="">Disable Sekitori</label>
+  <span id="display"></span>
   <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
   <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </body>
