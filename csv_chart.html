@@ -9,10 +9,11 @@ window.onload = function() {
   const HEYA_COUNT = 3;
   var xDatesDps = [];
 
-  // Initialize data points for individual heya; dps1, dps2, dps3...
-  for (var i = 1; i <= HEYA_COUNT; i++) {
-    this["dps" + i] = [];
-  }
+  // Initialize array of dataPoint arrays with sekitori
+  var dps = Create2DArray(HEYA_COUNT);
+
+  // Initialize array of dataPoint arrays with no sekitori
+  var dpsB = Create2DArray(HEYA_COUNT);
 
   var chart = new CanvasJS.Chart("chartContainer", {
     theme: "light2",
@@ -39,7 +40,8 @@ window.onload = function() {
       //margin: 30,
       includeZero: false,
       //labelFormatString: "YYYY MM"
-      interval: 30,
+      interval: 5,
+      intervalType: "year",
       labelFormatter: function(e) {
         return CanvasJS.formatDate(e.value, "YYYY.MM");
       },
@@ -138,17 +140,87 @@ window.onload = function() {
       }]
     }, {
       name: "Dewanoumi",
-      dataPoints: dps1
+      type: "rangeSplineArea",
+      dataPoints: dps[0]
     }, {
       name: "Fujishima",
-      dataPoints: dps2
+      type: "rangeSplineArea",
+      dataPoints: dps[1]
     }, {
       name: "Futagoyama",
+      type: "rangeSplineArea",
       markerSize: 0,      // For data series with 0 sekitori throughout
-                          // It makes the dataPoint marker only appear on hover
-      dataPoints: dps3
+                          // Makes its dataPoint marker only appear on hover
+      dataPoints: dps[2]
     }]
   });
+
+
+  for (var i = 2; i < HEYA_COUNT + 2; i++)
+    configureDataSeries(i);
+
+
+  function configureDataSeries(i) {
+    chart.options.data[i].cursor = "pointer";
+    chart.options.data[i].showInLegend = true;
+    chart.options.data[i].fillOpacity = .4;
+    chart.options.data[i].lineThickness = 2;
+    chart.options.data[i].indexLabelFontSize = 14;
+    chart.options.data[i].indexLabelLineThickness = 0.5;
+    chart.options.data[i].indexLabelLineColor = "black";
+    chart.options.data[i].legendMarkerType = "circle";
+    chart.options.data[i].indexLabelFormatter = getHeyaLabel;
+    chart.options.data[i].click = openLink;
+
+    chart.render();
+  }
+
+
+  // Returns HB and HT labels
+  function getHeyaLabel(e) {
+    //if (e.index === 0 && e.dataPoint.dataPointLabel)
+    if (e.index !== 1 && e.dataPoint.dataPointLabel)
+      return e.dataPoint.dataPointLabel;
+    else return "";
+  }
+
+
+  // Opens link of particular basho and/or heya
+  function openLink(e) {
+    window.open(e.dataPoint.url);
+  }
+
+
+  function Create2DArray(rows) {
+    var arr = [];
+
+    for (var i = 0; i < rows; i++) {
+       arr[i] = [];
+    }
+
+    return arr;
+  }
+
+  // Checkbox for toggling between sekitori and sekitoriless dataSeries
+  var sekitoriCheckbox = document.querySelector("input[name=checkbox]");
+  sekitoriCheckbox.addEventListener("change", toggleSekitori);
+
+  function toggleSekitori() {
+    if (this.checked) {
+      for (var i = 2; i < HEYA_COUNT + 2; i++) {
+        chart.data[i].set("type", "spline");
+        chart.options.data[i].dataPoints = dpsB[i-2];
+      }
+      chart.options.toolTip.contentFormatter = tooltipNoSekitori;
+    } else {
+      for (var i = 2; i < HEYA_COUNT + 2; i++) {
+        chart.data[i].set("type", "rangeSplineArea");
+        chart.options.data[i].dataPoints = dps[i-2];
+      }
+      chart.options.toolTip.contentFormatter = tooltipSekitori;
+    }
+    chart.render();
+  }
 
 
   function tooltipNoSekitori(e) {
@@ -158,7 +230,7 @@ window.onload = function() {
       var temp = CanvasJS.formatDate(e.entries[i].dataPoint.x, "YYYY.MM") + 
       " - " + "<strong>" + e.entries[i].dataSeries.name + 
       "</strong><br/>Shisho: " + e.entries[i].dataPoint.label + 
-      "<br/><strong>" + e.entries[i].dataPoint.y[0] + "</strong> rikishi";
+      "<br/><strong>" + e.entries[i].dataPoint.y + "</strong> rikishi";
       str = str.concat(temp);
     }
 
@@ -182,44 +254,7 @@ window.onload = function() {
   }
 
 
-  function configureDataSeries() {
-    for (var i = 2; i <= 4; i++) {
-      chart.options.data[i].type = "rangeArea";
-      chart.options.data[i].cursor = "pointer";
-      chart.options.data[i].showInLegend = true;
-      chart.options.data[i].fillOpacity = .4;
-      chart.options.data[i].lineThickness = 2;
-      chart.options.data[i].indexLabelFontSize = 14;
-      chart.options.data[i].indexLabelLineThickness = 0.5;
-      chart.options.data[i].indexLabelLineColor = "black";
-      chart.options.data[i].indexLabelFormatter = getHeyaLabel; 
-      chart.options.data[i].click = openLink;
-    }
-    chart.render();
-  }
-
-  configureDataSeries();
-
-
-  function getHeyaLabel(e) {
-    if (e.index === 0 && e.dataPoint.dataPointLabel)
-      return e.dataPoint.dataPointLabel;
-    else return "";
-  }
-
-
-  // Function that opens link of particular basho and/or heya
-  function openLink(e) {
-    window.open(e.dataPoint.url);
-  }
-
-
-  var sekitoriCheckbox = document.querySelector("input[name=checkbox]");
-  sekitoriCheckbox.addEventListener("change", toggleSekitori);
-
-  
-
-
+  /*
   var linesCheckbox = document.querySelector("input[name=checkbox]");
   linesCheckbox.addEventListener("change", smoothLines);
 
@@ -235,6 +270,7 @@ window.onload = function() {
 
     chart.render();
   }
+  */
 
 
   /*$("#slider1").slider({
@@ -257,9 +293,9 @@ window.onload = function() {
 
   function getDataPointsFromCSV(csv) {
     var csvLines = heya = date = [];
-    for (var i = 1; i <= HEYA_COUNT; i++) {
-      this["datas" + i] = [];
-    }
+    
+
+    var datas = Create2DArray(HEYA_COUNT);
 
     csvLines = csv.split(/[\r?\n|\r|\n]+/);
     for (var i = 1; i < csvLines.length; i++) {
@@ -273,55 +309,47 @@ window.onload = function() {
           y: 0
         });
 
-        datas1 = heya[1].split("-");
-        datas2 = heya[2].split("-");
-        datas3 = heya[3].split("-");
+        for (var j = 0; j < HEYA_COUNT; j++) {
+          datas[j] = heya[j+1].split("-");
+          if (heya[j+1] !== "") {
+            dps[j].push({
+              label: datas[j][2],
+              dataPointLabel: datas[j][3],
+              x: new Date(date[0], date[1] - 1),
+              y: [parseInt(datas[j][0]), parseInt(datas[j][0]) - 
+              parseInt(datas[j][1])]
+            });
+            dpsB[j].push({
+              label: datas[j][2],
+              dataPointLabel: datas[j][3],
+              x: new Date(date[0], date[1] - 1),
+              y: parseInt(datas[j][0])
+            })
+          }
+        }
 
-        dps1.push({
-          label: datas1[2],
-          dataPointLabel: datas1[3],
-          url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + date[0] + 
-          date[1] + "&heya=9&shusshin=-1",
-          x: new Date(date[0], date[1] - 1),
-          y: [parseInt(datas1[0]), parseInt(datas1[0]) - parseInt(datas1[1])]
-        });
+      /*
+      dps[0].push({
+        url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + date[0] + 
+        date[1] + "&heya=9&shusshin=-1"
+      });
         
-        if (heya[2] !== "") {
-          dps2.push({
-            label: datas2[2],
-            dataPointLabel: datas2[3],
-            url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + date[0] + 
-            date[1] + "&heya=" + datas2[4] + "&shusshin=-1",
-            x: new Date(date[0], date[1] - 1),
-            y: [parseInt(datas2[0]), parseInt(datas2[0]) - parseInt(datas2[1])]
-          });
-        }
+      dps[1].push({
+        url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + date[0] + 
+        date[1] + "&heya=" + datas[1][4] + "&shusshin=-1"
+      });
 
-        if (heya[3] !== "") {
-          dps3.push({
-            label: datas3[2],
-            dataPointLabel: datas3[3],
-            url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + date[0] + 
-            date[1] + "&heya=14&shusshin=-1",
-            x: new Date(date[0], date[1] - 1),
-            y: [parseInt(datas3[0]), parseInt(datas3[0]) - parseInt(datas3[1])]
-          });
-        }
+      dps[2].push({
+        url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + date[0] + 
+        date[1] + "&heya=14&shusshin=-1"
+      });
+      */
+
       }
     }
     chart.render();
   }
 
-  $("#updateDataPoint").click(function() {
-    for (var i = 2; i <= 4; i++) {
-      for (var j = 0; j < chart.options.data[i].dataPoints.length; j++) {
-        chart.options.data[i].dataPoints[j].y[1] = 
-        chart.options.data[i].dataPoints[j].y[0];
-      }
-    }
-    chart.options.toolTip.contentFormatter = tooltipNoSekitori;
-    chart.render();
-  });
 }
 
     </script>
@@ -330,10 +358,7 @@ window.onload = function() {
 <body>
   <div id="chartContainer" style="height: 450px; width: 100%;">
       <center><img src="https://i.imgur.com/Pdr7Mvk.gif" id="loader"/><br/>Loading...</center>
-  </div><label><input id="smoothLines" type="checkbox" name="checkbox" value="">Smooth Lines</label>
-  </div><label><input id="toggleSekitori" type="checkbox" name="checkbox" value="">Disable Sekitori</label>
-  <button id="updateDataPoint">Update Data Point</button>
-  <span id="display"></span>
+  </div><label><input id="toggleSekitori" type="checkbox" name="checkbox" value="">Disable Sekitori</label>  <span id="display"></span>
   <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
   <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </body>
