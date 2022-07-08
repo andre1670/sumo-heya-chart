@@ -7,7 +7,6 @@
 window.onload = function() {
 
   const HEYA_COUNT = 3;
-
   var ichimonDps = [];
 
   // Initialize array of dataPoint arrays with sekitori
@@ -60,7 +59,22 @@ window.onload = function() {
         endValue: new Date(1934, 2),               
         color: "red",
         opacity: .1
-      }]
+      }, {
+        value: new Date(1957, 11),
+        label: "6BPY era starts"
+      }, {
+        value: new Date(1945, 8),
+        label: "WWII ends"
+      }, {
+        value: new Date(1967, 3),
+        label: "Divisional Contraction"
+      }],
+      crosshair: {
+        enabled: true,
+        labelFormatter: function(e) {
+          return CanvasJS.formatDate(e.value, "YYYY.MM");
+        }
+      }
     },
 
     axisY: {
@@ -164,8 +178,8 @@ window.onload = function() {
     chart.options.data[i].showInLegend = true;
     chart.options.data[i].fillOpacity = .4;
     chart.options.data[i].lineThickness = 2;
-    chart.options.data[i].indexLabelFontSize = 14;
-    chart.options.data[i].indexLabelLineThickness = 1;
+    chart.options.data[i].indexLabelFontSize = 12;
+    chart.options.data[i].indexLabelLineThickness = 1.5;
     chart.options.data[i].indexLabelLineColor = "black";
     chart.options.data[i].legendMarkerType = "circle";
     chart.options.data[i].visible = false;
@@ -256,8 +270,6 @@ window.onload = function() {
 
   function getDataPointsFromCSV(csv) {
     var csvLines = heya = date = [];
-    
-
     var datas = Create2DArray(HEYA_COUNT);
 
     csvLines = csv.split(/[\r?\n|\r|\n]+/);
