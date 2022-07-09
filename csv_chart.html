@@ -21,7 +21,6 @@ window.onload = function() {
     animationEnabled: false,
     exportEnabled: true,
     zoomEnabled: true,
-    colorSet: "colorSet3",
     zoomType: "x",
 
     title: {
@@ -62,12 +61,6 @@ window.onload = function() {
       }, {
         value: new Date(1957, 11),
         label: "6BPY era starts"
-      }, {
-        value: new Date(1945, 8),
-        label: "WWII ends"
-      }, {
-        value: new Date(1967, 3),
-        label: "Divisional Contraction"
       }],
       crosshair: {
         enabled: true,
@@ -94,10 +87,10 @@ window.onload = function() {
     legend: {
       cursor: "pointer",
       fontFamily: "Trebuchet MS",
-      fontWeight: "normal",
-      //itemWidth: 1000,
+      fontWeight: "bold ",
       horizontalAlign: "center",
-      // dockInsidePlotArea: true,
+      //itemWidth: 110,
+      //dockInsidePlotArea: true,
       itemmouseover: function(e) {
         e.dataSeries.lineThickness = 3;
         //e.chart.data[e.dataSeriesIndex].lineThickness
@@ -139,33 +132,38 @@ window.onload = function() {
       cornerRadius: 8,
       fontFamily: "Verdana",
       //borderColor: "black",
-      contentFormatter: tooltipSekitori
+      contentFormatter: tooltipNoSekitori
     },
 
     data: [{
       name: "Dewanoumi Ichimon",
-      type: "line",
+      legendText: "DEWANOUMI ICHIMON",
+      type: "rangeArea",
       showInLegend: true,
       toolTipContent: " ",
       highlightEnabled: false,
-      markerSize: 0, 
-      lineThickness: 0,
+      markerSize: 0,
       visible: false,
+      legendMarkerBorderThickness: 5,
+      //legendMarkerColor: "white",
+      legendMarkerBorderColor : "black",
+      legendMarkerBorderThickness: 1,
+      legendTextFontWeight: "bold",
       dataPoints: ichimonDps  
     }, {
       name: "Dewanoumi",
-      type: "rangeSplineArea",
-      dataPoints: dps[0]
+      type: "spline",
+      dataPoints: dpsB[0]
     }, {
       name: "Fujishima",
-      type: "rangeSplineArea",
-      dataPoints: dps[1]
+      type: "spline",
+      dataPoints: dpsB[1]
     }, {
       name: "Futagoyama",
-      type: "rangeSplineArea",
+      type: "spline",
       markerSize: 0,  // For heya with 0 sekitori throughout
                       // Without it, the markers appear on all of its dataPoints
-      dataPoints: dps[2]
+      dataPoints: dpsB[2]
     }]
   });
 
@@ -183,6 +181,7 @@ window.onload = function() {
     chart.options.data[i].indexLabelLineColor = "black";
     chart.options.data[i].legendMarkerType = "circle";
     chart.options.data[i].visible = false;
+    chart.options.data[i].indexLabelLineDashType = "dot";
     chart.options.data[i].indexLabelFormatter = getHeyaLabel;
     chart.options.data[i].click = openLink;
   }
@@ -219,16 +218,16 @@ window.onload = function() {
   function toggleSekitori() {
     if (this.checked) {
       for (var i = 1; i < HEYA_COUNT + 1; i++) {
-        chart.data[i].set("type", "spline");
-        chart.options.data[i].dataPoints = dpsB[i-1];
-      }
-      chart.options.toolTip.contentFormatter = tooltipNoSekitori;
-    } else {
-      for (var i = 1; i < HEYA_COUNT + 1; i++) {
         chart.data[i].set("type", "rangeSplineArea");
         chart.options.data[i].dataPoints = dps[i-1];
       }
       chart.options.toolTip.contentFormatter = tooltipSekitori;
+    } else {
+      for (var i = 1; i < HEYA_COUNT + 1; i++) {
+        chart.data[i].set("type", "spline");
+        chart.options.data[i].dataPoints = dpsB[i-1];
+      }
+      chart.options.toolTip.contentFormatter = tooltipNoSekitori;
     }
     chart.render();
   }
@@ -301,7 +300,7 @@ window.onload = function() {
             if (i === csvLines.length - 2) {
               ichimonDps.push({
                 x: new Date(date[0], date[1] - 1),
-                y: 0
+                y: [0, 0]
               });
             }
           }
@@ -319,7 +318,7 @@ window.onload = function() {
 <body>
   <div id="chartContainer" style="height: 450px; width: 100%;">
     <center><img src="https://i.imgur.com/Pdr7Mvk.gif" id="loader"/><br/>Loading...</center>
-  </div><label><input id="toggleSekitori" type="checkbox" name="checkbox" value="">Disable Sekitori</label>
+  </div><label><input id="toggleSekitori" type="checkbox" name="checkbox" value="">Enable Sekitori</label>
   <span id="display"></span>
   <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
   <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
