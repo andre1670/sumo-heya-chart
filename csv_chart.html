@@ -93,17 +93,14 @@ window.onload = function() {
       //dockInsidePlotArea: true,
       itemmouseover: function(e) {
         e.dataSeries.lineThickness = 3;
-        //e.chart.data[e.dataSeriesIndex].lineThickness
         e.dataSeries.fillOpacity = .5;
         e.dataSeries.indexLabelFontWeight = "bold";
-
         e.chart.render();
       },
       itemmouseout: function(e) {
         e.dataSeries.lineThickness = 2;
         e.dataSeries.fillOpacity = .4;
         e.dataSeries.indexLabelFontWeight = "normal";
-
         e.chart.render();
       },
       itemclick: function(e) {
@@ -121,7 +118,6 @@ window.onload = function() {
           e.dataSeries.visible = false;
         else
           e.dataSeries.visible = true;
-
         e.chart.render();
       }
     },
@@ -137,19 +133,15 @@ window.onload = function() {
 
     data: [{
       name: "Dewanoumi Ichimon",
-      legendText: "DEWANOUMI ICHIMON",
+      legendText: " • {name} • ",
       type: "rangeArea",
       showInLegend: true,
       toolTipContent: " ",
       highlightEnabled: false,
+      legendMarkerType: "none",
       markerSize: 0,
-      visible: false,
-      legendMarkerBorderThickness: 5,
-      //legendMarkerColor: "white",
-      legendMarkerBorderColor : "black",
-      legendMarkerBorderThickness: 1,
-      legendTextFontWeight: "bold",
-      dataPoints: ichimonDps  
+      visible: true,
+      dataPoints: ichimonDps
     }, {
       name: "Dewanoumi",
       type: "spline",
@@ -180,7 +172,7 @@ window.onload = function() {
     chart.options.data[i].indexLabelLineThickness = 1.5;
     chart.options.data[i].indexLabelLineColor = "black";
     chart.options.data[i].legendMarkerType = "circle";
-    chart.options.data[i].visible = false;
+    chart.options.data[i].visible = true;
     chart.options.data[i].indexLabelLineDashType = "dot";
     chart.options.data[i].indexLabelFormatter = getHeyaLabel;
     chart.options.data[i].click = openLink;
