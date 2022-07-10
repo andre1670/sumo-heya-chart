@@ -246,9 +246,10 @@ window.onload = function() {
     for (var i = 0; i < e.entries.length; i++) {
       var temp = CanvasJS.formatDate(e.entries[i].dataPoint.x, "YYYY.MM") + 
       " - <strong>" + e.entries[i].dataSeries.name + "</strong><br/>Shisho: " + 
-      e.entries[i].dataPoint.shisho + "<br/><strong>" + e.entries[i].dataPoint.y[0] + 
-      "</strong> rikishi, <strong>" + (e.entries[i].dataPoint.y[0] - 
-        e.entries[i].dataPoint.y[1]) + "</strong> sekitori<br/>";
+      e.entries[i].dataPoint.shisho + "<br/><strong>" + 
+      e.entries[i].dataPoint.y[0] + "</strong> rikishi, <strong>" + 
+      (e.entries[i].dataPoint.y[0] - e.entries[i].dataPoint.y[1]) + 
+      "</strong> sekitori<br/>";
       str = str.concat(temp);
     }
 
