@@ -38,8 +38,8 @@ window.onload = function() {
       tickLength: 5,
       tickColor: "black",
       lineColor: "black",
-      //viewportMinimum: new Date(1988, 2),
-      //viewportMaximum: new Date(2022, 7),
+      viewportMinimum: new Date(1898, 5),
+      viewportMaximum: new Date(2022, 7),
       //margin: 10,
       //labelFormatString: "YYYY MM"
       //interval: 5,
@@ -133,7 +133,7 @@ window.onload = function() {
 
     data: [{
       name: "Dewanoumi Ichimon",
-      legendText: " • {name} • ",
+      legendText: "- {name} -",
       type: "rangeArea",
       showInLegend: true,
       toolTipContent: " ",
@@ -303,15 +303,80 @@ window.onload = function() {
     chart.render();
   }
 
+
+  var axisXMin = chart.axisX.get("viewportMinimum");
+  var axisXMax = chart.axisX.get("viewPortMaximum");
+
+  $( function() {
+    $("#fromDate").val(axisXMin);
+    $("#toDate").val(axisXMax);
+    $("#fromDate").datepicker({dateFormat: "M yy"});
+    $("#toDate").datepicker({dateFormat: "M yy"});
+  });
+
+  $("#date-selector").change( function() {
+    var minValue = $( "#fromDate" ).val();
+    var maxValue = $ ( "#toDate" ).val();
+    
+    if(new Date(minValue).getTime() < new Date(maxValue).getTime()){  
+      chart.axisX.set("viewportMinimum", minValue);
+      chart.axisX.set("viewPortMaximum", maxValue);
+    }  
+  });
+
+  $(".period").click( function() {
+    var period = this.id;  
+    var minValue = new Date(axisXMax);
+    
+    switch(period){
+      case "1m":
+        minValue.setMonth(minValue.getMonth() - 1);
+        break;
+      case "3m":
+        minValue.setMonth(minValue.getMonth() - 3);
+        break;
+      case "6m":
+        minValue.setMonth(minValue.getMonth() - 6);
+        break;
+      case "1y":
+        minValue.setYear(minValue.getFullYear() - 1);
+        break;
+      default:
+        minValue = axisXMin;
+    }
+
+    chart.axisX.set("viewportMinimum", minValue);  
+    chart.axisX.set("viewPortMaximum", axisXMax);
+  });
+
+  document.getElementById("button").addEventListener("click", function(){
+    var type = chart.data[0].get("type"); 
+    document.getElementById("display").innerHTML = "Chart Type: " + type;
+  })
+
 }
 
     </script>
 </head>
 
 <body>
+  <div id="update-nav">
+  <div id="range-selector">
+    <input type="button" id="1m" class="period ui-button" value="1m" />
+    <input type="button" id="3m" class="period ui-button" value="3m"/>
+    <input type="button" id="6m" class="period ui-button" value="6m"/>
+    <input type="button" id="1y" class="period ui-button" value="1y"/>
+    <input type="button" id="all" class="period ui-button" value="All"/>
+  </div>
+  <div id="date-selector" class="">
+      From:<input type="text" id="fromDate"  class="ui-widget">
+      To:<input type="text" id="toDate"  class="ui-widget">
+  </div>
+  </div>
   <div id="chartContainer" style="height: 450px; width: 100%;">
     <center><img src="https://i.imgur.com/Pdr7Mvk.gif" id="loader"/><br/>Loading...</center>
   </div><label><input id="toggleSekitori" type="checkbox" name="checkbox" value="">Enable Sekitori</label>
+  <button id="button">Get Chart Type</button>
   <span id="display"></span>
   <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
   <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
