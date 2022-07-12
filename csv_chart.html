@@ -38,8 +38,6 @@ window.onload = function() {
       tickLength: 5,
       tickColor: "black",
       lineColor: "black",
-      viewportMinimum: new Date(1898, 5),
-      viewportMaximum: new Date(2022, 7),
       //margin: 10,
       //labelFormatString: "YYYY MM"
       //interval: 5,
@@ -304,8 +302,8 @@ window.onload = function() {
   }
 
 
-  var axisXMin = chart.axisX.get("viewportMinimum");
-  var axisXMax = chart.axisX.get("viewPortMaximum");
+  var axisXMin = chart.axisX[0].get("minimum");
+  var axisXMax = chart.axisX[0].get("maximum");
 
   $( function() {
     $("#fromDate").val(axisXMin);
@@ -319,14 +317,15 @@ window.onload = function() {
     var maxValue = $ ( "#toDate" ).val();
     
     if(new Date(minValue).getTime() < new Date(maxValue).getTime()){  
-      chart.axisX.set("viewportMinimum", minValue);
-      chart.axisX.set("viewPortMaximum", maxValue);
+      chart.axisX[0].set("viewportMinimum", minValue);
+      chart.axisX[0].set("viewPortMaximum", maxValue);
     }  
   });
 
   $(".period").click( function() {
     var period = this.id;  
-    var minValue = new Date(axisXMax);
+    var minValue;
+    minValue = new Date(axisXMax);
     
     switch(period){
       case "1m":
@@ -338,21 +337,16 @@ window.onload = function() {
       case "6m":
         minValue.setMonth(minValue.getMonth() - 6);
         break;
-      case "1y":
-        minValue.setYear(minValue.getFullYear() - 1);
+      case "5y":
+        minValue.setYear(minValue.getFullYear() - 5);
         break;
       default:
         minValue = axisXMin;
     }
-
-    chart.axisX.set("viewportMinimum", minValue);  
-    chart.axisX.set("viewPortMaximum", axisXMax);
+    
+    chart.axisX[0].set("minimum", new Date(minValue), true);  
+    chart.axisX[0].set("maximum", new Date(axisXMax), true);
   });
-
-  document.getElementById("button").addEventListener("click", function(){
-    var type = chart.data[0].get("type"); 
-    document.getElementById("display").innerHTML = "Chart Type: " + type;
-  })
 
 }
 
@@ -365,7 +359,7 @@ window.onload = function() {
     <input type="button" id="1m" class="period ui-button" value="1m" />
     <input type="button" id="3m" class="period ui-button" value="3m"/>
     <input type="button" id="6m" class="period ui-button" value="6m"/>
-    <input type="button" id="1y" class="period ui-button" value="1y"/>
+    <input type="button" id="5y" class="period ui-button" value="5y"/>
     <input type="button" id="all" class="period ui-button" value="All"/>
   </div>
   <div id="date-selector" class="">
