@@ -7,6 +7,19 @@
 window.onload = function() {
 
   const HEYA_COUNT = 3;
+
+  var heyaNames = ["Dewanoumi Ichimon", "Nishonoseki Ichimon", 
+  "Tatsunami Ichimon", "Tokitsukaze Ichimon", "Takasago Ichimon",
+    "Dewanoumi", "Fujishima", "Futagoyama", "Irumagawa", "Kasugano", "Kise", 
+    "Musashigawa", "Onoe", "Sakaigawa", "Shikihide", "Takekuma", "Tamanoi", 
+    "Tatsunami", "Yamahibiki",
+  "Hanaregoma", "Kataonami", "Minato", "Naruto", "Nishiiwa", "Nishonoseki", 
+  "Onomatsu", "Oshiogawa", "Otake", "Sadogatake", "Shibatayama", 
+  "Shikoroyama", "Tagonoura", "Takadagawa", "Tokiwayama",
+    "Asahiyama", "Asakayama", "Isegahama", "Miyagino", "Oshima",
+  "Arashio", "Isenoumi", "Michinoku", "Oitekaze", "Tokitsukaze",
+    "Hakkaku", "Kokonoe", "Nishikido", "Takasago"]
+
   var ichimonDps = [];
 
   // Initialize array of dataPoint arrays with sekitori
@@ -15,182 +28,177 @@ window.onload = function() {
   // Initialize array of dataPoint arrays with no sekitori
   var dpsB = Create2DArray(HEYA_COUNT);
 
-  var chart = new CanvasJS.Chart("chartContainer", {
+  var chart = new CanvasJS.Chart("chartContainer");
+
+  chart.options = {
     //theme: "light2",
     backgroundColor: "transparent",
     animationEnabled: false,
     exportEnabled: true,
     zoomEnabled: true,
-    zoomType: "x",
+    zoomType: "x"
+  };
 
-    title: {
-      text: "Description",
-      fontFamily: "Verdana"
+  chart.options.title = {
+    text: "Description",
+    fontFamily: "Verdana"
+  };
+
+  chart.options.axisX = {
+    title: "date",
+    titleFontFamily: "Verdana",
+    labelFontFamily: "Arial",
+    labelFontSize: 14,
+    titleFontSize: 20,
+    titleFontColor: "red",
+    tickLength: 5,
+    tickColor: "black",
+    lineColor: "black",
+    maximum: new Date(2022, 8),
+    //viewportMinimum: new Date(1898, 5),
+    //viewportMaximum: new Date(2022, 7),
+    //margin: 10,
+    //labelFormatString: "YYYY MM"
+    //interval: 5,
+    //intervalType: "year",
+    labelFormatter: function(e) {
+      return CanvasJS.formatDate(e.value, "YYYY.MM");
+    }
+  };
+
+  chart.options.axisX.stripLines = [];
+
+  chart.options.axisX.stripLines[0] = {
+    //value: new Date(1988, 1),
+    startValue: new Date(1898, 4),
+    endValue: new Date(1988, 1),               
+    color: "red",
+    opacity: .1
+  }; 
+  chart.options.axisX.stripLines[1] = {
+    startValue: new Date(1898, 4),
+    endValue: new Date(1934, 2),               
+    color: "red",
+    opacity: .1
+  }; 
+  chart.options.axisX.stripLines[2] = {
+    value: new Date(1957, 11),
+    label: "6BPY era starts"
+  };
+  chart.options.axisX.crosshair = {
+    enabled: true,
+    labelFormatter: function(e) {
+      return CanvasJS.formatDate(e.value, "YYYY.MM");
+    }
+  };
+
+  chart.options.axisY = {
+    title: "total rikishi",
+    titleFontFamily: "Verdana",
+    labelFontFamily: "arial",
+    labelFontSize: 14,
+    titleFontSize: 20,
+    titleFontColor: "red",
+    includeZero: true,
+    tickLength: 0,
+    lineColor: "black",
+    gridColor: "#A9A9A9",
+    minimum: 0
+  };
+
+  chart.options.legend = {
+    cursor: "pointer",
+    fontFamily: "Trebuchet MS",
+    fontWeight: "bold ",
+    horizontalAlign: "center",
+    //itemWidth: 110,
+    //dockInsidePlotArea: true,
+    itemmouseover: function(e) {
+      e.dataSeries.lineThickness = 3;
+      e.dataSeries.fillOpacity = .5;
+      e.dataSeries.indexLabelFontWeight = "bold";
+      e.chart.render();
     },
-
-    axisX: {
-      title: "date",
-      titleFontFamily: "Verdana",
-      labelFontFamily: "Arial",
-      labelFontSize: 14,
-      titleFontSize: 20,
-      titleFontColor: "red",
-      tickLength: 5,
-      tickColor: "black",
-      lineColor: "black",
-      //margin: 10,
-      //labelFormatString: "YYYY MM"
-      //interval: 5,
-      //intervalType: "year",
-      labelFormatter: function(e) {
-        return CanvasJS.formatDate(e.value, "YYYY.MM");
-      },
-      stripLines: [{
-        //value: new Date(1988, 1),
-        startValue: new Date(1898, 4),
-        endValue: new Date(1988, 1),               
-        color: "red",
-        opacity: .1
-      }, {
-        startValue: new Date(1898, 4),
-        endValue: new Date(1934, 2),               
-        color: "red",
-        opacity: .1
-      }, {
-        value: new Date(1957, 11),
-        label: "6BPY era starts"
-      }],
-      crosshair: {
-        enabled: true,
-        labelFormatter: function(e) {
-          return CanvasJS.formatDate(e.value, "YYYY.MM");
-        }
-      }
+    itemmouseout: function(e) {
+      e.dataSeries.lineThickness = 2;
+      e.dataSeries.fillOpacity = .4;
+      e.dataSeries.indexLabelFontWeight = "normal";
+      e.chart.render();
     },
-
-    axisY: {
-      title: "total rikishi",
-      titleFontFamily: "Verdana",
-      labelFontFamily: "arial",
-      labelFontSize: 14,
-      titleFontSize: 20,
-      titleFontColor: "red",
-      includeZero: true,
-      tickLength: 0,
-      lineColor: "black",
-      gridColor: "#A9A9A9",
-      minimum: 0
-    },
-
-    legend: {
-      cursor: "pointer",
-      fontFamily: "Trebuchet MS",
-      fontWeight: "bold ",
-      horizontalAlign: "center",
-      //itemWidth: 110,
-      //dockInsidePlotArea: true,
-      itemmouseover: function(e) {
-        e.dataSeries.lineThickness = 3;
-        e.dataSeries.fillOpacity = .5;
-        e.dataSeries.indexLabelFontWeight = "bold";
-        e.chart.render();
-      },
-      itemmouseout: function(e) {
-        e.dataSeries.lineThickness = 2;
-        e.dataSeries.fillOpacity = .4;
-        e.dataSeries.indexLabelFontWeight = "normal";
-        e.chart.render();
-      },
-      itemclick: function(e) {
-        if (e.dataSeries.name === "Dewanoumi Ichimon") {
-          if (e.dataSeries.visible) {
-            e.dataSeries.visible = false;
-            for (var i = 1; i < HEYA_COUNT + 1; i++)
-              chart.options.data[i].visible = false;
-          } else {
-            e.dataSeries.visible = true;
-            for (var i = 1; i < HEYA_COUNT + 1; i++)
-              chart.options.data[i].visible = true;
-          }
-        } else if (e.dataSeries.visible)
+    itemclick: function(e) {
+      if (e.dataSeries.name === "Dewanoumi Ichimon") {
+        if (e.dataSeries.visible) {
           e.dataSeries.visible = false;
-        else
+          for (var i = 1; i < HEYA_COUNT + 1; i++)
+            chart.options.data[i].visible = false;
+        } else {
           e.dataSeries.visible = true;
-        e.chart.render();
+          for (var i = 1; i < HEYA_COUNT + 1; i++)
+            chart.options.data[i].visible = true;
+        }
+      } else if (e.dataSeries.visible)
+        e.dataSeries.visible = false;
+      else
+        e.dataSeries.visible = true;
+      e.chart.render();
+    }
+  };
+
+  chart.options.toolTip = {
+    shared: false,
+    fontSize: 13,
+    cornerRadius: 8,
+    fontFamily: "Verdana",
+    //borderColor: "black",
+    contentFormatter: tooltipNoSekitori
+  };
+
+  chart.options.data = [];
+
+  for (var i = 0; i < HEYA_COUNT + 1; i++) {
+    if (i == 0) {
+      chart.options.data[i] = {
+        name: heyaNames[i],
+        legendText: "- {name} -",
+        type: "rangeArea",
+        showInLegend: true,
+        toolTipContent: " ",
+        highlightEnabled: false,
+        legendMarkerType: "none",
+        markerSize: 0,
+        visible: true,
+        dataPoints: ichimonDps
       }
-    },
-
-    toolTip: {
-      shared: false,
-      fontSize: 13,
-      cornerRadius: 8,
-      fontFamily: "Verdana",
-      //borderColor: "black",
-      contentFormatter: tooltipNoSekitori
-    },
-
-    data: [{
-      name: "Dewanoumi Ichimon",
-      legendText: "- {name} -",
-      type: "rangeArea",
-      showInLegend: true,
-      toolTipContent: " ",
-      highlightEnabled: false,
-      legendMarkerType: "none",
-      markerSize: 0,
-      visible: true,
-      dataPoints: ichimonDps
-    }, {
-      name: "Dewanoumi",
-      type: "spline",
-      dataPoints: dpsB[0]
-    }, {
-      name: "Fujishima",
-      type: "spline",
-      dataPoints: dpsB[1]
-    }, {
-      name: "Futagoyama",
-      type: "spline",
-      markerSize: 0,  // For heya with 0 sekitori throughout
-                      // Without it, the markers appear on all of its dataPoints
-      dataPoints: dpsB[2]
-    }]
-  });
-
-
-  for (var i = 1; i < HEYA_COUNT + 1; i++)
-    configureDataSeries(i);
-
-  function configureDataSeries(i) {
-    chart.options.data[i].cursor = "pointer";
-    chart.options.data[i].showInLegend = true;
-    chart.options.data[i].fillOpacity = .4;
-    chart.options.data[i].lineThickness = 2;
-    chart.options.data[i].indexLabelFontSize = 12;
-    chart.options.data[i].indexLabelLineThickness = 1.5;
-    chart.options.data[i].indexLabelLineColor = "black";
-    chart.options.data[i].legendMarkerType = "circle";
-    chart.options.data[i].visible = true;
-    chart.options.data[i].indexLabelLineDashType = "dot";
-    chart.options.data[i].indexLabelFormatter = getHeyaLabel;
-    chart.options.data[i].click = openLink;
+    }
+    else {
+      chart.options.data[i] = {
+        name: heyaNames[i+4],
+        type: "spline",
+        markerSize: 0,
+        cursor: "pointer",
+        showInLegend: true,
+        fillOpacity: .4,
+        lineThickness: 2,
+        indexLabelFontSize: 12,
+        indexLabelLineThickness: 1.5,
+        indexLabelLineColor: "black",
+        legendMarkerType: "circle",
+        visible: true,
+        indexLabelLineDashType: "dot",
+        indexLabelFormatter: function(e) {
+          if (e.index !== 1 && e.dataPoint.label)
+            return e.dataPoint.label;
+          else return "";
+        },
+        click: function(e) {
+          window.open(e.dataPoint.url);
+        },
+        dataPoints: dpsB[i-1]
+      };
+    }
   }
 
-
-  // Returns HB and HT labels
-  function getHeyaLabel(e) {
-    if (e.index !== 1 && e.dataPoint.label)
-      return e.dataPoint.label;
-    else return "";
-  }
-
-
-  // Opens link of particular basho and/or heya
-  function openLink(e) {
-    window.open(e.dataPoint.url);
-  }
-
-
+  
   function Create2DArray(rows) {
     var arr = [];
 
@@ -301,52 +309,16 @@ window.onload = function() {
     chart.render();
   }
 
+  document.getElementById("button").addEventListener("click", function(){
+    var currentMin = chart.axisX[0].get("viewportMinimum");
+    var currentMax = chart.axisX[0].get("viewportMaximum");
+    var yearMax = currentMax.getFullYear();
+    var monthMax = currentMax.getMonth();
 
-  var axisXMin = chart.axisX[0].get("minimum");
-  var axisXMax = chart.axisX[0].get("maximum");
+    document.getElementById("display").innerHTML = currentMin + " " + currentMax;
+    chart.axisX[0].set("viewportMinimum", new Date(yearMax - 5, monthMax));
 
-  $( function() {
-    $("#fromDate").val(axisXMin);
-    $("#toDate").val(axisXMax);
-    $("#fromDate").datepicker({dateFormat: "M yy"});
-    $("#toDate").datepicker({dateFormat: "M yy"});
-  });
-
-  $("#date-selector").change( function() {
-    var minValue = $( "#fromDate" ).val();
-    var maxValue = $ ( "#toDate" ).val();
-    
-    if(new Date(minValue).getTime() < new Date(maxValue).getTime()){  
-      chart.axisX[0].set("viewportMinimum", minValue);
-      chart.axisX[0].set("viewPortMaximum", maxValue);
-    }  
-  });
-
-  $(".period").click( function() {
-    var period = this.id;  
-    var minValue;
-    minValue = new Date(axisXMax);
-    
-    switch(period){
-      case "1m":
-        minValue.setMonth(minValue.getMonth() - 1);
-        break;
-      case "3m":
-        minValue.setMonth(minValue.getMonth() - 3);
-        break;
-      case "6m":
-        minValue.setMonth(minValue.getMonth() - 6);
-        break;
-      case "5y":
-        minValue.setYear(minValue.getFullYear() - 5);
-        break;
-      default:
-        minValue = axisXMin;
-    }
-    
-    chart.axisX[0].set("minimum", new Date(minValue), true);  
-    chart.axisX[0].set("maximum", new Date(axisXMax), true);
-  });
+  })
 
 }
 
@@ -354,23 +326,10 @@ window.onload = function() {
 </head>
 
 <body>
-  <div id="update-nav">
-  <div id="range-selector">
-    <input type="button" id="1m" class="period ui-button" value="1m" />
-    <input type="button" id="3m" class="period ui-button" value="3m"/>
-    <input type="button" id="6m" class="period ui-button" value="6m"/>
-    <input type="button" id="5y" class="period ui-button" value="5y"/>
-    <input type="button" id="all" class="period ui-button" value="All"/>
-  </div>
-  <div id="date-selector" class="">
-      From:<input type="text" id="fromDate"  class="ui-widget">
-      To:<input type="text" id="toDate"  class="ui-widget">
-  </div>
-  </div>
   <div id="chartContainer" style="height: 450px; width: 100%;">
     <center><img src="https://i.imgur.com/Pdr7Mvk.gif" id="loader"/><br/>Loading...</center>
   </div><label><input id="toggleSekitori" type="checkbox" name="checkbox" value="">Enable Sekitori</label>
-  <button id="button">Get Chart Type</button>
+  <button id="button">5 yrs</button>
   <span id="display"></span>
   <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
   <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
