@@ -6,27 +6,22 @@
 
 window.onload = function() {
 
-  const HEYA_COUNT = 3;
+  const HEYA_COUNT = 43;
 
-  var heyaNames = ["Dewanoumi Ichimon", "Nishonoseki Ichimon", 
-  "Tatsunami Ichimon", "Tokitsukaze Ichimon", "Takasago Ichimon",
-    "Dewanoumi", "Fujishima", "Futagoyama", "Irumagawa", "Kasugano", "Kise", 
-    "Musashigawa", "Onoe", "Sakaigawa", "Shikihide", "Takekuma", "Tamanoi", 
-    "Tatsunami", "Yamahibiki",
-  "Hanaregoma", "Kataonami", "Minato", "Naruto", "Nishiiwa", "Nishonoseki", 
-  "Onomatsu", "Oshiogawa", "Otake", "Sadogatake", "Shibatayama", 
-  "Shikoroyama", "Tagonoura", "Takadagawa", "Tokiwayama",
-    "Asahiyama", "Asakayama", "Isegahama", "Miyagino", "Oshima",
-  "Arashio", "Isenoumi", "Michinoku", "Oitekaze", "Tokitsukaze",
-    "Hakkaku", "Kokonoe", "Nishikido", "Takasago"]
-
-  var ichimonDps = [];
+  var heyaNames = ["Overall", "Arashio", "Asahiyama", "Asakayama", "Dewanoumi", 
+  "Fujishima", "Futagoyama", "Hakkaku", "Hanaregoma", "Irumagawa", 
+  "Isegahama", "Isenoumi", "Kasugano", "Kataonami", "Kise", "Kokonoe", 
+  "Michinoku", "Minato", "Miyagino", "Musashigawa", "Naruto", "Nishiiwa", 
+  "Nishikido", "Nishonoseki", "Oitekaze", "Onoe", "Onomatsu", "Oshima", 
+  "Oshiogawa", "Otake", "Sadogatake", "Sakaigawa", "Shibatayama", "Shikihide", 
+  "Shikoroyama", "Tagonoura", "Takadagawa", "Takasago", "Takekuma", "Tamanoi", 
+  "Tatsunami", "Tokitsukaze", "Tokiwayama", "Yamahibiki"];
 
   // Initialize array of dataPoint arrays with sekitori
-  var dps = Create2DArray(HEYA_COUNT);
+  var dps = Create2DArray(HEYA_COUNT+1);
 
   // Initialize array of dataPoint arrays with no sekitori
-  var dpsB = Create2DArray(HEYA_COUNT);
+  var dpsB = Create2DArray(HEYA_COUNT+1);
 
   var chart = new CanvasJS.Chart("chartContainer");
 
@@ -54,7 +49,7 @@ window.onload = function() {
     tickLength: 5,
     tickColor: "black",
     lineColor: "black",
-    maximum: new Date(2022, 8),
+    //maximum: new Date(2022, 8),
     //viewportMinimum: new Date(1898, 5),
     //viewportMaximum: new Date(2022, 7),
     //margin: 10,
@@ -70,20 +65,16 @@ window.onload = function() {
 
   chart.options.axisX.stripLines[0] = {
     //value: new Date(1988, 1),
-    startValue: new Date(1898, 4),
+    startValue: new Date(1757, 9),
     endValue: new Date(1988, 1),               
     color: "red",
-    opacity: .1
+    opacity: .08
   }; 
   chart.options.axisX.stripLines[1] = {
-    startValue: new Date(1898, 4),
+    startValue: new Date(1757, 9),
     endValue: new Date(1934, 2),               
     color: "red",
-    opacity: .1
-  }; 
-  chart.options.axisX.stripLines[2] = {
-    value: new Date(1957, 11),
-    label: "6BPY era starts"
+    opacity: .08
   };
   chart.options.axisX.crosshair = {
     enabled: true,
@@ -108,10 +99,12 @@ window.onload = function() {
 
   chart.options.legend = {
     cursor: "pointer",
+    fontSize: 17,
     fontFamily: "Trebuchet MS",
-    fontWeight: "bold ",
+    fontWeight: "normal",
     horizontalAlign: "center",
-    //itemWidth: 110,
+    itemWidth: 130,
+    maxWidth: 1050,
     //dockInsidePlotArea: true,
     itemmouseover: function(e) {
       e.dataSeries.lineThickness = 3;
@@ -126,17 +119,7 @@ window.onload = function() {
       e.chart.render();
     },
     itemclick: function(e) {
-      if (e.dataSeries.name === "Dewanoumi Ichimon") {
-        if (e.dataSeries.visible) {
-          e.dataSeries.visible = false;
-          for (var i = 1; i < HEYA_COUNT + 1; i++)
-            chart.options.data[i].visible = false;
-        } else {
-          e.dataSeries.visible = true;
-          for (var i = 1; i < HEYA_COUNT + 1; i++)
-            chart.options.data[i].visible = true;
-        }
-      } else if (e.dataSeries.visible)
+      if (e.dataSeries.visible)
         e.dataSeries.visible = false;
       else
         e.dataSeries.visible = true;
@@ -155,47 +138,32 @@ window.onload = function() {
 
   chart.options.data = [];
 
-  for (var i = 0; i < HEYA_COUNT + 1; i++) {
-    if (i == 0) {
-      chart.options.data[i] = {
-        name: heyaNames[i],
-        legendText: "- {name} -",
-        type: "rangeArea",
-        showInLegend: true,
-        toolTipContent: " ",
-        highlightEnabled: false,
-        legendMarkerType: "none",
-        markerSize: 0,
-        visible: true,
-        dataPoints: ichimonDps
-      }
-    }
-    else {
-      chart.options.data[i] = {
-        name: heyaNames[i+4],
-        type: "spline",
-        markerSize: 0,
-        cursor: "pointer",
-        showInLegend: true,
-        fillOpacity: .4,
-        lineThickness: 2,
-        indexLabelFontSize: 12,
-        indexLabelLineThickness: 1.5,
-        indexLabelLineColor: "black",
-        legendMarkerType: "circle",
-        visible: true,
-        indexLabelLineDashType: "dot",
-        indexLabelFormatter: function(e) {
-          if (e.index !== 1 && e.dataPoint.label)
-            return e.dataPoint.label;
-          else return "";
-        },
-        click: function(e) {
-          window.open(e.dataPoint.url);
-        },
-        dataPoints: dpsB[i-1]
-      };
-    }
+
+  for (var i = 0; i <= HEYA_COUNT; i++) {
+    chart.options.data[i] = {
+      name: heyaNames[i],
+      type: "spline",
+      markerSize: 0,
+      cursor: "pointer",
+      showInLegend: true,
+      fillOpacity: .4,
+      lineThickness: 2,
+      indexLabelFontSize: 12,
+      indexLabelLineThickness: 1.5,
+      indexLabelLineColor: "black",
+      legendMarkerType: "circle",
+      visible: false,
+      indexLabelLineDashType: "dot",
+      indexLabelFormatter: function(e) {
+        if (e.index !== 1 && e.dataPoint.label)
+          return e.dataPoint.label;
+        else return "";
+      },
+      click: function(e) {
+        window.open(e.dataPoint.url);
+      },
+      dataPoints: dpsB[i]
+    };
   }
 
   
@@ -215,15 +183,15 @@ window.onload = function() {
 
   function toggleSekitori() {
     if (this.checked) {
-      for (var i = 1; i < HEYA_COUNT + 1; i++) {
+      for (var i = 0; i <= HEYA_COUNT; i++) {
         chart.data[i].set("type", "rangeSplineArea");
-        chart.options.data[i].dataPoints = dps[i-1];
+        chart.options.data[i].dataPoints = dps[i];
       }
       chart.options.toolTip.contentFormatter = tooltipSekitori;
     } else {
-      for (var i = 1; i < HEYA_COUNT + 1; i++) {
+      for (var i = 0; i <= HEYA_COUNT; i++) {
         chart.data[i].set("type", "spline");
-        chart.options.data[i].dataPoints = dpsB[i-1];
+        chart.options.data[i].dataPoints = dpsB[i];
       }
       chart.options.toolTip.contentFormatter = tooltipNoSekitori;
     }
@@ -268,7 +236,7 @@ window.onload = function() {
 
   function getDataPointsFromCSV(csv) {
     var csvLines = heya = date = [];
-    var datas = Create2DArray(HEYA_COUNT);
+    var datas = Create2DArray(HEYA_COUNT+1);
 
     csvLines = csv.split(/[\r?\n|\r|\n]+/);
     for (var i = 1; i < csvLines.length; i++) {
@@ -276,9 +244,19 @@ window.onload = function() {
         heya = csvLines[i].split(",");
         date = heya[0].split(".");
 
-        for (var j = 0; j < HEYA_COUNT; j++) {
+        for (var j = 0; j <= HEYA_COUNT; j++) {
           datas[j] = heya[j+1].split("-");
           if (heya[j+1] !== "") {
+            if (datas[j][0] === "") {
+              dps[j].push({
+                x: new Date(date[0], date[1] - 1),
+                y: null
+              });
+              dpsB[j].push({
+                x: new Date(date[0], date[1] - 1),
+                y: null
+              });
+            } else
             dps[j].push({
               shisho: datas[j][2],
               label: datas[j][3],
@@ -296,12 +274,6 @@ window.onload = function() {
               x: new Date(date[0], date[1] - 1),
               y: parseInt(datas[j][0])
             });
-            if (i === csvLines.length - 2) {
-              ichimonDps.push({
-                x: new Date(date[0], date[1] - 1),
-                y: [0, 0]
-              });
-            }
           }
         }
       }
@@ -309,27 +281,15 @@ window.onload = function() {
     chart.render();
   }
 
-  document.getElementById("button").addEventListener("click", function(){
-    var currentMin = chart.axisX[0].get("viewportMinimum");
-    var currentMax = chart.axisX[0].get("viewportMaximum");
-    var yearMax = currentMax.getFullYear();
-    var monthMax = currentMax.getMonth();
-
-    document.getElementById("display").innerHTML = currentMin + " " + currentMax;
-    chart.axisX[0].set("viewportMinimum", new Date(yearMax - 5, monthMax));
-
-  })
-
 }
 
     </script>
 </head>
 
 <body>
-  <div id="chartContainer" style="height: 450px; width: 100%;">
+  <div id="chartContainer" style="height: 600px; width: 100%;">
     <center><img src="https://i.imgur.com/Pdr7Mvk.gif" id="loader"/><br/>Loading...</center>
   </div><label><input id="toggleSekitori" type="checkbox" name="checkbox" value="">Enable Sekitori</label>
-  <button id="button">5 yrs</button>
   <span id="display"></span>
   <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
   <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
