@@ -8,6 +8,12 @@ window.onload = function() {
 
   const HEYA_COUNT = 43;
 
+  // Initialize array of dataPoint arrays with sekitori
+  var dps = Create2DArray(HEYA_COUNT+1);
+
+  // Initialize array of dataPoint arrays with no sekitori
+  var dpsB = Create2DArray(HEYA_COUNT+1);
+
   var heyaNames = ["Overall", "Arashio", "Asahiyama", "Asakayama", "Dewanoumi", 
   "Fujishima", "Futagoyama", "Hakkaku", "Hanaregoma", "Irumagawa", 
   "Isegahama", "Isenoumi", "Kasugano", "Kataonami", "Kise", "Kokonoe", 
@@ -17,17 +23,23 @@ window.onload = function() {
   "Shikoroyama", "Tagonoura", "Takadagawa", "Takasago", "Takekuma", "Tamanoi", 
   "Tatsunami", "Tokitsukaze", "Tokiwayama", "Yamahibiki"];
 
-  // Initialize array of dataPoint arrays with sekitori
-  var dps = Create2DArray(HEYA_COUNT+1);
-
-  // Initialize array of dataPoint arrays with no sekitori
-  var dpsB = Create2DArray(HEYA_COUNT+1);
+  CanvasJS.addColorSet("heyaColors",
+    ["#d92121", "#ff6666", "#d95321", "#ff9066", "#d98521", "#ffae4d", 
+    "#b39c36", "#d9b721", "#a7b336", "#c8d921", "#85b336", "#96d921", 
+    "#63b336", "#64d921", "#31d921", "#5dff4d", "#21d942", "#4dff6d", 
+    "#21d974", "#4dff9e", "#21d9a6", "#33ffc7", "#21d9d9", "#33ffff", 
+    "#21a7d9", "#66d5ff", "#2174d9", "#66acff", "#2142d9", "#6682ff", 
+    "#3121d9", "#7466ff", "#6321d9", "#9e66ff", "#9621d9", "#c766ff", 
+    "#c821d9", "#f166ff", "#d921b7", "#ff80e8", "#d92185", "#ff66b9", 
+    "#d92153", "#ff4d7d"]
+  );
 
   var chart = new CanvasJS.Chart("chartContainer");
 
   chart.options = {
-    //theme: "light2",
-    backgroundColor: "transparent",
+    colorSet: "heyaColors",
+    //theme: "dark1",
+    //backgroundColor: "transparent", // #fffedf
     animationEnabled: false,
     exportEnabled: true,
     zoomEnabled: true,
