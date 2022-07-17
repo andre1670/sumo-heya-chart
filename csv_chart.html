@@ -33,7 +33,13 @@ window.onload = function() {
 
   // Shuffled colors
   CanvasJS.addColorSet("heyaColors",
-    ["#d95321","#ff66b9","#9e66ff","#96d921","#5dff4d","#66acff","#21d942","#ff4d7d","#66d5ff","#21a7d9","#c821d9","#33ffff","#6682ff","#21d9a6","#7466ff","#ff9066","#d92121","#6321d9","#33ffc7","#ff80e8","#d92153","#d9b721","#4dff9e","#d921b7","#d92185","#ff6666","#4dff6d","#63b336","#21d974","#64d921","#b39c36","#31d921","#21d9d9","#c8d921","#a7b336","#9621d9","#f166ff","#85b336","#2142d9","#ffae4d","#2174d9","#c766ff","#3121d9","#d98521"]
+    ["#d95321", "#ff66b9", "#9e66ff", "#96d921", "#5dff4d", "#66acff", "#21d942", 
+    "#ff4d7d", "#66d5ff", "#21a7d9", "#c821d9", "#33ffff", "#6682ff", "#21d9a6", 
+    "#7466ff", "#ff9066", "#d92121", "#6321d9", "#33ffc7", "#ff80e8", "#d92153", 
+    "#d9b721", "#4dff9e", "#d921b7", "#d92185", "#ff6666", "#4dff6d", "#63b336", 
+    "#21d974", "#64d921", "#b39c36", "#31d921", "#21d9d9", "#c8d921", "#a7b336", 
+    "#9621d9", "#f166ff", "#85b336", "#2142d9", "#ffae4d", "#2174d9", "#c766ff", 
+    "#3121d9", "#d98521"]
   );
 
   var chart = new CanvasJS.Chart("chartContainer");
@@ -113,7 +119,7 @@ window.onload = function() {
     fontSize: 17,
     fontWeight: "normal",
     horizontalAlign: "center",
-    itemWidth: 130,
+    itemWidth: 125,
     maxWidth: 1050,
     //dockInsidePlotArea: true,
     itemmouseover: function(e) {
@@ -139,7 +145,6 @@ window.onload = function() {
 
   chart.options.toolTip = {
     shared: false,
-    fontSize: 13,
     cornerRadius: 8,
     //borderColor: "black",
     contentFormatter: tooltipNoSekitori
@@ -151,12 +156,10 @@ window.onload = function() {
   for (var i = 0; i <= HEYA_COUNT; i++) {
     chart.options.data[i] = {
       name: heyaNames[i],
-      type: "spline",
+      type: "line",
       markerSize: 0,
       cursor: "pointer",
       showInLegend: true,
-      fillOpacity: .4,
-      lineThickness: 2,
       indexLabelFontSize: 12,
       indexLabelLineThickness: 1.5,
       indexLabelLineColor: "black",
@@ -191,18 +194,24 @@ window.onload = function() {
   sekitoriCheckbox.addEventListener("change", toggleSekitori);
 
   function toggleSekitori() {
+    var a = document.getElementById("loadingText");
+    a.innerHTML= "";
     if (this.checked) {
+      a.innerHTML= "Please wait...";
       for (var i = 0; i <= HEYA_COUNT; i++) {
-        chart.data[i].set("type", "rangeSplineArea");
         chart.options.data[i].dataPoints = dps[i];
+        chart.data[i].set("type", "rangeArea");
       }
       chart.options.toolTip.contentFormatter = tooltipSekitori;
+      a.innerHTML= "";
     } else {
+      a.innerHTML= "Please wait...";
       for (var i = 0; i <= HEYA_COUNT; i++) {
-        chart.data[i].set("type", "spline");
         chart.options.data[i].dataPoints = dpsB[i];
+        chart.data[i].set("type", "line");
       }
       chart.options.toolTip.contentFormatter = tooltipNoSekitori;
+      a.innerHTML= "";
     }
     chart.render();
   }
@@ -213,9 +222,14 @@ window.onload = function() {
 
     for (var i = 0; i < e.entries.length; i++) {
       var temp = CanvasJS.formatDate(e.entries[i].dataPoint.x, "YYYY.MM") + 
-      " - <strong>" + e.entries[i].dataSeries.name + 
-      "</strong><br/>Shisho: " + e.entries[i].dataPoint.shisho + 
-      "<br/><strong>" + e.entries[i].dataPoint.y + "</strong> rikishi";
+      " - <strong>" + e.entries[i].dataSeries.name + "</strong>";
+      if (e.entries[i].dataPoint.prevHeyaName !== "")
+        temp = temp + " (then " + e.entries[i].dataPoint.prevHeyaName + ")";
+      if (e.entries[i].dataPoint.shisho !== "")
+        temp = temp + "<br/>Shisho: " + e.entries[i].dataPoint.shisho;
+
+      temp = temp + "<br/><strong>" + e.entries[i].dataPoint.y + 
+      "</strong> rikishi";
       str = str.concat(temp);
     }
 
@@ -228,11 +242,15 @@ window.onload = function() {
 
     for (var i = 0; i < e.entries.length; i++) {
       var temp = CanvasJS.formatDate(e.entries[i].dataPoint.x, "YYYY.MM") + 
-      " - <strong>" + e.entries[i].dataSeries.name + "</strong><br/>Shisho: " + 
-      e.entries[i].dataPoint.shisho + "<br/><strong>" + 
-      e.entries[i].dataPoint.y[0] + "</strong> rikishi, <strong>" + 
-      (e.entries[i].dataPoint.y[0] - e.entries[i].dataPoint.y[1]) + 
-      "</strong> sekitori<br/>";
+      " - <strong>" + e.entries[i].dataSeries.name + "</strong>";
+      if (e.entries[i].dataPoint.prevHeyaName !== "")
+        temp = temp + " (then " + e.entries[i].dataPoint.prevHeyaName + ")";
+      if (e.entries[i].dataPoint.shisho !== "")
+        temp = temp + "<br/>Shisho: " + e.entries[i].dataPoint.shisho;
+
+      temp = temp + "<br/><strong>" + e.entries[i].dataPoint.y[0] + 
+      "</strong> rikishi, <strong>" + (e.entries[i].dataPoint.y[0] - 
+        e.entries[i].dataPoint.y[1]) + "</strong> sekitori<br/>";
       str = str.concat(temp);
     }
 
@@ -269,6 +287,7 @@ window.onload = function() {
             dps[j].push({
               shisho: datas[j][2],
               label: datas[j][3],
+              prevHeyaName: datas[j][5],
               url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + date[0] + 
               date[1] + "&heya=" + datas[j][4] + "&shusshin=-1",
               x: new Date(date[0], date[1] - 1),
@@ -278,6 +297,7 @@ window.onload = function() {
             dpsB[j].push({
               shisho: datas[j][2],
               label: datas[j][3],
+              prevHeyaName: datas[j][5],
               url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + date[0] + 
               date[1] + "&heya=" + datas[j][4] + "&shusshin=-1",
               x: new Date(date[0], date[1] - 1),
@@ -298,7 +318,9 @@ window.onload = function() {
 <body>
   <div id="chartContainer" style="height: 600px; width: 100%;">
     <center><img src="https://i.imgur.com/Pdr7Mvk.gif" id="loader"/><br/>Loading...</center>
-  </div><label><input id="toggleSekitori" type="checkbox" name="checkbox" value="">Enable Sekitori</label>
+  </div>
+  <label><input id="toggleSekitori" type="checkbox" name="checkbox" value="" style="float:left">Enable Sekitori</label>
+  <div id="loadingText"> </div>
   <span id="display"></span>
   <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
   <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
