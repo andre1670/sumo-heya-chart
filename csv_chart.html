@@ -42,6 +42,9 @@ window.onload = function() {
     "#3121d9", "#d98521"]
   );
 
+	var minXValue = document.getElementById("minXValue");
+	var maxXValue = document.getElementById("maxXValue");
+
   var chart = new CanvasJS.Chart("chartContainer");
 
   chart.options = {
@@ -51,7 +54,16 @@ window.onload = function() {
     animationEnabled: false,
     exportEnabled: true,
     zoomEnabled: true,
-    zoomType: "x"
+    zoomType: "x",
+		rangeChanged: function(e) {
+			if (e.trigger == "reset") {
+				minXValue.setAttribute("Value", CanvasJS.formatDate(e.chart.axisX[0].viewportMinimum, "YYYY.MM"));
+				maxXValue.setAttribute("Value", CanvasJS.formatDate(e.chart.axisX[0].viewportMaximum, "YYYY.MM"));
+			} else {
+				minXValue.setAttribute("Value", CanvasJS.formatDate(e.axisX[0].viewportMinimum, "YYYY.MM"));
+				maxXValue.setAttribute("Value", CanvasJS.formatDate(e.axisX[0].viewportMaximum, "YYYY.MM"));
+			}
+		}
   };
 
   chart.options.title = {
@@ -65,7 +77,6 @@ window.onload = function() {
     titleFontSize: 20,
     titleFontColor: "red",
     tickLength: 5,
-    tickColor: "black",
     lineColor: "black",
     //maximum: new Date(2022, 8),
     //viewportMinimum: new Date(1898, 5),
@@ -120,7 +131,6 @@ window.onload = function() {
     fontWeight: "normal",
     horizontalAlign: "center",
     itemWidth: 125,
-    maxWidth: 1050,
     //dockInsidePlotArea: true,
     itemmouseover: function(e) {
       e.dataSeries.lineThickness = 3;
@@ -137,9 +147,11 @@ window.onload = function() {
     itemclick: function(e) {
       if (e.dataSeries.visible)
         e.dataSeries.visible = false;
-      else
+			else
         e.dataSeries.visible = true;
       e.chart.render();
+			minXValue.setAttribute("Value", CanvasJS.formatDate(e.chart.axisX[0].viewportMinimum, "YYYY.MM"));
+			maxXValue.setAttribute("Value", CanvasJS.formatDate(e.chart.axisX[0].viewportMaximum, "YYYY.MM"));
     }
   };
 
@@ -151,7 +163,6 @@ window.onload = function() {
   };
 
   chart.options.data = [];
-
 
   for (var i = 0; i <= HEYA_COUNT; i++) {
     chart.options.data[i] = {
@@ -194,24 +205,18 @@ window.onload = function() {
   sekitoriCheckbox.addEventListener("change", toggleSekitori);
 
   function toggleSekitori() {
-    var a = document.getElementById("loadingText");
-    a.innerHTML= "";
     if (this.checked) {
-      a.innerHTML= "Please wait...";
       for (var i = 0; i <= HEYA_COUNT; i++) {
-        chart.options.data[i].dataPoints = dps[i];
         chart.data[i].set("type", "rangeArea");
+        chart.options.data[i].dataPoints = dps[i];
       }
       chart.options.toolTip.contentFormatter = tooltipSekitori;
-      a.innerHTML= "";
     } else {
-      a.innerHTML= "Please wait...";
       for (var i = 0; i <= HEYA_COUNT; i++) {
-        chart.options.data[i].dataPoints = dpsB[i];
         chart.data[i].set("type", "line");
+        chart.options.data[i].dataPoints = dpsB[i];
       }
       chart.options.toolTip.contentFormatter = tooltipNoSekitori;
-      a.innerHTML= "";
     }
     chart.render();
   }
@@ -224,7 +229,7 @@ window.onload = function() {
       var temp = CanvasJS.formatDate(e.entries[i].dataPoint.x, "YYYY.MM") + 
       " - <strong>" + e.entries[i].dataSeries.name + "</strong>";
       if (e.entries[i].dataPoint.prevHeyaName !== "")
-        temp = temp + " (then " + e.entries[i].dataPoint.prevHeyaName + ")";
+        temp = temp + "<br/>(then " + e.entries[i].dataPoint.prevHeyaName + ")";
       if (e.entries[i].dataPoint.shisho !== "")
         temp = temp + "<br/>Shisho: " + e.entries[i].dataPoint.shisho;
 
@@ -244,7 +249,7 @@ window.onload = function() {
       var temp = CanvasJS.formatDate(e.entries[i].dataPoint.x, "YYYY.MM") + 
       " - <strong>" + e.entries[i].dataSeries.name + "</strong>";
       if (e.entries[i].dataPoint.prevHeyaName !== "")
-        temp = temp + " (then " + e.entries[i].dataPoint.prevHeyaName + ")";
+        temp = temp + "<br/>(then " + e.entries[i].dataPoint.prevHeyaName + ")";
       if (e.entries[i].dataPoint.shisho !== "")
         temp = temp + "<br/>Shisho: " + e.entries[i].dataPoint.shisho;
 
@@ -288,8 +293,8 @@ window.onload = function() {
               shisho: datas[j][2],
               label: datas[j][3],
               prevHeyaName: datas[j][5],
-              url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + date[0] + 
-              date[1] + "&heya=" + datas[j][4] + "&shusshin=-1",
+              url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + 
+							date[0] + date[1] + "&heya=" + datas[j][4] + "&shusshin=-1",
               x: new Date(date[0], date[1] - 1),
               y: [parseInt(datas[j][0]), parseInt(datas[j][0]) - 
               parseInt(datas[j][1])]
@@ -298,8 +303,8 @@ window.onload = function() {
               shisho: datas[j][2],
               label: datas[j][3],
               prevHeyaName: datas[j][5],
-              url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + date[0] + 
-              date[1] + "&heya=" + datas[j][4] + "&shusshin=-1",
+              url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + 
+							date[0] + date[1] + "&heya=" + datas[j][4] + "&shusshin=-1",
               x: new Date(date[0], date[1] - 1),
               y: parseInt(datas[j][0])
             });
@@ -309,20 +314,24 @@ window.onload = function() {
     }
     chart.render();
   }
-
+	
 }
 
     </script>
 </head>
 
 <body>
+	<label>Viewing from: </label>
+	<input id="minXValue" type="text" placeholder="" size="5" style="text-align: center; background-color:powderblue;" readonly>
+	<label>to: </label>
+	<input id="maxXValue" type="text" placeholder="" size="5" style="text-align: center; background-color:powderblue;" readonly>
   <div id="chartContainer" style="height: 600px; width: 100%;">
     <center><img src="https://i.imgur.com/Pdr7Mvk.gif" id="loader"/><br/>Loading...</center>
   </div>
   <label><input id="toggleSekitori" type="checkbox" name="checkbox" value="" style="float:left">Enable Sekitori</label>
   <div id="loadingText"> </div>
   <span id="display"></span>
-  <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </body>
 
