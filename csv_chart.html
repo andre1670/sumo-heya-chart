@@ -276,8 +276,8 @@ window.onload = function() {
         heya = csvLines[i].split(",");
         dates = heya[0].split(".");
         for (var j = 0; j <= HEYA_COUNT; j++) {
-          hData[j] = heya[j + 1].split("-");
-          if (heya[j + 1] !== "") {
+          hData[j] = heya[j+1].split("-");
+          if (heya[j+1] !== "") {
             if (hData[j][0] === "") {
               dps[j].push({
                 x: new Date(dates[0], dates[1] - 1),
@@ -288,7 +288,7 @@ window.onload = function() {
                 y: null
               });
             }
-            if (hData[j][3] !== "") {
+            else if (hData[j][3] !== "") {
               dps[j].push({
                 markerSize: 3,
                 markerColor: "black",
@@ -313,34 +313,35 @@ window.onload = function() {
                   parseInt(hData[j][1])
                 ]
               });
+            } else {
+              dps[j].push({
+                shisho: hData[j][2],
+                label: hData[j][3],
+                prevHeyaName: hData[j][5],
+                url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" +
+                  dates[0] + dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
+                x: new Date(dates[0], dates[1] - 1),
+                y: parseInt(hData[j][0])
+              });
+              dpsB[j].push({
+                shisho: hData[j][2],
+                label: hData[j][3],
+                prevHeyaName: hData[j][5],
+                url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" +
+                  dates[0] + dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
+                x: new Date(dates[0], dates[1] - 1),
+                y: [parseInt(hData[j][0]), parseInt(hData[j][0]) -
+                  parseInt(hData[j][1])
+                ]
+              });
             }
-            dps[j].push({
-              shisho: hData[j][2],
-              label: hData[j][3],
-              prevHeyaName: hData[j][5],
-              url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" +
-                dates[0] + dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
-              x: new Date(dates[0], dates[1] - 1),
-              y: parseInt(hData[j][0])
-            });
-            dpsB[j].push({
-              shisho: hData[j][2],
-              label: hData[j][3],
-              prevHeyaName: hData[j][5],
-              url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" +
-                dates[0] + dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
-              x: new Date(dates[0], dates[1] - 1),
-              y: [parseInt(hData[j][0]), parseInt(hData[j][0]) -
-                parseInt(hData[j][1])
-              ]
-            });
           }
         }
       }
     }
     chart.render();
   }
-
+  
   var button = document.getElementById("setViewport"),
     vMin = document.getElementById("viewportMinimum"),
     vMax = document.getElementById("viewportMaximum");
