@@ -61,14 +61,14 @@ window.onload = function() {
     zoomType: "x",
     rangeChanged: function(e) {
       if (e.trigger === "reset") {
-        minXValue.setAttribute("Value",
+        minXValue.setAttribute("value",
           CanvasJS.formatDate(e.chart.axisX[0].viewportMinimum, "YYYY.MM"));
-        maxXValue.setAttribute("Value",
+        maxXValue.setAttribute("value",
           CanvasJS.formatDate(e.chart.axisX[0].viewportMaximum, "YYYY.MM"));
       } else {
-        minXValue.setAttribute("Value",
+        minXValue.setAttribute("value",
           CanvasJS.formatDate(e.axisX[0].viewportMinimum, "YYYY.MM"));
-        maxXValue.setAttribute("Value",
+        maxXValue.setAttribute("value",
           CanvasJS.formatDate(e.axisX[0].viewportMaximum, "YYYY.MM"));
       }
     }
@@ -112,6 +112,15 @@ window.onload = function() {
     opacity: .08
   };
 
+  chart.options.axisX.crosshair = {
+    enabled: true,
+    snapToDataPoint: true,
+    color: "green",
+    valueFormatString: "YYYY.MM",
+    lineDashType: "longDash",
+    labelBackgroundColor: "green"
+  }
+
   chart.options.axisY = {
     title: "total rikishi",
     labelFontFamily: "arial",
@@ -144,11 +153,13 @@ window.onload = function() {
       e.chart.render();
     },
     itemclick: function(e) {
-      if (e.dataSeries.visible)
+      if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible)
         e.dataSeries.visible = false;
       else
         e.dataSeries.visible = true;
+
       e.chart.render();
+
       minXValue.setAttribute("Value",
         CanvasJS.formatDate(e.chart.axisX[0].viewportMinimum, "YYYY.MM"));
       maxXValue.setAttribute("Value",
@@ -175,11 +186,7 @@ window.onload = function() {
       showInLegend: true,
       indexLabelFontSize: 12,
       legendMarkerType: "square",
-      indexLabelFormatter: function(e) {
-        if (e.index !== 1 && e.dataPoint.label)
-          return e.dataPoint.label;
-        else return "";
-      },
+      indexLabelFormatter: getHeyaLabels,
       click: function(e) {
         window.open(e.dataPoint.url);
       },
@@ -196,6 +203,12 @@ window.onload = function() {
     }
 
     return arr;
+  }
+
+  function getHeyaLabels(e) {
+    if (e.index !== 1 && e.dataPoint.label)
+      return e.dataPoint.label;
+    else return "";
   }
 
   // Checkbox for toggling between sekitori and sekitoriless dataSeries
@@ -360,9 +373,9 @@ window.onload = function() {
 
     chart.axisX[0].set("viewportMinimum", new Date(minDates[0], minDates[1] - 1));
     chart.axisX[0].set("viewportMaximum", new Date(maxDates[0], maxDates[1] - 1));
-    minXValue.setAttribute("Value", 
+    minXValue.setAttribute("value", 
       CanvasJS.formatDate(chart.axisX[0].viewportMinimum, "YYYY.MM"));
-    maxXValue.setAttribute("Value", 
+    maxXValue.setAttribute("value", 
       CanvasJS.formatDate(chart.axisX[0].viewportMaximum, "YYYY.MM"));
   }
 
@@ -372,10 +385,59 @@ window.onload = function() {
   function resetViewport() {
     chart.axisX[0].set("viewportMinimum", null);
     chart.axisX[0].set("viewportMaximum", null);
-      minXValue.setAttribute("Value", 
-        CanvasJS.formatDate(chart.axisX[0].viewportMinimum, "YYYY.MM"));
-      maxXValue.setAttribute("Value", 
-        CanvasJS.formatDate(chart.axisX[0].viewportMaximum, "YYYY.MM"));
+    minXValue.setAttribute("value", 
+      CanvasJS.formatDate(chart.axisX[0].viewportMinimum, "YYYY.MM"));
+    maxXValue.setAttribute("value", 
+      CanvasJS.formatDate(chart.axisX[0].viewportMaximum, "YYYY.MM"));
+    vRange.value = "";
+  }
+
+
+  $(".period").click( function() {
+    var period = this.id;
+    var dates = [];
+
+    dates = maxXValue.value.split(".");
+    dates[0] = parseInt(dates[0]);
+    
+    switch(period) {
+      case "5y":
+        dates[0] = dates[0] - 5;
+        break;
+      case "10y":
+        dates[0] = dates[0] - 10;
+        break;
+      case "20y":
+        dates[0] = dates[0] - 20;
+        break;
+      default:
+        dates[0] = dates[0] - 50;
+    }
+    
+    chart.axisX[0].set("viewportMinimum", new Date(dates[0], dates[1] - 1));
+    minXValue.setAttribute("value", 
+      CanvasJS.formatDate(chart.axisX[0].viewportMinimum, "YYYY.MM"));
+    maxXValue.setAttribute("value", 
+      CanvasJS.formatDate(chart.axisX[0].viewportMaximum, "YYYY.MM"));
+  });
+
+
+  var labelsCheckbox = document.querySelector("input[name=labelsCheckbox]");
+  labelsCheckbox.addEventListener("change", toggleLabels);
+
+  function toggleLabels() {
+    if (this.checked) {
+      for (var i = 0; i <= HEYA_COUNT; i++) {
+        chart.options.data[i].indexLabelFormatter = function(e) {
+          return "";
+        }
+      }
+    } else {
+      for (var i = 0; i <= HEYA_COUNT; i++) {
+        chart.options.data[i].indexLabelFormatter = getHeyaLabels;
+      }
+    }
+    chart.render();
   }
 
 }
@@ -385,9 +447,16 @@ window.onload = function() {
   <body> 
     Viewing from: <input id="minXValue" type="text" placeholder="-" size="5" style="text-align: center; background-color:white;" readonly> 
     to: <input id="maxXValue" type="text" placeholder="-" size="5" style="text-align: center; background-color:white;" readonly> 
-    Set viewport range: <input id="viewportRange" type="text" placeholder="yyyy.m-yyyy.m"> 
-    <button id="setViewport" type="button" value="viewportButton">Set Viewport</button>
+    Enter viewport range: <input id="viewportRange" type="text" placeholder="yyyy.m - yyyy.m"> 
+    <button id="setViewport" type="button" value="viewportButton">Set</button>
     <button id="resetViewport" type="button" value="resetViewportButton">Reset</button>
+    <div id="update-nav">
+      <div id="range-selector">
+        <input type="button" id="5y" class="period ui-button" value="5 yrs"/>
+        <input type="button" id="10y" class="period ui-button" value="10 yrs"/>
+        <input type="button" id="20y" class="period ui-button" value="20 yrs"/>
+        <input type="button" id="50y" class="period ui-button" value="50 yrs"/>
+      </div>
     </div>
     <div id="chartContainer" style="height: 600px; width: 100%;">
       <center>
@@ -395,8 +464,9 @@ window.onload = function() {
         <br />Loading...
       </center>
     </div>
-    <label>
-      <input id="toggleSekitori" type="checkbox" name="checkbox" value="" style="float:left">Enable Sekitori </label>
+    <label><input id="toggleSekitori" type="checkbox" name="checkbox" value="" style="float:left">Enable Sekitori</label>
+    <div>
+    <label><input id="toggleLabels" type="checkbox" name="labelsCheckbox" value="" style="float:left">Hide Labels</label>
     <div id="loadingText"></div>
     <span id="display"></span>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
