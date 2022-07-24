@@ -54,7 +54,7 @@ window.onload = function() {
   chart.options = {
     colorSet: "heyaColors",
     //theme: "dark1",
-    //backgroundColor: "transparent", // #fffedf
+    backgroundColor: "white", // #fffedf
     animationEnabled: true,
     exportEnabled: true,
     zoomEnabled: true,
@@ -75,7 +75,7 @@ window.onload = function() {
   };
 
   chart.options.title = {
-    text: "Description"
+    text: null
   };
 
   chart.options.axisX = {
@@ -115,10 +115,8 @@ window.onload = function() {
   chart.options.axisX.crosshair = {
     enabled: true,
     snapToDataPoint: true,
-    color: "green",
     valueFormatString: "YYYY.MM",
-    lineDashType: "longDash",
-    labelBackgroundColor: "green"
+    lineDashType: "longDash"
   }
 
   chart.options.axisY = {
@@ -133,7 +131,7 @@ window.onload = function() {
     gridColor: "#A9A9A9"
   };
 
-  chart.options.legend = {
+  /*chart.options.legend = {
     cursor: "pointer",
     fontSize: 16,
     fontWeight: "normal",
@@ -165,7 +163,7 @@ window.onload = function() {
       maxXValue.setAttribute("Value",
         CanvasJS.formatDate(e.chart.axisX[0].viewportMaximum, "YYYY.MM"));
     }
-  };
+  };*/
 
   chart.options.toolTip = {
     shared: false,
@@ -183,7 +181,7 @@ window.onload = function() {
       markerSize: 0,
       visible: false,
       cursor: "pointer",
-      showInLegend: true,
+      //showInLegend: true,
       indexLabelFontSize: 12,
       legendMarkerType: "square",
       indexLabelFormatter: getHeyaLabels,
@@ -192,6 +190,14 @@ window.onload = function() {
       },
       dataPoints: dps[i]
     };
+  }
+
+
+  function updateViewportText() {
+    minXValue.setAttribute("value",
+      CanvasJS.formatDate(chart.axisX[0].viewportMinimum, "YYYY.MM"));
+    maxXValue.setAttribute("value",
+      CanvasJS.formatDate(chart.axisX[0].viewportMaximum, "YYYY.MM"));
   }
 
 
@@ -232,6 +238,25 @@ window.onload = function() {
     chart.render();
   }
 
+
+  var labelsCheckbox = document.querySelector("input[name=labelsCheckbox]");
+  labelsCheckbox.addEventListener("change", toggleLabels);
+
+
+  function toggleLabels() {
+    if (this.checked) {
+      for (var i = 0; i <= HEYA_COUNT; i++) {
+        chart.options.data[i].indexLabelFormatter = function(e) {
+          return "";
+        }
+      }
+    } else {
+      for (var i = 0; i <= HEYA_COUNT; i++) {
+        chart.options.data[i].indexLabelFormatter = getHeyaLabels;
+      }
+    }
+    chart.render();
+  }
 
   function tooltipNoSekitori(e) {
     var str = "";
@@ -373,10 +398,7 @@ window.onload = function() {
 
     chart.axisX[0].set("viewportMinimum", new Date(minDates[0], minDates[1] - 1));
     chart.axisX[0].set("viewportMaximum", new Date(maxDates[0], maxDates[1] - 1));
-    minXValue.setAttribute("value", 
-      CanvasJS.formatDate(chart.axisX[0].viewportMinimum, "YYYY.MM"));
-    maxXValue.setAttribute("value", 
-      CanvasJS.formatDate(chart.axisX[0].viewportMaximum, "YYYY.MM"));
+    updateViewportText();
   }
 
   var resetViewportButton = document.getElementById("resetViewport");
@@ -385,10 +407,7 @@ window.onload = function() {
   function resetViewport() {
     chart.axisX[0].set("viewportMinimum", null);
     chart.axisX[0].set("viewportMaximum", null);
-    minXValue.setAttribute("value", 
-      CanvasJS.formatDate(chart.axisX[0].viewportMinimum, "YYYY.MM"));
-    maxXValue.setAttribute("value", 
-      CanvasJS.formatDate(chart.axisX[0].viewportMaximum, "YYYY.MM"));
+    updateViewportText();
     vRange.value = "";
   }
 
@@ -415,38 +434,99 @@ window.onload = function() {
     }
     
     chart.axisX[0].set("viewportMinimum", new Date(dates[0], dates[1] - 1));
-    minXValue.setAttribute("value", 
-      CanvasJS.formatDate(chart.axisX[0].viewportMinimum, "YYYY.MM"));
-    maxXValue.setAttribute("value", 
-      CanvasJS.formatDate(chart.axisX[0].viewportMaximum, "YYYY.MM"));
+
+    updateViewportText();
   });
 
 
-  var labelsCheckbox = document.querySelector("input[name=labelsCheckbox]");
-  labelsCheckbox.addEventListener("change", toggleLabels);
+  //Add custom-legends as list and attach click event to that
+  var legendListId = document.getElementById("legendList");
+  customLegends(chart,legendListId);
 
-  function toggleLabels() {
-    if (this.checked) {
-      for (var i = 0; i <= HEYA_COUNT; i++) {
-        chart.options.data[i].indexLabelFormatter = function(e) {
-          return "";
-        }
-      }
-    } else {
-      for (var i = 0; i <= HEYA_COUNT; i++) {
-        chart.options.data[i].indexLabelFormatter = getHeyaLabels;
-      }
+  function customLegends(chart, legendListId) {
+    for (var i = 0; i <= HEYA_COUNT; i++) { 
+      var li = document.createElement("li");
+      li.style.color = "gray";
+      li.appendChild(document.createTextNode(heyaNames[i]));
+      legendListId.appendChild(li); 
+      $('li').each(function (i) {
+          $(this).attr('id', (i));
+      });
     }
-    chart.render();
+      
+    //Add click event to Custom-Legends being clicked
+
+    $('li').mouseover(function (event) {
+      var index = $(this).index();
+
+      chart.options.data[index].lineThickness = 3;
+      chart.options.data[index].fillOpacity = .6;
+      chart.options.data[index].indexLabelFontWeight = "bolder";
+
+      chart.render();
+    });
+
+    $('li').mouseout(function (event) {
+      var index = $(this).index();
+
+      chart.options.data[index].lineThickness = 2;
+      chart.options.data[index].fillOpacity = .4;
+      chart.options.data[index].indexLabelFontWeight = "normal";
+
+      chart.render();
+    });
+
+    $('li').click(function (event) {        
+     var index = $(this).index();
+
+     if (typeof (chart.options.data[index].visible) === "undefined" || chart.options.data[index].visible) {
+        chart.options.data[index].visible = false;
+        this.style.color = "gray";
+     } else {
+        chart.options.data[index].visible = true;
+        this.style.color = colorsShuffled[index];
+     }
+     chart.render();
+
+     updateViewportText();
+    });  
   }
 
 }
 
     </script>
+    <style>
+      #minXValue, #maxXValue {
+        text-align: center; 
+        background-color: white;
+      }
+
+      #chartContainer {
+        height: 500px; 
+        width: 100%; 
+        border-style: solid;
+      }
+
+      #legends {
+        overflow: scroll;
+        height: 150px;
+      }
+
+      li { 
+        list-style-type: "• ";
+        font-weight: bold;
+        cursor: pointer;
+        width: auto;
+        float: left;
+        margin-left: 25px;
+        min-width: 100px;
+      } 
+    </style>
   </head>
-  <body> 
-    Viewing from: <input id="minXValue" type="text" placeholder="-" size="5" style="text-align: center; background-color:white;" readonly> 
-    to: <input id="maxXValue" type="text" placeholder="-" size="5" style="text-align: center; background-color:white;" readonly> 
+  <body>
+    <body style="background-color:#ffffde;">
+    Viewing from: <input id="minXValue" type="text" placeholder="-" size="5" readonly> 
+    to: <input id="maxXValue" type="text" placeholder="-" size="5" readonly> 
     Enter viewport range: <input id="viewportRange" type="text" placeholder="yyyy.m - yyyy.m"> 
     <button id="setViewport" type="button" value="viewportButton">Set</button>
     <button id="resetViewport" type="button" value="resetViewportButton">Reset</button>
@@ -458,15 +538,14 @@ window.onload = function() {
         <input type="button" id="50y" class="period ui-button" value="50 yrs"/>
       </div>
     </div>
-    <div id="chartContainer" style="height: 600px; width: 100%;">
-      <center>
-        <img src="https://i.imgur.com/Pdr7Mvk.gif" id="loader" />
-        <br />Loading...
-      </center>
+    <div id="chartContainer"></div>
+      <div id="legends">
+        <ul id="legendList">      
+        </ul>
+      </div>
     </div>
-    <label><input id="toggleSekitori" type="checkbox" name="checkbox" value="">Enable Sekitori</label>
-    <label><input id="toggleLabels" type="checkbox" name="labelsCheckbox" value="">Hide Labels</label>
-    <div id="loadingText"></div>
+    <label><input id="toggleSekitori" type="checkbox" name="checkbox">Enable Sekitori</label>
+    <label><input id="toggleLabels" type="checkbox" name="labelsCheckbox">Hide Labels</label>
     <span id="display"></span>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
