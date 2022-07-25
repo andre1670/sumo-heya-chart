@@ -87,7 +87,7 @@ window.onload = function() {
     lineColor: "black",
     //viewportMinimum: new Date(1898, 5),
     //viewportMaximum: new Date(2022, 7),
-    margin: 0,
+    //margin: 0,
     //labelFormatString: "YYYY MM"
     //interval: 5,
     //intervalType: "year",
@@ -125,45 +125,12 @@ window.onload = function() {
     labelFontSize: 14,
     titleFontSize: 20,
     //titleFontColor: "red",
+    minimum: 0,
     includeZero: true,
     tickLength: 0,
     lineColor: "black",
     gridColor: "#A9A9A9"
   };
-
-  /*chart.options.legend = {
-    cursor: "pointer",
-    fontSize: 16,
-    fontWeight: "normal",
-    horizontalAlign: "center",
-    itemWidth: 125,
-    //dockInsidePlotArea: true,
-    itemmouseover: function(e) {
-      e.dataSeries.lineThickness = 3;
-      e.dataSeries.fillOpacity = .6;
-      e.dataSeries.indexLabelFontWeight = "bolder";
-      e.chart.render();
-    },
-    itemmouseout: function(e) {
-      e.dataSeries.lineThickness = 2;
-      e.dataSeries.fillOpacity = .4;
-      e.dataSeries.indexLabelFontWeight = "normal";
-      e.chart.render();
-    },
-    itemclick: function(e) {
-      if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible)
-        e.dataSeries.visible = false;
-      else
-        e.dataSeries.visible = true;
-
-      e.chart.render();
-
-      minXValue.setAttribute("Value",
-        CanvasJS.formatDate(e.chart.axisX[0].viewportMinimum, "YYYY.MM"));
-      maxXValue.setAttribute("Value",
-        CanvasJS.formatDate(e.chart.axisX[0].viewportMaximum, "YYYY.MM"));
-    }
-  };*/
 
   chart.options.toolTip = {
     shared: false,
@@ -184,6 +151,9 @@ window.onload = function() {
       //showInLegend: true,
       indexLabelFontSize: 12,
       legendMarkerType: "square",
+      indexLabelLineThickness: 1,
+      indexLabelLineColor: "black",
+      indexLabelLineDashType: "dash",
       indexLabelFormatter: getHeyaLabels,
       click: function(e) {
         window.open(e.dataPoint.url);
@@ -323,36 +293,6 @@ window.onload = function() {
                 x: new Date(dates[0], dates[1] - 1),
                 y: null
               });
-            }
-            else if (hData[j][3] !== "") {
-              dps[j].push({
-                markerSize: 4,
-                markerColor: "white",
-                markerBorderColor: "black",
-                markerBorderThickness: 1,
-                shisho: hData[j][2],
-                label: hData[j][3],
-                prevHeyaName: hData[j][5],
-                url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
-                dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
-                x: new Date(dates[0], dates[1] - 1),
-                y: parseInt(hData[j][0])
-              });
-              dpsB[j].push({
-                markerSize: 4,
-                markerColor: "white",
-                markerBorderColor: "black",
-                markerBorderThickness: 1,
-                shisho: hData[j][2],
-                label: hData[j][3],
-                prevHeyaName: hData[j][5],
-                url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
-                dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
-                x: new Date(dates[0], dates[1] - 1),
-                y: [parseInt(hData[j][0]), parseInt(hData[j][0]) -
-                  parseInt(hData[j][1])
-                ]
-              });
             } else {
               dps[j].push({
                 shisho: hData[j][2],
@@ -441,12 +381,12 @@ window.onload = function() {
 
   //Add custom-legends as list and attach click event to that
   var legendListId = document.getElementById("legendList");
-  customLegends(chart,legendListId);
+  customLegends(chart, legendListId);
 
   function customLegends(chart, legendListId) {
     for (var i = 0; i <= HEYA_COUNT; i++) { 
       var li = document.createElement("li");
-      li.style.color = "gray";
+      li.style.color = "#A9A9A9";
       li.appendChild(document.createTextNode(heyaNames[i]));
       legendListId.appendChild(li); 
       $('li').each(function (i) {
@@ -456,7 +396,7 @@ window.onload = function() {
       
     //Add click event to Custom-Legends being clicked
 
-    $('li').mouseover(function (event) {
+    $('li').mouseover(function(event) {
       var index = $(this).index();
 
       chart.options.data[index].lineThickness = 3;
@@ -466,7 +406,7 @@ window.onload = function() {
       chart.render();
     });
 
-    $('li').mouseout(function (event) {
+    $('li').mouseout(function(event) {
       var index = $(this).index();
 
       chart.options.data[index].lineThickness = 2;
@@ -476,20 +416,51 @@ window.onload = function() {
       chart.render();
     });
 
-    $('li').click(function (event) {        
-     var index = $(this).index();
+    $('li').click(function(event) {        
+      var index = $(this).index();
+      var totalDisabledSeries = 0;
 
-     if (typeof (chart.options.data[index].visible) === "undefined" || chart.options.data[index].visible) {
+      if (typeof (chart.options.data[index].visible) === "undefined" || chart.options.data[index].visible) {
         chart.options.data[index].visible = false;
-        this.style.color = "gray";
-     } else {
+
+        for (var i = 0; i <= HEYA_COUNT; i++) {
+          if (!chart.options.data[i].visible)
+            totalDisabledSeries++;
+        }
+        if (totalDisabledSeries > HEYA_COUNT) {
+          minXValue.setAttribute("value", "");
+          maxXValue.setAttribute("value", "");
+        }
+        this.style.color = "#A9A9A9";
+        this.style.fontWeight = "normal";
+      } else {
         chart.options.data[index].visible = true;
         this.style.color = colorsShuffled[index];
-     }
-     chart.render();
+        this.style.fontWeight = "bold";
+      }
+      chart.render();
 
-     updateViewportText();
+      updateViewportText();
     });  
+  }
+
+
+  var hideAllButton = document.getElementById("hideAll");
+  hideAllButton.addEventListener("click", hideAll);
+
+  function hideAll() {
+    const legend = [...document.querySelectorAll("li")];
+    for (var i = 0; i <= HEYA_COUNT; i++) {
+      if (chart.options.data[i].visible) {
+        chart.options.data[i].visible = false;
+        legend[i].style.color = "#A9A9A9";
+        legend[i].style.fontWeight = "normal";
+        //document.getElementById("legends")[i].style.color = "#A9A9A9";
+      }
+    }
+    minXValue.setAttribute("value", "");
+    maxXValue.setAttribute("value", "");
+    chart.render();
   }
 
 }
@@ -502,9 +473,9 @@ window.onload = function() {
       }
 
       #chartContainer {
-        height: 500px; 
+        height: 450px; 
         width: 100%; 
-        border-style: solid;
+        border: 1px solid;
       }
 
       #legends {
@@ -514,13 +485,13 @@ window.onload = function() {
 
       li { 
         list-style-type: "• ";
-        font-weight: bold;
+        font-family: Calibri;
         cursor: pointer;
         width: auto;
         float: left;
         margin-left: 25px;
-        min-width: 100px;
-      } 
+        min-width: 160px;
+      }
     </style>
   </head>
   <body>
@@ -537,15 +508,15 @@ window.onload = function() {
         <input type="button" id="20y" class="period ui-button" value="20 yrs"/>
         <input type="button" id="50y" class="period ui-button" value="50 yrs"/>
       </div>
-    </div>
+    <label><input id="toggleSekitori" type="checkbox" name="checkbox">Enable Sekitori</label>
+    <label><input id="toggleLabels" type="checkbox" name="labelsCheckbox">Hide Labels</label>
+    <button id="hideAll" type="button" value="hideAllButton">Hide All Graph</button>
     <div id="chartContainer"></div>
       <div id="legends">
         <ul id="legendList">      
         </ul>
       </div>
     </div>
-    <label><input id="toggleSekitori" type="checkbox" name="checkbox">Enable Sekitori</label>
-    <label><input id="toggleLabels" type="checkbox" name="labelsCheckbox">Hide Labels</label>
     <span id="display"></span>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
