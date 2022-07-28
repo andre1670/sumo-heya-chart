@@ -84,14 +84,14 @@ window.onload = function() {
     titleFontWeight: "bold",
     labelFontFamily: "Arial",
     labelFontSize: 14,
-    titleFontSize: 20,
+    titleFontSize: 16,
     tickLength: 5,
     lineColor: "black",
     //viewportMinimum: new Date(1898, 5),
     //viewportMaximum: new Date(2022, 7),
     //margin: 0,
     //labelFormatString: "YYYY MM"
-    //interval: 5,
+    //interval: 50,
     //intervalType: "year",
     labelFormatter: function(e) {
       return CanvasJS.formatDate(e.value, "YYYY.MM");
@@ -128,7 +128,7 @@ window.onload = function() {
     titleFontWeight: "bold",
     labelFontFamily: "Arial",
     labelFontSize: 14,
-    titleFontSize: 20,
+    titleFontSize: 16,
     //titleFontColor: "red",
     minimum: 0,
     includeZero: true,
@@ -170,10 +170,15 @@ window.onload = function() {
 
 
   function updateViewportText() {
-    minXValue.setAttribute("value",
-      CanvasJS.formatDate(chart.axisX[0].viewportMinimum, "YYYY.MM"));
-    maxXValue.setAttribute("value",
-      CanvasJS.formatDate(chart.axisX[0].viewportMaximum, "YYYY.MM"));
+    if (chart.axisX[0].get("viewportMinimum") === Infinity) {
+      minXValue.setAttribute("value", "");
+      maxXValue.setAttribute("value", "");
+    } else {
+      minXValue.setAttribute("value",
+        CanvasJS.formatDate(chart.axisX[0].viewportMinimum, "YYYY.MM"));
+      maxXValue.setAttribute("value",
+        CanvasJS.formatDate(chart.axisX[0].viewportMaximum, "YYYY.MM"));
+    }
   }
 
 
@@ -327,10 +332,20 @@ window.onload = function() {
     }
     chart.render();
   }
+
   
+
   var viewportButton = document.getElementById("setViewport");
   var vRange = document.getElementById("viewportRange");
   viewportButton.addEventListener("click", setViewport);
+
+
+  vRange.addEventListener("keydown", function (e) {
+    if (e.code === "Enter") {  //checks whether the pressed key is "Enter"
+        setViewport();
+    }
+  });
+
 
   //Function for setting viewport
   function setViewport() {
@@ -422,32 +437,29 @@ window.onload = function() {
       chart.render();
     });
 
-    $('li').click(function(event) {        
+    $('li').click(function(event) {
+      var totalInactiveSeries = 0;
       var index = $(this).index();
-      var totalDisabledSeries = 0;
 
-      if (typeof (chart.options.data[index].visible) === "undefined" || chart.options.data[index].visible) {
+      if (typeof(chart.options.data[index].visible) === "undefined" || 
+        chart.options.data[index].visible) {
         chart.options.data[index].visible = false;
-
-        for (var i = 0; i <= HEYA_COUNT; i++) {
-          if (!chart.options.data[i].visible)
-            totalDisabledSeries++;
-        }
-        if (totalDisabledSeries > HEYA_COUNT) {
+        for (var i = 0; i <= HEYA_COUNT; i++)
+          totalInactiveSeries++;
+        this.style.color = "#A9A9A9";
+        this.style.fontWeight = "normal";
+        if (totalInactiveSeries > HEYA_COUNT) {
           minXValue.setAttribute("value", "");
           maxXValue.setAttribute("value", "");
         }
-        this.style.color = "#A9A9A9";
-        this.style.fontWeight = "normal";
       } else {
         chart.options.data[index].visible = true;
         this.style.color = colorsShuffled[index];
         this.style.fontWeight = "bold";
       }
       chart.render();
-
       updateViewportText();
-    });  
+    });
   }
 
 
@@ -464,8 +476,7 @@ window.onload = function() {
         //document.getElementById("legends")[i].style.color = "#A9A9A9";
       }
     }
-    minXValue.setAttribute("value", "");
-    maxXValue.setAttribute("value", "");
+    updateViewportText();
     chart.render();
   }
 
@@ -475,11 +486,12 @@ window.onload = function() {
     <style>
 
       body {
-        background-color: #defffc;/*#ffffde*/
+        background-color: #ffffde;/*#ffffde*/
       }
 
       #minXValue, #maxXValue {
         font-weight: bold;
+        font-family: "Arial";
         text-align: center;
         background-color: transparent;
         border: none;
@@ -487,19 +499,35 @@ window.onload = function() {
 
       .currentViewport{
         float: right;
+        border-width: 1px;
+        margin-top: 3px;
+        margin-bottom: 3px;
       }
 
-      .setViewportRange, #range-selector {
+      .setViewportRange, #resetViewport, #range-selector{
+        margin-right: 5px;
         display: inline-block;
+        margin-top: 3px;
+        margin-bottom: 3px;
+      }
+
+      #toggleSekitori, #toggleLabels, #hideAll {
+        margin-left: 5px;
+        display: inline-block;
+        margin-top: 3px;
+        margin-bottom: 3px;
+      }
+
+      checkbox, #hideAll {
+        margin-left: 10px;
       }
 
       #resetViewport {
         background-color: pink;
-        display: inline-block;
       }
 
       #chartContainer {
-        height: 400px; 
+        height: 450px; 
         width: 100%; 
         border: 1px solid;
         margin-top: 10px;
@@ -520,17 +548,22 @@ window.onload = function() {
         min-width: 160px;
       }
 
+      fieldset {
+        padding-top: 5px;
+        padding-bottom: 5px;
+      }
+
     </style>
   </head>
   <body>
     <body>
       <fieldset>
         <div class="currentViewport">
-          <label>Viewport range: <input id="minXValue" type="text" size="5" placeholder="..." readonly></label>
+          <label>Viewing: <input id="minXValue" type="text" size="5" placeholder="..." readonly></label>
           <label> - <input id="maxXValue" type="text" size="5" placeholder="..." readonly></label> 
         </div>
         <div class="setViewportRange">
-          Set viewport range: <input id="viewportRange" type="text" placeholder="yyyy.m - yyyy.m"> 
+          Set view range: <input id="viewportRange" type="text" placeholder="yyyy.m - yyyy.m"> 
           <button id="setViewport" type="button" value="viewportButton">Set</button>
         </div>
         <button id="resetViewport" type="button" value="resetViewportButton">Reset</button>
@@ -543,15 +576,17 @@ window.onload = function() {
       </fieldset>
     <div id="chartContainer"></div>
       <div id="legends">
-        <ul id="legendList">      
+        <ul id="legendList">
         </ul>
       </div>
     </div>
-    <label><input id="toggleSekitori" type="checkbox" name="checkbox">Enable Sekitori</label>
-    <label><input id="toggleLabels" type="checkbox" name="labelsCheckbox">Hide Labels</label>
-    <button id="hideAll" type="button" value="hideAllButton">Hide All Graph</button>
+    <fieldset id="graphSettings">
+      <label><input id="toggleSekitori" type="checkbox" name="checkbox">Enable Sekitori</label>
+      <label><input id="toggleLabels" type="checkbox" name="labelsCheckbox">Hide Labels</label>
+      <button id="hideAll" type="button" value="hideAllButton">Hide All Graphs</button>
+    </fieldset>
     <span id="display"></span>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script type='text/javascript' src="scripts/canvasjs_modified.min.js"></script>
   </body>
 </html>
