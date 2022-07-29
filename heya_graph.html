@@ -44,7 +44,7 @@ window.onload = function() {
     "#2174d9", "#c766ff", "#3121d9", "#d98521"
   ]
 
-  CanvasJS.addColorSet("heyaColors", colorsShuffled);
+  CanvasJS.addColorSet("heyaColors", colorsOrdered);
 
   var minXValue = document.getElementById("minXValue");
   var maxXValue = document.getElementById("maxXValue");
@@ -85,8 +85,13 @@ window.onload = function() {
     labelFontFamily: "Arial",
     labelFontSize: 14,
     titleFontSize: 16,
-    tickLength: 5,
+    tickLength: 6,
+    tickThickness: 1.5,
+    lineThickness: 1,
     lineColor: "black",
+    gridThickness: 1,
+    gridColor: "#A9A9A9",
+    //labelPlacement: "inside",
     //viewportMinimum: new Date(1898, 5),
     //viewportMaximum: new Date(2022, 7),
     //margin: 0,
@@ -130,6 +135,8 @@ window.onload = function() {
     labelFontSize: 14,
     titleFontSize: 16,
     //titleFontColor: "red",
+    lineThickness: 1,
+    lineColor: "black",
     minimum: 0,
     includeZero: true,
     tickLength: 0,
@@ -499,27 +506,19 @@ window.onload = function() {
 
       .currentViewport{
         float: right;
-        border-width: 1px;
-        margin-top: 3px;
-        margin-bottom: 3px;
+        margin: 3px;
       }
 
       .setViewportRange, #resetViewport, #range-selector{
         margin-right: 5px;
         display: inline-block;
-        margin-top: 3px;
-        margin-bottom: 3px;
+        margin: 3px;
       }
 
       #toggleSekitori, #toggleLabels, #hideAll {
         margin-left: 5px;
         display: inline-block;
-        margin-top: 3px;
-        margin-bottom: 3px;
-      }
-
-      checkbox, #hideAll {
-        margin-left: 10px;
+        margin: 3px;
       }
 
       #resetViewport {
@@ -535,7 +534,7 @@ window.onload = function() {
 
       #legends {
         overflow: scroll;
-        height: 150px;
+        height: 140px;
       }
 
       li { 
@@ -549,8 +548,7 @@ window.onload = function() {
       }
 
       fieldset {
-        padding-top: 5px;
-        padding-bottom: 5px;
+        padding: 0;
       }
 
     </style>
@@ -558,6 +556,7 @@ window.onload = function() {
   <body>
     <body>
       <fieldset>
+        <legend>View</legend>
         <div class="currentViewport">
           <label>Viewing: <input id="minXValue" type="text" size="5" placeholder="..." readonly></label>
           <label> - <input id="maxXValue" type="text" size="5" placeholder="..." readonly></label> 
@@ -566,7 +565,7 @@ window.onload = function() {
           Set view range: <input id="viewportRange" type="text" placeholder="yyyy.m - yyyy.m"> 
           <button id="setViewport" type="button" value="viewportButton">Set</button>
         </div>
-        <button id="resetViewport" type="button" value="resetViewportButton">Reset</button>
+        <button id="resetViewport" type="button" value="resetViewportButton">↻ Reset</button>
         <div id="range-selector">
           <input type="button" id="5y" class="period ui-button" value="5 yrs"/>
           <input type="button" id="10y" class="period ui-button" value="10 yrs"/>
