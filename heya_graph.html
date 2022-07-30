@@ -59,6 +59,19 @@ window.onload = function() {
     exportEnabled: true,
     zoomEnabled: true,
     zoomType: "x",
+    /*rangeChanging: function(e) {
+      var monthTime = 365 * 120 * 60 * 1000;
+
+      if (e.trigger === "reset") {
+        e.chart.options.axisX.intervalType = null;
+      }
+      else if (e.trigger === "zoom") {
+        if (e.axisX[0].viewportMaximum - e.axisX[0].viewportMinimum < monthTime * 14) {
+          e.chart.options.axisX.intervalType = "month";
+          e.chart.options.axisX.interval = 1;
+        } 
+      }
+    },*/
     rangeChanged: function(e) {
       if (e.trigger === "reset") {
         minXValue.setAttribute("value",
@@ -89,15 +102,17 @@ window.onload = function() {
     tickThickness: 1.5,
     lineThickness: 1,
     lineColor: "black",
-    gridThickness: 1,
+    //gridThickness: 0.5,
     gridColor: "#A9A9A9",
+    gridDashType: "solid",
+    //labelAngle: 0,
     //labelPlacement: "inside",
     //viewportMinimum: new Date(1898, 5),
     //viewportMaximum: new Date(2022, 7),
     //margin: 0,
     //labelFormatString: "YYYY MM"
-    //interval: 50,
-    //intervalType: "year",
+    //interval: 1,
+    //intervalType: "month",
     labelFormatter: function(e) {
       return CanvasJS.formatDate(e.value, "YYYY.MM");
     }
@@ -137,7 +152,6 @@ window.onload = function() {
     //titleFontColor: "red",
     lineThickness: 1,
     lineColor: "black",
-    minimum: 0,
     includeZero: true,
     tickLength: 0,
     lineColor: "black",
@@ -445,30 +459,38 @@ window.onload = function() {
     });
 
     $('li').click(function(event) {
-      var totalInactiveSeries = 0;
       var index = $(this).index();
 
       if (typeof(chart.options.data[index].visible) === "undefined" || 
         chart.options.data[index].visible) {
         chart.options.data[index].visible = false;
-        for (var i = 0; i <= HEYA_COUNT; i++)
-          totalInactiveSeries++;
         this.style.color = "#A9A9A9";
         this.style.fontWeight = "normal";
-        if (totalInactiveSeries > HEYA_COUNT) {
-          minXValue.setAttribute("value", "");
-          maxXValue.setAttribute("value", "");
-        }
       } else {
         chart.options.data[index].visible = true;
-        this.style.color = colorsShuffled[index];
+        this.style.color = colorsOrdered[index];
         this.style.fontWeight = "bold";
       }
       chart.render();
+      //changeInterval();
+      /*console.log(chart.axisX[0].get("interval"));
+      console.log(chart.axisX[0].get("intervalType"));
+      console.log(chart.axisX[0].get("viewportMaximum") - chart.axisX[0].get("viewportMinimum"));*/
       updateViewportText();
     });
   }
 
+  function changeInterval() {
+    var monthTime = 365 * 120 * 60 * 500;
+    if (chart.axisX[0].get("viewportMaximum") - 
+      chart.axisX[0].get("viewportMinimum") < monthTime * 24) {
+      chart.axisX[0].set("interval", 1, false);
+      chart.axisX[0].set("intervalType", "month");
+    } else {
+      chart.axisX[0].set("interval", 20, false);
+      chart.axisX[0].set("intervalType", "year");
+    }
+  }
 
   var hideAllButton = document.getElementById("hideAll");
   hideAllButton.addEventListener("click", hideAll);
@@ -496,9 +518,13 @@ window.onload = function() {
         background-color: #ffffde;/*#ffffde*/
       }
 
+      * {
+        font-family: Arial;
+        font-size: 100%;
+      }
+
       #minXValue, #maxXValue {
         font-weight: bold;
-        font-family: "Arial";
         text-align: center;
         background-color: transparent;
         border: none;
@@ -538,8 +564,7 @@ window.onload = function() {
       }
 
       li { 
-        list-style-type: "• ";
-        font-family: "Arial";
+        list-style-type: "● ";
         cursor: pointer;
         width: auto;
         float: left;
@@ -549,6 +574,13 @@ window.onload = function() {
 
       fieldset {
         padding: 0;
+        font-size: 90%;
+      }
+
+      legend {
+        color: #7b61cd;
+        margin-left: 5px;
+        font-weight: bold;
       }
 
     </style>
