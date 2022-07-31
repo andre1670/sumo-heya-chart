@@ -3,6 +3,7 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="styles.css">
     <script>
 
 window.onload = function() {
@@ -53,25 +54,11 @@ window.onload = function() {
 
   chart.options = {
     colorSet: "heyaColors",
-    //theme: "dark1",
     backgroundColor: "white", // #fffedf
-    animationEnabled: true,
+    animationEnabled: false,
     exportEnabled: true,
     zoomEnabled: true,
     zoomType: "x",
-    /*rangeChanging: function(e) {
-      var monthTime = 365 * 120 * 60 * 1000;
-
-      if (e.trigger === "reset") {
-        e.chart.options.axisX.intervalType = null;
-      }
-      else if (e.trigger === "zoom") {
-        if (e.axisX[0].viewportMaximum - e.axisX[0].viewportMinimum < monthTime * 14) {
-          e.chart.options.axisX.intervalType = "month";
-          e.chart.options.axisX.interval = 1;
-        } 
-      }
-    },*/
     rangeChanged: function(e) {
       if (e.trigger === "reset") {
         minXValue.setAttribute("value",
@@ -102,17 +89,8 @@ window.onload = function() {
     tickThickness: 1.5,
     lineThickness: 1,
     lineColor: "black",
-    //gridThickness: 0.5,
     gridColor: "#A9A9A9",
     gridDashType: "solid",
-    //labelAngle: 0,
-    //labelPlacement: "inside",
-    //viewportMinimum: new Date(1898, 5),
-    //viewportMaximum: new Date(2022, 7),
-    //margin: 0,
-    //labelFormatString: "YYYY MM"
-    //interval: 1,
-    //intervalType: "month",
     labelFormatter: function(e) {
       return CanvasJS.formatDate(e.value, "YYYY.MM");
     }
@@ -121,7 +99,6 @@ window.onload = function() {
   chart.options.axisX.stripLines = [];
 
   chart.options.axisX.stripLines[0] = {
-    //value: new Date(1988, 1),
     startValue: new Date(1757, 9),
     endValue: new Date(1988, 1),
     color: "red",
@@ -149,7 +126,6 @@ window.onload = function() {
     labelFontFamily: "Arial",
     labelFontSize: 14,
     titleFontSize: 16,
-    //titleFontColor: "red",
     lineThickness: 1,
     lineColor: "black",
     includeZero: true,
@@ -162,7 +138,6 @@ window.onload = function() {
     fontFamily: "Arial",
     shared: false,
     cornerRadius: 8,
-    //borderColor: "black",
     contentFormatter: tooltipNoSekitori
   };
 
@@ -189,7 +164,6 @@ window.onload = function() {
     };
   }
 
-
   function updateViewportText() {
     if (chart.axisX[0].get("viewportMinimum") === Infinity) {
       minXValue.setAttribute("value", "");
@@ -201,7 +175,6 @@ window.onload = function() {
         CanvasJS.formatDate(chart.axisX[0].viewportMaximum, "YYYY.MM"));
     }
   }
-
 
   function Create2DArray(rows) {
     var arr = [];
@@ -240,10 +213,8 @@ window.onload = function() {
     chart.render();
   }
 
-
   var labelsCheckbox = document.querySelector("input[name=labelsCheckbox]");
   labelsCheckbox.addEventListener("change", toggleLabels);
-
 
   function toggleLabels() {
     if (this.checked) {
@@ -279,7 +250,6 @@ window.onload = function() {
     return str;
   }
 
-
   function tooltipSekitori(e) {
     var str = "";
 
@@ -300,8 +270,7 @@ window.onload = function() {
     return str;
   }
 
-
-  $.get("https://raw.githubusercontent.com/andre1670/andre1670/main/chart.csv",
+  $.get("https://raw.githubusercontent.com/chiyotasuke/heya-graph/main/heya_data.csv",
     getDataPointsFromCSV);
 
   function getDataPointsFromCSV(csv) {
@@ -354,8 +323,6 @@ window.onload = function() {
     chart.render();
   }
 
-  
-
   var viewportButton = document.getElementById("setViewport");
   var vRange = document.getElementById("viewportRange");
   viewportButton.addEventListener("click", setViewport);
@@ -392,7 +359,6 @@ window.onload = function() {
     updateViewportText();
     vRange.value = "";
   }
-
 
   $(".period").click( function() {
     var period = this.id;
@@ -436,8 +402,6 @@ window.onload = function() {
       });
     }
       
-    //Add click event to Custom-Legends being clicked
-
     $('li').mouseover(function(event) {
       var index = $(this).index();
 
@@ -472,24 +436,7 @@ window.onload = function() {
         this.style.fontWeight = "bold";
       }
       chart.render();
-      //changeInterval();
-      /*console.log(chart.axisX[0].get("interval"));
-      console.log(chart.axisX[0].get("intervalType"));
-      console.log(chart.axisX[0].get("viewportMaximum") - chart.axisX[0].get("viewportMinimum"));*/
-      updateViewportText();
     });
-  }
-
-  function changeInterval() {
-    var monthTime = 365 * 120 * 60 * 500;
-    if (chart.axisX[0].get("viewportMaximum") - 
-      chart.axisX[0].get("viewportMinimum") < monthTime * 24) {
-      chart.axisX[0].set("interval", 1, false);
-      chart.axisX[0].set("intervalType", "month");
-    } else {
-      chart.axisX[0].set("interval", 20, false);
-      chart.axisX[0].set("intervalType", "year");
-    }
   }
 
   var hideAllButton = document.getElementById("hideAll");
@@ -502,92 +449,37 @@ window.onload = function() {
         chart.options.data[i].visible = false;
         legend[i].style.color = "#A9A9A9";
         legend[i].style.fontWeight = "normal";
-        //document.getElementById("legends")[i].style.color = "#A9A9A9";
       }
     }
     updateViewportText();
     chart.render();
   }
 
+  var coll = document.getElementsByClassName("collapsible");
+
+  for (var i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+      var content = this.nextElementSibling;
+      if (content.style.display === "block") {
+        content.style.display = "none";
+      } else {
+        content.style.display = "block";
+      }
+    });
+  }
+
 }
 
     </script>
-    <style>
-
-      body {
-        background-color: #ffffde;/*#ffffde*/
-      }
-
-      * {
-        font-family: Arial;
-        font-size: 100%;
-      }
-
-      #minXValue, #maxXValue {
-        font-weight: bold;
-        text-align: center;
-        background-color: transparent;
-        border: none;
-      }
-
-      .currentViewport{
-        float: right;
-        margin: 3px;
-      }
-
-      .setViewportRange, #resetViewport, #range-selector{
-        margin-right: 5px;
-        display: inline-block;
-        margin: 3px;
-      }
-
-      #toggleSekitori, #toggleLabels, #hideAll {
-        margin-left: 5px;
-        display: inline-block;
-        margin: 3px;
-      }
-
-      #resetViewport {
-        background-color: pink;
-      }
-
-      #chartContainer {
-        height: 450px; 
-        width: 100%; 
-        border: 1px solid;
-        margin-top: 10px;
-      }
-
-      #legends {
-        overflow: scroll;
-        height: 140px;
-      }
-
-      li { 
-        list-style-type: "● ";
-        cursor: pointer;
-        width: auto;
-        float: left;
-        margin-left: 25px;
-        min-width: 160px;
-      }
-
-      fieldset {
-        padding: 0;
-        font-size: 90%;
-      }
-
-      legend {
-        color: #7b61cd;
-        margin-left: 5px;
-        font-weight: bold;
-      }
-
-    </style>
   </head>
   <body>
     <body>
-      <fieldset>
+      <title>Heya Graph</title>
+      <div id="header">
+        <a href="https://sumodb.sumogames.de/">Sumo Reference</a><a id="titleText">Heya Graph</a><a id="creditText">data compiled from</a>
+      </div>
+      <fieldset id="graphView">
         <legend>View</legend>
         <div class="currentViewport">
           <label>Viewing: <input id="minXValue" type="text" size="5" placeholder="..." readonly></label>
@@ -599,6 +491,7 @@ window.onload = function() {
         </div>
         <button id="resetViewport" type="button" value="resetViewportButton">↻ Reset</button>
         <div id="range-selector">
+          Zoom to: 
           <input type="button" id="5y" class="period ui-button" value="5 yrs"/>
           <input type="button" id="10y" class="period ui-button" value="10 yrs"/>
           <input type="button" id="20y" class="period ui-button" value="20 yrs"/>
@@ -606,16 +499,23 @@ window.onload = function() {
         </div>
       </fieldset>
     <div id="chartContainer"></div>
-      <div id="legends">
-        <ul id="legendList">
-        </ul>
-      </div>
-    </div>
     <fieldset id="graphSettings">
       <label><input id="toggleSekitori" type="checkbox" name="checkbox">Enable Sekitori</label>
       <label><input id="toggleLabels" type="checkbox" name="labelsCheckbox">Hide Labels</label>
       <button id="hideAll" type="button" value="hideAllButton">Hide All Graphs</button>
     </fieldset>
+      <div id="legends">
+        <ul id="legendList">
+        </ul>
+      </div>
+    </div>
+    <button type="button" class="collapsible">▾ INFORMATION</button>
+    <div class="content">
+      <p>- Click-and-drag across graph to zoom in</p>
+      <p>- Clicking on data points redirects you to Sumo Reference banzuke page with heya filtered</p>
+      <p>- Data on the lighter pink area of the graph (before 1988.03) is unreliable since its banzuke contain rikishi with no heya information</p>
+      <p>- Data on the darker pink area of the graph (before 1934.05) is incomplete, as many lower division ranks are missing</p>
+    </div>
     <span id="display"></span>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type='text/javascript' src="scripts/canvasjs_modified.min.js"></script>
