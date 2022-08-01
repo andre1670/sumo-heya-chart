@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="files/styles.css">
     <script>
 
 window.onload = function() {
@@ -22,7 +22,7 @@ window.onload = function() {
     "Isegahama", "Isenoumi", "Kasugano", "Kataonami", "Kise", 
     "Kokonoe", "Michinoku", "Minato", "Miyagino", "Musashigawa", 
     "Naruto", "Nishiiwa", "Nishikido", "Nishonoseki", "Oitekaze", 
-    "Onoe", "Onomatsu", "Oshima", "Oshiogawa", "Otake", 
+    "Onoe", "Ōnomatsu", "Ōshima", "Oshiogawa", "Ōtake", 
     "Sadogatake", "Sakaigawa", "Shibatayama", "Shikihide", "Shikoroyama", 
     "Tagonoura", "Takadagawa", "Takasago", "Takekuma", "Tamanoi",
     "Tatsunami", "Tokitsukaze", "Tokiwayama", "Yamahibiki"
@@ -48,8 +48,7 @@ window.onload = function() {
 
   CanvasJS.addColorSet("heyaColors", colorsOrdered);
 
-  var minXValue = document.getElementById("minXValue");
-  var maxXValue = document.getElementById("maxXValue");
+  var viewportX = document.getElementById("viewportX");
 
   var chart = new CanvasJS.Chart("chartContainer");
 
@@ -61,17 +60,17 @@ window.onload = function() {
     zoomEnabled: true,
     zoomType: "x",
     rangeChanged: function(e) {
+      var viewportRange = "";
       if (e.trigger === "reset") {
-        minXValue.setAttribute("value",
-          CanvasJS.formatDate(e.chart.axisX[0].viewportMinimum, "YYYY.MM"));
-        maxXValue.setAttribute("value",
-          CanvasJS.formatDate(e.chart.axisX[0].viewportMaximum, "YYYY.MM"));
+        viewportRange = viewportRange + 
+        CanvasJS.formatDate(e.chart.axisX[0].viewportMinimum, "YYYY.MM") + 
+        " - " + CanvasJS.formatDate(e.chart.axisX[0].viewportMaximum, "YYYY.MM");
       } else {
-        minXValue.setAttribute("value",
-          CanvasJS.formatDate(e.axisX[0].viewportMinimum, "YYYY.MM"));
-        maxXValue.setAttribute("value",
-          CanvasJS.formatDate(e.axisX[0].viewportMaximum, "YYYY.MM"));
+        viewportRange = viewportRange + 
+        CanvasJS.formatDate(e.axisX[0].viewportMinimum, "YYYY.MM") + 
+        " - " + CanvasJS.formatDate(e.axisX[0].viewportMaximum, "YYYY.MM");
       }
+        viewportX.setAttribute("value", viewportRange);
     }
   };
 
@@ -167,13 +166,13 @@ window.onload = function() {
 
   function updateViewportText() {
     if (chart.axisX[0].get("viewportMinimum") === Infinity) {
-      minXValue.setAttribute("value", "");
-      maxXValue.setAttribute("value", "");
+      viewportX.setAttribute("value", "");
     } else {
-      minXValue.setAttribute("value",
-        CanvasJS.formatDate(chart.axisX[0].viewportMinimum, "YYYY.MM"));
-      maxXValue.setAttribute("value",
-        CanvasJS.formatDate(chart.axisX[0].viewportMaximum, "YYYY.MM"));
+      var viewportRange = "";
+      viewportRange = viewportRange + 
+      CanvasJS.formatDate(chart.axisX[0].viewportMinimum, "YYYY.MM") +
+      " - " + CanvasJS.formatDate(chart.axisX[0].viewportMaximum, "YYYY.MM");
+      viewportX.setAttribute("value", viewportRange);
     }
   }
 
@@ -241,7 +240,7 @@ window.onload = function() {
       if (e.entries[i].dataPoint.prevHeyaName !== "")
         temp = temp + "<br/>(then " + e.entries[i].dataPoint.prevHeyaName + ")";
       if (e.entries[i].dataPoint.shisho !== "")
-        temp = temp + "<br/>Shisho: " + e.entries[i].dataPoint.shisho;
+        temp = temp + "<br/>Shishō: " + e.entries[i].dataPoint.shisho;
 
       temp = temp + "<br/><strong>" + e.entries[i].dataPoint.y +
         "</strong> rikishi";
@@ -260,7 +259,7 @@ window.onload = function() {
       if (e.entries[i].dataPoint.prevHeyaName !== "")
         temp = temp + "<br/>(then " + e.entries[i].dataPoint.prevHeyaName + ")";
       if (e.entries[i].dataPoint.shisho !== "")
-        temp = temp + "<br/>Shisho: " + e.entries[i].dataPoint.shisho;
+        temp = temp + "<br/>Shishō: " + e.entries[i].dataPoint.shisho;
 
       temp = temp + "<br/><strong>" + e.entries[i].dataPoint.y[0] +
         "</strong> rikishi, <strong>" + (e.entries[i].dataPoint.y[0] -
@@ -364,25 +363,27 @@ window.onload = function() {
   $(".period").click( function() {
     var period = this.id;
     var dates = [];
+    var minXValue = [];
 
-    dates = maxXValue.value.split(".");
-    dates[0] = parseInt(dates[0]);
+    dates = viewportX.value.split("-");
+    minXValue = dates[1].split(".");
+    minXValue[0] = parseInt(minXValue[0]);
     
     switch(period) {
       case "5y":
-        dates[0] = dates[0] - 5;
+        minXValue[0] = minXValue[0] - 5;
         break;
       case "10y":
-        dates[0] = dates[0] - 10;
+        minXValue[0] = minXValue[0] - 10;
         break;
       case "20y":
-        dates[0] = dates[0] - 20;
+        minXValue[0] = minXValue[0] - 20;
         break;
       default:
-        dates[0] = dates[0] - 50;
+        minXValue[0] = minXValue[0] - 50;
     }
     
-    chart.axisX[0].set("viewportMinimum", new Date(dates[0], dates[1] - 1));
+    chart.axisX[0].set("viewportMinimum", new Date(minXValue[0], minXValue[1] - 1));
 
     updateViewportText();
   });
@@ -437,6 +438,7 @@ window.onload = function() {
         this.style.fontWeight = "bold";
       }
       chart.render();
+      updateViewportText();
     });
   }
 
@@ -452,8 +454,8 @@ window.onload = function() {
         legend[i].style.fontWeight = "normal";
       }
     }
-    updateViewportText();
     chart.render();
+    updateViewportText();
   }
 
   var coll = document.getElementsByClassName("collapsible");
@@ -483,8 +485,7 @@ window.onload = function() {
       <fieldset id="graphView">
         <legend>View</legend>
         <div class="currentViewport">
-          <label>Viewing: <input id="minXValue" type="text" size="5" placeholder="..." readonly></label>
-          <label> - <input id="maxXValue" type="text" size="5" placeholder="..." readonly></label> 
+          <label>Viewing: <input id="viewportX" type="text" size="15" placeholder=". . ." readonly></label>
         </div>
         <div class="setViewportRange">
           Set view range: <input id="viewportRange" type="text" placeholder="yyyy.m - yyyy.m"> 
@@ -512,13 +513,15 @@ window.onload = function() {
     </div>
     <button type="button" class="collapsible">▾ INFORMATION</button>
     <div class="content">
+      <p><b>HB</b> - Heya branchout, or heya assumed</p>
+      <p><b>HT</b> - Heya takeover, new shisho</p>
       <p>- Click-and-drag across graph to zoom in</p>
       <p>- Clicking on data points redirects you to Sumo Reference banzuke page with heya filtered</p>
-      <p>- Data on the lighter pink area of the graph (before 1988.03) is unreliable since its banzuke contain rikishi with no heya information</p>
-      <p>- Data on the darker pink area of the graph (before 1934.05) is largely incomplete, as many of the lower division ranks are missing</p>
+      <p>- Data on the lighter pink area of the graph (before 1988.03) can be unreliable since its banzuke contain rikishi with no heya information</p>
+      <p>- Data on the darker pink area of the graph (before 1934.05) is mostly incomplete, as many of the lower division ranks are missing</p>
     </div>
     <span id="display"></span>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type='text/javascript' src="scripts/canvasjs_modified.min.js"></script>
+    <script type='text/javascript' src="files/canvasjs_modified.min.js"></script>
   </body>
 </html>
