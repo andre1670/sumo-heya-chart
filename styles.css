@@ -32,7 +32,7 @@ h1 {
   margin-bottom: 5px;
 }
 
-#minXValue, #maxXValue {
+#viewportX {
   font-weight: bold;
   text-align: center;
   background-color: transparent;
