@@ -196,6 +196,10 @@ window.onload = function() {
   var sekitoriCheckbox = document.querySelector("input[name=checkbox]");
   sekitoriCheckbox.addEventListener("change", toggleSekitori);
 
+  $('input[type="checkbox"]').each(function(){
+  	$(this).prop('checked', false);
+  });
+  
   function toggleSekitori() {
     if (this.checked) {
       for (var i = 0; i <= HEYA_COUNT; i++) {
