@@ -17,7 +17,7 @@ window.onload = function() {
   // Initialize array of dataPoint arrays with sekitori
   var dpsB = Create2DArray(HEYA_COUNT + 1);
 
-  var heyaNames = ["All", "Arashio", "Asahiyama", "Asakayama", "Dewanoumi",
+  var hNamesAlpha = ["All", "Arashio", "Asahiyama", "Asakayama", "Dewanoumi",
     "Fujishima", "Futagoyama", "Hakkaku", "Hanaregoma", "Irumagawa",
     "Isegahama", "Isenoumi", "Kasugano", "Kataonami", "Kise", 
     "Kokonoe", "Michinoku", "Minato", "Miyagino", "Musashigawa", 
@@ -26,7 +26,19 @@ window.onload = function() {
     "Sadogatake", "Sakaigawa", "Shibatayama", "Shikihide", "Shikoroyama", 
     "Tagonoura", "Takadagawa", "Takasago", "Takekuma", "Tamanoi",
     "Tatsunami", "Tokitsukaze", "Tokiwayama", "Yamahibiki"
-  ];
+    ];
+
+  var hNamesOld = ["All", "Kasugano", "Dewanoumi", "Takasago", "Tatsunami", 
+    "Tokitsukaze", "Isenoumi", "Sadogatake", "Miyagino", "Ōshima", "Kataonami", 
+    "Kokonoe", "Ōtake", "Michinoku", "Takadagawa", "Isegahama", "Fujishima", 
+    "Minato", "Yamahibiki", "Tagonoura", "Tamanoi", "Hanaregoma", "Shikihide", 
+    "Irumagawa", "Hakkaku", "Ōnomatsu", "Sakaigawa", "Oitekaze", "Shibatayama", 
+    "Arashio", "Nishikido", "Kise", "Shikoroyama", "Tokiwayama", "Onoe", 
+    "Musashigawa", "Asakayama", "Asahiyama", "Naruto", "Nishiiwa", "Futagoyama", 
+    "Nishonoseki", "Takekuma", "Oshiogawa"
+    ];
+
+  var hNamesIchi = []
 
   var colorsOrdered = ["#d92121", "#ff6666", "#d95321", "#ff9066", "#d98521",
     "#ffae4d", "#b39c36", "#d9b721", "#a7b336", "#c8d921", "#85b336", "#96d921",
@@ -35,7 +47,7 @@ window.onload = function() {
     "#2174d9", "#66acff", "#2142d9", "#6682ff", "#3121d9", "#7466ff", "#6321d9",
     "#9e66ff", "#9621d9", "#c766ff", "#c821d9", "#f166ff", "#d921b7", "#ff80e8",
     "#d92185", "#ff66b9", "#d92153", "#ff4d7d"
-  ]
+    ];
 
   var colorsShuffled = ["#d95321", "#ff66b9", "#9e66ff", "#96d921", "#5dff4d",
     "#66acff", "#21d942", "#ff4d7d", "#66d5ff", "#21a7d9", "#c821d9", "#33ffff",
@@ -44,7 +56,7 @@ window.onload = function() {
     "#4dff6d", "#63b336", "#21d974", "#64d921", "#b39c36", "#31d921", "#21d9d9",
     "#c8d921", "#a7b336", "#9621d9", "#f166ff", "#85b336", "#2142d9", "#ffae4d",
     "#2174d9", "#c766ff", "#3121d9", "#d98521"
-  ]
+    ];
 
   CanvasJS.addColorSet("heyaColors", colorsOrdered);
 
@@ -145,7 +157,7 @@ window.onload = function() {
 
   for (var i = 0; i <= HEYA_COUNT; i++) {
     chart.options.data[i] = {
-      name: heyaNames[i],
+      name: hNamesAlpha[i],
       type: "line",
       markerSize: 0,
       visible: false,
@@ -196,10 +208,6 @@ window.onload = function() {
   var sekitoriCheckbox = document.querySelector("input[name=checkbox]");
   sekitoriCheckbox.addEventListener("change", toggleSekitori);
 
-  $('input[type="checkbox"]').each(function(){
-  	$(this).prop('checked', false);
-  });
-  
   function toggleSekitori() {
     if (this.checked) {
       for (var i = 0; i <= HEYA_COUNT; i++) {
@@ -401,7 +409,7 @@ window.onload = function() {
     for (var i = 0; i <= HEYA_COUNT; i++) { 
       var li = document.createElement("li");
       li.style.color = "#A9A9A9";
-      li.appendChild(document.createTextNode(heyaNames[i]));
+      li.appendChild(document.createTextNode(hNamesAlpha[i]));
       legendListId.appendChild(li); 
       $('li').each(function (i) {
           $(this).attr('id', (i));
@@ -476,6 +484,10 @@ window.onload = function() {
     });
   }
 
+  $('input[type="checkbox"]').each(function(){
+    $(this).prop('checked', false);
+  });
+
 }
 
     </script>
@@ -526,6 +538,6 @@ window.onload = function() {
     </div>
     <span id="display"></span>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type='text/javascript' src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script type='text/javascript' src="scripts/canvasjs_modified.min.js"></script>
   </body>
 </html>
