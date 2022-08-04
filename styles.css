@@ -44,13 +44,25 @@ h1 {
   margin: 3px;
 }
 
-.setViewportRange, #resetViewport, #range-selector{
+.setViewportRange, #resetViewport, #range-selector {
   margin-right: 5px;
   display: inline-block;
   margin: 3px;
 }
 
-#toggleSekitori, #toggleLabels, #hideAll {
+.setViewportRange {
+  padding-right: 10px;
+  border-right: 1px solid;
+  border-color: gray;
+}
+
+#range-selector {
+  padding-left: 10px;
+  border-left: 1px solid;
+  border-color: gray;
+}
+
+#toggleSekitori, #hideAll {
   margin-left: 5px;
   display: inline-block;
   margin: 3px;
@@ -115,4 +127,22 @@ legend {
   overflow: hidden;
   background-color: white;
   line-height: 1.2;
+}
+
+.whiteCircle {
+  display: inline-block;
+  height: 7px;
+  width: 7px;
+  background-color: white;
+  border: 1px solid;
+  border-radius: 50%;
+}
+
+.blackCircle {
+  display: inline-block;
+  height: 7px;
+  width: 7px;
+  background-color: black;
+  border: 1px solid;
+  border-radius: 50%;
 }
