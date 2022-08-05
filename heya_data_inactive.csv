@@ -21,11 +21,11 @@ Basho,Oguruma,Kagamiyama,Azumazeki,Minezaki,Nakagawa,Izutsu,Takanohana,Kasugayam
 1927.01,,,,,,,,,5-3-OS Futasegawa--4-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 1927.03,,,,,,,,,4-3-OS Futasegawa--4-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 1927.05,,,,,,,,,3-2-OS Futasegawa--4-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-1927.1,,,,,,,,,4-3-OS Futasegawa--4-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1927.10,,,,,,,,,4-3-OS Futasegawa--4-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 1928.01,,,,,,,,,3-2-OS Futasegawa--4-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 1928.03,,,,,,,,,4-3-OS Futasegawa--4-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 1928.05,,,,,,,,,3-2-OS Futasegawa--4-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-1928.1,,,,,,,,,3-2-OS Futasegawa--4-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1928.10,,,,,,,,,3-2-OS Futasegawa--4-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 1929.01,,,,,,,,,3-2-OS Futasegawa--4-,,,,,,,,,,,,,,,,,1-0-K Izumigawa-HB-102-,,,,,,,,,,,,,,
 1929.03,,,,,,,,,4-2-OS Futasegawa--4-,,,,,,,,,,,,,,,,,-----,,,,,,,,,,,,,,
 1929.05,,,,,,,,,4-3-OS Futasegawa--4-,,,,,,,,,,,,,,,,,-----,,,,,,,,,,,,,,
@@ -33,16 +33,16 @@ Basho,Oguruma,Kagamiyama,Azumazeki,Minezaki,Nakagawa,Izutsu,Takanohana,Kasugayam
 1930.01,,,,,,,,,3-2-OS Futasegawa--4-,,,,,,,,,,,,2-2-S Kiyosegawa-HB-24-,,,,,-----,,,,,,,,,,,,,,
 1930.03,,,,,,,,,3-2-OS Futasegawa--4-,,,,,,,,,,,,2-2-S Kiyosegawa--24-,,,,,-----,,,,,,,,,,,,,,
 1930.05,,,,,,,,,4-2-OS Futasegawa--4-,,,,,,,,,,,,2-2-S Kiyosegawa--24-,,,,,-----,,,,,,,,,,,,,,
-1930.1,,,,,,,,,3-2-OS Futasegawa--4-,,,,,,,,,,,,2-2-S Kiyosegawa--24-,,,,,-----,,,,,,,,,,,,,,
+1930.10,,,,,,,,,3-2-OS Futasegawa--4-,,,,,,,,,,,,2-2-S Kiyosegawa--24-,,,,,-----,,,,,,,,,,,,,,
 1931.01,,,,,,,,,2-2-OS Futasegawa--4-,,,,,,,,,,,,4-2-S Kiyosegawa--24-,,,,,-----,,,,,,,,,,,,,,
 1931.03,,,,,,,,,2-2-OS Futasegawa--4-,,,,,,,,,,,,2-2-S Kiyosegawa--24-,,,,,-----,,,,,,,,,,,,,,
 1931.05,,,,,,,,,3-1-OS Futasegawa--4-,,,,,,,,,,,,2-2-S Kiyosegawa--24-,,,,,-----,,,,,,,,,,,,,,
-1931.1,,,,,,,,,3-1-OS Futasegawa--4-,,,,,,,,,,,,2-2-S Kiyosegawa--24-,,,,,-----,,,,,,,,,,,,,,
+1931.10,,,,,,,,,3-1-OS Futasegawa--4-,,,,,,,,,,,,2-2-S Kiyosegawa--24-,,,,,-----,,,,,,,,,,,,,,
 1932.01,,,,,,,,,2-1-OS Futasegawa--4-,,,,,,,,,,,,2-2-S Kiyosegawa--24-,,,,,-----,,,,,,,,,,,,,,
 1932.02,,,,,,,,,2-0-OS Futasegawa--4-,,,,,,,,,,,,2-2-S Kiyosegawa--24-,,,,,-----,,,,,,,,,,,,,,
 1932.03,,,,,,,,,3-0-OS Futasegawa--4-,,,,,,,,,,,,3-2-S Kiyosegawa--24-,,,,,-----,,,,,,,,,,,,,,
 1932.05,,,,,,,,,2-0-OS Futasegawa--4-,,,,,,,,,,,,3-3-S Kiyosegawa--24-,,,,,-----,,,,,,,,,,,,,,
-1932.1,,,,,,,,,3-0-OS Futasegawa--4-,,,,,,,,,,,,3-3-S Kiyosegawa--24-,,,,,-----,,,,,,,,,,,,,,
+1932.10,,,,,,,,,3-0-OS Futasegawa--4-,,,,,,,,,,,,3-3-S Kiyosegawa--24-,,,,,-----,,,,,,,,,,,,,,
 1933.01,,,,,,,,,2-1-OS Futasegawa--4-,,,,,,,,,,,,3-2-S Kiyosegawa--24-,,,,,-----,,,,,,,,,,,,,,
 1933.05,,,,,,,,,3-1-OS Futasegawa--4-,,,,,,,,,,,,3-3-S Kiyosegawa--24-,,,,,-----,,,,,,,,,,,,,,
 1934.01,,,,,,,,,3-2-OS Futasegawa--4-,,,,,,,,,,,,4-3-S Kiyosegawa--24-,,,,,-----,,,,,,,,,,,,,,
@@ -74,10 +74,10 @@ Basho,Oguruma,Kagamiyama,Azumazeki,Minezaki,Nakagawa,Izutsu,Takanohana,Kasugayam
 1947.06,,,,,,,,,7-4-S Futasegawa--4-,,,,29-11-S Tamanoumi--60-,,,,,,,,23-8-S Kiyosegawa--24-,,,,,3-1-K Izumigawa--102-,,,,,,2-0-O Matsunobori--71-,,,,,,,2-0-M2 Kinkazan-HT-65-,1-1-O Shimizugawa--62-
 1947.11,,,,,,,,,6-3-S Futasegawa--4-,,,,33-11-S Tamanoumi--60-,,,,,,,,22-9-S Kiyosegawa--24-,,,,,2-0-K Izumigawa--102-,,,,,,2-0-O Matsunobori--71-,,,,,,,2-1-M2 Kinkazan--65-,1-1-O Shimizugawa--62-
 1948.05,,,,,,,,,6-3-S Futasegawa--4-,,,,33-9-S Tamanoumi--60-,,,,,,,,23-10-S Kiyosegawa--24-,,,,,2-0-K Izumigawa--102-,,,,,,2-0-O Matsunobori--71-,,,,,,,2-0-M2 Kinkazan--65-,1-1-O Shimizugawa--62-
-1948.1,,,,,,,,,6-3-S Futasegawa--4-,,,,33-9-S Tamanoumi--60-,,,,,,,,23-9-S Kiyosegawa--24-,,,,,3-0-K Izumigawa--102-,,,,,,2-0-O Matsunobori--71-,,,,,,,3-1-M2 Kinkazan--65-,1-1-O Shimizugawa--62-
+1948.10,,,,,,,,,6-3-S Futasegawa--4-,,,,33-9-S Tamanoumi--60-,,,,,,,,23-9-S Kiyosegawa--24-,,,,,3-0-K Izumigawa--102-,,,,,,2-0-O Matsunobori--71-,,,,,,,3-1-M2 Kinkazan--65-,1-1-O Shimizugawa--62-
 1949.01,,,,,,,,,6-3-S Futasegawa--4-,,,,32-10-S Tamanoumi--60-,,,,,,,,22-8-S Kiyosegawa--24-,,,,,3-0-K Izumigawa--102-,,,,,,2-0-O Matsunobori--71-,,,,,,,3-0-M2 Kinkazan--65-,1-1-O Shimizugawa--62-
 1949.05,,,,,,,,,5-2-S Futasegawa--4-,,,,35-11-S Tamanoumi--60-,,,,,,,,22-7-S Kiyosegawa--24-,,,,,3-0-K Izumigawa--102-,,,,,,1-1-O Matsunobori--71-,,,,,,,3-1-M2 Kinkazan--65-,1-1-O Shimizugawa--62-
-1949.1,,,,,,,,,6-2-S Futasegawa--4-,,,,35-11-S Tamanoumi--60-,,,,,,,,22-8-S Kiyosegawa--24-,,,,,3-1-K Izumigawa--102-,,,,,,1-1-O Matsunobori--71-,,,,,,,3-0-M2 Kinkazan--65-,2-1-O Shimizugawa--62-
+1949.10,,,,,,,,,6-2-S Futasegawa--4-,,,,35-11-S Tamanoumi--60-,,,,,,,,22-8-S Kiyosegawa--24-,,,,,3-1-K Izumigawa--102-,,,,,,1-1-O Matsunobori--71-,,,,,,,3-0-M2 Kinkazan--65-,2-1-O Shimizugawa--62-
 1950.01,,,,,,,,,7-2-S Futasegawa--4-,,,,37-13-S Tamanoumi--60-,,,,,,,,22-8-S Kiyosegawa--24-,,,,,3-1-K Izumigawa--102-,,,,,,1-1-O Matsunobori--71-,,,,,,,3-1-M2 Kinkazan--65-,2-1-O Shimizugawa--62-
 1950.05,,,,,,,,,8-2-S Futasegawa--4-,3-1-O Masuiyama I-HB-47-,,,40-14-S Tamanoumi--60-,,,,,,,,22-7-S Kiyosegawa--24-,,,,,4-1-K Izumigawa--102-,,,,,,1-1-O Matsunobori--71-,,,,,,,3-1-M2 Kinkazan--65-,2-1-O Shimizugawa--62-
 1950.09,,,,,,,,,9-2-S Futasegawa--4-,3-1-O Masuiyama I--47-,,,39-12-S Tamanoumi--60-,,,,,,,,23-10-S Kiyosegawa--24-,,,,,5-1-K Izumigawa--102-,,,,,,1-1-O Matsunobori--71-,,,,,,,3-1-M2 Kinkazan--65-,2-1-O Shimizugawa--62-
@@ -137,9 +137,9 @@ Basho,Oguruma,Kagamiyama,Azumazeki,Minezaki,Nakagawa,Izutsu,Takanohana,Kasugayam
 1962.05,,,,,,,,,14-0-S Kozuzan--4-,12-0-O Masuiyama I--47-,,,56-6-O Saganohana--60-,,,,,,,,50-6-Y Terukuni--24-,,,,,10-2-M3 Shachinosato--102-,,5-0-M1 Katsuragawa--37-,,,6-0-O Nayoroiwa--32-,6-0-O Matsunobori--71-,58-6-M3 Onoumi--17-,9-1-O Mitsuneyama--86-,8-0-K Shimizugawa--43-,2-0-M2 Kiyoenami--54-,1-0-J5 Yahatano-HB-91-,6-0-M1 Tokachiiwa--49-,11-2-M2 Kinkazan--65-,7-1-O Shimizugawa--62-
 1962.07,,,,,,,8-0-Y Wakanohana I-HB-14-Futagoyama,,13-0-S Kozuzan--4-,9-0-O Masuiyama I--47-,,,57-7-O Saganohana--60-,,,,,,,,48-5-Y Terukuni--24-,,,,,10-2-M3 Shachinosato--102-,,5-0-M1 Katsuragawa--37-,,,6-0-O Nayoroiwa--32-,5-0-O Matsunobori--71-,55-7-M3 Onoumi--17-,9-1-O Mitsuneyama--86-,8-0-K Shimizugawa--43-,2-0-M2 Kiyoenami--54-,1-0-J5 Yahatano--91-,6-0-M1 Tokachiiwa--49-,10-1-M2 Kinkazan--65-,6-1-O Shimizugawa--62-
 1962.09,,,,,,,10-0-Y Wakanohana I--14-Futagoyama,,13-0-S Kozuzan--4-,8-0-O Masuiyama I--47-,,,55-7-O Saganohana--60-,,,,,,,,48-4-Y Terukuni--24-,,,,,12-2-M3 Shachinosato--102-,,5-0-M1 Katsuragawa--37-,,,6-0-O Nayoroiwa--32-,4-0-O Matsunobori--71-,51-7-M3 Onoumi--17-,9-1-O Mitsuneyama--86-,8-0-K Shimizugawa--43-,2-0-M2 Kiyoenami--54-,1-0-J5 Yahatano--91-,6-0-M1 Tokachiiwa--49-,10-1-M2 Kinkazan--65-,6-1-O Shimizugawa--62-
-1962.11,,,,,,,11-0-Y Wakanohana I--14-Futagoyama,,13-0-S Kozuzan--4-,7-0-O Masuiyama I--47-,,,51-8-O Saganohana--60-,,,,,,,,46-5-Y Terukuni--24-,,,,,12-2-M3 Shachinosato--102-,,5-0-M1 Katsuragawa--37-,,,6-0-O Nayoroiwa--32-,4-0-O Matsunobori--71-,51-7-M3 Onoumi--17-,10-1-O Mitsuneyama--86-,8-0-K Shimizugawa--43-,0-0-M2 Kiyoenami--54-,1-0-J5 Yahatano--91-,5-0-M1 Tokachiiwa--49-,10-1-M2 Kinkazan--65-,5-1-O Shimizugawa--62-
-1963.01,,,,,,,11-0-Y Wakanohana I--14-Futagoyama,,14-1-S Kozuzan--4-,8-0-O Masuiyama I--47-,,,51-8-O Saganohana--60-,,,,,,,,44-5-Y Terukuni--24-,,,,,12-2-M3 Shachinosato--102-,,6-0-M1 Katsuragawa--37-,,,6-0-O Nayoroiwa--32-,4-0-O Matsunobori--71-,48-7-M3 Onoumi--17-,10-1-O Mitsuneyama--86-,6-0-K Shimizugawa--43-,0-0-M2 Kiyoenami--54-,1-0-J5 Yahatano--91-,5-0-M1 Tokachiiwa--49-,10-1-M2 Kinkazan--65-,5-1-O Shimizugawa--62-
-1963.03,,,,,,,13-0-Y Wakanohana I--14-Futagoyama,,14-1-S Kozuzan--4-,9-0-O Masuiyama I--47-,,,52-8-O Saganohana--60-,,,,,,,,42-5-Y Terukuni--24-,,,,,12-2-M3 Shachinosato--102-,,5-0-M1 Katsuragawa--37-,,,6-0-O Nayoroiwa--32-,3-0-O Matsunobori--71-,48-7-M3 Onoumi--17-,9-1-O Mitsuneyama--86-,5-0-K Shimizugawa--43-,0-0-M2 Kiyoenami--54-,1-0-J5 Yahatano--91-,4-0-M1 Tokachiiwa--49-,10-1-M2 Kinkazan--65-,5-1-O Shimizugawa--62-
+1962.11,,,,,,,11-0-Y Wakanohana I--14-Futagoyama,,13-0-S Kozuzan--4-,7-0-O Masuiyama I--47-,,,51-8-O Saganohana--60-,,,,,,,,46-5-Y Terukuni--24-,,,,,12-2-M3 Shachinosato--102-,,5-0-M1 Katsuragawa--37-,,,6-0-O Nayoroiwa--32-,4-0-O Matsunobori--71-,51-7-M3 Onoumi--17-,10-1-O Mitsuneyama--86-,8-0-K Shimizugawa--43-,-----,1-0-J5 Yahatano--91-,5-0-M1 Tokachiiwa--49-,10-1-M2 Kinkazan--65-,5-1-O Shimizugawa--62-
+1963.01,,,,,,,11-0-Y Wakanohana I--14-Futagoyama,,14-1-S Kozuzan--4-,8-0-O Masuiyama I--47-,,,51-8-O Saganohana--60-,,,,,,,,44-5-Y Terukuni--24-,,,,,12-2-M3 Shachinosato--102-,,6-0-M1 Katsuragawa--37-,,,6-0-O Nayoroiwa--32-,4-0-O Matsunobori--71-,48-7-M3 Onoumi--17-,10-1-O Mitsuneyama--86-,6-0-K Shimizugawa--43-,-----,1-0-J5 Yahatano--91-,5-0-M1 Tokachiiwa--49-,10-1-M2 Kinkazan--65-,5-1-O Shimizugawa--62-
+1963.03,,,,,,,13-0-Y Wakanohana I--14-Futagoyama,,14-1-S Kozuzan--4-,9-0-O Masuiyama I--47-,,,52-8-O Saganohana--60-,,,,,,,,42-5-Y Terukuni--24-,,,,,12-2-M3 Shachinosato--102-,,5-0-M1 Katsuragawa--37-,,,6-0-O Nayoroiwa--32-,3-0-O Matsunobori--71-,48-7-M3 Onoumi--17-,9-1-O Mitsuneyama--86-,5-0-K Shimizugawa--43-,-----,1-0-J5 Yahatano--91-,4-0-M1 Tokachiiwa--49-,10-1-M2 Kinkazan--65-,5-1-O Shimizugawa--62-
 1963.05,,,,,,,16-0-Y Wakanohana I--14-Futagoyama,,14-1-S Futaseyama-HT-4-,9-0-O Masuiyama I--47-,,,55-8-O Saganohana--60-,,,,,,,,42-5-Y Terukuni--24-,,,,,12-2-M3 Shachinosato--102-,,5-0-M1 Katsuragawa--37-,,,6-0-O Nayoroiwa--32-,3-0-O Matsunobori--71-,47-7-M3 Onoumi--17-,11-1-O Mitsuneyama--86-,5-0-K Shimizugawa--43-,2-0-M2 Kiyoenami--54-,1-0-J5 Yahatano--91-,4-0-M1 Tokachiiwa--49-,9-1-M2 Kinkazan--65-,5-1-O Shimizugawa--62-
 1963.07,,,,,,,17-0-Y Wakanohana I--14-Futagoyama,,21-1-S Futaseyama--4-,9-0-O Masuiyama I--47-,,,53-8-O Saganohana--60-,,,,,,,,41-6-Y Terukuni--24-,,,,,11-2-M3 Shachinosato--102-,,6-0-M1 Katsuragawa--37-,,,6-0-O Nayoroiwa--32-,2-0-O Matsunobori--71-,46-7-M3 Onoumi--17-,14-1-O Mitsuneyama--86-,5-0-K Shimizugawa--43-,2-0-M2 Kiyoenami--54-,2-0-J5 Yahatano--91-,4-0-M1 Tokachiiwa--49-,10-1-M2 Kinkazan--65-,5-1-O Shimizugawa--62-
 1963.09,,,,,,,18-0-Y Wakanohana I--14-Futagoyama,,21-1-S Futaseyama--4-,9-0-O Masuiyama I--47-,,,54-8-O Saganohana--60-,,,,,,,,40-6-Y Terukuni--24-,,,,,11-2-M3 Shachinosato--102-,,6-0-M1 Katsuragawa--37-,,,6-0-O Nayoroiwa--32-,2-0-O Matsunobori--71-,49-8-M3 Onoumi--17-,16-1-O Mitsuneyama--86-,5-0-K Shimizugawa--43-,2-0-M2 Kiyoenami--54-,2-0-J5 Yahatano--91-,3-0-M1 Tokachiiwa--49-,10-1-M2 Kinkazan--65-,5-1-O Shimizugawa--62-
