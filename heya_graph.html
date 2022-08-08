@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="test.css">
+    <link rel="stylesheet" href="styles.css">
     <script>
 
 const HEYA_COUNT = 43;
@@ -39,10 +39,10 @@ var hNamesDefAlpha = ["Araiso", "Asahiyama[1]", "Azumazeki", "Hanakago[2]", "Han
 "Takekuma[3]", "Tanigawa", "Tatsutagawa", "Wakamatsu"
 ];
 
-var hNamesDefOld = ["Asahiyama[1]", "Wakamatsu", "Isegahama[2]", "Nishonoseki[2]", 
-"Oitekaze[3]", "Oyama", "Onogawa", "Mihogaseki", "Hanakago[2]", "Minatogawa", 
+var hNamesDefOld = ["Asahiyama[1]", "Onogawa", "Wakamatsu", "Isegahama[2]", "Nishonoseki[2]", 
+"Oitekaze[3]", "Oyama", "Mihogaseki", "Hanakago[2]", "Minatogawa", 
 "Kasugayama[2]", "Kise[1]", "Magaki[2]", "Nakagawa[3]", "Takashima[1]", 
-"Tanigawa", "Takanohana", "Kagamiyama", "Tatsutagawa", "Izutsu", "Oshiogawa[2]", 
+"Takanohana", "Tanigawa", "Kagamiyama", "Tatsutagawa", "Izutsu", "Oshiogawa[2]", 
 "Onaruto", "Kumagatani", "Ōshima[1]", "Hanaregoma[1]", "Magaki[3]", "Azumazeki", 
 "Nakamura", "Oguruma", "Minezaki", "Kabutoyama", "Hanakago[3]", "Araiso", 
 "Takashima[2]", "Hatachiyama", "Kiriyama", "Kasugayama[3]", "Takekuma[3]", 
@@ -58,30 +58,20 @@ var hNamesDefClo = ["Oguruma", "Kagamiyama", "Azumazeki", "Minezaki", "Nakagawa[
 "Tanigawa", "Minatogawa", "Onogawa", "Oitekaze[3]"
 ];
 
-var colorsOrdered = ["#d92121", "#ff6666", "#d95321", "#ff9066", "#d98521",
-"#ffae4d", "#b39c36", "#d9b721", "#a7b336", "#c8d921", "#85b336", "#96d921",
-"#63b336", "#64d921", "#31d921", "#10b500", "#21d942", "#00b821", "#21d974",
-"#00b04f", "#21d9a6", "#00b07f", "#21d9d9", "#00abab", "#21a7d9", "#0084b5",
-"#2174d9", "#66acff", "#2142d9", "#6682ff", "#3121d9", "#7466ff", "#6321d9",
-"#9e66ff", "#9621d9", "#c766ff", "#c821d9", "#f166ff", "#d921b7", "#ff80e8",
-"#d92185", "#ff66b9", "#d92153", "#ff4d7d",
-"#d92121", "#ff6666", "#d95321", "#ff9066", "#d98521",
-"#ffae4d", "#b39c36", "#d9b721", "#a7b336", "#c8d921", "#85b336", "#96d921",
-"#63b336", "#64d921", "#31d921", "#10b500", "#21d942", "#00b821", "#21d974",
-"#00b04f", "#21d9a6", "#00b07f", "#21d9d9", "#00abab", "#21a7d9", "#0084b5",
-"#2174d9", "#66acff", "#2142d9", "#6682ff", "#3121d9", "#7466ff", "#6321d9",
-"#9e66ff", "#9621d9", "#c766ff", "#c821d9", "#f166ff", "#d921b7", "#ff80e8",
-"#d92185", "#ff66b9", "#d92153", "#ff4d7d"
-];
+var dataColors = ["#d74bb1", "#4ccc61", "#7e52d2", "#5dae2d", "#a746bf", 
+"#afbb35", "#3959cf", "#e6a01e", "#8274f1", "#8bc35e", "#d574e7", "#44a14d", 
+"#ea377d", "#5bca89", "#b52479", "#2d7a2c", "#834aaf", "#72962e", "#4779ea", 
+"#d8ad41", "#5b5cbb", "#e29134", "#458ee8", "#e95b35", "#54bce6", "#b72f20", 
+"#4acaad", "#ce2c57", "#329f75", "#e14f92", "#347f4e", "#ab82e5", "#5d7821", 
+"#d076c6", "#9e8d27", "#644999", "#e07931", "#415ea7", "#be5f2a", "#7f89dc", 
+"#5f6211", "#7b68b9", "#9dbc72", "#9e4593", "#6c995c", "#da4248", "#3bbcc3", 
+"#9d4317", "#599fd7", "#b27a30", "#3176ae", "#ee8765", "#1a6447", "#e86176", 
+"#296437", "#e98ec7", "#507738", "#cd96da", "#476025", "#d16799", "#76b991", 
+"#b1394e", "#37846c", "#a13f6a", "#beb46b", "#7b488b", "#8d8444", "#a4a4e5", 
+"#7b5d16", "#8974b2", "#62612c", "#a7679a", "#daa370", "#5a5f94", "#966536", 
+"#d795b8", "#884729", "#e47f9b", "#c77c60", "#894b67", "#e68d8b", "#8f3f4a", 
+"#af5448", "#b25e68"];
 
-var colorsShuffled = ["#d95321", "#ff66b9", "#9e66ff", "#96d921", "#5dff4d",
-"#66acff", "#21d942", "#ff4d7d", "#66d5ff", "#21a7d9", "#c821d9", "#33ffff",
-"#6682ff", "#21d9a6", "#7466ff", "#ff9066", "#d92121", "#6321d9", "#33ffc7",
-"#ff80e8", "#d92153", "#d9b721", "#4dff9e", "#d921b7", "#d92185", "#ff6666",
-"#4dff6d", "#63b336", "#21d974", "#64d921", "#b39c36", "#31d921", "#21d9d9",
-"#c8d921", "#a7b336", "#9621d9", "#f166ff", "#85b336", "#2142d9", "#ffae4d",
-"#2174d9", "#c766ff", "#3121d9", "#d98521"
-];
 
 window.onload = function() {
 
@@ -92,7 +82,7 @@ window.onload = function() {
   var dpsB = Create2DArray(HEYA_COUNT + 1 + DEF_HEYA_COUNT);
 
 
-  CanvasJS.addColorSet("heyaColors", colorsOrdered);
+  CanvasJS.addColorSet("heyaColors", dataColors);
 
   var viewportX = document.getElementById("viewportX");
 
@@ -676,7 +666,7 @@ window.onload = function() {
               chart.options.data[i].dataPoints = dps[i];
             }
             chart.options.data[i].visible = true;
-            this.style.color = colorsOrdered[i];
+            this.style.color = dataColors[i];
             this.style.fontWeight = "bold";
           }
         }
@@ -740,7 +730,7 @@ window.onload = function() {
               chart.options.data[i].dataPoints = dps[i];
             }
             chart.options.data[i].visible = true;
-            this.style.color = colorsOrdered[i];
+            this.style.color = dataColors[i];
             this.style.fontWeight = "bold";
           }
         }
@@ -792,7 +782,7 @@ window.onload = function() {
           li.innerText = hNamesDefAlpha[i-(HEYA_COUNT + 1)];
         }
         break;
-      default:
+      case "oldest":
         for (var i = 0; i <= HEYA_COUNT; i++) {
           var li = document.getElementById("name" + String(i));
           li.innerText = hNamesOld[i];
@@ -800,6 +790,16 @@ window.onload = function() {
         for (var i = HEYA_COUNT + 1; i < HEYA_COUNT + DEF_HEYA_COUNT + 1; i++) {
           var li = document.getElementById("name" + String(i));
           li.innerText = hNamesDefOld[i-(HEYA_COUNT + 1)];
+        }
+        break;
+      default:
+        for (var i = 0; i <= HEYA_COUNT; i++) {
+          var li = document.getElementById("name" + String(i));
+          li.innerText = hNamesAlpha[i];
+        }
+        for (var i = HEYA_COUNT + 1; i < HEYA_COUNT + DEF_HEYA_COUNT + 1; i++) {
+          var li = document.getElementById("name" + String(i));
+          li.innerText = hNamesDefClo[i-(HEYA_COUNT + 1)];
         }
     }
     hideAll();
@@ -816,10 +816,6 @@ window.onload = function() {
         <a id="titleText">Heya Graph</a><a href="https://sumodb.sumogames.de/">Sumo Reference</a><a id="creditText">data compiled from</a>
       </div>
       <fieldset id="graphView">
-        <legend>View</legend>
-        <div class="currentViewport">
-          <label>Viewing: <input id="viewportX" type="text" size=14 placeholder=". . ." readonly></label>
-        </div>
         <div class="setViewportRange">
           Set view range: <input id="viewportRange" type="text" placeholder="yyyy.m - yyyy.m" autocomplete="off"> 
           <button id="setViewport" type="button" value="viewportButton">Set</button>
@@ -835,18 +831,24 @@ window.onload = function() {
       </fieldset>
     <div id="chartContainer"></div>
     <fieldset id="graphSettings">
+      <div class="currentViewport">
+        <label>Viewing: <input id="viewportX" type="text" size=11  placeholder=". . ." readonly></label>
+      </div>
       <label><input id="toggleSekitori" type="checkbox" name="checkbox" autocomplete="off">Enable Sekitori</label>
       <button id="hideAll" type="button" value="hideAllButton">Hide All Graphs</button>
       <label id="sortHNames">Sort heya names </label>
         <select id="sortDropdown" autocomplete="off">
           <option value="alphabetic">alphabetically</option>
-          <option value="oldest">from oldest to newest</option>
+          <option value="oldest">oldest first</option>
+          <option value="closed">recently closed first</option>
         </select>
     </fieldset>
+    <label><div id="legendTitle">Active heya</div></label>
     <div id="legends">
       <ul id="legendList">
       </ul>
     </div>
+    <label><div id="legendTitleDef">Defunct heya</div></label>
     <div id="legendsDef">
       <ul id="legendListDef">
       </ul>
@@ -854,7 +856,7 @@ window.onload = function() {
     <button type="button" class="collapsible">▾ INFORMATION</button>
     <div class="content">
       <p><div class="whiteCircle"></div> - Heya Opening</p>
-      <p><b>△</b> - Heya Takeover</p>
+      <p>△ - Heya Takeover</p>
       <p><div class="blackCircle"></div> - Heya Closure</p>
       <p>- Click-and-drag across graph to zoom in</p>
       <p>- Clicking on data points redirects you to Sumo Reference banzuke page with heya filtered</p>
