@@ -8,54 +8,70 @@
     <script>
 
 const HEYA_COUNT = 43;
-const DEF_HEYA_COUNT = 40;
+const DEF_HEYA_COUNT = 66;
 
 var hNamesAlpha = ["All", "Arashio", "Asahiyama[2]", "Asakayama", "Dewanoumi",
-"Fujishima", "Futagoyama", "Hakkaku", "Hanaregoma[2]", "Irumagawa", "Isegahama[3]", 
-"Isenoumi", "Kasugano", "Kataonami", "Kise[2]", "Kokonoe", "Michinoku", "Minato", 
-"Miyagino", "Musashigawa", "Naruto", "Nishiiwa", "Nishikido", "Nishonoseki[3]", 
-"Oitekaze[4]", "Onoe", "Ōnomatsu", "Ōshima[2]", "Oshiogawa[3]", "Ōtake", "Sadogatake", 
-"Sakaigawa", "Shibatayama", "Shikihide", "Shikoroyama", "Tagonoura[3]", 
-"Takadagawa", "Takasago", "Takekuma[4]", "Tamanoi", "Tatsunami", "Tokitsukaze", 
+"Fujishima[2]", "Futagoyama", "Hakkaku", "Hanaregoma[2]", "Irumagawa", "Isegahama[3]", 
+"Isenoumi", "Kasugano", "Kataonami", "Kise[1]", "Kokonoe", "Michinoku[2]", "Minato", 
+"Miyagino[2]", "Musashigawa", "Naruto", "Nishiiwa", "Nishikido", "Nishonoseki[3]", 
+"Oitekaze[4]", "Onoe", "Ōnomatsu", "Ōshima[2]", "Oshiogawa[3]", "Ōtake", "Sadogatake[2]", 
+"Sakaigawa", "Shibatayama", "Shikihide[3]", "Shikoroyama", "Tagonoura[3]", 
+"Takadagawa", "Takasago", "Takekuma[3]", "Tamanoi[2]", "Tatsunami", "Tokitsukaze", 
 "Tokiwayama", "Yamahibiki"
 ];
 
-var hNamesOld = ["All", "Kasugano", "Dewanoumi", "Takasago", "Tatsunami", 
-"Tokitsukaze", "Isenoumi", "Sadogatake", "Miyagino", "Ōshima[2]", "Kataonami", 
-"Kokonoe", "Ōtake", "Michinoku", "Takadagawa", "Isegahama[3]", "Fujishima", 
-"Minato", "Yamahibiki", "Tagonoura[3]", "Tamanoi", "Hanaregoma[2]", "Shikihide", 
+var hNamesOld = ["All", "Dewanoumi", "Takasago", "Tatsunami", "Kasugano", 
+"Tokitsukaze", "Isenoumi", "Sadogatake[2]", "Miyagino[2]", "Ōshima[2]", "Kataonami", 
+"Kokonoe", "Ōtake", "Michinoku[2]", "Takadagawa", "Isegahama[3]", "Fujishima[2]", 
+"Minato", "Yamahibiki", "Tagonoura[3]", "Tamanoi[2]", "Hanaregoma[2]", "Shikihide[3]", 
 "Irumagawa", "Hakkaku", "Ōnomatsu", "Sakaigawa", "Oitekaze[4]", "Shibatayama", 
-"Arashio", "Nishikido", "Kise[2]", "Shikoroyama", "Tokiwayama", "Onoe", 
+"Arashio", "Nishikido", "Kise[1]", "Shikoroyama", "Tokiwayama", "Onoe", 
 "Musashigawa", "Asakayama", "Asahiyama[2]", "Naruto", "Nishiiwa", "Futagoyama", 
-"Nishonoseki[3]", "Takekuma[4]", "Oshiogawa[3]"
+"Nishonoseki[3]", "Takekuma[3]", "Oshiogawa[3]"
 ];
 
-var hNamesDefAlpha = ["Araiso", "Asahiyama[1]", "Azumazeki", "Hanakago[2]", "Hanakago[3]", 
-"Hanaregoma[1]", "Hatachiyama", "Isegahama[2]", "Izutsu", "Kabutoyama", "Kagamiyama", 
-"Kasugayama[2]", "Kasugayama[3]", "Kiriyama", "Kise[1]", "Kumagatani", "Magaki[2]", "Magaki[3]", 
-"Mihogaseki", "Minatogawa", "Minezaki", "Nakagawa[3]", "Nakagawa[4]", "Nakamura", 
-"Nishonoseki[2]", "Oguruma", "Oitekaze[3]", "Onaruto", "Onogawa", "Ōshima[1]", 
-"Oshiogawa[2]", "Oyama", "Tagonoura[2]", "Takanohana", "Takashima[1]", "Takashima[2]", 
-"Takekuma[3]", "Tanigawa", "Tatsutagawa", "Wakamatsu"
+var hNamesDefAlpha = ["Araiso", "Asahiyama[1]", "Azumazeki", "Fujishima[1]", 
+"Furiwake", "Futagoyama[1]", "Hanakago[1]", "Hanakago[2]", "Hanakago[3]", 
+"Hanaregoma[1]", "Hatachiyama", "Isegahama[2]", "Izutsu", "Kabutoyama", 
+"Kagamiyama", "Kasugayama[1]", "Kasugayama[2]", "Kasugayama[3]", "Kiriyama", 
+"Kise[1]", "Kumagatani[1]", "Kumagatani[2]", "Magaki[2]", "Magaki[3]", 
+"Michinoku[1]", "Mihogaseki[1]", "Mihogaseki[2]", "Minatogawa[1]", "Minatogawa[2]", 
+"Minezaki", "Miyagino[1]", "Nakagawa[3]", "Nakagawa[4]", "Nakamura[1]", 
+"Nakamura[2]", "Nishikijima", "Nishonoseki[2]", "Oguruma", "Oitekaze[3]", 
+"Onaruto[1]", "Onaruto[2]", "Onogawa", "Ōshima[1]", "Oshiogawa[2]", "Oyama", "Sadogatake[1]", 
+"Sanoyama[1]", "Sanoyama[2]", "Shikihide[2]", "Tagonoura[2]", "Takanohana", 
+"Takashima[1]", "Takashima[2]", "Takekuma[1]", "Takekuma[2]", "Tamanoi[1]", 
+"Tanigawa[1]", "Tanigawa[2]", "Tatekawa", "Tatsutagawa", "Tatsutayama", "Tomozuna", 
+"Urakaze", "Wakafuji", "Wakamatsu", "Yamawake",
 ];
 
-var hNamesDefOld = ["Asahiyama[1]", "Onogawa", "Wakamatsu", "Isegahama[2]", "Nishonoseki[2]", 
-"Oitekaze[3]", "Oyama", "Mihogaseki", "Hanakago[2]", "Minatogawa", 
-"Kasugayama[2]", "Kise[1]", "Magaki[2]", "Nakagawa[3]", "Takashima[1]", 
-"Takanohana", "Tanigawa", "Kagamiyama", "Tatsutagawa", "Izutsu", "Oshiogawa[2]", 
-"Onaruto", "Kumagatani", "Ōshima[1]", "Hanaregoma[1]", "Magaki[3]", "Azumazeki", 
-"Nakamura", "Oguruma", "Minezaki", "Kabutoyama", "Hanakago[3]", "Araiso", 
-"Takashima[2]", "Hatachiyama", "Kiriyama", "Kasugayama[3]", "Takekuma[3]", 
+var hNamesDefOld = ["Nishikijima", "Asahiyama[1]", "Onogawa", "Wakamatsu", "Isegahama[2]", "Nishonoseki[2]", 
+"Oitekaze[3]", "Oyama", "Mihogaseki[1]", "Hanakago[1]", "Minatogawa[1]", "Sanoyama[2]", 
+"Kasugayama[1]", "Kise[1]", "Magaki[2]", "Nakagawa[3]", "Tatekawa", "Onaruto[1]", "Takashima[1]", 
+"Takanohana", "Tanigawa[1]", "Kagamiyama", "Tatsutagawa", "Izutsu", "Oshiogawa[2]", 
+"Onaruto[2]", "Kumagatani[1]", "Ōshima[1]", "Hanaregoma[1]", "Fujishima[1]", "Magaki[3]", "Azumazeki", 
+"Nakamura[1]", "Oguruma", "Minezaki", "Kabutoyama", "Hanakago[2]", "Araiso", 
+"Takashima[2]", "Hatachiyama", "Kiriyama", "Kasugayama[2]", "Takekuma[1]", 
 "Tagonoura[2]", "Nakagawa[4]"
+"Urakaze", "Nakamura[2]", 
+"Michinoku[1]", "Sanoyama[1]", "Miyagino[1]", "Kumagatani[2]", "Takekuma[2]", 
+"Shikihide[2]", "Yamawake", "Wakafuji", "Furiwake", "Minatogawa[1]", "Kasugayama[3]", 
+"Tamanoi[1]", "Tomozuna", "Hanakago[3]", "Futagoyama[1]", "Tatsutayama", "Mihogaseki[1]", 
+"Tanigawa[2]", "Sadogatake[1]"
 ];
 
 var hNamesDefClo = ["Oguruma", "Kagamiyama", "Azumazeki", "Minezaki", "Nakagawa[4]", 
-"Izutsu", "Takanohana", "Kasugayama[3]", "Asahiyama[1]", "Mihogaseki", "Magaki[3]", 
-"Hanaregoma[1]", "Nishonoseki[2]", "Nakamura", "Hanakago[3]", "Ōshima[1]", "Tagonoura[2]", 
+"Izutsu", "Takanohana", "Kasugayama[3]", "Asahiyama[1]", "Mihogaseki[2]", "Magaki[3]", 
+"Hanaregoma[1]", "Nishonoseki[2]", "Nakamura[2]", "Hanakago[3]", "Ōshima[1]", "Tagonoura[2]", 
 "Takashima[2]", "Kiriyama", "Araiso", "Isegahama[2]", "Hatachiyama", "Oshiogawa[2]", 
-"Takekuma[3]", "Kabutoyama", "Wakamatsu", "Tatsutagawa", "Kise[2]", "Kumagatani", 
-"Onaruto", "Kasugayama[2]", "Oyama", "Hanakago[2]", "Takashima[1]", "Magaki[2]", "Nakagawa[3]", 
-"Tanigawa", "Minatogawa", "Onogawa", "Oitekaze[3]"
+"Takekuma[2]", "Kabutoyama", "Wakamatsu", "Tatsutagawa", "Kise[1]", "Kumagatani[2]", 
+"Onaruto[2]", "Fujishima[1]", "Kasugayama[2]", "Oyama", "Hanakago[2]", "Takashima[1]", "Magaki[2]", "Nakagawa[3]", 
+"Tanigawa[2]", "Minatogawa[2]", "Onogawa", "Oitekaze[3]", 
+"Nishikijima", "Sanoyama[2]", "Tatekawa", "Onaruto[1]", "Urakaze", "Nakamura[1]", 
+"Michinoku[1]", "Sanoyama[1]", "Miyagino[1]", "Kumagatani[1]", "Takekuma[1]", 
+"Shikihide[2]", "Yamawake", "Wakafuji", "Furiwake", "Minatogawa[1]", "Kasugayama[1]", 
+"Tamanoi[1]", "Tomozuna", "Hanakago[1]", "Futagoyama[1]", "Tatsutayama", "Mihogaseki[1]", 
+"Tanigawa[1]", "Sadogatake[1]"
 ];
 
 var dataColors = ["#d74bb1", "#4ccc61", "#7e52d2", "#5dae2d", "#a746bf", 
