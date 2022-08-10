@@ -7,58 +7,122 @@
     <link rel="stylesheet" href="styles.css">
     <script>
 
+const HEYA_COUNT = 43;
+const DEF_HEYA_COUNT = 66;
+
+var hNamesAlpha = ["All", "Arashio", "Asahiyama[2]", "Asakayama", "Dewanoumi",
+"Fujishima[2]", "Futagoyama", "Hakkaku", "Hanaregoma[2]", "Irumagawa", "Isegahama[3]", 
+"Isenoumi", "Kasugano", "Kataonami", "Kise[1]", "Kokonoe", "Michinoku[2]", "Minato", 
+"Miyagino[2]", "Musashigawa", "Naruto", "Nishiiwa", "Nishikido", "Nishonoseki[3]", 
+"Oitekaze[4]", "Onoe", "Onomatsu", "Oshima[2]", "Oshiogawa[3]", "Otake", "Sadogatake[2]", 
+"Sakaigawa", "Shibatayama", "Shikihide[3]", "Shikoroyama", "Tagonoura[3]", 
+"Takadagawa", "Takasago", "Takekuma[3]", "Tamanoi[2]", "Tatsunami", "Tokitsukaze", 
+"Tokiwayama", "Yamahibiki"
+];
+
+var hNamesNew = ["All", "Oshiogawa[3]", "Takekuma[3]", 
+"Nishonoseki[3]", "Futagoyama", "Nishiiwa", "Naruto", "Asahiyama[2]", "Asakayama", 
+"Musashigawa", "Onoe", "Tokiwayama", "Shikoroyama", "Kise[1]", "Nishikido", 
+"Arashio", "Shibatayama", "Oitekaze[4]", "Sakaigawa", "Onomatsu", "Hakkaku", 
+"Irumagawa", "Shikihide[3]", "Hanaregoma[2]", "Tamanoi[2]", "Tagonoura[3]", "Yamahibiki", 
+"Minato", "Fujishima[2]", "Isegahama[3]", "Takadagawa", "Michinoku[2]", "Otake", 
+"Kokonoe", "Kataonami", "Oshima[2]", "Miyagino[2]", "Sadogatake[2]", "Isenoumi", 
+"Tokitsukaze", "Kasugano", "Tatsunami", "Takasago", "Dewanoumi"
+];
+
+var hNamesOld = ["All", "Dewanoumi", "Takasago", "Tatsunami", "Kasugano", 
+"Tokitsukaze", "Isenoumi", "Sadogatake[2]", "Miyagino[2]", "Oshima[2]", "Kataonami", 
+"Kokonoe", "Otake", "Michinoku[2]", "Takadagawa", "Isegahama[3]", "Fujishima[2]", 
+"Minato", "Yamahibiki", "Tagonoura[3]", "Tamanoi[2]", "Hanaregoma[2]", "Shikihide[3]", 
+"Irumagawa", "Hakkaku", "Onomatsu", "Sakaigawa", "Oitekaze[4]", "Shibatayama", 
+"Arashio", "Nishikido", "Kise[1]", "Shikoroyama", "Tokiwayama", "Onoe", 
+"Musashigawa", "Asakayama", "Asahiyama[2]", "Naruto", "Nishiiwa", "Futagoyama", 
+"Nishonoseki[3]", "Takekuma[3]", "Oshiogawa[3]"
+];
+
+var hNamesDefAlpha = ["Araiso", "Asahiyama[1]", "Azumazeki", "Fujishima[1]", 
+"Furiwake", "Futagoyama[1]", "Hanakago[1]", "Hanakago[2]", "Hanakago[3]", 
+"Hanaregoma[1]", "Hatachiyama", "Isegahama[2]", "Izutsu", "Kabutoyama", 
+"Kagamiyama", "Kasugayama[1]", "Kasugayama[2]", "Kasugayama[3]", "Kiriyama", 
+"Kise[1]", "Kumagatani[1]", "Kumagatani[2]", "Magaki[2]", "Magaki[3]", 
+"Michinoku[1]", "Mihogaseki[1]", "Mihogaseki[2]", "Minatogawa[1]", "Minatogawa[2]", 
+"Minezaki", "Miyagino[1]", "Nakagawa[3]", "Nakagawa[4]", "Nakamura[1]", 
+"Nakamura[2]", "Nishikijima", "Nishonoseki[2]", "Oguruma", "Oitekaze[3]", 
+"Onaruto[1]", "Onaruto[2]", "Onogawa", "Oshima[1]", "Oshiogawa[2]", "Oyama", "Sadogatake[1]", 
+"Sanoyama[1]", "Sanoyama[2]", "Shikihide[2]", "Tagonoura[2]", "Takanohana", 
+"Takashima[1]", "Takashima[2]", "Takekuma[1]", "Takekuma[2]", "Tamanoi[1]", 
+"Tanigawa[1]", "Tanigawa[2]", "Tatekawa", "Tatsutagawa", "Tatsutayama", "Tomozuna", 
+"Urakaze", "Wakafuji", "Wakamatsu", "Yamawake",
+];
+
+var hNamesDefNew = ["Nakagawa[4]", 
+"Tagonoura[2]", "Takekuma[2]", "Kasugayama[3]", "Kiriyama", "Hatachiyama", 
+"Takashima[2]", "Araiso", "Hanakago[3]", "Kabutoyama", "Minezaki", "Oguruma", 
+"Nakamura[2]", "Azumazeki", "Magaki[3]", "Fujishima[1]", "Hanaregoma[1]", "Oshima[1]", "Kumagatani[2]", 
+"Onaruto[2]", "Oshiogawa[2]", "Izutsu", "Tatsutagawa", "Kagamiyama", "Tanigawa[2]", 
+"Takanohana", "Takashima[1]", "Sanoyama[2]", "Onaruto[1]", "Tatekawa", "Nakagawa[3]", "Magaki[2]", "Kise[1]", 
+"Kasugayama[2]", "Sanoyama[1]", "Urakaze", "Minatogawa[1]", 
+"Hanakago[2]", "Shikihide[2]", "Mihogaseki[2]", "Furiwake", "Tatsutayama", "Oyama", "Kasugayama[1]", 
+"Oitekaze[3]", "Nishonoseki[2]", "Isegahama[2]", "Sadogatake[1]", "Hanakago[1]", "Wakamatsu", "Takekuma[1]", "Nakamura[1]", 
+"Onogawa", "Tanigawa[1]", "Yamawake", "Tamanoi[1]", "Miyagino[1]", "Michinoku[1]", "Futagoyama[1]", 
+"Asahiyama[1]", "Minatogawa[1]", "Mihogaseki[1]", "Wakafuji", "Nishikijima", "Kumagatani[1]", "Tomozuna"
+];
+
+var hNamesDefOld = ["Tomozuna", "Kumagatani[1]", "Nishikijima", "Wakafuji", "Mihogaseki[1]", "Minatogawa[1]", 
+"Asahiyama[1]", "Futagoyama[1]", "Michinoku[1]", "Miyagino[1]", "Tamanoi[1]", "Yamawake", "Tanigawa[1]", 
+"Onogawa", "Nakamura[1]", "Takekuma[1]", "Wakamatsu", "Hanakago[1]", "Sadogatake[1]", "Isegahama[2]", "Nishonoseki[2]", 
+"Oitekaze[3]", "Kasugayama[1]", "Oyama", "Tatsutayama", "Furiwake", "Mihogaseki[2]", "Shikihide[2]", 
+"Hanakago[2]", "Minatogawa[1]", "Urakaze", "Sanoyama[1]", 
+"Kasugayama[2]", "Kise[1]", "Magaki[2]", "Nakagawa[3]", "Tatekawa", "Onaruto[1]", "Sanoyama[2]", "Takashima[1]", 
+"Takanohana", "Tanigawa[2]", "Kagamiyama", "Tatsutagawa", "Izutsu", "Oshiogawa[2]", 
+"Onaruto[2]", "Kumagatani[2]", "Oshima[1]", "Hanaregoma[1]", "Fujishima[1]", "Magaki[3]", "Azumazeki", 
+"Nakamura[2]", "Oguruma", "Minezaki", "Kabutoyama", "Hanakago[3]", "Araiso", 
+"Takashima[2]", "Hatachiyama", "Kiriyama", "Kasugayama[3]", "Takekuma[2]", 
+"Tagonoura[2]", "Nakagawa[4]"
+];
+
+var hNamesDefClo = ["Oguruma", "Kagamiyama", "Azumazeki", "Minezaki", "Nakagawa[4]", 
+"Izutsu", "Takanohana", "Kasugayama[3]", "Asahiyama[1]", "Mihogaseki[2]", "Magaki[3]", 
+"Hanaregoma[1]", "Nishonoseki[2]", "Nakamura[2]", "Hanakago[3]", "Oshima[1]", "Tagonoura[2]", 
+"Takashima[2]", "Kiriyama", "Araiso", "Isegahama[2]", "Hatachiyama", "Oshiogawa[2]", 
+"Takekuma[2]", "Kabutoyama", "Wakamatsu", "Tatsutagawa", "Kise[1]", "Kumagatani[2]", 
+"Onaruto[2]", "Fujishima[1]", "Kasugayama[2]", "Oyama", "Hanakago[2]", "Takashima[1]", "Magaki[2]", "Nakagawa[3]", 
+"Tanigawa[2]", "Minatogawa[2]", "Onogawa", "Oitekaze[3]", 
+"Nishikijima", "Sanoyama[2]", "Tatekawa", "Onaruto[1]", "Urakaze", "Nakamura[1]", 
+"Michinoku[1]", "Sanoyama[1]", "Miyagino[1]", "Kumagatani[1]", "Takekuma[1]", 
+"Shikihide[2]", "Yamawake", "Wakafuji", "Furiwake", "Minatogawa[1]", "Kasugayama[1]", 
+"Tamanoi[1]", "Tomozuna", "Hanakago[1]", "Futagoyama[1]", "Tatsutayama", "Mihogaseki[1]", 
+"Tanigawa[1]", "Sadogatake[1]"
+];
+
+var dataColors = ["#bdb26f", "#5068e4", "#6eb729", "#9263e0", "#4fc656", 
+"#9e42b8", "#afc337", "#534ec2", "#d1b524", "#235fc9", "#e8a532", "#4f83f3", 
+"#ee8d27", "#554baa", "#42972e", "#d773e7", "#85c259", "#dc50b8", "#4bc881", 
+"#e83889", "#3d9d5a", "#b92784", "#839d2b", "#7b4aab", "#ccb84d", "#666ac8", 
+"#c1851b", "#4674c4", "#df7730", "#5095e4", "#ee613a", "#3ac1df", "#be3d19", 
+"#60cfa8", "#db3941", "#41bab2", "#e23e68", "#3e7927", "#b780e5", "#a8952a", 
+"#5e4393", "#95b96c", "#9f4094", "#767a19", "#9c8fea", "#516615", "#e28de2", 
+"#518342", "#b868bd", "#3b8251", "#e674b8", "#296437", "#d6548b", "#64b083", 
+"#b13144", "#308a6f", "#e56463", "#115e41", "#e886ad", "#415a1f", "#7155a7", 
+"#e4b060", "#494b93", "#907016", "#5d5ca7", "#aa5d16", "#6ab2e8", "#a04720", 
+"#2e8cba", "#cf6449", "#3265a6", "#ba8437", "#866fbd", "#616117", "#c5a4e9", 
+"#704b0c", "#91a2e3", "#dd9c5a", "#694283", "#839149", "#775591", "#597236", 
+"#d28ec9", "#297153", "#a13765", "#787b43", "#997ebf", "#6f5d1d", "#6e83b7", 
+"#f18f6b", "#445082", "#eaaf85", "#576196", "#8b6325", "#a76395", "#585c26", 
+"#d795b8", "#997d43", "#8d4672", "#c09669", "#8b4a5f", "#c47a51", "#92434d", 
+"#935e31", "#e87c86", "#814a28", "#e08f8b", "#a04b34", "#bd5e70", "#ae5751"
+];
+
 window.onload = function() {
 
-  const HEYA_COUNT = 43;
-
   // Initialize array of dataPoint arrays with no sekitori
-  var dps = Create2DArray(HEYA_COUNT + 1);
+  var dps = Create2DArray(HEYA_COUNT + 1 + DEF_HEYA_COUNT);
 
   // Initialize array of dataPoint arrays with sekitori
-  var dpsB = Create2DArray(HEYA_COUNT + 1);
+  var dpsB = Create2DArray(HEYA_COUNT + 1 + DEF_HEYA_COUNT);
 
-  var hNamesAlpha = ["All", "Arashio", "Asahiyama", "Asakayama", "Dewanoumi",
-    "Fujishima", "Futagoyama", "Hakkaku", "Hanaregoma", "Irumagawa",
-    "Isegahama", "Isenoumi", "Kasugano", "Kataonami", "Kise", 
-    "Kokonoe", "Michinoku", "Minato", "Miyagino", "Musashigawa", 
-    "Naruto", "Nishiiwa", "Nishikido", "Nishonoseki", "Oitekaze", 
-    "Onoe", "Ōnomatsu", "Ōshima", "Oshiogawa", "Ōtake", 
-    "Sadogatake", "Sakaigawa", "Shibatayama", "Shikihide", "Shikoroyama", 
-    "Tagonoura", "Takadagawa", "Takasago", "Takekuma", "Tamanoi",
-    "Tatsunami", "Tokitsukaze", "Tokiwayama", "Yamahibiki"
-    ];
 
-  var hNamesOld = ["All", "Kasugano", "Dewanoumi", "Takasago", "Tatsunami", 
-    "Tokitsukaze", "Isenoumi", "Sadogatake", "Miyagino", "Ōshima", "Kataonami", 
-    "Kokonoe", "Ōtake", "Michinoku", "Takadagawa", "Isegahama", "Fujishima", 
-    "Minato", "Yamahibiki", "Tagonoura", "Tamanoi", "Hanaregoma", "Shikihide", 
-    "Irumagawa", "Hakkaku", "Ōnomatsu", "Sakaigawa", "Oitekaze", "Shibatayama", 
-    "Arashio", "Nishikido", "Kise", "Shikoroyama", "Tokiwayama", "Onoe", 
-    "Musashigawa", "Asakayama", "Asahiyama", "Naruto", "Nishiiwa", "Futagoyama", 
-    "Nishonoseki", "Takekuma", "Oshiogawa"
-    ];
-
-  var hNamesIchi = []
-
-  var colorsOrdered = ["#d92121", "#ff6666", "#d95321", "#ff9066", "#d98521",
-    "#ffae4d", "#b39c36", "#d9b721", "#a7b336", "#c8d921", "#85b336", "#96d921",
-    "#63b336", "#64d921", "#31d921", "#10b500", "#21d942", "#00b821", "#21d974",
-    "#00b04f", "#21d9a6", "#00b07f", "#21d9d9", "#00abab", "#21a7d9", "#0084b5",
-    "#2174d9", "#66acff", "#2142d9", "#6682ff", "#3121d9", "#7466ff", "#6321d9",
-    "#9e66ff", "#9621d9", "#c766ff", "#c821d9", "#f166ff", "#d921b7", "#ff80e8",
-    "#d92185", "#ff66b9", "#d92153", "#ff4d7d"
-    ];
-
-  var colorsShuffled = ["#d95321", "#ff66b9", "#9e66ff", "#96d921", "#5dff4d",
-    "#66acff", "#21d942", "#ff4d7d", "#66d5ff", "#21a7d9", "#c821d9", "#33ffff",
-    "#6682ff", "#21d9a6", "#7466ff", "#ff9066", "#d92121", "#6321d9", "#33ffc7",
-    "#ff80e8", "#d92153", "#d9b721", "#4dff9e", "#d921b7", "#d92185", "#ff6666",
-    "#4dff6d", "#63b336", "#21d974", "#64d921", "#b39c36", "#31d921", "#21d9d9",
-    "#c8d921", "#a7b336", "#9621d9", "#f166ff", "#85b336", "#2142d9", "#ffae4d",
-    "#2174d9", "#c766ff", "#3121d9", "#d98521"
-    ];
-
-  CanvasJS.addColorSet("heyaColors", colorsOrdered);
+  CanvasJS.addColorSet("heyaColors", dataColors);
 
   var viewportX = document.getElementById("viewportX");
 
@@ -169,6 +233,20 @@ window.onload = function() {
     };
   }
 
+  for (var i = HEYA_COUNT + 1; i < DEF_HEYA_COUNT + HEYA_COUNT + 1; i++) {
+    chart.options.data[i] = {
+      name: hNamesDefAlpha[i - (HEYA_COUNT + 1)],
+      type: "line",
+      markerSize: 0,
+      visible: false,
+      cursor: "pointer",
+      click: function(e) {
+        window.open(e.dataPoint.url);
+      },
+      dataPoints: dps[i]
+    };
+  }
+
   function updateViewportText() {
     if (chart.axisX[0].get("viewportMinimum") === Infinity) {
       viewportX.setAttribute("value", "");
@@ -191,21 +269,26 @@ window.onload = function() {
     return arr;
   }
 
+
   // Checkbox for toggling between sekitori and sekitoriless dataSeries
   var sekitoriCheckbox = document.querySelector("input[name=checkbox]");
   sekitoriCheckbox.addEventListener("change", toggleSekitori);
 
   function toggleSekitori() {
     if (this.checked) {
-      for (var i = 0; i <= HEYA_COUNT; i++) {
-        chart.data[i].set("type", "rangeArea");
-        chart.options.data[i].dataPoints = dpsB[i];
+      for (var i = 0; i < DEF_HEYA_COUNT + HEYA_COUNT + 1; i++) {
+        if (chart.options.data[i].visible === true) {
+          chart.data[i].set("type", "rangeArea");
+          chart.options.data[i].dataPoints = dpsB[i];
+        }
       }
       chart.options.toolTip.contentFormatter = tooltipSekitori;
     } else {
-      for (var i = 0; i <= HEYA_COUNT; i++) {
-        chart.data[i].set("type", "line");
-        chart.options.data[i].dataPoints = dps[i];
+      for (var i = 0; i < DEF_HEYA_COUNT + HEYA_COUNT + 1; i++) {
+        if (chart.options.data[i].visible === true) {
+          chart.data[i].set("type", "line");
+          chart.options.data[i].dataPoints = dps[i];
+        }
       }
       chart.options.toolTip.contentFormatter = tooltipNoSekitori;
     }
@@ -221,7 +304,7 @@ window.onload = function() {
       if (e.entries[i].dataPoint.prevHeyaName !== "")
         temp = temp + "<br/>(then " + e.entries[i].dataPoint.prevHeyaName + ")";
       if (e.entries[i].dataPoint.shisho !== "")
-        temp = temp + "<br/>Shishō: " + e.entries[i].dataPoint.shisho;
+        temp = temp + "<br/>Shisho: " + e.entries[i].dataPoint.shisho;
 
       temp = temp + "<br/><strong>" + e.entries[i].dataPoint.y +
         "</strong> rikishi";
@@ -240,7 +323,7 @@ window.onload = function() {
       if (e.entries[i].dataPoint.prevHeyaName !== "")
         temp = temp + "<br/>(then " + e.entries[i].dataPoint.prevHeyaName + ")";
       if (e.entries[i].dataPoint.shisho !== "")
-        temp = temp + "<br/>Shishō: " + e.entries[i].dataPoint.shisho;
+        temp = temp + "<br/>Shisho: " + e.entries[i].dataPoint.shisho;
 
       temp = temp + "<br/><strong>" + e.entries[i].dataPoint.y[0] +
         "</strong> rikishi, <strong>" + (e.entries[i].dataPoint.y[0] -
@@ -252,9 +335,9 @@ window.onload = function() {
   }
 
   $.get("https://raw.githubusercontent.com/chiyotasuke/heya-graph/main/heya_data.csv",
-    getDataPointsFromCSV);
+    getDataActive);
 
-  function getDataPointsFromCSV(csv) {
+  function getDataActive(csv) {
     var csvLines = heya = dates = [];
     var hData = Create2DArray(HEYA_COUNT + 1);
 
@@ -306,40 +389,11 @@ window.onload = function() {
                   parseInt(hData[j][1])]
                 });
               }
-              else if (hData[j][3] === "HT") {
-                dps[j].push({
-                  markerSize: 6,
-                  markerColor: "white",
-                  markerType: "triangle",
-                  markerBorderThickness: 1,
-                  markerBorderColor: "black",
-                  shisho: hData[j][2],
-                  prevHeyaName: hData[j][5],
-                  url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
-                  dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
-                  x: new Date(dates[0], dates[1] - 1),
-                  y: parseInt(hData[j][0])
-                });
-                dpsB[j].push({
-                  markerSize: 6,
-                  markerColor: "white",
-                  markerType: "triangle",
-                  markerBorderThickness: 1,
-                  markerBorderColor: "black",
-                  shisho: hData[j][2],
-                  prevHeyaName: hData[j][5],
-                  url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
-                  dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
-                  x: new Date(dates[0], dates[1] - 1),
-                  y: [parseInt(hData[j][0]), parseInt(hData[j][0]) -
-                  parseInt(hData[j][1])]
-                });
-              }
               else {
                 dps[j].push({
                   markerSize: 6,
-                  markerColor: "black",
-                  markerType: "circle",
+                  markerColor: "white",
+                  markerType: "triangle",
                   markerBorderThickness: 1,
                   markerBorderColor: "black",
                   shisho: hData[j][2],
@@ -351,8 +405,8 @@ window.onload = function() {
                 });
                 dpsB[j].push({
                   markerSize: 6,
-                  markerColor: "black",
-                  markerType: "circle",
+                  markerColor: "white",
+                  markerType: "triangle",
                   markerBorderThickness: 1,
                   markerBorderColor: "black",
                   shisho: hData[j][2],
@@ -364,8 +418,7 @@ window.onload = function() {
                   parseInt(hData[j][1])]
                 });
               }
-            }
-            else {
+            } else {
               dps[j].push({
                 shisho: hData[j][2],
                 label: hData[j][3],
@@ -376,6 +429,169 @@ window.onload = function() {
                 y: parseInt(hData[j][0])
               });
               dpsB[j].push({
+                shisho: hData[j][2],
+                label: hData[j][3],
+                prevHeyaName: hData[j][5],
+                url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
+                x: new Date(dates[0], dates[1] - 1),
+                y: [parseInt(hData[j][0]), parseInt(hData[j][0]) -
+                  parseInt(hData[j][1])]
+              });
+            }
+          }
+        }
+      }
+    }
+    chart.render();
+  }
+
+  $.get("https://raw.githubusercontent.com/chiyotasuke/chiyotasuke/main/heya_data_def.csv",
+    getDataDef);
+
+  function getDataDef(csv) {
+    var csvLines = heya = dates = [];
+    var hData = Create2DArray(HEYA_COUNT + 1);
+
+    csvLines = csv.split(/[\r?\n|\r|\n]+/);
+    for (var i = 1; i < csvLines.length; i++) {
+      if (csvLines[i].length > 0) {
+        heya = csvLines[i].split(",");
+        dates = heya[0].split(".");
+        for (var j = 0; j < DEF_HEYA_COUNT; j++) {
+          hData[j] = heya[j+1].split("-");
+          if (heya[j+1] !== "") {
+            if (hData[j][0] === "") {
+              dps[j+HEYA_COUNT+1].push({
+                x: new Date(dates[0], dates[1] - 1),
+                y: null
+              });
+              dpsB[j+HEYA_COUNT+1].push({
+                x: new Date(dates[0], dates[1] - 1),
+                y: null
+              });
+            }
+            else if (hData[j][2] === "None") {
+              dps[j+HEYA_COUNT+1].push({
+                lineColor: "gray",
+                shisho: hData[j][2],
+                label: hData[j][3],
+                prevHeyaName: hData[j][5],
+                url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
+                x: new Date(dates[0], dates[1] - 1),
+                y: parseInt(hData[j][0])
+              });
+              dpsB[j+HEYA_COUNT+1].push({
+                lineColor: "gray",
+                shisho: hData[j][2],
+                label: hData[j][3],
+                prevHeyaName: hData[j][5],
+                url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
+                x: new Date(dates[0], dates[1] - 1),
+                y: [parseInt(hData[j][0]), parseInt(hData[j][0]) -
+                  parseInt(hData[j][1])]
+              });
+            }
+            else if (hData[j][3] !== "") {
+              if (hData[j][3] === "HB") {
+                dps[j+HEYA_COUNT+1].push({
+                  markerSize: 6,
+                  markerColor: "white",
+                  markerType: "circle",
+                  markerBorderThickness: 1,
+                  markerBorderColor: "black",
+                  shisho: hData[j][2],
+                  prevHeyaName: hData[j][5],
+                  url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                  dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
+                  x: new Date(dates[0], dates[1] - 1),
+                  y: parseInt(hData[j][0])
+                });
+                dpsB[j+HEYA_COUNT+1].push({
+                  markerSize: 6,
+                  markerColor: "white",
+                  markerType: "circle",
+                  markerBorderThickness: 1,
+                  markerBorderColor: "black",
+                  shisho: hData[j][2],
+                  prevHeyaName: hData[j][5],
+                  url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                  dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
+                  x: new Date(dates[0], dates[1] - 1),
+                  y: [parseInt(hData[j][0]), parseInt(hData[j][0]) -
+                  parseInt(hData[j][1])]
+                });
+              }
+              else if (hData[j][3] === "HT"){
+                dps[j+HEYA_COUNT+1].push({
+                  markerSize: 6,
+                  markerColor: "white",
+                  markerType: "triangle",
+                  markerBorderThickness: 1,
+                  markerBorderColor: "black",
+                  shisho: hData[j][2],
+                  prevHeyaName: hData[j][5],
+                  url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                  dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
+                  x: new Date(dates[0], dates[1] - 1),
+                  y: parseInt(hData[j][0])
+                });
+                dpsB[j+HEYA_COUNT+1].push({
+                  markerSize: 6,
+                  markerColor: "white",
+                  markerType: "triangle",
+                  markerBorderThickness: 1,
+                  markerBorderColor: "black",
+                  shisho: hData[j][2],
+                  prevHeyaName: hData[j][5],
+                  url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                  dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
+                  x: new Date(dates[0], dates[1] - 1),
+                  y: [parseInt(hData[j][0]), parseInt(hData[j][0]) -
+                  parseInt(hData[j][1])]
+                });
+              } else {
+                dps[j+HEYA_COUNT+1].push({
+                  markerSize: 6,
+                  markerColor: "black",
+                  markerType: "circle",
+                  markerBorderThickness: 1,
+                  markerBorderColor: "black",
+                  shisho: hData[j][2],
+                  prevHeyaName: hData[j][5],
+                  url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                  dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
+                  x: new Date(dates[0], dates[1] - 1),
+                  y: parseInt(hData[j][0])
+                });
+                dpsB[j+HEYA_COUNT+1].push({
+                  markerSize: 6,
+                  markerColor: "black",
+                  markerType: "circle",
+                  markerBorderThickness: 1,
+                  markerBorderColor: "black",
+                  shisho: hData[j][2],
+                  prevHeyaName: hData[j][5],
+                  url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                  dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
+                  x: new Date(dates[0], dates[1] - 1),
+                  y: [parseInt(hData[j][0]), parseInt(hData[j][0]) -
+                  parseInt(hData[j][1])]
+                });
+              }
+            } else {
+              dps[j+HEYA_COUNT+1].push({
+                shisho: hData[j][2],
+                label: hData[j][3],
+                prevHeyaName: hData[j][5],
+                url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
+                x: new Date(dates[0], dates[1] - 1),
+                y: parseInt(hData[j][0])
+              });
+              dpsB[j+HEYA_COUNT+1].push({
                 shisho: hData[j][2],
                 label: hData[j][3],
                 prevHeyaName: hData[j][5],
@@ -459,53 +675,128 @@ window.onload = function() {
   });
 
 
-  //Add custom-legends as list and attach click event to that
   var legendListId = document.getElementById("legendList");
-  customLegends(chart, legendListId);
+  customLegends();
 
-  function customLegends(chart, legendListId) {
+  function customLegends() {
     for (var i = 0; i <= HEYA_COUNT; i++) { 
       var li = document.createElement("li");
       li.style.color = "#A9A9A9";
       li.appendChild(document.createTextNode(hNamesAlpha[i]));
       legendListId.appendChild(li); 
       $('li').each(function (i) {
-          $(this).attr('id', (i));
+          $(this).attr('id', "name" + String(i));
       });
     }
       
     $('li').mouseover(function(event) {
-      var index = $(this).index();
-
-      chart.options.data[index].lineThickness = 3;
-      chart.options.data[index].fillOpacity = .6;
-      chart.options.data[index].indexLabelFontWeight = "bolder";
-
+      for (var i = 0; i <= HEYA_COUNT; i++) {
+        if (chart.options.data[i].name === this.innerText) {
+          chart.options.data[i].lineThickness = 3;
+          chart.options.data[i].fillOpacity = .6;
+          chart.options.data[i].indexLabelFontWeight = "bolder";
+        }
+      }
       chart.render();
     });
 
     $('li').mouseout(function(event) {
-      var index = $(this).index();
-
-      chart.options.data[index].lineThickness = 2;
-      chart.options.data[index].fillOpacity = .4;
-      chart.options.data[index].indexLabelFontWeight = "normal";
-
+      for (var i = 0; i <= HEYA_COUNT; i++) {
+        if (chart.options.data[i].name === this.innerText) {
+          chart.options.data[i].lineThickness = 2;
+          chart.options.data[i].fillOpacity = .4;
+          chart.options.data[i].indexLabelFontWeight = "normal";
+        }
+      }
       chart.render();
     });
 
     $('li').click(function(event) {
-      var index = $(this).index();
+      for (var i = 0; i <= HEYA_COUNT; i++) {
+        if (chart.options.data[i].name === this.innerText) {
+          if (typeof(chart.options.data[i].visible) === "undefined" || 
+            chart.options.data[i].visible) {
+            chart.options.data[i].visible = false;
+            this.style.color = "#A9A9A9";
+            this.style.fontWeight = "normal";
+          } else {
+            if (document.getElementById("toggleSekitori").checked === true) {
+              chart.data[i].set("type", "rangeArea");
+              chart.options.data[i].dataPoints = dpsB[i];
+            }
+            else {
+              chart.data[i].set("type", "line");
+              chart.options.data[i].dataPoints = dps[i];
+            }
+            chart.options.data[i].visible = true;
+            this.style.color = dataColors[i];
+            this.style.fontWeight = "bold";
+          }
+        }
+      }
+      chart.render();
+      updateViewportText();
+    });
+  }
 
-      if (typeof(chart.options.data[index].visible) === "undefined" || 
-        chart.options.data[index].visible) {
-        chart.options.data[index].visible = false;
-        this.style.color = "#A9A9A9";
-        this.style.fontWeight = "normal";
-      } else {
-        chart.options.data[index].visible = true;
-        this.style.color = colorsOrdered[index];
-        this.style.fontWeight = "bold";
+  var legendListIdDef = document.getElementById("legendListDef");
+  customLegendsDef();
+
+  function customLegendsDef() {
+    for (var i = HEYA_COUNT + 1; i < HEYA_COUNT + DEF_HEYA_COUNT + 1; i++)  { 
+      var li = document.createElement("li");
+      li.style.color = "#A9A9A9";
+      li.appendChild(document.createTextNode(hNamesDefAlpha[i-(HEYA_COUNT + 1)]));
+      legendListIdDef.appendChild(li); 
+      $('li').each(function (i) {
+          $(this).attr('id', "name" + String(i));
+      });
+    }
+      
+    $('li').mouseover(function(event) {
+      for (var i = HEYA_COUNT + 1; i < HEYA_COUNT + DEF_HEYA_COUNT + 1; i++) {
+        if (chart.options.data[i].name === this.innerText) {
+          chart.options.data[i].lineThickness = 3;
+          chart.options.data[i].fillOpacity = .6;
+          chart.options.data[i].indexLabelFontWeight = "bolder";
+        }
+      }
+      chart.render();
+    });
+
+    $('li').mouseout(function(event) {
+      for (var i = HEYA_COUNT + 1; i < HEYA_COUNT + DEF_HEYA_COUNT + 1; i++) {
+        if (chart.options.data[i].name === this.innerText) {
+          chart.options.data[i].lineThickness = 2;
+          chart.options.data[i].fillOpacity = .4;
+          chart.options.data[i].indexLabelFontWeight = "normal";
+        }
+      }
+      chart.render();
+    });
+
+    $('li').click(function(event) {
+      for (var i = HEYA_COUNT + 1; i < HEYA_COUNT + DEF_HEYA_COUNT + 1; i++) {
+        if (chart.options.data[i].name === this.innerText) {
+          if (typeof(chart.options.data[i].visible) === "undefined" || 
+            chart.options.data[i].visible) {
+            chart.options.data[i].visible = false;
+            this.style.color = "#A9A9A9";
+            this.style.fontWeight = "normal";
+          } else {
+            if (document.getElementById("toggleSekitori").checked === true) {
+              chart.data[i].set("type", "rangeArea");
+              chart.options.data[i].dataPoints = dpsB[i];
+            }
+            else {
+              chart.data[i].set("type", "line");
+              chart.options.data[i].dataPoints = dps[i];
+            }
+            chart.options.data[i].visible = true;
+            this.style.color = dataColors[i];
+            this.style.fontWeight = "bold";
+          }
+        }
       }
       chart.render();
       updateViewportText();
@@ -517,12 +808,11 @@ window.onload = function() {
 
   function hideAll() {
     const legend = [...document.querySelectorAll("li")];
-    for (var i = 0; i <= HEYA_COUNT; i++) {
-      if (chart.options.data[i].visible) {
+    for (var i = 0; i < DEF_HEYA_COUNT + HEYA_COUNT + 1; i++) {
+      if (chart.options.data[i].visible) 
         chart.options.data[i].visible = false;
-        legend[i].style.color = "#A9A9A9";
-        legend[i].style.fontWeight = "normal";
-      }
+      legend[i].style.color = "#A9A9A9";
+      legend[i].style.fontWeight = "normal";
     }
     chart.render();
     updateViewportText();
@@ -540,10 +830,75 @@ window.onload = function() {
         content.style.display = "block";
       }
     });
+
+    var legendTitle = document.getElementById("legendTitle");
+
+    legendTitle.addEventListener("click", function() {
+      var legend = document.getElementById("legends");
+      if (legend.style.display === "none") {
+        legend.style.display = "block";
+      } else {
+        legend.style.display = "none";
+      }
+    });
+
+    var legendTitleDef = document.getElementById("legendTitleDef");
+
+    legendTitleDef.addEventListener("click", function() {
+      var legendDef = document.getElementById("legendsDef");
+      if (legendDef.style.display === "block") {
+        legendDef.style.display = "none";
+      } else {
+        legendDef.style.display = "block";
+      }
+    });
+
   }
 
-  $('input[type="checkbox"]').each(function(){
-    $(this).prop('checked', false);
+  var sortNames = document.getElementById("sortDropdown");
+  sortNames.addEventListener("change", function() {
+    switch(sortNames.value) {
+      case "alphabetic":
+        for (var i = 0; i <= HEYA_COUNT; i++) {
+          var li = document.getElementById("name" + String(i));
+          li.innerText = hNamesAlpha[i];
+        }
+        for (var i = HEYA_COUNT + 1; i < HEYA_COUNT + DEF_HEYA_COUNT + 1; i++) {
+          var li = document.getElementById("name" + String(i));
+          li.innerText = hNamesDefAlpha[i-(HEYA_COUNT + 1)];
+        }
+        break;
+      case "newest":
+        for (var i = 0; i <= HEYA_COUNT; i++) {
+          var li = document.getElementById("name" + String(i));
+          li.innerText = hNamesNew[i];
+        }
+        for (var i = HEYA_COUNT + 1; i < HEYA_COUNT + DEF_HEYA_COUNT + 1; i++) {
+          var li = document.getElementById("name" + String(i));
+          li.innerText = hNamesDefNew[i-(HEYA_COUNT + 1)];
+        }
+        break;
+      case "oldest":
+        for (var i = 0; i <= HEYA_COUNT; i++) {
+          var li = document.getElementById("name" + String(i));
+          li.innerText = hNamesOld[i];
+        }
+        for (var i = HEYA_COUNT + 1; i < HEYA_COUNT + DEF_HEYA_COUNT + 1; i++) {
+          var li = document.getElementById("name" + String(i));
+          li.innerText = hNamesDefOld[i-(HEYA_COUNT + 1)];
+        }
+        break;
+      default:
+        for (var i = 0; i <= HEYA_COUNT; i++) {
+          var li = document.getElementById("name" + String(i));
+          li.innerText = hNamesAlpha[i];
+        }
+        for (var i = HEYA_COUNT + 1; i < HEYA_COUNT + DEF_HEYA_COUNT + 1; i++) {
+          var li = document.getElementById("name" + String(i));
+          li.innerText = hNamesDefClo[i-(HEYA_COUNT + 1)];
+        }
+    }
+    hideAll();
   });
 
 }
@@ -557,12 +912,8 @@ window.onload = function() {
         <a id="titleText">Heya Graph</a><a href="https://sumodb.sumogames.de/">Sumo Reference</a><a id="creditText">data compiled from</a>
       </div>
       <fieldset id="graphView">
-        <legend>View</legend>
-        <div class="currentViewport">
-          <label>Viewing: <input id="viewportX" type="text" size=14 placeholder=". . ." readonly></label>
-        </div>
         <div class="setViewportRange">
-          Set view range: <input id="viewportRange" type="text" placeholder="yyyy.m - yyyy.m"> 
+          Set view range: <input id="viewportRange" type="text" placeholder="yyyy.m - yyyy.m" autocomplete="off"> 
           <button id="setViewport" type="button" value="viewportButton">Set</button>
         </div>
         <button id="resetViewport" type="button" value="resetViewportButton">↻ Reset</button>
@@ -576,27 +927,41 @@ window.onload = function() {
       </fieldset>
     <div id="chartContainer"></div>
     <fieldset id="graphSettings">
-      <label><input id="toggleSekitori" type="checkbox" name="checkbox">Enable Sekitori</label>
-      <button id="hideAll" type="button" value="hideAllButton">Hide All Graphs</button>
-    </fieldset>
-      <div id="legends">
-        <ul id="legendList">
-        </ul>
+      <div class="currentViewport">
+        <label>Viewing: <input id="viewportX" type="text" size=14 placeholder=". . ." readonly></label>
       </div>
+      <label><input id="toggleSekitori" type="checkbox" name="checkbox" autocomplete="off">Enable Sekitori</label>
+      <button id="hideAll" type="button" value="hideAllButton">Hide All Graphs</button>
+      <label id="sortHNames">Sort heya names </label>
+        <select id="sortDropdown" autocomplete="off">
+          <option value="alphabetic">alphabetically</option>
+          <option value="newest">newest first</option>
+          <option value="oldest">oldest first</option>
+          <option value="closed">recently closed first</option>
+        </select>
+    </fieldset>
+    <label><div id="legendTitle">Active heya (43) ▾</div></label>
+    <div id="legends" autocomplete="off">
+      <ul id="legendList">
+      </ul>
+    </div>
+    <label><div id="legendTitleDef">Defunct heya (66) <small>(shutdown since WWII) ▾</small></div></label>
+    <div id="legendsDef" autocomplete="off">
+      <ul id="legendListDef">
+      </ul>
     </div>
     <button type="button" class="collapsible">▾ INFORMATION</button>
     <div class="content">
       <p><div class="whiteCircle"></div> - Heya Opening</p>
-      <p><b>△</b> - Heya Takeover</p>
+      <p>△ - Heya Takeover</p>
       <p><div class="blackCircle"></div> - Heya Closure</p>
       <p>- Click-and-drag across graph to zoom in</p>
-      <p>- Click-and-drag across graph to zoom in</p>
       <p>- Clicking on data points redirects you to Sumo Reference banzuke page with heya filtered</p>
-      <p>- Data on the lighter pink area of the graph (before 1988.03) can be unreliable since its banzuke contain rikishi with no heya information</p>
-      <p>- Data on the darker pink area of the graph (before 1934.05) is mostly incomplete, as many of the lower division ranks are missing</p>
+      <p>- Graph on the lighter pink area of the graph (before 1988.03) can be inaccurate since its banzuke contain rikishi with no heya information</p>
+      <p>- Graph on the darker pink area of the graph (before 1934.05) is mostly incomplete, as many of the lower division ranks are missing</p>
     </div>
     <span id="display"></span>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type='text/javascript' src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script type='text/javascript' src="scripts/canvasjs_modified.min.js"></script>
   </body>
 </html>
