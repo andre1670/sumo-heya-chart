@@ -146,7 +146,7 @@ fieldset {
   height: 6px;
   width: 6px;
   background-color: white;
-  border: 2px solid;
+  border: 1px solid;
   border-radius: 50%;
 }
 
@@ -155,7 +155,7 @@ fieldset {
   height: 6px;
   width: 6px;
   background-color: black;
-  border: 2px solid;
+  border: 1px solid;
   border-radius: 50%;
 }
 
