@@ -62,7 +62,7 @@ h1 {
   border-color: gray;
 }
 
-#toggleSekitori, #hideAll {
+#toggleSekitori, #hideAll, #sortHNames {
   margin-left: 5px;
   display: inline-block;
   margin: 3px;
@@ -78,6 +78,9 @@ h1 {
   border: 1px solid;
 }
 
+#graphSettings {
+  padding-bottom: 3px;
+}
 #legends {
   overflow: scroll;
   height: 120px;
