@@ -80,8 +80,19 @@ h1 {
 
 #legends {
   overflow: scroll;
-  height: 140px;
+  height: 120px;
+  overflow-x: hidden;
+  border-bottom: 1px solid;
+  display: block;
+}
+
+#legendsDef {
+  overflow: scroll;
+  height: 120px;
   margin-bottom: 5px;
+  overflow-x: hidden;
+  border-bottom: 1px solid;
+  display: none;
 }
 
 li { 
@@ -94,15 +105,13 @@ li {
   min-width: 130px;
 }
 
+#name0 {
+  text-decoration: underline;
+}
+
 fieldset {
   padding: 0;
   font-size: 80%;
-}
-
-legend {
-  color: blue;
-  margin-left: 5px;
-  font-weight: bold;
 }
 
 .collapsible {
@@ -145,4 +154,22 @@ legend {
   background-color: black;
   border: 2px solid;
   border-radius: 50%;
+}
+
+#legendTitle {
+  color: green;
+}
+
+#legendTitleDef {
+  color: red;
+}
+
+#legendTitle, #legendTitleDef {
+  cursor: pointer;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 80%;
+  font-family: Verdana;
+  margin-left: 40px;
 }
