@@ -14,17 +14,38 @@ var hNamesAlpha = ["All", "Arashio", "Asahiyama[2]", "Asakayama", "Dewanoumi",
 "Fujishima[2]", "Futagoyama", "Hakkaku", "Hanaregoma[2]", "Irumagawa", "Isegahama[3]", 
 "Isenoumi", "Kasugano", "Kataonami", "Kise[1]", "Kokonoe", "Michinoku[2]", "Minato", 
 "Miyagino[2]", "Musashigawa", "Naruto", "Nishiiwa", "Nishikido", "Nishonoseki[3]", 
-"Oitekaze[4]", "Onoe", "Ōnomatsu", "Ōshima[2]", "Oshiogawa[3]", "Ōtake", "Sadogatake[2]", 
+"Oitekaze[4]", "Onoe", "Onomatsu", "Oshima[2]", "Oshiogawa[3]", "Otake", "Sadogatake[2]", 
 "Sakaigawa", "Shibatayama", "Shikihide[3]", "Shikoroyama", "Tagonoura[3]", 
 "Takadagawa", "Takasago", "Takekuma[3]", "Tamanoi[2]", "Tatsunami", "Tokitsukaze", 
 "Tokiwayama", "Yamahibiki"
 ];
 
+var hNamesChange = ["", "K Oyutaka → M2 Sokokurai", "S Kotonishiki", "O Kaio", 
+"M1⠀Hitachiyama → Y⠀Hitachiyama → K⠀Ryogoku → Y⠀Tsunenohana → M1⠀Dewanohana → Y⠀Sadanoyama → S⠀Washuyama → M2⠀Oginohana",
+"Y Mienoumi → O Musoyama [Musashigawa → Fujishima]", "Futagoyama", "Hakkaku", "Hanaregoma[2]", "Irumagawa", "Isegahama[3]", 
+"Isenoumi", "Kasugano", "Kataonami", "Kise[1]", "Kokonoe", "Michinoku[2]", "Minato", 
+"Miyagino[2]", "Musashigawa", "Naruto", "Nishiiwa", "Nishikido", "Nishonoseki[3]", 
+"Oitekaze[4]", "Onoe", "Onomatsu", "Oshima[2]", "Oshiogawa[3]", "Otake", "Sadogatake[2]", 
+"Sakaigawa", "Shibatayama", "Shikihide[3]", "Shikoroyama", "Tagonoura[3]", 
+"Takadagawa", "Takasago", "Takekuma[3]", "Tamanoi[2]", "Tatsunami", "Tokitsukaze", 
+"Tokiwayama", "Yamahibiki"
+];
+
+var hNamesNew = ["All", "Oshiogawa[3]", "Takekuma[3]", 
+"Nishonoseki[3]", "Futagoyama", "Nishiiwa", "Naruto", "Asahiyama[2]", "Asakayama", 
+"Musashigawa", "Onoe", "Tokiwayama", "Shikoroyama", "Kise[1]", "Nishikido", 
+"Arashio", "Shibatayama", "Oitekaze[4]", "Sakaigawa", "Onomatsu", "Hakkaku", 
+"Irumagawa", "Shikihide[3]", "Hanaregoma[2]", "Tamanoi[2]", "Tagonoura[3]", "Yamahibiki", 
+"Minato", "Fujishima[2]", "Isegahama[3]", "Takadagawa", "Michinoku[2]", "Otake", 
+"Kokonoe", "Kataonami", "Oshima[2]", "Miyagino[2]", "Sadogatake[2]", "Isenoumi", 
+"Tokitsukaze", "Kasugano", "Tatsunami", "Takasago", "Dewanoumi"
+];
+
 var hNamesOld = ["All", "Dewanoumi", "Takasago", "Tatsunami", "Kasugano", 
-"Tokitsukaze", "Isenoumi", "Sadogatake[2]", "Miyagino[2]", "Ōshima[2]", "Kataonami", 
-"Kokonoe", "Ōtake", "Michinoku[2]", "Takadagawa", "Isegahama[3]", "Fujishima[2]", 
+"Tokitsukaze", "Isenoumi", "Sadogatake[2]", "Miyagino[2]", "Oshima[2]", "Kataonami", 
+"Kokonoe", "Otake", "Michinoku[2]", "Takadagawa", "Isegahama[3]", "Fujishima[2]", 
 "Minato", "Yamahibiki", "Tagonoura[3]", "Tamanoi[2]", "Hanaregoma[2]", "Shikihide[3]", 
-"Irumagawa", "Hakkaku", "Ōnomatsu", "Sakaigawa", "Oitekaze[4]", "Shibatayama", 
+"Irumagawa", "Hakkaku", "Onomatsu", "Sakaigawa", "Oitekaze[4]", "Shibatayama", 
 "Arashio", "Nishikido", "Kise[1]", "Shikoroyama", "Tokiwayama", "Onoe", 
 "Musashigawa", "Asakayama", "Asahiyama[2]", "Naruto", "Nishiiwa", "Futagoyama", 
 "Nishonoseki[3]", "Takekuma[3]", "Oshiogawa[3]"
@@ -38,31 +59,42 @@ var hNamesDefAlpha = ["Araiso", "Asahiyama[1]", "Azumazeki", "Fujishima[1]",
 "Michinoku[1]", "Mihogaseki[1]", "Mihogaseki[2]", "Minatogawa[1]", "Minatogawa[2]", 
 "Minezaki", "Miyagino[1]", "Nakagawa[3]", "Nakagawa[4]", "Nakamura[1]", 
 "Nakamura[2]", "Nishikijima", "Nishonoseki[2]", "Oguruma", "Oitekaze[3]", 
-"Onaruto[1]", "Onaruto[2]", "Onogawa", "Ōshima[1]", "Oshiogawa[2]", "Oyama", "Sadogatake[1]", 
+"Onaruto[1]", "Onaruto[2]", "Onogawa", "Oshima[1]", "Oshiogawa[2]", "Oyama", "Sadogatake[1]", 
 "Sanoyama[1]", "Sanoyama[2]", "Shikihide[2]", "Tagonoura[2]", "Takanohana", 
 "Takashima[1]", "Takashima[2]", "Takekuma[1]", "Takekuma[2]", "Tamanoi[1]", 
 "Tanigawa[1]", "Tanigawa[2]", "Tatekawa", "Tatsutagawa", "Tatsutayama", "Tomozuna", 
 "Urakaze", "Wakafuji", "Wakamatsu", "Yamawake",
 ];
 
-var hNamesDefOld = ["Nishikijima", "Asahiyama[1]", "Onogawa", "Wakamatsu", "Isegahama[2]", "Nishonoseki[2]", 
-"Oitekaze[3]", "Oyama", "Mihogaseki[1]", "Hanakago[1]", "Minatogawa[1]", "Sanoyama[2]", 
-"Kasugayama[1]", "Kise[1]", "Magaki[2]", "Nakagawa[3]", "Tatekawa", "Onaruto[1]", "Takashima[1]", 
-"Takanohana", "Tanigawa[1]", "Kagamiyama", "Tatsutagawa", "Izutsu", "Oshiogawa[2]", 
-"Onaruto[2]", "Kumagatani[1]", "Ōshima[1]", "Hanaregoma[1]", "Fujishima[1]", "Magaki[3]", "Azumazeki", 
-"Nakamura[1]", "Oguruma", "Minezaki", "Kabutoyama", "Hanakago[2]", "Araiso", 
-"Takashima[2]", "Hatachiyama", "Kiriyama", "Kasugayama[2]", "Takekuma[1]", 
+var hNamesDefNew = ["Nakagawa[4]", 
+"Tagonoura[2]", "Takekuma[2]", "Kasugayama[3]", "Kiriyama", "Hatachiyama", 
+"Takashima[2]", "Araiso", "Hanakago[3]", "Kabutoyama", "Minezaki", "Oguruma", 
+"Nakamura[2]", "Azumazeki", "Magaki[3]", "Fujishima[1]", "Hanaregoma[1]", "Oshima[1]", "Kumagatani[2]", 
+"Onaruto[2]", "Oshiogawa[2]", "Izutsu", "Tatsutagawa", "Kagamiyama", "Tanigawa[2]", 
+"Takanohana", "Takashima[1]", "Sanoyama[2]", "Onaruto[1]", "Tatekawa", "Nakagawa[3]", "Magaki[2]", "Kise[1]", 
+"Kasugayama[2]", "Sanoyama[1]", "Urakaze", "Minatogawa[1]", 
+"Hanakago[2]", "Shikihide[2]", "Mihogaseki[2]", "Furiwake", "Tatsutayama", "Oyama", "Kasugayama[1]", 
+"Oitekaze[3]", "Nishonoseki[2]", "Isegahama[2]", "Sadogatake[1]", "Hanakago[1]", "Wakamatsu", "Takekuma[1]", "Nakamura[1]", 
+"Onogawa", "Tanigawa[1]", "Yamawake", "Tamanoi[1]", "Miyagino[1]", "Michinoku[1]", "Futagoyama[1]", 
+"Asahiyama[1]", "Minatogawa[1]", "Mihogaseki[1]", "Wakafuji", "Nishikijima", "Kumagatani[1]", "Tomozuna"
+];
+
+var hNamesDefOld = ["Tomozuna", "Kumagatani[1]", "Nishikijima", "Wakafuji", "Mihogaseki[1]", "Minatogawa[1]", 
+"Asahiyama[1]", "Futagoyama[1]", "Michinoku[1]", "Miyagino[1]", "Tamanoi[1]", "Yamawake", "Tanigawa[1]", 
+"Onogawa", "Nakamura[1]", "Takekuma[1]", "Wakamatsu", "Hanakago[1]", "Sadogatake[1]", "Isegahama[2]", "Nishonoseki[2]", 
+"Oitekaze[3]", "Kasugayama[1]", "Oyama", "Tatsutayama", "Furiwake", "Mihogaseki[2]", "Shikihide[2]", 
+"Hanakago[2]", "Minatogawa[1]", "Urakaze", "Sanoyama[1]", 
+"Kasugayama[2]", "Kise[1]", "Magaki[2]", "Nakagawa[3]", "Tatekawa", "Onaruto[1]", "Sanoyama[2]", "Takashima[1]", 
+"Takanohana", "Tanigawa[2]", "Kagamiyama", "Tatsutagawa", "Izutsu", "Oshiogawa[2]", 
+"Onaruto[2]", "Kumagatani[2]", "Oshima[1]", "Hanaregoma[1]", "Fujishima[1]", "Magaki[3]", "Azumazeki", 
+"Nakamura[2]", "Oguruma", "Minezaki", "Kabutoyama", "Hanakago[3]", "Araiso", 
+"Takashima[2]", "Hatachiyama", "Kiriyama", "Kasugayama[3]", "Takekuma[2]", 
 "Tagonoura[2]", "Nakagawa[4]"
-"Urakaze", "Nakamura[2]", 
-"Michinoku[1]", "Sanoyama[1]", "Miyagino[1]", "Kumagatani[2]", "Takekuma[2]", 
-"Shikihide[2]", "Yamawake", "Wakafuji", "Furiwake", "Minatogawa[1]", "Kasugayama[3]", 
-"Tamanoi[1]", "Tomozuna", "Hanakago[3]", "Futagoyama[1]", "Tatsutayama", "Mihogaseki[1]", 
-"Tanigawa[2]", "Sadogatake[1]"
 ];
 
 var hNamesDefClo = ["Oguruma", "Kagamiyama", "Azumazeki", "Minezaki", "Nakagawa[4]", 
 "Izutsu", "Takanohana", "Kasugayama[3]", "Asahiyama[1]", "Mihogaseki[2]", "Magaki[3]", 
-"Hanaregoma[1]", "Nishonoseki[2]", "Nakamura[2]", "Hanakago[3]", "Ōshima[1]", "Tagonoura[2]", 
+"Hanaregoma[1]", "Nishonoseki[2]", "Nakamura[2]", "Hanakago[3]", "Oshima[1]", "Tagonoura[2]", 
 "Takashima[2]", "Kiriyama", "Araiso", "Isegahama[2]", "Hatachiyama", "Oshiogawa[2]", 
 "Takekuma[2]", "Kabutoyama", "Wakamatsu", "Tatsutagawa", "Kise[1]", "Kumagatani[2]", 
 "Onaruto[2]", "Fujishima[1]", "Kasugayama[2]", "Oyama", "Hanakago[2]", "Takashima[1]", "Magaki[2]", "Nakagawa[3]", 
@@ -74,20 +106,23 @@ var hNamesDefClo = ["Oguruma", "Kagamiyama", "Azumazeki", "Minezaki", "Nakagawa[
 "Tanigawa[1]", "Sadogatake[1]"
 ];
 
-var dataColors = ["#d74bb1", "#4ccc61", "#7e52d2", "#5dae2d", "#a746bf", 
-"#afbb35", "#3959cf", "#e6a01e", "#8274f1", "#8bc35e", "#d574e7", "#44a14d", 
-"#ea377d", "#5bca89", "#b52479", "#2d7a2c", "#834aaf", "#72962e", "#4779ea", 
-"#d8ad41", "#5b5cbb", "#e29134", "#458ee8", "#e95b35", "#54bce6", "#b72f20", 
-"#4acaad", "#ce2c57", "#329f75", "#e14f92", "#347f4e", "#ab82e5", "#5d7821", 
-"#d076c6", "#9e8d27", "#644999", "#e07931", "#415ea7", "#be5f2a", "#7f89dc", 
-"#5f6211", "#7b68b9", "#9dbc72", "#9e4593", "#6c995c", "#da4248", "#3bbcc3", 
-"#9d4317", "#599fd7", "#b27a30", "#3176ae", "#ee8765", "#1a6447", "#e86176", 
-"#296437", "#e98ec7", "#507738", "#cd96da", "#476025", "#d16799", "#76b991", 
-"#b1394e", "#37846c", "#a13f6a", "#beb46b", "#7b488b", "#8d8444", "#a4a4e5", 
-"#7b5d16", "#8974b2", "#62612c", "#a7679a", "#daa370", "#5a5f94", "#966536", 
-"#d795b8", "#884729", "#e47f9b", "#c77c60", "#894b67", "#e68d8b", "#8f3f4a", 
-"#af5448", "#b25e68"];
-
+var dataColors = ["#bdb26f", "#5068e4", "#6eb729", "#9263e0", "#4fc656", 
+"#9e42b8", "#afc337", "#534ec2", "#d1b524", "#235fc9", "#e8a532", "#4f83f3", 
+"#ee8d27", "#554baa", "#42972e", "#d773e7", "#85c259", "#dc50b8", "#4bc881", 
+"#e83889", "#3d9d5a", "#b92784", "#839d2b", "#7b4aab", "#ccb84d", "#666ac8", 
+"#c1851b", "#4674c4", "#df7730", "#5095e4", "#ee613a", "#3ac1df", "#be3d19", 
+"#60cfa8", "#db3941", "#41bab2", "#e23e68", "#3e7927", "#b780e5", "#a8952a", 
+"#5e4393", "#95b96c", "#9f4094", "#767a19", "#9c8fea", "#516615", "#e28de2", 
+"#518342", "#b868bd", "#3b8251", "#e674b8", "#296437", "#d6548b", "#64b083", 
+"#b13144", "#308a6f", "#e56463", "#115e41", "#e886ad", "#415a1f", "#7155a7", 
+"#e4b060", "#494b93", "#907016", "#5d5ca7", "#aa5d16", "#6ab2e8", "#a04720", 
+"#2e8cba", "#cf6449", "#3265a6", "#ba8437", "#866fbd", "#616117", "#c5a4e9", 
+"#704b0c", "#91a2e3", "#dd9c5a", "#694283", "#839149", "#775591", "#597236", 
+"#d28ec9", "#297153", "#a13765", "#787b43", "#997ebf", "#6f5d1d", "#6e83b7", 
+"#f18f6b", "#445082", "#eaaf85", "#576196", "#8b6325", "#a76395", "#585c26", 
+"#d795b8", "#997d43", "#8d4672", "#c09669", "#8b4a5f", "#c47a51", "#92434d", 
+"#935e31", "#e87c86", "#814a28", "#e08f8b", "#a04b34", "#bd5e70", "#ae5751"
+];
 
 window.onload = function() {
 
@@ -280,7 +315,7 @@ window.onload = function() {
       if (e.entries[i].dataPoint.prevHeyaName !== "")
         temp = temp + "<br/>(then " + e.entries[i].dataPoint.prevHeyaName + ")";
       if (e.entries[i].dataPoint.shisho !== "")
-        temp = temp + "<br/>Shishō: " + e.entries[i].dataPoint.shisho;
+        temp = temp + "<br/>Shisho: " + e.entries[i].dataPoint.shisho;
 
       temp = temp + "<br/><strong>" + e.entries[i].dataPoint.y +
         "</strong> rikishi";
@@ -299,7 +334,7 @@ window.onload = function() {
       if (e.entries[i].dataPoint.prevHeyaName !== "")
         temp = temp + "<br/>(then " + e.entries[i].dataPoint.prevHeyaName + ")";
       if (e.entries[i].dataPoint.shisho !== "")
-        temp = temp + "<br/>Shishō: " + e.entries[i].dataPoint.shisho;
+        temp = temp + "<br/>Shisho: " + e.entries[i].dataPoint.shisho;
 
       temp = temp + "<br/><strong>" + e.entries[i].dataPoint.y[0] +
         "</strong> rikishi, <strong>" + (e.entries[i].dataPoint.y[0] -
@@ -445,6 +480,29 @@ window.onload = function() {
               dpsB[j+HEYA_COUNT+1].push({
                 x: new Date(dates[0], dates[1] - 1),
                 y: null
+              });
+            }
+            else if (hData[j][2] === "None") {
+              dps[j+HEYA_COUNT+1].push({
+                lineColor: "gray",
+                shisho: hData[j][2],
+                label: hData[j][3],
+                prevHeyaName: hData[j][5],
+                url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
+                x: new Date(dates[0], dates[1] - 1),
+                y: parseInt(hData[j][0])
+              });
+              dpsB[j+HEYA_COUNT+1].push({
+                lineColor: "gray",
+                shisho: hData[j][2],
+                label: hData[j][3],
+                prevHeyaName: hData[j][5],
+                url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
+                x: new Date(dates[0], dates[1] - 1),
+                y: [parseInt(hData[j][0]), parseInt(hData[j][0]) -
+                  parseInt(hData[j][1])]
               });
             }
             else if (hData[j][3] !== "") {
@@ -627,19 +685,20 @@ window.onload = function() {
     updateViewportText();
   });
 
-
   var legendListId = document.getElementById("legendList");
   customLegends();
 
   function customLegends() {
     for (var i = 0; i <= HEYA_COUNT; i++) { 
       var li = document.createElement("li");
-      li.style.color = "#A9A9A9";
+      li.style.color = "gray";
       li.appendChild(document.createTextNode(hNamesAlpha[i]));
       legendListId.appendChild(li); 
       $('li').each(function (i) {
-          $(this).attr('id', "name" + String(i));
+        $(this).attr('id', "name" + String(i));
+        $(this).tooltip({title: hNamesChange[i], delay: {show: 100}, animation: true}); 
       });
+      
     }
       
     $('li').mouseover(function(event) {
@@ -670,7 +729,7 @@ window.onload = function() {
           if (typeof(chart.options.data[i].visible) === "undefined" || 
             chart.options.data[i].visible) {
             chart.options.data[i].visible = false;
-            this.style.color = "#A9A9A9";
+            this.style.color = "gray";
             this.style.fontWeight = "normal";
           } else {
             if (document.getElementById("toggleSekitori").checked === true) {
@@ -698,7 +757,7 @@ window.onload = function() {
   function customLegendsDef() {
     for (var i = HEYA_COUNT + 1; i < HEYA_COUNT + DEF_HEYA_COUNT + 1; i++)  { 
       var li = document.createElement("li");
-      li.style.color = "#A9A9A9";
+      li.style.color = "gray";
       li.appendChild(document.createTextNode(hNamesDefAlpha[i-(HEYA_COUNT + 1)]));
       legendListIdDef.appendChild(li); 
       $('li').each(function (i) {
@@ -734,7 +793,7 @@ window.onload = function() {
           if (typeof(chart.options.data[i].visible) === "undefined" || 
             chart.options.data[i].visible) {
             chart.options.data[i].visible = false;
-            this.style.color = "#A9A9A9";
+            this.style.color = "gray";
             this.style.fontWeight = "normal";
           } else {
             if (document.getElementById("toggleSekitori").checked === true) {
@@ -764,7 +823,7 @@ window.onload = function() {
     for (var i = 0; i < DEF_HEYA_COUNT + HEYA_COUNT + 1; i++) {
       if (chart.options.data[i].visible) 
         chart.options.data[i].visible = false;
-      legend[i].style.color = "#A9A9A9";
+      legend[i].style.color = "gray";
       legend[i].style.fontWeight = "normal";
     }
     chart.render();
@@ -783,6 +842,29 @@ window.onload = function() {
         content.style.display = "block";
       }
     });
+
+    var legendTitle = document.getElementById("legendTitle");
+
+    legendTitle.addEventListener("click", function() {
+      var legend = document.getElementById("legends");
+      if (legend.style.display === "none") {
+        legend.style.display = "block";
+      } else {
+        legend.style.display = "none";
+      }
+    });
+
+    var legendTitleDef = document.getElementById("legendTitleDef");
+
+    legendTitleDef.addEventListener("click", function() {
+      var legendDef = document.getElementById("legendsDef");
+      if (legendDef.style.display === "block") {
+        legendDef.style.display = "none";
+      } else {
+        legendDef.style.display = "block";
+      }
+    });
+
   }
 
   var sortNames = document.getElementById("sortDropdown");
@@ -796,6 +878,16 @@ window.onload = function() {
         for (var i = HEYA_COUNT + 1; i < HEYA_COUNT + DEF_HEYA_COUNT + 1; i++) {
           var li = document.getElementById("name" + String(i));
           li.innerText = hNamesDefAlpha[i-(HEYA_COUNT + 1)];
+        }
+        break;
+      case "newest":
+        for (var i = 0; i <= HEYA_COUNT; i++) {
+          var li = document.getElementById("name" + String(i));
+          li.innerText = hNamesNew[i];
+        }
+        for (var i = HEYA_COUNT + 1; i < HEYA_COUNT + DEF_HEYA_COUNT + 1; i++) {
+          var li = document.getElementById("name" + String(i));
+          li.innerText = hNamesDefNew[i-(HEYA_COUNT + 1)];
         }
         break;
       case "oldest":
@@ -820,6 +912,12 @@ window.onload = function() {
     }
     hideAll();
   });
+
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
+
+    
 
 }
 
@@ -848,24 +946,25 @@ window.onload = function() {
     <div id="chartContainer"></div>
     <fieldset id="graphSettings">
       <div class="currentViewport">
-        <label>Viewing: <input id="viewportX" type="text" size=11  placeholder=". . ." readonly></label>
+        <label>Viewing: <input id="viewportX" type="text" size=14 placeholder=". . ." readonly></label>
       </div>
       <label><input id="toggleSekitori" type="checkbox" name="checkbox" autocomplete="off">Enable Sekitori</label>
       <button id="hideAll" type="button" value="hideAllButton">Hide All Graphs</button>
       <label id="sortHNames">Sort heya names </label>
         <select id="sortDropdown" autocomplete="off">
           <option value="alphabetic">alphabetically</option>
+          <option value="newest">newest first</option>
           <option value="oldest">oldest first</option>
           <option value="closed">recently closed first</option>
         </select>
     </fieldset>
-    <label><div id="legendTitle">Active heya</div></label>
-    <div id="legends">
+    <label><div id="legendTitle">Active heya (43) ▾</div></label>
+    <div id="legends" autocomplete="off">
       <ul id="legendList">
       </ul>
     </div>
-    <label><div id="legendTitleDef">Defunct heya</div></label>
-    <div id="legendsDef">
+    <label><div id="legendTitleDef">Defunct heya (66) <small>(shut down since WWII) ▾</small></div></label>
+    <div id="legendsDef" autocomplete="off">
       <ul id="legendListDef">
       </ul>
     </div>
@@ -876,11 +975,13 @@ window.onload = function() {
       <p><div class="blackCircle"></div> - Heya Closure</p>
       <p>- Click-and-drag across graph to zoom in</p>
       <p>- Clicking on data points redirects you to Sumo Reference banzuke page with heya filtered</p>
-      <p>- Data on the lighter pink area of the graph (before 1988.03) can be unreliable since its banzuke contain rikishi with no heya information</p>
-      <p>- Data on the darker pink area of the graph (before 1934.05) is mostly incomplete, as many of the lower division ranks are missing</p>
+      <p>- Graph on the lighter pink area of the graph (before 1988.03) can be inaccurate since its banzuke contain rikishi with no heya information</p>
+      <p>- Graph on the darker pink area of the graph (before 1934.05) is mostly incomplete, as many of the lower division ranks are missing</p>
     </div>
     <span id="display"></span>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type='text/javascript' src="scripts/canvasjs_modified.min.js"></script>
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
   </body>
 </html>
