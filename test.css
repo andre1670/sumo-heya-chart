@@ -178,21 +178,16 @@ fieldset {
   margin-left: 40px;
 }
 
-
-
-.tooltip-inner {
-  max-width: 300px;
-  max-height: 70px;
+.tooltip {
+  word-spacing: 3px;
+  background-color: white;
+  min-width: 50px;
+  max-width: 250px;
   text-align: center;
-  border-radius: 10px;
+  border-radius: 5px;
   font-size: 80%;
-  padding: 5px 10px 5px 10px;
-  background: white;
-  color: black;
-  border: 1px solid #737373;
+  padding: 4px 8px 4px 8px;
+  color: darkslategray;
+  border: 1px solid;
+  opacity: 1;
 }
-
-.tooltip.show {
-  opacity: 0.7;
-}
-
