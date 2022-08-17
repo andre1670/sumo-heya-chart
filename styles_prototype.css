@@ -96,12 +96,14 @@ fieldset {
 
 li { 
   list-style-type: "● ";
+  font-size: 90%;
   cursor: pointer;
   width: auto;
   float: left;
   margin: 1px 0;
-  margin-left: 15px;
-  min-width: 130px;
+  margin-left: 20px;
+  margin-bottom: 5px;
+  min-width: 110px;
 }
 
 #name0 {
