@@ -8,7 +8,7 @@
     <script>
 
 const HEYA_COUNT = 43;
-const DEF_HEYA_COUNT = 66;
+const DEF_HEYA_COUNT = 67;
 
 var hNamesAlpha = ["All", "Arashio", "Asahiyama[2]", "Asakayama", "Dewanoumi",
 "Fujishima[2]", "Futagoyama[2]", "Hakkaku", "Hanaregoma[2]", "Irumagawa", 
@@ -31,7 +31,7 @@ var hNamesTooltip = ["", "[Arashio]\nK⠀Oyutaka → M2 Sokokurai",
 "[Kasugano]\nGyoji⠀Kimura⠀Soshiro → Y⠀Tochigiyama → Y⠀Tochinishiki → Y⠀Tochinoumi → S⠀Tochinowaka", 
 "[Kataonami]\nS⠀Tamanoumi → S⠀Tamanofuji → S⠀Tamakasuga", "[Kise]\nM1⠀Higonoumi", 
 "[Kokonoe]\nY⠀Chiyonoyama → Y⠀Kitanofuji → Y⠀Chiyonofuji → O⠀Chiyotaikai", 
-"[Michinoku]\nM4⠀Hoshikabuto → M14⠀Hoshiiwato → O⠀Kirishima", "[Minato]\nK⠀Yutakayama → M2⠀Minatofuji", 
+"[Izutsu → Michinoku]\nM2⠀Tsurugamine → M4⠀Hoshikabuto → M14⠀Hoshiiwato → O⠀Kirishima", "[Minato]\nK⠀Yutakayama → M2⠀Minatofuji", 
 "[Yoshibayama Dojo → Miyagino]\nY⠀Yoshibayama → K⠀Hirokawa → M13⠀Chikubayama → J2⠀Kanechika → M13⠀Chikubayama", 
 "[Musashigawa]\nY⠀Musashimaru", "[Naruto]\nO⠀Kotooshu", "[Nishiiwa]\nS⠀Wakanosato", 
 "[Nishikido]\nS⠀Mitoizumi", "[Nishonoseki]\nY⠀Kisenosato", "[Oitekaze]\nM2⠀Daishoyama", 
@@ -55,14 +55,14 @@ var hNamesNew = ["All", "Oshiogawa[3]", "Takekuma[3]", "Nishonoseki[3]",
 "Arashio", "Shibatayama", "Oitekaze[4]", "Sakaigawa", "Onomatsu", "Hakkaku", 
 "Irumagawa", "Shikihide[3]", "Hanaregoma[2]", "Tamanoi[2]", "Tagonoura[3]", 
 "Yamahibiki", "Minato", "Fujishima[2]", "Isegahama[3]", "Takadagawa", 
-"Michinoku[2]", "Otake", "Kokonoe", "Kataonami", "Oshima[2]", "Miyagino[2]", 
-"Sadogatake[2]", "Isenoumi", "Tokitsukaze", "Kasugano", "Tatsunami", "Takasago", 
+"Otake", "Kokonoe", "Kataonami", "Oshima[2]", "Miyagino[2]", "Sadogatake[2]", 
+"Isenoumi", "Michinoku[2]", "Tokitsukaze", "Kasugano", "Tatsunami", "Takasago", 
 "Dewanoumi"
 ];
 
 var hNamesOld = ["All", "Dewanoumi", "Takasago", "Tatsunami", "Kasugano", 
-"Tokitsukaze", "Isenoumi", "Sadogatake[2]", "Miyagino[2]", "Oshima[2]", 
-"Kataonami", "Kokonoe", "Otake", "Michinoku[2]", "Takadagawa", "Isegahama[3]", 
+"Tokitsukaze", "Michinoku[2]", "Isenoumi", "Sadogatake[2]", "Miyagino[2]", 
+"Oshima[2]", "Kataonami", "Kokonoe", "Otake", "Takadagawa", "Isegahama[3]", 
 "Fujishima[2]", "Minato", "Yamahibiki", "Tagonoura[3]", "Tamanoi[2]", 
 "Hanaregoma[2]", "Shikihide[3]", "Irumagawa", "Hakkaku", "Onomatsu", "Sakaigawa", 
 "Oitekaze[4]", "Shibatayama", "Arashio", "Nishikido", "Kise[2]", "Shikoroyama", 
@@ -72,7 +72,7 @@ var hNamesOld = ["All", "Dewanoumi", "Takasago", "Tatsunami", "Kasugano",
 
 var hNamesDefAlpha = ["Araiso", "Asahiyama[1]", "Azumazeki", "Fujishima[1]", 
 "Furiwake", "Futagoyama[1]", "Hanakago[1]", "Hanakago[2]", "Hanakago[3]", 
-"Hanaregoma[1]", "Hatachiyama", "Isegahama[2]", "Izutsu", "Kabutoyama", 
+"Hanaregoma[1]", "Hatachiyama", "Isegahama[2]", "Izutsu[2]", "Izutsu[3]", "Kabutoyama", 
 "Kagamiyama", "Kasugayama[1]", "Kasugayama[2]", "Kasugayama[3]", "Kiriyama", 
 "Kise[1]", "Kumagatani[1]", "Kumagatani[2]", "Magaki[2]", "Magaki[3]", 
 "Michinoku[1]", "Mihogaseki[1]", "Mihogaseki[2]", "Minatogawa[1]", 
@@ -92,7 +92,7 @@ var hNamesTooltipDef = ["[Araiso]\nK⠀Futagodake",
 "[Furiwake]\nS⠀Naminooto", "[Futagoyama]\nM1⠀Toshuzan", "[Hanakago]\nS⠀Misugiiso", 
 "[Shibatayama → Hanakago]\nM3⠀Onoumi → Y⠀Wajima", "[Hanakago]\nS⠀Daijuyama", 
 "[Hanaregoma]\nO⠀Kaiketsu", "[Hatachiyama]\nO⠀Hokutenyu", 
-"[Isegahama → Araiso → Isegahama]\nS⠀Kiyosegawa → Y⠀Terukuni → O⠀Kiyokuni", 
+"[Isegahama → Araiso → Isegahama]\nS⠀Kiyosegawa → Y⠀Terukuni → O⠀Kiyokuni", "[Izutsu]\nY⠀Kitanofuji", 
 "[Kimigahama → Izutsu]\nS⠀Tsurugamine → S⠀Sakahoko", "[Kabutoyama]\nM1⠀Daiyu", 
 "[Kagamiyama]\nY⠀Kashiwado → S⠀Tagaryu", "[Kasugayama]\nS⠀Fujinokawa", 
 "[Kasugayama]\nO⠀Nayoroiwa → M1⠀Onobori", "[Kasugayama]\nM1⠀Kasugafuji → M11⠀Hamanishiki", 
@@ -126,8 +126,8 @@ var hNamesTooltipDef = ["[Araiso]\nK⠀Futagodake",
 var hNamesDefNew = ["Nakagawa[4]", "Tagonoura[2]", "Takekuma[2]", "Kasugayama[3]", 
 "Kiriyama", "Hatachiyama", "Takashima[2]", "Araiso", "Hanakago[3]", "Kabutoyama", 
 "Minezaki", "Oguruma", "Nakamura[2]", "Azumazeki", "Magaki[3]", "Fujishima[1]", 
-"Hanaregoma[1]", "Oshima[1]", "Kumagatani[2]", "Onaruto[2]", "Oshiogawa[2]", 
-"Izutsu", "Tatsutagawa", "Kagamiyama", "Tanigawa[2]", "Takanohana", 
+"Hanaregoma[1]", "Oshima[1]", "Kumagatani[2]", "Onaruto[2]", "Oshiogawa[2]", "Izutsu[2]", 
+"Izutsu[3]", "Tatsutagawa", "Kagamiyama", "Tanigawa[2]", "Takanohana", 
 "Takashima[1]", "Sanoyama[2]", "Onaruto[1]", "Tatekawa", "Nakagawa[3]", 
 "Magaki[2]", "Kise[1]", "Kasugayama[2]", "Sanoyama[1]", "Urakaze", 
 "Minatogawa[1]", "Hanakago[2]", "Shikihide[2]", "Mihogaseki[2]", "Furiwake", 
@@ -146,7 +146,7 @@ var hNamesDefOld = ["Tomozuna", "Kumagatani[1]", "Nishikijima", "Wakafuji",
 "Furiwake", "Mihogaseki[2]", "Shikihide[2]", "Hanakago[2]", "Minatogawa[1]", 
 "Urakaze", "Sanoyama[1]", "Kasugayama[2]", "Kise[1]", "Magaki[2]", "Nakagawa[3]", 
 "Tatekawa", "Onaruto[1]", "Sanoyama[2]", "Takashima[1]", "Takanohana", 
-"Tanigawa[2]", "Kagamiyama", "Tatsutagawa", "Izutsu", "Oshiogawa[2]", 
+"Tanigawa[2]", "Kagamiyama", "Tatsutagawa", "Izutsu[3]", "Izutsu[2]", "Oshiogawa[2]", 
 "Onaruto[2]", "Kumagatani[2]", "Oshima[1]", "Hanaregoma[1]", "Fujishima[1]", 
 "Magaki[3]", "Azumazeki", "Nakamura[2]", "Oguruma", "Minezaki", "Kabutoyama", 
 "Hanakago[3]", "Araiso", "Takashima[2]", "Hatachiyama", "Kiriyama", 
@@ -159,7 +159,7 @@ var hNamesDefClo = ["Oguruma", "Kagamiyama", "Azumazeki", "Minezaki",
 "Hanakago[3]", "Oshima[1]", "Tagonoura[2]", "Takashima[2]", "Kiriyama", "Araiso", 
 "Isegahama[2]", "Hatachiyama", "Oshiogawa[2]", "Takekuma[2]", "Kabutoyama", 
 "Wakamatsu", "Tatsutagawa", "Kise[1]", "Kumagatani[2]", "Onaruto[2]", 
-"Fujishima[1]", "Kasugayama[2]", "Oyama", "Hanakago[2]", "Takashima[1]", 
+"Fujishima[1]", "Kasugayama[2]", "Oyama", "Hanakago[2]", "Takashima[1]", "Izutsu[2]", 
 "Magaki[2]", "Nakagawa[3]", "Tanigawa[2]", "Minatogawa[2]", "Onogawa", 
 "Oitekaze[3]", "Nishikijima", "Sanoyama[2]", "Tatekawa", "Onaruto[1]", "Urakaze", 
 "Nakamura[1]", "Michinoku[1]", "Sanoyama[1]", "Miyagino[1]", "Kumagatani[1]", 
@@ -183,7 +183,8 @@ var dataColors = ["#bdb26f", "#5068e4", "#6eb729", "#9263e0", "#4fc656",
 "#d28ec9", "#297153", "#a13765", "#787b43", "#997ebf", "#6f5d1d", "#6e83b7", 
 "#f18f6b", "#445082", "#eaaf85", "#576196", "#8b6325", "#a76395", "#585c26", 
 "#d795b8", "#997d43", "#8d4672", "#c09669", "#8b4a5f", "#c47a51", "#92434d", 
-"#935e31", "#e87c86", "#814a28", "#e08f8b", "#a04b34", "#bd5e70", "#ae5751"
+"#935e31", "#e87c86", "#814a28", "#e08f8b", "#a04b34", "#bd5e70", "#ae5751", 
+"#bdb26f"
 ];
 
 window.onload = function() {
@@ -1039,7 +1040,7 @@ window.onload = function() {
           <input type="button" id="50y" class="period ui-button" value="50 yrs"/>
         </div>
         <div class="currentViewport">
-          <label>Viewing: <input id="viewportX" type="text" size=11 placeholder=". . ." readonly></label>
+          <label>Viewing: <input id="viewportX" type="text" size=14 placeholder=". . ." readonly></label>
         </div>
       </fieldset>
     <div id="chartContainer"></div>
