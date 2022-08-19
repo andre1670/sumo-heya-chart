@@ -798,7 +798,7 @@ window.onload = function() {
         if (chart.options.data[i].name === this.innerText) {
           chart.options.data[i].lineThickness = 3;
           chart.options.data[i].fillOpacity = .6;
-          chart.options.data[i].indexLabelFontWeight = "bolder";
+          this.style.textDecoration = "underline";
         }
       }
       chart.render();
@@ -809,7 +809,7 @@ window.onload = function() {
         if (chart.options.data[i].name === this.innerText) {
           chart.options.data[i].lineThickness = 2;
           chart.options.data[i].fillOpacity = .4;
-          chart.options.data[i].indexLabelFontWeight = "normal";
+          this.style.textDecoration = "none";
         }
       }
       chart.render();
@@ -864,7 +864,7 @@ window.onload = function() {
         if (chart.options.data[i].name === this.innerText) {
           chart.options.data[i].lineThickness = 3;
           chart.options.data[i].fillOpacity = .6;
-          chart.options.data[i].indexLabelFontWeight = "bolder";
+          this.style.textDecoration = "underline";
         }
       }
       chart.render();
@@ -875,7 +875,7 @@ window.onload = function() {
         if (chart.options.data[i].name === this.innerText) {
           chart.options.data[i].lineThickness = 2;
           chart.options.data[i].fillOpacity = .4;
-          chart.options.data[i].indexLabelFontWeight = "normal";
+          this.style.textDecoration = "none";
         }
       }
       chart.render();
@@ -1007,11 +1007,9 @@ window.onload = function() {
     hideAll();
   });
 
-    $(function () {
-      $('[data-toggle="tooltip"]').tooltip()
-    })
-
-    
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
 
 }
 
@@ -1055,12 +1053,12 @@ window.onload = function() {
           <option value="closed">recently closed first</option>
         </select>
     </fieldset>
-    <label><div id="legendTitle">Active heya (43) ▾</div></label>
+    <label><div id="legendTitle">▾ Active heya (43)</div></label>
     <div id="legends" autocomplete="off">
       <ul id="legendList">
       </ul>
     </div>
-    <label><div id="legendTitleDef">Defunct heya (66) <small>(shut down since WWII) ▾</small></div></label>
+    <label><div id="legendTitleDef">▾ Defunct heya (66) <small>(shut down since WWII)</small></div></label>
     <div id="legendsDef" autocomplete="off">
       <ul id="legendListDef">
       </ul>
