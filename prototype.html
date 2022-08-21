@@ -193,12 +193,11 @@ window.onload = function() {
 
   // Initialize array of dataPoint arrays with no sekitori
   var dps = Create2DArray(HEYA_COUNT + 1 + DEF_HEYA_COUNT);
-  var dpsExtra = Create2DArray(HEYA_COUNT + 1 + DEF_HEYA_COUNT);
 
   // Initialize array of dataPoint arrays with sekitori
   var dpsB = Create2DArray(HEYA_COUNT + 1 + DEF_HEYA_COUNT);
-  var dpsBExtra = Create2DArray(HEYA_COUNT + 1 + DEF_HEYA_COUNT);
 
+  var dpsExtra = Create2DArray(HEYA_COUNT + 1 + DEF_HEYA_COUNT);
 
   CanvasJS.addColorSet("heyaColors", dataColors);
 
@@ -311,19 +310,6 @@ window.onload = function() {
     };
   }
 
-  for (var i = DEF_HEYA_COUNT + HEYA_COUNT + 1; i < DEF_HEYA_COUNT + (HEYA_COUNT * 2) + 2; i++) {
-    chart.options.data[i] = {
-      type: "line",
-      markerSize: 0,
-      visible: false,
-      cursor: "pointer",
-      click: function(e) {
-        window.open(e.dataPoint.url);
-      },
-      dataPoints: dpsExtra[i]
-    };
-  }
-
   for (var i = HEYA_COUNT + 1; i < DEF_HEYA_COUNT + HEYA_COUNT + 1; i++) {
     chart.options.data[i] = {
       name: hNamesDefAlpha[i - (HEYA_COUNT + 1)],
@@ -335,6 +321,20 @@ window.onload = function() {
         window.open(e.dataPoint.url);
       },
       dataPoints: dps[i]
+    };
+  }
+
+  for (var i = DEF_HEYA_COUNT + HEYA_COUNT + 1; i < DEF_HEYA_COUNT + (HEYA_COUNT * 2) + 2; i++) {
+    chart.options.data[i] = {
+      type: "rangeArea",
+      markerSize: 0,
+      color: "gray",
+      lineColor: "black",
+      lineThickness: 0.5,
+      fillOpacity: 0.4,
+      visible: false,
+      cursor: "pointer",
+      dataPoints: dpsExtra[i-(DEF_HEYA_COUNT + HEYA_COUNT + 1)]
     };
   }
 
@@ -581,106 +581,51 @@ window.onload = function() {
         for (var j = 0; j <= HEYA_COUNT; j++) {
           hData[j] = heya[j+1].split("-");
           if (heya[j+1] !== "") {
-            if (hData[j][0] === "") {
-              dps[j].push({
+            if (hData[j][0].length > 0 && hData[j][0].length < 3) {
+              dpsExtra[j].push({
+                highlightEnabled: false,
                 x: new Date(dates[0], dates[1] - 1),
-                y: null
-              });
-              dpsB[j].push({
-                x: new Date(dates[0], dates[1] - 1),
-                y: null
+                y: [parseInt(hData[j][0]), parseInt(hData[j][0]) -
+                parseInt(hData[j][1])],
+                toolTipContent: " "
               });
             }
-            else if (hData[j][4] === "HT") {
-              dpsExtra[j].push({
-                markerSize: 6,
-                markerColor: "white",
-                markerType: "triangle",
-                markerBorderThickness: 1,
-                markerBorderColor: "black",
-                name: hData[j][0],
-                shisho: hData[j][3],
-                prevHeyaName: hData[j][6],
-                url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
-                dates[1] + "&heya=" + hData[j][5] + "&shusshin=-1",
-                x: new Date(dates[0], dates[1] - 1),
-                y: parseInt(hData[j][1])
-              });
-              dpsBExtra[j].push({
-                markerSize: 6,
-                markerColor: "white",
-                markerType: "triangle",
-                markerBorderThickness: 1,
-                markerBorderColor: "black",
-                name: hData[j][0],
-                shisho: hData[j][3],
-                prevHeyaName: hData[j][6],
-                url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
-                dates[1] + "&heya=" + hData[j][5] + "&shusshin=-1",
-                x: new Date(dates[0], dates[1] - 1),
-                y: [parseInt(hData[j][1]), parseInt(hData[j][1]) -
-                parseInt(hData[j][2])]
-              });
-            }
-            else if (hData[j][4] === "HS") {
-              dpsExtra[j].push({
-                markerSize: 6,
-                markerColor: "black",
-                markerType: "circle",
-                markerBorderThickness: 1,
-                markerBorderColor: "black",
-                name: hData[j][0],
-                shisho: hData[j][3],
-                prevHeyaName: hData[j][6],
-                url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
-                dates[1] + "&heya=" + hData[j][5] + "&shusshin=-1",
-                x: new Date(dates[0], dates[1] - 1),
-                y: parseInt(hData[j][1])
-              });
-              dpsBExtra[j].push({
-                markerSize: 6,
-                markerColor: "black",
-                markerType: "circle",
-                markerBorderThickness: 1,
-                markerBorderColor: "black",
-                name: hData[j][0],
-                shisho: hData[j][3],
-                prevHeyaName: hData[j][6],
-                url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
-                dates[1] + "&heya=" + hData[j][5] + "&shusshin=-1",
-                x: new Date(dates[0], dates[1] - 1),
-                y: [parseInt(hData[j][1]), parseInt(hData[j][1]) -
-                parseInt(hData[j][2])]
-              });
-            } else {
+            else if (hData[j][3] === "HF") {
               dpsExtra[j].push({
                 markerSize: 6,
                 markerColor: "yellow",
                 markerType: "square",
                 markerBorderThickness: 1,
                 markerBorderColor: "black",
+                click: function(e) {
+                  window.open(e.dataPoint.url);
+                },
                 name: hData[j][0],
-                shisho: hData[j][3],
-                prevHeyaName: hData[j][6],
                 url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
-                dates[1] + "&heya=" + hData[j][5] + "&shusshin=-1",
-                x: new Date(dates[0], dates[1] - 1),
-                y: parseInt(hData[j][1])
-              });
-              dpsBExtra[j].push({
-                markerSize: 6,
-                markerColor: "yellow",
-                markerType: "square",
-                markerBorderThickness: 1,
-                markerBorderColor: "black",
-                name: hData[j][0],
-                shisho: hData[j][3],
-                prevHeyaName: hData[j][6],
-                url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
-                dates[1] + "&heya=" + hData[j][5] + "&shusshin=-1",
+                dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
                 x: new Date(dates[0], dates[1] - 1),
                 y: [parseInt(hData[j][1]), parseInt(hData[j][1]) -
-                parseInt(hData[j][2])]
+                parseInt(hData[j][2])],
+                toolTipContent: dates[0] + "." + dates[1] + " - " + 
+                "Branches out from {name} beya, taking " + hData[j][2] + " rikishi"
+              });
+            } else if (hData[j][3] === "HS") {
+              dpsExtra[j].push({
+                markerSize: 6,
+                markerColor: "black",
+                markerType: "circle",
+                markerBorderThickness: 1,
+                markerBorderColor: "black",
+                click: function(e) {
+                  window.open(e.dataPoint.url);
+                },
+                name: hData[j][0],
+                url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
+                x: new Date(dates[0], dates[1] - 1),
+                y: [parseInt(hData[j][1]), parseInt(hData[j][1]) -
+                parseInt(hData[j][2])],
+                toolTipContent: "{name} beya closes, " + hData[j][2] + " of its rikishi transferring"
               });
             }
           }
@@ -962,24 +907,20 @@ window.onload = function() {
           if (typeof(chart.options.data[i].visible) === "undefined" || 
             chart.options.data[i].visible) {
             chart.options.data[i].visible = false;
-            chart.options.data[DEF_HEYA_COUNT + HEYA_COUNT + 1].visible = false;
+            chart.options.data[i + DEF_HEYA_COUNT + HEYA_COUNT + 1].visible = false;
             this.style.color = "gray";
             this.style.fontWeight = "normal";
           } else {
             if (document.getElementById("toggleSekitori").checked === true) {
               chart.data[i].set("type", "rangeArea");
               chart.options.data[i].dataPoints = dpsB[i];
-              chart.data[DEF_HEYA_COUNT + HEYA_COUNT + 1].set("type", "rangeArea");
-              chart.options.data[DEF_HEYA_COUNT + HEYA_COUNT + 1].dataPoints = dpsBExtra[i];
             }
             else {
               chart.data[i].set("type", "line");
               chart.options.data[i].dataPoints = dps[i];
-              chart.data[DEF_HEYA_COUNT + HEYA_COUNT + 1].set("type", "line");
-              chart.options.data[DEF_HEYA_COUNT + HEYA_COUNT + 1].dataPoints = dpsExtra[i];
             }
             chart.options.data[i].visible = true;
-            chart.options.data[DEF_HEYA_COUNT + HEYA_COUNT + 1].visible = true;
+            chart.options.data[i + DEF_HEYA_COUNT + HEYA_COUNT + 1].visible = true;
             this.style.color = dataColors[i];
             this.style.fontWeight = "bold";
           }
