@@ -6,9 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="styles.css">
     <script>
-
-
-
+      
 window.onload = function() {
 
   const HEYA_COUNT = 43;
@@ -16,12 +14,12 @@ window.onload = function() {
 
   var hNamesAlpha = ["All", "Arashio", "Asahiyama[2]", "Asakayama", "Dewanoumi",
   "Fujishima[2]", "Futagoyama[2]", "Hakkaku", "Hanaregoma[2]", "Irumagawa", 
-  "Isegahama[3]", "Isenoumi", "Kasugano", "Kataonami", "Kise[2]", "Kokonoe", 
+  "Isegahama[3]", "Isenoumi[3]", "Kasugano", "Kataonami", "Kise[2]", "Kokonoe", 
   "Michinoku[2]", "Minato", "Miyagino[2]", "Musashigawa", "Naruto", "Nishiiwa", 
   "Nishikido", "Nishonoseki[3]", "Oitekaze[4]", "Onoe", "Onomatsu", "Oshima[2]", 
   "Oshiogawa[3]", "Otake", "Sadogatake[2]", "Sakaigawa", "Shibatayama", 
   "Shikihide[3]", "Shikoroyama", "Tagonoura[3]", "Takadagawa", "Takasago", 
-  "Takekuma[3]", "Tamanoi[2]", "Tatsunami", "Tokitsukaze", "Tokiwayama", 
+  "Takekuma[4]", "Tamanoi[2]", "Tatsunami", "Tokitsukaze", "Tokiwayama", 
   "Yamahibiki"
   ];
 
@@ -53,40 +51,40 @@ window.onload = function() {
   "[Kitanoumi → Yamahibiki]\nY⠀Kitanoumi → M1⠀Ganyu"
   ];
 
-  var hNamesNew = ["All", "Oshiogawa[3]", "Takekuma[3]", "Nishonoseki[3]", 
+  var hNamesNew = ["All", "Oshiogawa[3]", "Takekuma[4]", "Nishonoseki[3]", 
   "Futagoyama[2]", "Nishiiwa", "Naruto", "Asahiyama[2]", "Asakayama", 
   "Musashigawa", "Onoe", "Tokiwayama", "Shikoroyama", "Kise[2]", "Nishikido", 
   "Arashio", "Shibatayama", "Oitekaze[4]", "Sakaigawa", "Onomatsu", "Hakkaku", 
   "Irumagawa", "Shikihide[3]", "Hanaregoma[2]", "Tamanoi[2]", "Tagonoura[3]", 
   "Yamahibiki", "Minato", "Fujishima[2]", "Isegahama[3]", "Takadagawa", 
   "Otake", "Kokonoe", "Kataonami", "Oshima[2]", "Miyagino[2]", "Sadogatake[2]", 
-  "Isenoumi", "Michinoku[2]", "Tokitsukaze", "Kasugano", "Tatsunami", "Takasago", 
+  "Isenoumi[3]", "Michinoku[2]", "Tokitsukaze", "Kasugano", "Tatsunami", "Takasago", 
   "Dewanoumi"
   ];
 
   var hNamesOld = ["All", "Dewanoumi", "Takasago", "Tatsunami", "Kasugano", 
-  "Tokitsukaze", "Michinoku[2]", "Isenoumi", "Sadogatake[2]", "Miyagino[2]", 
+  "Tokitsukaze", "Michinoku[2]", "Isenoumi[3]", "Sadogatake[2]", "Miyagino[2]", 
   "Oshima[2]", "Kataonami", "Kokonoe", "Otake", "Takadagawa", "Isegahama[3]", 
   "Fujishima[2]", "Minato", "Yamahibiki", "Tagonoura[3]", "Tamanoi[2]", 
   "Hanaregoma[2]", "Shikihide[3]", "Irumagawa", "Hakkaku", "Onomatsu", "Sakaigawa", 
   "Oitekaze[4]", "Shibatayama", "Arashio", "Nishikido", "Kise[2]", "Shikoroyama", 
   "Tokiwayama", "Onoe", "Musashigawa", "Asakayama", "Asahiyama[2]", "Naruto", 
-  "Nishiiwa", "Futagoyama[2]", "Nishonoseki[3]", "Takekuma[3]", "Oshiogawa[3]"
+  "Nishiiwa", "Futagoyama[2]", "Nishonoseki[3]", "Takekuma[4]", "Oshiogawa[3]"
   ];
 
   var hNamesDefAlpha = ["Araiso", "Asahiyama[1]", "Azumazeki", "Fujishima[1]", 
-  "Furiwake", "Futagoyama[1]", "Hanakago[1]", "Hanakago[2]", "Hanakago[3]", 
-  "Hanaregoma[1]", "Hatachiyama", "Isegahama[2]", "Izutsu[2]", "Izutsu[3]", "Kabutoyama", 
-  "Kagamiyama", "Kasugayama[1]", "Kasugayama[2]", "Kasugayama[3]", "Kiriyama", 
+  "Furiwake[1]", "Futagoyama[1]", "Hanakago[1]", "Hanakago[2]", "Hanakago[3]", 
+  "Hanaregoma[1]", "Hatachiyama", "Isegahama[2]", "Izutsu[2]", "Izutsu[3]", "Kabutoyama[3]", 
+  "Kagamiyama", "Kasugayama[1]", "Kasugayama[2]", "Kasugayama[3]", "Kiriyama[2]", 
   "Kise[1]", "Kumagatani[1]", "Kumagatani[2]", "Magaki[2]", "Magaki[3]", 
   "Michinoku[1]", "Mihogaseki[1]", "Mihogaseki[2]", "Minatogawa[1]", 
   "Minatogawa[2]", "Minezaki", "Miyagino[1]", "Nakagawa[3]", "Nakagawa[4]", 
   "Nakamura[1]", "Nakamura[2]", "Nishikijima", "Nishonoseki[2]", "Oguruma", 
-  "Oitekaze[3]", "Onaruto[1]", "Onaruto[2]", "Onogawa", "Oshima[1]", "Oshiogawa[2]", 
+  "Oitekaze[3]", "Onaruto[1]", "Onaruto[2]", "Onogawa[3]", "Oshima[1]", "Oshiogawa[2]", 
   "Oyama", "Sadogatake[1]", "Sanoyama[1]", "Sanoyama[2]", "Shikihide[2]", 
-  "Tagonoura[2]", "Takanohana", "Takashima[1]", "Takashima[2]", "Takekuma[1]", 
-  "Takekuma[2]", "Tamanoi[1]", "Tanigawa[1]", "Tanigawa[2]", "Tatekawa", 
-  "Tatsutagawa", "Tatsutayama", "Tomozuna", "Urakaze", "Wakafuji", "Wakamatsu", 
+  "Tagonoura[2]", "Takanohana", "Takashima[1]", "Takashima[2]", "Takekuma[2]", 
+  "Takekuma[3]", "Tamanoi[1]", "Tanigawa[1]", "Tanigawa[2]", "Tatekawa", 
+  "Tatsutagawa", "Tatsutayama[2]", "Tomozuna", "Urakaze", "Wakafuji", "Wakamatsu", 
   "Yamawake",
   ];
 
@@ -127,49 +125,49 @@ window.onload = function() {
   "[Yamawake]\nS⠀Otoiwa → M2⠀Komanosato",
   ];
 
-  var hNamesDefNew = ["Nakagawa[4]", "Tagonoura[2]", "Takekuma[2]", "Kasugayama[3]", 
-  "Kiriyama", "Hatachiyama", "Takashima[2]", "Araiso", "Hanakago[3]", "Kabutoyama", 
+  var hNamesDefNew = ["Nakagawa[4]", "Tagonoura[2]", "Takekuma[3]", "Kasugayama[3]", 
+  "Kiriyama[2]", "Hatachiyama", "Takashima[2]", "Araiso", "Hanakago[3]", "Kabutoyama[3]", 
   "Minezaki", "Oguruma", "Nakamura[2]", "Azumazeki", "Magaki[3]", "Fujishima[1]", 
   "Hanaregoma[1]", "Oshima[1]", "Kumagatani[2]", "Onaruto[2]", "Oshiogawa[2]", "Izutsu[2]", 
   "Izutsu[3]", "Tatsutagawa", "Kagamiyama", "Tanigawa[2]", "Takanohana", 
   "Takashima[1]", "Sanoyama[2]", "Onaruto[1]", "Tatekawa", "Nakagawa[3]", 
   "Magaki[2]", "Kise[1]", "Kasugayama[2]", "Sanoyama[1]", "Urakaze", 
-  "Minatogawa[1]", "Hanakago[2]", "Shikihide[2]", "Mihogaseki[2]", "Furiwake", 
-  "Tatsutayama", "Oyama", "Kasugayama[1]", "Oitekaze[3]", "Nishonoseki[2]", 
-  "Isegahama[2]", "Sadogatake[1]", "Hanakago[1]", "Wakamatsu", "Takekuma[1]", 
-  "Nakamura[1]", "Onogawa", "Tanigawa[1]", "Yamawake", "Tamanoi[1]", "Miyagino[1]", 
+  "Minatogawa[1]", "Hanakago[2]", "Shikihide[2]", "Mihogaseki[2]", "Furiwake[1]", 
+  "Tatsutayama[2]", "Oyama", "Kasugayama[1]", "Oitekaze[3]", "Nishonoseki[2]", 
+  "Isegahama[2]", "Sadogatake[1]", "Hanakago[1]", "Wakamatsu", "Takekuma[2]", 
+  "Nakamura[1]", "Onogawa[3]", "Tanigawa[1]", "Yamawake", "Tamanoi[1]", "Miyagino[1]", 
   "Michinoku[1]", "Futagoyama[1]", "Asahiyama[1]", "Minatogawa[1]", "Mihogaseki[1]", 
   "Wakafuji", "Nishikijima", "Kumagatani[1]", "Tomozuna"
   ];
 
   var hNamesDefOld = ["Tomozuna", "Kumagatani[1]", "Nishikijima", "Wakafuji", 
   "Mihogaseki[1]", "Minatogawa[1]", "Asahiyama[1]", "Futagoyama[1]", "Michinoku[1]", 
-  "Miyagino[1]", "Tamanoi[1]", "Yamawake", "Tanigawa[1]", "Onogawa", "Nakamura[1]", 
-  "Takekuma[1]", "Wakamatsu", "Hanakago[1]", "Sadogatake[1]", "Isegahama[2]", 
-  "Nishonoseki[2]", "Oitekaze[3]", "Kasugayama[1]", "Oyama", "Tatsutayama", 
-  "Furiwake", "Mihogaseki[2]", "Shikihide[2]", "Hanakago[2]", "Minatogawa[1]", 
+  "Miyagino[1]", "Tamanoi[1]", "Yamawake", "Tanigawa[1]", "Onogawa[3]", "Nakamura[1]", 
+  "Takekuma[2]", "Wakamatsu", "Hanakago[1]", "Sadogatake[1]", "Isegahama[2]", 
+  "Nishonoseki[2]", "Oitekaze[3]", "Kasugayama[1]", "Oyama", "Tatsutayama[2]", 
+  "Furiwake[1]", "Mihogaseki[2]", "Shikihide[2]", "Hanakago[2]", "Minatogawa[1]", 
   "Urakaze", "Sanoyama[1]", "Kasugayama[2]", "Kise[1]", "Magaki[2]", "Nakagawa[3]", 
   "Tatekawa", "Onaruto[1]", "Sanoyama[2]", "Takashima[1]", "Takanohana", 
   "Tanigawa[2]", "Kagamiyama", "Tatsutagawa", "Izutsu[3]", "Izutsu[2]", "Oshiogawa[2]", 
   "Onaruto[2]", "Kumagatani[2]", "Oshima[1]", "Hanaregoma[1]", "Fujishima[1]", 
-  "Magaki[3]", "Azumazeki", "Nakamura[2]", "Oguruma", "Minezaki", "Kabutoyama", 
-  "Hanakago[3]", "Araiso", "Takashima[2]", "Hatachiyama", "Kiriyama", 
-  "Kasugayama[3]", "Takekuma[2]", "Tagonoura[2]", "Nakagawa[4]"
+  "Magaki[3]", "Azumazeki", "Nakamura[2]", "Oguruma", "Minezaki", "Kabutoyama[3]", 
+  "Hanakago[3]", "Araiso", "Takashima[2]", "Hatachiyama", "Kiriyama[2]", 
+  "Kasugayama[3]", "Takekuma[3]", "Tagonoura[2]", "Nakagawa[4]"
   ];
 
   var hNamesDefClo = ["Oguruma", "Kagamiyama", "Azumazeki", "Minezaki", 
   "Nakagawa[4]", "Izutsu", "Takanohana", "Kasugayama[3]", "Asahiyama[1]", 
   "Mihogaseki[2]", "Magaki[3]", "Hanaregoma[1]", "Nishonoseki[2]", "Nakamura[2]", 
-  "Hanakago[3]", "Oshima[1]", "Tagonoura[2]", "Takashima[2]", "Kiriyama", "Araiso", 
-  "Isegahama[2]", "Hatachiyama", "Oshiogawa[2]", "Takekuma[2]", "Kabutoyama", 
+  "Hanakago[3]", "Oshima[1]", "Tagonoura[2]", "Takashima[2]", "Kiriyama[2]", "Araiso", 
+  "Isegahama[2]", "Hatachiyama", "Oshiogawa[2]", "Takekuma[3]", "Kabutoyama[3]", 
   "Wakamatsu", "Tatsutagawa", "Kise[1]", "Kumagatani[2]", "Onaruto[2]", 
   "Fujishima[1]", "Kasugayama[2]", "Oyama", "Hanakago[2]", "Takashima[1]", "Izutsu[2]", 
-  "Magaki[2]", "Nakagawa[3]", "Tanigawa[2]", "Minatogawa[2]", "Onogawa", 
+  "Magaki[2]", "Nakagawa[3]", "Tanigawa[2]", "Minatogawa[2]", "Onogawa[3]", 
   "Oitekaze[3]", "Nishikijima", "Sanoyama[2]", "Tatekawa", "Onaruto[1]", "Urakaze", 
   "Nakamura[1]", "Michinoku[1]", "Sanoyama[1]", "Miyagino[1]", "Kumagatani[1]", 
-  "Takekuma[1]", "Shikihide[2]", "Yamawake", "Wakafuji", "Furiwake", 
+  "Takekuma[2]", "Shikihide[2]", "Yamawake", "Wakafuji", "Furiwake[1]", 
   "Minatogawa[1]", "Kasugayama[1]", "Tamanoi[1]", "Tomozuna", "Hanakago[1]", 
-  "Futagoyama[1]", "Tatsutayama", "Mihogaseki[1]", "Tanigawa[1]", "Sadogatake[1]"
+  "Futagoyama[1]", "Tatsutayama[2]", "Mihogaseki[1]", "Tanigawa[1]", "Sadogatake[1]"
   ];
 
   var dataColors = ["#bdb26f", "#5068e4", "#6eb729", "#9263e0", "#4fc656", 
@@ -290,7 +288,7 @@ window.onload = function() {
   chart.options.toolTip = {
     fontFamily: "Arial",
     shared: false,
-    cornerRadius: 8,
+    cornerRadius: 0,
     contentFormatter: tooltipNoSekitori
   };
 
@@ -326,17 +324,16 @@ window.onload = function() {
 
   for (var i = DEF_HEYA_COUNT + HEYA_COUNT + 1; i < DEF_HEYA_COUNT + (HEYA_COUNT * 2) + 2; i++) {
     chart.options.data[i] = {
-      type: "rangeArea",
+      type: "line",
       markerSize: 0,
-      color: "gray",
+      lineDashType: "dash",
       lineColor: "black",
-      lineThickness: 0.5,
-      fillOpacity: 0.4,
+      lineThickness: 1,
       visible: false,
       cursor: "pointer",
       dataPoints: dpsExtra[i-(DEF_HEYA_COUNT + HEYA_COUNT + 1)]
     };
-  }
+  } 
 
   function updateViewportText() {
     if (chart.axisX[0].get("viewportMinimum") === Infinity) {
@@ -388,17 +385,57 @@ window.onload = function() {
 
   function tooltipNoSekitori(e) {
     var str = "";
+    var names = namesThen = [];
 
     for (var i = 0; i < e.entries.length; i++) {
       var temp = CanvasJS.formatDate(e.entries[i].dataPoint.x, "YYYY.MM") +
         " - <strong>" + e.entries[i].dataSeries.name + "</strong>";
-      if (e.entries[i].dataPoint.prevHeyaName !== "")
-        temp = temp + "<br/>(then " + e.entries[i].dataPoint.prevHeyaName + ")";
+      if (e.entries[i].dataPoint.heyaNameThen !== "")
+        temp = temp + "<br/>(then " + e.entries[i].dataPoint.heyaNameThen + ")";
       if (e.entries[i].dataPoint.shisho !== "")
         temp = temp + "<br/>Shisho: " + e.entries[i].dataPoint.shisho;
-
       temp = temp + "<br/><strong>" + e.entries[i].dataPoint.y +
         "</strong> rikishi";
+      if (e.entries[i].dataPoint.HBFrom) {
+        temp = temp + "<br/>Branched out of <strong>" + 
+        e.entries[i].dataPoint.HBFrom + "</strong>";
+        if (e.entries[i].dataPoint.HBFromNameThen !== "")
+          temp = temp + " (then " + e.entries[i].dataPoint.HBFromNameThen + ")";
+      }
+      if (e.entries[i].dataPoint.movedTo) {
+        if (e.entries[i].dataPoint.movedTo !== "") {
+          if (e.entries[i].dataPoint.movedTo.includes(".") === true) {
+            names = e.entries[i].dataPoint.movedTo.split(".");
+            namesThen = e.entries[i].dataPoint.movedToThen.split(".");
+            temp = temp + "<br/>Rikishi moved to ";
+            for (var j = 0; j < names.length; j++) {
+              if (namesThen[j] !== "")
+                temp = temp + "<br/>";
+              temp = temp + "<strong>" + 
+              e.entries[i].dataPoint.movedTo.split(".")[j] + "</strong>";
+              if (namesThen[j] !== "")
+                temp = temp + " (then " + namesThen[j] + ")";
+              if (j !== names.length - 1)
+                temp = temp + ", ";
+              if (j % 2 !== 0 && j !== names.length - 1) 
+                temp = temp + "<br/>";
+            }
+          } 
+          else {
+            if (e.entries[i].dataPoint.movedTo === "Rikishi retire")
+              temp = temp + "<br/>All its rikishi retire"
+            else {
+              temp = temp + "<br/>Rikishi moved to <strong>" + 
+              e.entries[i].dataPoint.movedTo + "</strong>";
+              if (e.entries[i].dataPoint.movedToThen !== "") {
+                temp = temp + " (then " + e.entries[i].dataPoint.movedToThen + ")";
+              }
+            }
+          }
+          temp = temp + "<br/>after closure";
+        }
+      }
+
       str = str.concat(temp);
     }
 
@@ -411,14 +448,54 @@ window.onload = function() {
     for (var i = 0; i < e.entries.length; i++) {
       var temp = CanvasJS.formatDate(e.entries[i].dataPoint.x, "YYYY.MM") +
         " - <strong>" + e.entries[i].dataSeries.name + "</strong>";
-      if (e.entries[i].dataPoint.prevHeyaName !== "")
-        temp = temp + "<br/>(then " + e.entries[i].dataPoint.prevHeyaName + ")";
+      if (e.entries[i].dataPoint.heyaNameThen !== "")
+        temp = temp + "<br/>(then " + e.entries[i].dataPoint.heyaNameThen + ")";
       if (e.entries[i].dataPoint.shisho !== "")
         temp = temp + "<br/>Shisho: " + e.entries[i].dataPoint.shisho;
 
-      temp = temp + "<br/><strong>" + e.entries[i].dataPoint.y[0] +
-        "</strong> rikishi, <strong>" + (e.entries[i].dataPoint.y[0] -
-          e.entries[i].dataPoint.y[1]) + "</strong> sekitori<br/>";
+      temp = temp + "<br/><strong>" + e.entries[i].dataPoint.y[0] + 
+      "</strong> rikishi, <strong>" + (e.entries[i].dataPoint.y[0] - 
+        e.entries[i].dataPoint.y[1]) + "</strong> sekitori";
+      if (e.entries[i].dataPoint.HBFrom) {
+        temp = temp + "<br/>Branched out of <strong>" + 
+        e.entries[i].dataPoint.HBFrom + "</strong>";
+        if (e.entries[i].dataPoint.HBFromNameThen !== "")
+          temp = temp + " (then " + e.entries[i].dataPoint.HBFromNameThen + ")";
+      }
+      if (e.entries[i].dataPoint.movedTo) {
+        if (e.entries[i].dataPoint.movedTo !== "") {
+          if (e.entries[i].dataPoint.movedTo.includes(".") === true) {
+            names = e.entries[i].dataPoint.movedTo.split(".");
+            namesThen = e.entries[i].dataPoint.movedToThen.split(".");
+            temp = temp + "<br/>Rikishi moved to ";
+            for (var j = 0; j < names.length; j++) {
+              if (namesThen[j] !== "")
+                temp = temp + "<br/>";
+              temp = temp + "<strong>" + 
+              e.entries[i].dataPoint.movedTo.split(".")[j] + "</strong>";
+              if (namesThen[j] !== "")
+                temp = temp + " (then " + namesThen[j] + ")";
+              if (j !== names.length - 1)
+                temp = temp + ", ";
+              if (j % 2 !== 0 && j !== names.length - 1) 
+                temp = temp + "<br/>";
+            }
+          } 
+          else {
+            if (e.entries[i].dataPoint.movedTo === "Rikishi retire")
+              temp = temp + "<br/>All its rikishi retire"
+            else {
+              temp = temp + "<br/>Rikishi moved to <strong>" + 
+              e.entries[i].dataPoint.movedTo + "</strong>";
+              if (e.entries[i].dataPoint.movedToThen !== "") {
+                temp = temp + " (then " + e.entries[i].dataPoint.movedToThen + ")";
+              }
+            }
+          }
+          temp = temp + "<br/>after closure";
+        }
+      }
+
       str = str.concat(temp);
     }
 
@@ -459,7 +536,9 @@ window.onload = function() {
                   markerBorderThickness: 1,
                   markerBorderColor: "black",
                   shisho: hData[j][2],
-                  prevHeyaName: hData[j][5],
+                  heyaNameThen: hData[j][5],
+                  HBFrom: hData[j][6],
+                  HBFromNameThen: hData[j][7],
                   url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
                   dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
                   x: new Date(dates[0], dates[1] - 1),
@@ -472,7 +551,9 @@ window.onload = function() {
                   markerBorderThickness: 1,
                   markerBorderColor: "black",
                   shisho: hData[j][2],
-                  prevHeyaName: hData[j][5],
+                  heyaNameThen: hData[j][5],
+                  HBFrom: hData[j][6],
+                  HBFromNameThen: hData[j][7],
                   url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
                   dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
                   x: new Date(dates[0], dates[1] - 1),
@@ -488,7 +569,7 @@ window.onload = function() {
                   markerBorderThickness: 1,
                   markerBorderColor: "black",
                   shisho: hData[j][2],
-                  prevHeyaName: hData[j][5],
+                  heyaNameThen: hData[j][5],
                   url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
                   dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
                   x: new Date(dates[0], dates[1] - 1),
@@ -501,7 +582,7 @@ window.onload = function() {
                   markerBorderThickness: 1,
                   markerBorderColor: "black",
                   shisho: hData[j][2],
-                  prevHeyaName: hData[j][5],
+                  heyaNameThen: hData[j][5],
                   url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
                   dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
                   x: new Date(dates[0], dates[1] - 1),
@@ -517,7 +598,7 @@ window.onload = function() {
                   markerBorderThickness: 1,
                   markerBorderColor: "black",
                   shisho: hData[j][2],
-                  prevHeyaName: hData[j][5],
+                  heyaNameThen: hData[j][5],
                   url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
                   dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
                   x: new Date(dates[0], dates[1] - 1),
@@ -530,7 +611,7 @@ window.onload = function() {
                   markerBorderThickness: 1,
                   markerBorderColor: "black",
                   shisho: hData[j][2],
-                  prevHeyaName: hData[j][5],
+                  heyaNameThen: hData[j][5],
                   url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
                   dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
                   x: new Date(dates[0], dates[1] - 1),
@@ -542,7 +623,7 @@ window.onload = function() {
               dps[j].push({
                 shisho: hData[j][2],
                 label: hData[j][3],
-                prevHeyaName: hData[j][5],
+                heyaNameThen: hData[j][5],
                 url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
                 dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
                 x: new Date(dates[0], dates[1] - 1),
@@ -551,7 +632,7 @@ window.onload = function() {
               dpsB[j].push({
                 shisho: hData[j][2],
                 label: hData[j][3],
-                prevHeyaName: hData[j][5],
+                heyaNameThen: hData[j][5],
                 url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
                 dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
                 x: new Date(dates[0], dates[1] - 1),
@@ -585,8 +666,7 @@ window.onload = function() {
               dpsExtra[j].push({
                 highlightEnabled: false,
                 x: new Date(dates[0], dates[1] - 1),
-                y: [parseInt(hData[j][0]), parseInt(hData[j][0]) -
-                parseInt(hData[j][1])],
+                y: parseInt(hData[j][0]),
                 toolTipContent: " "
               });
             }
@@ -604,10 +684,9 @@ window.onload = function() {
                 url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
                 dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
                 x: new Date(dates[0], dates[1] - 1),
-                y: [parseInt(hData[j][1]), parseInt(hData[j][1]) -
-                parseInt(hData[j][2])],
+                y: parseInt(hData[j][1]),
                 toolTipContent: dates[0] + "." + dates[1] + " - " + 
-                "Branches out from {name} beya, taking " + hData[j][2] + " rikishi"
+                "Branches out of {name} Beya, taking " + hData[j][2] + " rikishi"
               });
             } else if (hData[j][3] === "HS") {
               dpsExtra[j].push({
@@ -623,9 +702,9 @@ window.onload = function() {
                 url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
                 dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
                 x: new Date(dates[0], dates[1] - 1),
-                y: [parseInt(hData[j][1]), parseInt(hData[j][1]) -
-                parseInt(hData[j][2])],
-                toolTipContent: "{name} beya closes, " + hData[j][2] + " of its rikishi transferring"
+                y: parseInt(hData[j][1]),
+                toolTipContent: dates[0] + "." + dates[1] + " - " + 
+                "{name} Beya closes, " + hData[j][2] + " of its rikishi transferring"
               });
             }
           }
@@ -665,7 +744,7 @@ window.onload = function() {
                 lineColor: "gray",
                 shisho: hData[j][2],
                 label: hData[j][3],
-                prevHeyaName: hData[j][5],
+                heyaNameThen: hData[j][5],
                 url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
                 dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
                 x: new Date(dates[0], dates[1] - 1),
@@ -675,7 +754,7 @@ window.onload = function() {
                 lineColor: "gray",
                 shisho: hData[j][2],
                 label: hData[j][3],
-                prevHeyaName: hData[j][5],
+                heyaNameThen: hData[j][5],
                 url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
                 dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
                 x: new Date(dates[0], dates[1] - 1),
@@ -692,7 +771,9 @@ window.onload = function() {
                   markerBorderThickness: 1,
                   markerBorderColor: "black",
                   shisho: hData[j][2],
-                  prevHeyaName: hData[j][5],
+                  heyaNameThen: hData[j][5],
+                  HBFrom: hData[j][6],
+                  HBFromNameThen: hData[j][7],
                   url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
                   dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
                   x: new Date(dates[0], dates[1] - 1),
@@ -705,7 +786,9 @@ window.onload = function() {
                   markerBorderThickness: 1,
                   markerBorderColor: "black",
                   shisho: hData[j][2],
-                  prevHeyaName: hData[j][5],
+                  heyaNameThen: hData[j][5],
+                  HBFrom: hData[j][6],
+                  HBFromNameThen: hData[j][7],
                   url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
                   dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
                   x: new Date(dates[0], dates[1] - 1),
@@ -713,7 +796,7 @@ window.onload = function() {
                   parseInt(hData[j][1])]
                 });
               }
-              else if (hData[j][3] === "HT"){
+              else if (hData[j][3] === "HT") {
                 dps[j+HEYA_COUNT+1].push({
                   markerSize: 6,
                   markerColor: "white",
@@ -721,7 +804,7 @@ window.onload = function() {
                   markerBorderThickness: 1,
                   markerBorderColor: "black",
                   shisho: hData[j][2],
-                  prevHeyaName: hData[j][5],
+                  heyaNameThen: hData[j][5],
                   url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
                   dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
                   x: new Date(dates[0], dates[1] - 1),
@@ -734,14 +817,15 @@ window.onload = function() {
                   markerBorderThickness: 1,
                   markerBorderColor: "black",
                   shisho: hData[j][2],
-                  prevHeyaName: hData[j][5],
+                  heyaNameThen: hData[j][5],
                   url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
                   dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
                   x: new Date(dates[0], dates[1] - 1),
                   y: [parseInt(hData[j][0]), parseInt(hData[j][0]) -
                   parseInt(hData[j][1])]
                 });
-              } else {
+              } 
+              else {
                 dps[j+HEYA_COUNT+1].push({
                   markerSize: 6,
                   markerColor: "black",
@@ -749,7 +833,9 @@ window.onload = function() {
                   markerBorderThickness: 1,
                   markerBorderColor: "black",
                   shisho: hData[j][2],
-                  prevHeyaName: hData[j][5],
+                  heyaNameThen: hData[j][5],
+                  movedTo: hData[j][6],
+                  movedToThen: hData[j][7],
                   url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
                   dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
                   x: new Date(dates[0], dates[1] - 1),
@@ -762,7 +848,9 @@ window.onload = function() {
                   markerBorderThickness: 1,
                   markerBorderColor: "black",
                   shisho: hData[j][2],
-                  prevHeyaName: hData[j][5],
+                  heyaNameThen: hData[j][5],
+                  movedTo: hData[j][6],
+                  movedToThen: hData[j][7],
                   url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
                   dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
                   x: new Date(dates[0], dates[1] - 1),
@@ -774,7 +862,7 @@ window.onload = function() {
               dps[j+HEYA_COUNT+1].push({
                 shisho: hData[j][2],
                 label: hData[j][3],
-                prevHeyaName: hData[j][5],
+                heyaNameThen: hData[j][5],
                 url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
                 dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
                 x: new Date(dates[0], dates[1] - 1),
@@ -783,7 +871,7 @@ window.onload = function() {
               dpsB[j+HEYA_COUNT+1].push({
                 shisho: hData[j][2],
                 label: hData[j][3],
-                prevHeyaName: hData[j][5],
+                heyaNameThen: hData[j][5],
                 url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
                 dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
                 x: new Date(dates[0], dates[1] - 1),
@@ -889,7 +977,7 @@ window.onload = function() {
       }
       chart.render();
     });
-
+    
     $('li').mouseout(function(event) {
       for (var i = 0; i <= HEYA_COUNT; i++) {
         if (chart.options.data[i].name === this.innerText) {
@@ -996,6 +1084,10 @@ window.onload = function() {
       updateViewportText();
     });
   }
+  
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
 
   var hideAllButton = document.getElementById("hideAll");
   hideAllButton.addEventListener("click", hideAll);
@@ -1094,10 +1186,6 @@ window.onload = function() {
     }
     hideAll();
   });
-
-  $(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-  })
 
 }
 
