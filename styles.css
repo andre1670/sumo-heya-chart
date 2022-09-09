@@ -1,14 +1,12 @@
+
+
 body {
-  background-color: #ffffde;/*#ffffde*/
+  background-color: #ffffde;
 }
 
 * {
   font-family: Arial, Tahoma, sans-serif;
   font-size: 100%;
-}
-
-h1 {
-  text-align: center;
 }
 
 #header {
@@ -28,8 +26,23 @@ h1 {
   margin-left: 5px;
 }
 
-#graphView {
-  margin-bottom: 5px;
+fieldset {
+  padding: 2px;
+  font-size: 80%;
+}
+
+.setViewport, #resetViewportButton, #rangeSelector, #toggleSekitori, #hideExtra, #hideAll, #sortHNames {
+  display: inline-block;
+  margin: 3px;
+}
+
+#resetViewportButton {
+  background-color: lightpink;
+}
+
+.currentViewport{
+  float: right;
+  margin: 3px;
 }
 
 #viewportX {
@@ -39,53 +52,36 @@ h1 {
   border: none;
 }
 
-.currentViewport{
-  float: right;
-  margin: 3px;
-}
-
-.setViewportRange, #resetViewport, #range-selector {
-  margin-right: 5px;
-  display: inline-block;
-  margin: 3px;
-}
-
-.setViewportRange {
-  padding-right: 10px;
-  border-right: 1px solid;
-  border-color: gray;
-}
-
-#range-selector {
-  padding-left: 10px;
-  border-left: 1px solid;
-  border-color: gray;
-}
-
-#toggleSekitori, #hideAll, #sortHNames {
-  margin-left: 5px;
-  display: inline-block;
-  margin: 3px;
-}
-
-#resetViewport {
-  background-color: lightpink;
-}
-
 #chartContainer {
   height: 450px; 
-  width: 100%; 
-  border: 1px solid;
+  width: auto;
+  border: 1px solid gray;
 }
 
-#graphSettings {
-  padding-bottom: 3px;
+#legendTitle, #legendTitleDef {
+  cursor: pointer;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 80%;
+  font-family: Verdana;
+  margin-left: 40px;
 }
+
+#legendTitle {
+  color: green;
+}
+
+#legendTitleDef {
+  color: red;
+}
+
 #legends {
   overflow: scroll;
   height: 120px;
+  margin-bottom: 5px;
   overflow-x: hidden;
-  border-bottom: 1px solid;
+  border-bottom: 1px solid darkslategray;
   display: block;
 }
 
@@ -94,27 +90,37 @@ h1 {
   height: 120px;
   margin-bottom: 5px;
   overflow-x: hidden;
-  border-bottom: 1px solid;
+  border-bottom: 1px solid darkslategray;
   display: none;
 }
 
 li { 
   list-style-type: "● ";
+  font-size: 90%;
   cursor: pointer;
   width: auto;
   float: left;
   margin: 1px 0;
-  margin-left: 15px;
-  min-width: 130px;
+  margin-left: 20px;
+  margin-bottom: 5px;
+  min-width: 110px;
 }
 
 #name0 {
   text-decoration: underline;
 }
 
-fieldset {
-  padding: 0;
+.tooltip {
+  white-space: pre-line;
+  word-spacing: 3px;
+  background-color: white;
+  max-width: 250px;
+  text-align: center;
   font-size: 80%;
+  padding: 4px 8px 4px 8px;
+  color: darkslategray;
+  border: 1px solid;
+  opacity: 1;
 }
 
 .collapsible {
@@ -159,20 +165,9 @@ fieldset {
   border-radius: 50%;
 }
 
-#legendTitle {
-  color: green;
-}
-
-#legendTitleDef {
-  color: red;
-}
-
-#legendTitle, #legendTitleDef {
-  cursor: pointer;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  font-weight: bold;
-  font-size: 80%;
-  font-family: Verdana;
-  margin-left: 40px;
+.blackSquare {
+  height: 8px;
+  width: 8px;
+  background-color: black;
+  display: inline-block;
 }
