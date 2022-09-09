@@ -7,119 +7,187 @@
     <link rel="stylesheet" href="styles.css">
     <script>
 
-const HEYA_COUNT = 43;
-const DEF_HEYA_COUNT = 66;
-
-var hNamesAlpha = ["All", "Arashio", "Asahiyama[2]", "Asakayama", "Dewanoumi",
-"Fujishima[2]", "Futagoyama", "Hakkaku", "Hanaregoma[2]", "Irumagawa", "Isegahama[3]", 
-"Isenoumi", "Kasugano", "Kataonami", "Kise[2]", "Kokonoe", "Michinoku[2]", "Minato", 
-"Miyagino[2]", "Musashigawa", "Naruto", "Nishiiwa", "Nishikido", "Nishonoseki[3]", 
-"Oitekaze[4]", "Onoe", "Onomatsu", "Oshima[2]", "Oshiogawa[3]", "Otake", "Sadogatake[2]", 
-"Sakaigawa", "Shibatayama", "Shikihide[3]", "Shikoroyama", "Tagonoura[3]", 
-"Takadagawa", "Takasago", "Takekuma[3]", "Tamanoi[2]", "Tatsunami", "Tokitsukaze", 
-"Tokiwayama", "Yamahibiki"
-];
-
-var hNamesNew = ["All", "Oshiogawa[3]", "Takekuma[3]", 
-"Nishonoseki[3]", "Futagoyama", "Nishiiwa", "Naruto", "Asahiyama[2]", "Asakayama", 
-"Musashigawa", "Onoe", "Tokiwayama", "Shikoroyama", "Kise[2]", "Nishikido", 
-"Arashio", "Shibatayama", "Oitekaze[4]", "Sakaigawa", "Onomatsu", "Hakkaku", 
-"Irumagawa", "Shikihide[3]", "Hanaregoma[2]", "Tamanoi[2]", "Tagonoura[3]", "Yamahibiki", 
-"Minato", "Fujishima[2]", "Isegahama[3]", "Takadagawa", "Michinoku[2]", "Otake", 
-"Kokonoe", "Kataonami", "Oshima[2]", "Miyagino[2]", "Sadogatake[2]", "Isenoumi", 
-"Tokitsukaze", "Kasugano", "Tatsunami", "Takasago", "Dewanoumi"
-];
-
-var hNamesOld = ["All", "Dewanoumi", "Takasago", "Tatsunami", "Kasugano", 
-"Tokitsukaze", "Isenoumi", "Sadogatake[2]", "Miyagino[2]", "Oshima[2]", "Kataonami", 
-"Kokonoe", "Otake", "Michinoku[2]", "Takadagawa", "Isegahama[3]", "Fujishima[2]", 
-"Minato", "Yamahibiki", "Tagonoura[3]", "Tamanoi[2]", "Hanaregoma[2]", "Shikihide[3]", 
-"Irumagawa", "Hakkaku", "Onomatsu", "Sakaigawa", "Oitekaze[4]", "Shibatayama", 
-"Arashio", "Nishikido", "Kise[2]", "Shikoroyama", "Tokiwayama", "Onoe", 
-"Musashigawa", "Asakayama", "Asahiyama[2]", "Naruto", "Nishiiwa", "Futagoyama", 
-"Nishonoseki[3]", "Takekuma[3]", "Oshiogawa[3]"
-];
-
-var hNamesDefAlpha = ["Araiso", "Asahiyama[1]", "Azumazeki", "Fujishima[1]", 
-"Furiwake", "Futagoyama[1]", "Hanakago[1]", "Hanakago[2]", "Hanakago[3]", 
-"Hanaregoma[1]", "Hatachiyama", "Isegahama[2]", "Izutsu[2]", "Izutsu[3]", "Kabutoyama", 
-"Kagamiyama", "Kasugayama[1]", "Kasugayama[2]", "Kasugayama[3]", "Kiriyama", 
-"Kise[1]", "Kumagatani[1]", "Kumagatani[2]", "Magaki[2]", "Magaki[3]", 
-"Michinoku[1]", "Mihogaseki[1]", "Mihogaseki[2]", "Minatogawa[1]", 
-"Minatogawa[2]", "Minezaki", "Miyagino[1]", "Nakagawa[3]", "Nakagawa[4]", 
-"Nakamura[1]", "Nakamura[2]", "Nishikijima", "Nishonoseki[2]", "Oguruma", 
-"Oitekaze[3]", "Onaruto[1]", "Onaruto[2]", "Onogawa", "Oshima[1]", "Oshiogawa[2]", 
-"Oyama", "Sadogatake[1]", "Sanoyama[1]", "Sanoyama[2]", "Shikihide[2]", 
-"Tagonoura[2]", "Takanohana", "Takashima[1]", "Takashima[2]", "Takekuma[1]", 
-"Takekuma[2]", "Tamanoi[1]", "Tanigawa[1]", "Tanigawa[2]", "Tatekawa", 
-"Tatsutagawa", "Tatsutayama", "Tomozuna", "Urakaze", "Wakafuji", "Wakamatsu", 
-"Yamawake",
-];
-
-var hNamesDefNew = ["Nakagawa[4]", "Tagonoura[2]", "Takekuma[2]", "Kasugayama[3]", 
-"Kiriyama", "Hatachiyama", "Takashima[2]", "Araiso", "Hanakago[3]", "Kabutoyama", 
-"Minezaki", "Oguruma", "Nakamura[2]", "Azumazeki", "Magaki[3]", "Fujishima[1]", 
-"Hanaregoma[1]", "Oshima[1]", "Kumagatani[2]", "Onaruto[2]", "Oshiogawa[2]", "Izutsu[2]", 
-"Izutsu[3]", "Tatsutagawa", "Kagamiyama", "Tanigawa[2]", "Takanohana", 
-"Takashima[1]", "Sanoyama[2]", "Onaruto[1]", "Tatekawa", "Nakagawa[3]", 
-"Magaki[2]", "Kise[1]", "Kasugayama[2]", "Sanoyama[1]", "Urakaze", 
-"Minatogawa[1]", "Hanakago[2]", "Shikihide[2]", "Mihogaseki[2]", "Furiwake", 
-"Tatsutayama", "Oyama", "Kasugayama[1]", "Oitekaze[3]", "Nishonoseki[2]", 
-"Isegahama[2]", "Sadogatake[1]", "Hanakago[1]", "Wakamatsu", "Takekuma[1]", 
-"Nakamura[1]", "Onogawa", "Tanigawa[1]", "Yamawake", "Tamanoi[1]", "Miyagino[1]", 
-"Michinoku[1]", "Futagoyama[1]", "Asahiyama[1]", "Minatogawa[1]", "Mihogaseki[1]", 
-"Wakafuji", "Nishikijima", "Kumagatani[1]", "Tomozuna"
-];
-
-var hNamesDefOld = ["Tomozuna", "Kumagatani[1]", "Nishikijima", "Wakafuji", 
-"Mihogaseki[1]", "Minatogawa[1]", "Asahiyama[1]", "Futagoyama[1]", "Michinoku[1]", 
-"Miyagino[1]", "Tamanoi[1]", "Yamawake", "Tanigawa[1]", "Onogawa", "Nakamura[1]", 
-"Takekuma[1]", "Wakamatsu", "Hanakago[1]", "Sadogatake[1]", "Isegahama[2]", 
-"Nishonoseki[2]", "Oitekaze[3]", "Kasugayama[1]", "Oyama", "Tatsutayama", 
-"Furiwake", "Mihogaseki[2]", "Shikihide[2]", "Hanakago[2]", "Minatogawa[1]", 
-"Urakaze", "Sanoyama[1]", "Kasugayama[2]", "Kise[1]", "Magaki[2]", "Nakagawa[3]", 
-"Tatekawa", "Onaruto[1]", "Sanoyama[2]", "Takashima[1]", "Takanohana", 
-"Tanigawa[2]", "Kagamiyama", "Tatsutagawa", "Izutsu[3]", "Izutsu[2]", "Oshiogawa[2]", 
-"Onaruto[2]", "Kumagatani[2]", "Oshima[1]", "Hanaregoma[1]", "Fujishima[1]", 
-"Magaki[3]", "Azumazeki", "Nakamura[2]", "Oguruma", "Minezaki", "Kabutoyama", 
-"Hanakago[3]", "Araiso", "Takashima[2]", "Hatachiyama", "Kiriyama", 
-"Kasugayama[3]", "Takekuma[2]", "Tagonoura[2]", "Nakagawa[4]"
-];
-
-var hNamesDefClo = ["Oguruma", "Kagamiyama", "Azumazeki", "Minezaki", 
-"Nakagawa[4]", "Izutsu", "Takanohana", "Kasugayama[3]", "Asahiyama[1]", 
-"Mihogaseki[2]", "Magaki[3]", "Hanaregoma[1]", "Nishonoseki[2]", "Nakamura[2]", 
-"Hanakago[3]", "Oshima[1]", "Tagonoura[2]", "Takashima[2]", "Kiriyama", "Araiso", 
-"Isegahama[2]", "Hatachiyama", "Oshiogawa[2]", "Takekuma[2]", "Kabutoyama", 
-"Wakamatsu", "Tatsutagawa", "Kise[1]", "Kumagatani[2]", "Onaruto[2]", 
-"Fujishima[1]", "Kasugayama[2]", "Oyama", "Hanakago[2]", "Takashima[1]", "Izutsu[2]", 
-"Magaki[2]", "Nakagawa[3]", "Tanigawa[2]", "Minatogawa[2]", "Onogawa", 
-"Oitekaze[3]", "Nishikijima", "Sanoyama[2]", "Tatekawa", "Onaruto[1]", "Urakaze", 
-"Nakamura[1]", "Michinoku[1]", "Sanoyama[1]", "Miyagino[1]", "Kumagatani[1]", 
-"Takekuma[1]", "Shikihide[2]", "Yamawake", "Wakafuji", "Furiwake", 
-"Minatogawa[1]", "Kasugayama[1]", "Tamanoi[1]", "Tomozuna", "Hanakago[1]", 
-"Futagoyama[1]", "Tatsutayama", "Mihogaseki[1]", "Tanigawa[1]", "Sadogatake[1]"
-];
-
-var dataColors = ["#bdb26f", "#5068e4", "#6eb729", "#9263e0", "#4fc656", 
-"#9e42b8", "#afc337", "#534ec2", "#d1b524", "#235fc9", "#e8a532", "#4f83f3", 
-"#ee8d27", "#554baa", "#42972e", "#d773e7", "#85c259", "#dc50b8", "#4bc881", 
-"#e83889", "#3d9d5a", "#b92784", "#839d2b", "#7b4aab", "#ccb84d", "#666ac8", 
-"#c1851b", "#4674c4", "#df7730", "#5095e4", "#ee613a", "#3ac1df", "#be3d19", 
-"#60cfa8", "#db3941", "#41bab2", "#e23e68", "#3e7927", "#b780e5", "#a8952a", 
-"#5e4393", "#95b96c", "#9f4094", "#767a19", "#9c8fea", "#516615", "#e28de2", 
-"#518342", "#b868bd", "#3b8251", "#e674b8", "#296437", "#d6548b", "#64b083", 
-"#b13144", "#308a6f", "#e56463", "#115e41", "#e886ad", "#415a1f", "#7155a7", 
-"#e4b060", "#494b93", "#907016", "#5d5ca7", "#aa5d16", "#6ab2e8", "#a04720", 
-"#2e8cba", "#cf6449", "#3265a6", "#ba8437", "#866fbd", "#616117", "#c5a4e9", 
-"#704b0c", "#91a2e3", "#dd9c5a", "#694283", "#839149", "#775591", "#597236", 
-"#d28ec9", "#297153", "#a13765", "#787b43", "#997ebf", "#6f5d1d", "#6e83b7", 
-"#f18f6b", "#445082", "#eaaf85", "#576196", "#8b6325", "#a76395", "#585c26", 
-"#d795b8", "#997d43", "#8d4672", "#c09669", "#8b4a5f", "#c47a51", "#92434d", 
-"#935e31", "#e87c86", "#814a28", "#e08f8b", "#a04b34", "#bd5e70", "#ae5751"
-];
-
 window.onload = function() {
+
+  const HEYA_COUNT = 43;
+  const DEF_HEYA_COUNT = 67;
+
+  var hNamesAlpha = ["All", "Arashio", "Asahiyama[2]", "Asakayama", "Dewanoumi",
+  "Fujishima[2]", "Futagoyama[2]", "Hakkaku", "Hanaregoma[2]", "Irumagawa", 
+  "Isegahama[3]", "Isenoumi[3]", "Kasugano", "Kataonami", "Kise[2]", "Kokonoe", 
+  "Michinoku[2]", "Minato", "Miyagino[2]", "Musashigawa", "Naruto", "Nishiiwa", 
+  "Nishikido", "Nishonoseki[3]", "Oitekaze[4]", "Onoe", "Onomatsu", "Oshima[2]", 
+  "Oshiogawa[3]", "Otake", "Sadogatake[2]", "Sakaigawa", "Shibatayama", 
+  "Shikihide[3]", "Shikoroyama", "Tagonoura[3]", "Takadagawa", "Takasago", 
+  "Takekuma[4]", "Tamanoi[2]", "Tatsunami", "Tokitsukaze", "Tokiwayama", 
+  "Yamahibiki"
+  ];
+
+  var hNamesTooltip = ["", "[Arashio]\nK⠀Oyutaka → M2 Sokokurai", 
+  "[Asahiyama]\nS⠀Kotonishiki", "[Asakayama]\nO⠀Kaio", 
+  "[Dewanoumi]\nMs⠀Katsuragawa → M1⠀Hitachiyama → Y⠀Hitachiyama → K⠀Ryogoku → Y⠀Tsunenohana → M1⠀Dewanohana → Y⠀Sadanoyama → S⠀Washuyama → M2⠀Oginohana",
+  "[Musashigawa → Fujishima]\nY⠀Mienoumi → O⠀Musoyama", "[Futagoyama]\nO⠀Miyabiyama", 
+  "[Hakkaku]\nY⠀Hokutoumi", "[Matsugane → Nishonoseki → Hanaregoma]\nO⠀Wakashimazu → S⠀Tamanoshima", 
+  "[Irumagawa]\nS⠀Tochitsukasa", "[Ajigawa → Isegahama]\nS⠀Mutsuarashi → Y⠀Asahifuji", 
+  "[Isenoumi]\nM1⠀Kashiwado → S⠀Fujinokawa → M3⠀Kitakachidoki", 
+  "[Kasugano]\nGyoji⠀Kimura⠀Soshiro → Y⠀Tochigiyama → Y⠀Tochinishiki → Y⠀Tochinoumi → S⠀Tochinowaka", 
+  "[Kataonami]\nS⠀Tamanoumi → S⠀Tamanofuji → S⠀Tamakasuga", "[Kise]\nM1⠀Higonoumi", 
+  "[Kokonoe]\nY⠀Chiyonoyama → Y⠀Kitanofuji → Y⠀Chiyonofuji → O⠀Chiyotaikai", 
+  "[Izutsu → Michinoku]\nM2⠀Tsurugamine → M4⠀Hoshikabuto → M14⠀Hoshiiwato → O⠀Kirishima", "[Minato]\nK⠀Yutakayama → M2⠀Minatofuji", 
+  "[Yoshibayama Dojo → Miyagino]\nY⠀Yoshibayama → K⠀Hirokawa → M13⠀Chikubayama → J2⠀Kanechika → M13⠀Chikubayama", 
+  "[Musashigawa]\nY⠀Musashimaru", "[Naruto]\nO⠀Kotooshu", "[Nishiiwa]\nS⠀Wakanosato", 
+  "[Nishikido]\nS⠀Mitoizumi", "[Nishonoseki]\nY⠀Kisenosato", "[Oitekaze]\nM2⠀Daishoyama", 
+  "[Onoe]\nK⠀Hamanoshima", "[Onomatsu]\nS⠀Masurao → M8⠀Daido", 
+  "[Tamagaki → Ajigawa → Takashima → Tomozuna → Oshima]\nK⠀Tomoegata → J7⠀Yamatonishiki → S⠀Kaiki → S⠀Kyokutenho", 
+  "[Oshiogawa]\nS⠀Takekaze", "[Taiho → Otake]\nY⠀Taiho → S⠀Takatoriki → J4⠀Dairyu", 
+  "[Sadogatake]\nK⠀Kotonishiki → Y⠀Kotozakura → S⠀Kotonowaka", "[Nakadachi → Sakaigawa]\nK⠀Ryogoku", 
+  "[Shibatayama]\nY⠀Onokuni", "[Shikihide]\nK⠀Oshio → M9⠀Kitazakura", "[Shikoroyama]\nS⠀Terao", 
+  "[Naruto → Tagonoura]\nY⠀Takanosato → M8⠀Takanotsuru", "[Takadagawa]\nO⠀Maenoyama → S⠀Akinoshima", 
+  "[Takasago]\nM1⠀Takasago → S⠀Takamiyama → O⠀Asashio → Y⠀Maedayama → Y⠀Asashio → O⠀Asashio → S⠀Asasekiryu", 
+  "[Takekuma]\nO⠀Goeido", "[Tamanoi]\nS⠀Tochiazuma → O⠀Tochiazuma", 
+  "[Tatsunami]\nK⠀Midorishima → Y⠀Haguroyama → S⠀Annenyama → K⠀Asahiyutaka", 
+  "[Futabayama Dojo → Tokitsukaze]\nY⠀Futabayama → Y⠀Kagamisato → O⠀Yutakayama → K⠀Futatsuryu → M3⠀Tokitsuumi → M1⠀Tosayutaka", 
+  "[Chiganoura → Tokiwayama]\nS⠀Masudayama → K⠀Takamisugi", 
+  "[Kitanoumi → Yamahibiki]\nY⠀Kitanoumi → M1⠀Ganyu"
+  ];
+
+  var hNamesNew = ["All", "Oshiogawa[3]", "Takekuma[4]", "Nishonoseki[3]", 
+  "Futagoyama[2]", "Nishiiwa", "Naruto", "Asahiyama[2]", "Asakayama", 
+  "Musashigawa", "Onoe", "Tokiwayama", "Shikoroyama", "Kise[2]", "Nishikido", 
+  "Arashio", "Shibatayama", "Oitekaze[4]", "Sakaigawa", "Onomatsu", "Hakkaku", 
+  "Irumagawa", "Shikihide[3]", "Hanaregoma[2]", "Tamanoi[2]", "Tagonoura[3]", 
+  "Yamahibiki", "Minato", "Fujishima[2]", "Isegahama[3]", "Takadagawa", 
+  "Otake", "Kokonoe", "Kataonami", "Oshima[2]", "Miyagino[2]", "Sadogatake[2]", 
+  "Isenoumi[3]", "Michinoku[2]", "Tokitsukaze", "Kasugano", "Tatsunami", "Takasago", 
+  "Dewanoumi"
+  ];
+
+  var hNamesOld = ["All", "Dewanoumi", "Takasago", "Tatsunami", "Kasugano", 
+  "Tokitsukaze", "Michinoku[2]", "Isenoumi[3]", "Sadogatake[2]", "Miyagino[2]", 
+  "Oshima[2]", "Kataonami", "Kokonoe", "Otake", "Takadagawa", "Isegahama[3]", 
+  "Fujishima[2]", "Minato", "Yamahibiki", "Tagonoura[3]", "Tamanoi[2]", 
+  "Hanaregoma[2]", "Shikihide[3]", "Irumagawa", "Hakkaku", "Onomatsu", "Sakaigawa", 
+  "Oitekaze[4]", "Shibatayama", "Arashio", "Nishikido", "Kise[2]", "Shikoroyama", 
+  "Tokiwayama", "Onoe", "Musashigawa", "Asakayama", "Asahiyama[2]", "Naruto", 
+  "Nishiiwa", "Futagoyama[2]", "Nishonoseki[3]", "Takekuma[4]", "Oshiogawa[3]"
+  ];
+
+  var hNamesDefAlpha = ["Araiso", "Asahiyama[1]", "Azumazeki", "Fujishima[1]", 
+  "Furiwake[1]", "Futagoyama[1]", "Hanakago[1]", "Hanakago[2]", "Hanakago[3]", 
+  "Hanaregoma[1]", "Hatachiyama", "Isegahama[2]", "Izutsu[2]", "Izutsu[3]", "Kabutoyama[3]", 
+  "Kagamiyama", "Kasugayama[1]", "Kasugayama[2]", "Kasugayama[3]", "Kiriyama[2]", 
+  "Kise[1]", "Kumagatani[1]", "Kumagatani[2]", "Magaki[2]", "Magaki[3]", 
+  "Michinoku[1]", "Mihogaseki[1]", "Mihogaseki[2]", "Minatogawa[1]", 
+  "Minatogawa[2]", "Minezaki", "Miyagino[1]", "Nakagawa[3]", "Nakagawa[4]", 
+  "Nakamura[1]", "Nakamura[2]", "Nishikijima", "Nishonoseki[2]", "Oguruma", 
+  "Oitekaze[3]", "Onaruto[1]", "Onaruto[2]", "Onogawa[3]", "Oshima[1]", "Oshiogawa[2]", 
+  "Oyama", "Sadogatake[1]", "Sanoyama[1]", "Sanoyama[2]", "Shikihide[2]", 
+  "Tagonoura[2]", "Takanohana", "Takashima[1]", "Takashima[2]", "Takekuma[2]", 
+  "Takekuma[3]", "Tamanoi[1]", "Tanigawa[1]", "Tanigawa[2]", "Tatekawa", 
+  "Tatsutagawa", "Tatsutayama[2]", "Tomozuna", "Urakaze", "Wakafuji", "Wakamatsu", 
+  "Yamawake",
+  ];
+
+  var hNamesTooltipDef = ["[Araiso]\nK⠀Futagodake", 
+  "[Asahiyama]\nOS⠀Iwagaya → Y⠀Onishiki → OS⠀Futasegawa → S⠀Futasegawa → S⠀Kozuzan → S⠀Futaseyama → K⠀Wakafutase → O⠀Daiju", 
+  "[Azumazeki]\nS⠀Takamiyama → M10⠀Ushiomaru → K⠀Takamisakari", "[Fujishima]\nO⠀Takanohana", 
+  "[Furiwake]\nS⠀Naminooto", "[Futagoyama]\nM1⠀Toshuzan", "[Hanakago]\nS⠀Misugiiso", 
+  "[Shibatayama → Hanakago]\nM3⠀Onoumi → Y⠀Wajima", "[Hanakago]\nS⠀Daijuyama", 
+  "[Hanaregoma]\nO⠀Kaiketsu", "[Hatachiyama]\nO⠀Hokutenyu", 
+  "[Isegahama → Araiso → Isegahama]\nS⠀Kiyosegawa → Y⠀Terukuni → O⠀Kiyokuni", "[Izutsu]\nY⠀Kitanofuji", 
+  "[Kimigahama → Izutsu]\nS⠀Tsurugamine → S⠀Sakahoko", "[Kabutoyama]\nM1⠀Daiyu", 
+  "[Kagamiyama]\nY⠀Kashiwado → S⠀Tagaryu", "[Kasugayama]\nS⠀Fujinokawa", 
+  "[Kasugayama]\nO⠀Nayoroiwa → M1⠀Onobori", "[Kasugayama]\nM1⠀Kasugafuji → M11⠀Hamanishiki", 
+  "[Kiriyama]\nK⠀Kurosegawa", "[Kise]\nM1⠀Katsuragawa → M9⠀Kiyonomori", 
+  "[Kumagatani]\nMs12⠀Aratama → M4⠀Shikishima", "[Kumagatani]\nM8⠀Yoshinomine", 
+  "[Magaki]\nK⠀Shimizugawa", "[Magaki]\nY⠀Wakanohana⠀II", "[Michinoku]\nJ1⠀Saigo# → S⠀Oshio", 
+  "[Mihogaseki]\nOS⠀Takinoumi", "[Mihogaseki]\nO⠀Masuiyama⠀I → O⠀Masuiyama⠀II", 
+  "[Minatogawa]\nS⠀Ayanami → M1⠀Ayanishiki", "[Minatogawa]\nM1⠀Tokachiiwa", 
+  "[Minezaki]\nM2⠀Misugiiso", "[Miyagino]\nO⠀Hoo →? M8⠀Goshoguruma → Y⠀Otori", 
+  "[Nakagawa]\nM2⠀Kiyoenami", "[Nakagawa]\nM14⠀Asahisato", 
+  "[Nakamura]\nOS⠀Ashinoura# → M1⠀Tatekabuto", "[Nakamura]\nS⠀Fujizakura", 
+  "[Nishikijima]\nM1⠀Orochigata → S⠀Orochigata → M1⠀Orochiyama → Gyoji⠀Kimura⠀Kesazo", 
+  "[Nishonoseki]\nY⠀Tamanishiki → S⠀Tamanoumi → O⠀Saganohana → M1⠀Tokachiiwa → S⠀Kongo", 
+  "[Oguruma]\nO⠀Kotokaze", "[Oitekaze]\nO⠀Shimizugawa", "[Onaruto]\nM2⠀Futaseyama", 
+  "[Onaruto]\nS⠀Kotetsuyama", "[Jinmaku → Onogawa]\nOS⠀Daimon# → M4⠀Aobayama → M2⠀Kinkazan", 
+  "[Oshima]\nO⠀Asahikuni", "[Oshiogawa]\nO⠀Daikirin", 
+  "[Oyama]\nS⠀Takanobori → O⠀Matsunobori → M2⠀Onobori", "[Sadogatake]\nM1⠀Akutsugawa", 
+  "[Sanoyama]\nM2⠀Asahibiki", "[Sanoyama]\nK⠀Kuninobori", "[Shikihide]\nM11⠀Ariake", 
+  "[Tagonoura]\nM1⠀Kushimaumi", "[Futagoyama → Takanohana]\nY⠀Wakanohana⠀I → O⠀Takanohana → Y⠀Takanohana", 
+  "[Kumagatani → Takashima]\nO⠀Mitsuneyama", "[Takashima]\nS⠀Koboyama", 
+  "[Takekuma]\nS⠀Ryogoku", "[Takekuma]\nS⠀Kurohimeyama", 
+  "[Furiwake → Tamanoi]\nS⠀Naminooto → J1⠀Mutsunishiki", "[Tanigawa]\nS⠀Kurosegawa", 
+  "[Tanigawa]\nJ5⠀Yahatano", "[Tatekawa]\nM10⠀Hiodoshi", 
+  "[Tatsutagawa]\nY⠀Kagamisato → S⠀Aonosato", "[Tatsutayama]\nO⠀Noshirogata", 
+  "[Tomozuna]\nM1⠀Kaizan → K⠀Yahazuyama", "[Urakaze]\nM5⠀Taroyama", 
+  "[Wakafuji]\nM3⠀Ageshio → M6⠀Koshinoumi", 
+  "[Wakamatsu → Nishiiwa → Wakamatsu]\nK⠀Izumigawa → M3⠀Shachinosato → S⠀Fusanishiki → O⠀Asashio", 
+  "[Yamawake]\nS⠀Otoiwa → M2⠀Komanosato",
+  ];
+
+  var hNamesDefNew = ["Nakagawa[4]", "Tagonoura[2]", "Takekuma[3]", "Kasugayama[3]", 
+  "Kiriyama[2]", "Hatachiyama", "Takashima[2]", "Araiso", "Hanakago[3]", "Kabutoyama[3]", 
+  "Minezaki", "Oguruma", "Nakamura[2]", "Azumazeki", "Magaki[3]", "Fujishima[1]", 
+  "Hanaregoma[1]", "Oshima[1]", "Kumagatani[2]", "Onaruto[2]", "Oshiogawa[2]", "Izutsu[2]", 
+  "Izutsu[3]", "Tatsutagawa", "Kagamiyama", "Tanigawa[2]", "Takanohana", 
+  "Takashima[1]", "Sanoyama[2]", "Onaruto[1]", "Tatekawa", "Nakagawa[3]", 
+  "Magaki[2]", "Kise[1]", "Kasugayama[2]", "Sanoyama[1]", "Urakaze", 
+  "Minatogawa[1]", "Hanakago[2]", "Shikihide[2]", "Mihogaseki[2]", "Furiwake[1]", 
+  "Tatsutayama[2]", "Oyama", "Kasugayama[1]", "Oitekaze[3]", "Nishonoseki[2]", 
+  "Isegahama[2]", "Sadogatake[1]", "Hanakago[1]", "Wakamatsu", "Takekuma[2]", 
+  "Nakamura[1]", "Onogawa[3]", "Tanigawa[1]", "Yamawake", "Tamanoi[1]", "Miyagino[1]", 
+  "Michinoku[1]", "Futagoyama[1]", "Asahiyama[1]", "Minatogawa[1]", "Mihogaseki[1]", 
+  "Wakafuji", "Nishikijima", "Kumagatani[1]", "Tomozuna"
+  ];
+
+  var hNamesDefOld = ["Tomozuna", "Kumagatani[1]", "Nishikijima", "Wakafuji", 
+  "Mihogaseki[1]", "Minatogawa[1]", "Asahiyama[1]", "Futagoyama[1]", "Michinoku[1]", 
+  "Miyagino[1]", "Tamanoi[1]", "Yamawake", "Tanigawa[1]", "Onogawa[3]", "Nakamura[1]", 
+  "Takekuma[2]", "Wakamatsu", "Hanakago[1]", "Sadogatake[1]", "Isegahama[2]", 
+  "Nishonoseki[2]", "Oitekaze[3]", "Kasugayama[1]", "Oyama", "Tatsutayama[2]", 
+  "Furiwake[1]", "Mihogaseki[2]", "Shikihide[2]", "Hanakago[2]", "Minatogawa[1]", 
+  "Urakaze", "Sanoyama[1]", "Kasugayama[2]", "Kise[1]", "Magaki[2]", "Nakagawa[3]", 
+  "Tatekawa", "Onaruto[1]", "Sanoyama[2]", "Takashima[1]", "Takanohana", 
+  "Tanigawa[2]", "Kagamiyama", "Tatsutagawa", "Izutsu[3]", "Izutsu[2]", "Oshiogawa[2]", 
+  "Onaruto[2]", "Kumagatani[2]", "Oshima[1]", "Hanaregoma[1]", "Fujishima[1]", 
+  "Magaki[3]", "Azumazeki", "Nakamura[2]", "Oguruma", "Minezaki", "Kabutoyama[3]", 
+  "Hanakago[3]", "Araiso", "Takashima[2]", "Hatachiyama", "Kiriyama[2]", 
+  "Kasugayama[3]", "Takekuma[3]", "Tagonoura[2]", "Nakagawa[4]"
+  ];
+
+  var hNamesDefClo = ["Oguruma", "Kagamiyama", "Azumazeki", "Minezaki", 
+  "Nakagawa[4]", "Izutsu", "Takanohana", "Kasugayama[3]", "Asahiyama[1]", 
+  "Mihogaseki[2]", "Magaki[3]", "Hanaregoma[1]", "Nishonoseki[2]", "Nakamura[2]", 
+  "Hanakago[3]", "Oshima[1]", "Tagonoura[2]", "Takashima[2]", "Kiriyama[2]", "Araiso", 
+  "Isegahama[2]", "Hatachiyama", "Oshiogawa[2]", "Takekuma[3]", "Kabutoyama[3]", 
+  "Wakamatsu", "Tatsutagawa", "Kise[1]", "Kumagatani[2]", "Onaruto[2]", 
+  "Fujishima[1]", "Kasugayama[2]", "Oyama", "Hanakago[2]", "Takashima[1]", "Izutsu[2]", 
+  "Magaki[2]", "Nakagawa[3]", "Tanigawa[2]", "Minatogawa[2]", "Onogawa[3]", 
+  "Oitekaze[3]", "Nishikijima", "Sanoyama[2]", "Tatekawa", "Onaruto[1]", "Urakaze", 
+  "Nakamura[1]", "Michinoku[1]", "Sanoyama[1]", "Miyagino[1]", "Kumagatani[1]", 
+  "Takekuma[2]", "Shikihide[2]", "Yamawake", "Wakafuji", "Furiwake[1]", 
+  "Minatogawa[1]", "Kasugayama[1]", "Tamanoi[1]", "Tomozuna", "Hanakago[1]", 
+  "Futagoyama[1]", "Tatsutayama[2]", "Mihogaseki[1]", "Tanigawa[1]", "Sadogatake[1]"
+  ];
+
+  var dataColors = ["#bdb26f", "#5068e4", "#6eb729", "#9263e0", "#4fc656", 
+  "#9e42b8", "#afc337", "#534ec2", "#d1b524", "#235fc9", "#e8a532", "#4f83f3", 
+  "#ee8d27", "#554baa", "#42972e", "#d773e7", "#85c259", "#dc50b8", "#4bc881", 
+  "#e83889", "#3d9d5a", "#b92784", "#839d2b", "#7b4aab", "#ccb84d", "#666ac8", 
+  "#c1851b", "#4674c4", "#df7730", "#5095e4", "#ee613a", "#3ac1df", "#be3d19", 
+  "#60cfa8", "#db3941", "#41bab2", "#e23e68", "#3e7927", "#b780e5", "#a8952a", 
+  "#5e4393", "#95b96c", "#9f4094", "#767a19", "#9c8fea", "#516615", "#e28de2", 
+  "#518342", "#b868bd", "#3b8251", "#e674b8", "#296437", "#d6548b", "#64b083", 
+  "#b13144", "#308a6f", "#e56463", "#115e41", "#e886ad", "#415a1f", "#7155a7", 
+  "#e4b060", "#494b93", "#907016", "#5d5ca7", "#aa5d16", "#6ab2e8", "#a04720", 
+  "#2e8cba", "#cf6449", "#3265a6", "#ba8437", "#866fbd", "#616117", "#c5a4e9", 
+  "#704b0c", "#91a2e3", "#dd9c5a", "#694283", "#839149", "#775591", "#597236", 
+  "#d28ec9", "#297153", "#a13765", "#787b43", "#997ebf", "#6f5d1d", "#6e83b7", 
+  "#f18f6b", "#445082", "#eaaf85", "#576196", "#8b6325", "#a76395", "#585c26", 
+  "#d795b8", "#997d43", "#8d4672", "#c09669", "#8b4a5f", "#c47a51", "#92434d", 
+  "#935e31", "#e87c86", "#814a28", "#e08f8b", "#a04b34", "#bd5e70", "#ae5751", 
+  "#bdb26f"
+  ];
 
   // Initialize array of dataPoint arrays with no sekitori
   var dps = Create2DArray(HEYA_COUNT + 1 + DEF_HEYA_COUNT);
@@ -127,6 +195,7 @@ window.onload = function() {
   // Initialize array of dataPoint arrays with sekitori
   var dpsB = Create2DArray(HEYA_COUNT + 1 + DEF_HEYA_COUNT);
 
+  var dpsExtra = Create2DArray(HEYA_COUNT + 1 + DEF_HEYA_COUNT);
 
   CanvasJS.addColorSet("heyaColors", dataColors);
 
@@ -219,12 +288,13 @@ window.onload = function() {
   chart.options.toolTip = {
     fontFamily: "Arial",
     shared: false,
-    cornerRadius: 8,
+    cornerRadius: 0,
     contentFormatter: tooltipNoSekitori
   };
 
   chart.options.data = [];
 
+  // Active heya
   for (var i = 0; i <= HEYA_COUNT; i++) {
     chart.options.data[i] = {
       name: hNamesAlpha[i],
@@ -239,6 +309,7 @@ window.onload = function() {
     };
   }
 
+  // Defunct heya
   for (var i = HEYA_COUNT + 1; i < DEF_HEYA_COUNT + HEYA_COUNT + 1; i++) {
     chart.options.data[i] = {
       name: hNamesDefAlpha[i - (HEYA_COUNT + 1)],
@@ -252,6 +323,37 @@ window.onload = function() {
       dataPoints: dps[i]
     };
   }
+
+  // Active heya extra
+  for (var i = DEF_HEYA_COUNT + HEYA_COUNT + 1; i < DEF_HEYA_COUNT + 
+    (HEYA_COUNT * 2) + 2; i++) {
+    chart.options.data[i] = {
+      type: "line",
+      markerSize: 0,
+      color: "darkgray",
+      lineColor: "dimgray",
+      lineThickness: 1,
+      visible: false,
+      cursor: "pointer",
+      connectNullData: false,
+      dataPoints: dpsExtra[i - (DEF_HEYA_COUNT + HEYA_COUNT + 1)]
+    };
+  } 
+
+  // Defunct heya extra
+  for (var i = DEF_HEYA_COUNT + (HEYA_COUNT * 2) + 2; i < (DEF_HEYA_COUNT + HEYA_COUNT + 1) * 2 - 1; i++) {
+    chart.options.data[i] = {
+      type: "line",
+      markerSize: 0,
+      color: "darkgray",
+      lineColor: "dimgray",
+      lineThickness: 1,
+      visible: false,
+      cursor: "pointer",
+      connectNullData: false,
+      dataPoints: dpsExtra[i - (DEF_HEYA_COUNT + HEYA_COUNT + 1)]
+    };
+  } 
 
   function updateViewportText() {
     if (chart.axisX[0].get("viewportMinimum") === Infinity) {
@@ -275,9 +377,8 @@ window.onload = function() {
     return arr;
   }
 
-
   // Checkbox for toggling between sekitori and sekitoriless dataSeries
-  var sekitoriCheckbox = document.querySelector("input[name=checkbox]");
+  var sekitoriCheckbox = document.getElementById("toggleSekitori");
   sekitoriCheckbox.addEventListener("change", toggleSekitori);
 
   function toggleSekitori() {
@@ -301,19 +402,121 @@ window.onload = function() {
     chart.render();
   }
 
+  var extraCheckbox = document.getElementById("hideExtra");
+  extraCheckbox.addEventListener("change", hideExtra);
+
+  function hideExtra() {
+    if (this.checked) {
+      for (var i = 0; i < DEF_HEYA_COUNT + HEYA_COUNT + 1; i++) {
+        if (chart.options.data[i].visible === true)
+          chart.options.data[i + DEF_HEYA_COUNT + HEYA_COUNT + 1].visible = false;
+      }
+    } else {
+      for (var i = 0; i < DEF_HEYA_COUNT + HEYA_COUNT + 1; i++) {
+        if (chart.options.data[i].visible === true)
+          chart.options.data[i + DEF_HEYA_COUNT + HEYA_COUNT + 1].visible = true;
+      }
+    }
+    chart.render();
+  }
+
   function tooltipNoSekitori(e) {
     var str = "";
+    var names = namesThen = [];
 
     for (var i = 0; i < e.entries.length; i++) {
       var temp = CanvasJS.formatDate(e.entries[i].dataPoint.x, "YYYY.MM") +
-        " - <strong>" + e.entries[i].dataSeries.name + "</strong>";
-      if (e.entries[i].dataPoint.prevHeyaName !== "")
-        temp = temp + "<br/>(then " + e.entries[i].dataPoint.prevHeyaName + ")";
-      if (e.entries[i].dataPoint.shisho !== "")
-        temp = temp + "<br/>Shisho: " + e.entries[i].dataPoint.shisho;
+        " - <strong>";
 
-      temp = temp + "<br/><strong>" + e.entries[i].dataPoint.y +
+      if (e.entries[i].dataPoint.heyaName)
+        temp = temp + e.entries[i].dataPoint.heyaName + "</strong> Beya";
+      else
+        temp = temp + e.entries[i].dataSeries.name + "</strong> Beya";
+      if (e.entries[i].dataPoint.heyaNameThen !== "" && 
+        typeof(e.entries[i].dataPoint.heyaNameThen) !== "undefined") 
+        temp = temp + "<br>(then " + e.entries[i].dataPoint.heyaNameThen + ")";
+      if (e.entries[i].dataPoint.shisho !== "") {
+        temp = temp + "<br>Shisho: ";
+        if (e.entries[i].dataPoint.heyaNameThen === "Futabayama Dojo" || 
+          e.entries[i].dataPoint.heyaNameThen === "Yoshibayama Dojo")
+          temp = temp + e.entries[i].dataPoint.shisho;
+        else if (e.entries[i].dataPoint.shisho === "None") 
+          temp = temp + "None";
+        else
+          temp = temp + "Former " + e.entries[i].dataPoint.shisho;
+      }
+      temp = temp + "<br><strong>" + e.entries[i].dataPoint.y +
         "</strong> rikishi";
+      if (e.entries[i].dataPoint.HBFrom) {
+        temp = temp + "<br>Branched out of ";
+        if (e.entries[i].dataPoint.HBFromNameThen !== "") {
+          temp = temp + e.entries[i].dataPoint.HBFromNameThen + 
+          " Beya (later <strong>" + e.entries[i].dataPoint.HBFrom + "</strong>)";
+        }
+        else
+          temp = temp + "<strong>" + e.entries[i].dataPoint.HBFrom + "</strong> Beya";
+      }
+      if (e.entries[i].dataPoint.branchOuter) {
+        if (e.entries[i].dataPoint.branchOuter === "Yokozuna Yoshibayama" ||
+          e.entries[i].dataPoint.branchOuter === "Yokozuna Futabayama") {
+          temp = temp + "<br>Active " + e.entries[i].dataPoint.branchOuter +
+          "<br>branched out to establish<br>" + e.entries[i].dataPoint.BOHNameThen + 
+          " (later <strong>" + e.entries[i].dataPoint.BOHName + "</strong> beya)";
+        } else {
+          temp = temp + "<br>Former " + e.entries[i].dataPoint.branchOuter +
+          "<br>branched out to establish<br>";
+          if (e.entries[i].dataPoint.BOHNameThen !== "") {
+            temp = temp + e.entries[i].dataPoint.BOHNameThen + " Beya (later <strong>" +
+            e.entries[i].dataPoint.BOHName + "</strong>)";
+          }
+          else {
+            temp = temp + "<strong>" + e.entries[i].dataPoint.BOHName + 
+            "</strong> Beya";
+          }
+        }
+      }
+      if (e.entries[i].dataPoint.HMHName) {
+        temp = temp + "<br>Rikishi moved from <strong>" + 
+        e.entries[i].dataPoint.HMHName + "</strong><br>Beya after its closure";
+      }
+      if (e.entries[i].dataPoint.movedTo) {
+        if (e.entries[i].dataPoint.movedTo !== "") {
+          if (e.entries[i].dataPoint.movedTo.includes(".") === true) {
+            names = e.entries[i].dataPoint.movedTo.split(".");
+            namesThen = e.entries[i].dataPoint.movedToThen.split(".");
+            temp = temp + "<br>Rikishi moved to ";
+            for (var j = 0; j < names.length; j++) {
+              if (namesThen[j] !== "")
+                temp = temp + "<br>";
+              temp = temp + "<strong>" + 
+              e.entries[i].dataPoint.movedTo.split(".")[j] + "</strong>";
+              if (namesThen[j] !== "")
+                temp = temp + " (then " + namesThen[j] + ")";
+              if (j !== names.length - 1)
+                temp = temp + ", ";
+              if (j % 2 !== 0 && j !== names.length - 1) 
+                temp = temp + "<br>";
+            }
+            temp = temp + " Beya"
+          } 
+          else {
+            if (e.entries[i].dataPoint.movedTo === "Rikishi retire")
+              temp = temp + "<br>All of its rikishi retire"
+            else {
+              temp = temp + "<br>Rikishi moved to ";
+              if (e.entries[i].dataPoint.movedToThen !== "") {
+                temp = temp + e.entries[i].dataPoint.movedToThen + " Beya (later <strong>" + 
+                e.entries[i].dataPoint.movedTo + "</strong>)";
+              }
+              else
+                temp = temp + "<strong>" + e.entries[i].dataPoint.movedTo + "</strong> Beya";
+              
+            }
+          }
+          temp = temp + "<br>after closure";
+        }
+      }
+
       str = str.concat(temp);
     }
 
@@ -325,15 +528,60 @@ window.onload = function() {
 
     for (var i = 0; i < e.entries.length; i++) {
       var temp = CanvasJS.formatDate(e.entries[i].dataPoint.x, "YYYY.MM") +
-        " - <strong>" + e.entries[i].dataSeries.name + "</strong>";
-      if (e.entries[i].dataPoint.prevHeyaName !== "")
-        temp = temp + "<br/>(then " + e.entries[i].dataPoint.prevHeyaName + ")";
+        " - <strong>";
+      if (e.entries[i].dataPoint.heyaName)
+        temp = temp + e.entries[i].dataPoint.heyaName + "</strong>";
+      else
+        temp = temp + e.entries[i].dataSeries.name + "</strong>";
+      if (e.entries[i].dataPoint.heyaNameThen !== "" || 
+        e.entries[i].dataPoint.heyaNameThen !== null)
+        temp = temp + "<br>(then " + e.entries[i].dataPoint.heyaNameThen + ")";
       if (e.entries[i].dataPoint.shisho !== "")
-        temp = temp + "<br/>Shisho: " + e.entries[i].dataPoint.shisho;
+        temp = temp + "<br>Shisho: " + e.entries[i].dataPoint.shisho;
 
-      temp = temp + "<br/><strong>" + e.entries[i].dataPoint.y[0] +
-        "</strong> rikishi, <strong>" + (e.entries[i].dataPoint.y[0] -
-          e.entries[i].dataPoint.y[1]) + "</strong> sekitori<br/>";
+      temp = temp + "<br><strong>" + e.entries[i].dataPoint.y[0] + 
+      "</strong> rikishi, <strong>" + (e.entries[i].dataPoint.y[0] - 
+        e.entries[i].dataPoint.y[1]) + "</strong> sekitori";
+      if (e.entries[i].dataPoint.HBFrom) {
+        temp = temp + "<br>Branched out of <strong>" + 
+        e.entries[i].dataPoint.HBFrom + "</strong>";
+        if (e.entries[i].dataPoint.HBFromNameThen !== "")
+          temp = temp + " (then " + e.entries[i].dataPoint.HBFromNameThen + ")";
+      }
+      if (e.entries[i].dataPoint.movedTo) {
+        if (e.entries[i].dataPoint.movedTo !== "") {
+          if (e.entries[i].dataPoint.movedTo.includes(".") === true) {
+            names = e.entries[i].dataPoint.movedTo.split(".");
+            namesThen = e.entries[i].dataPoint.movedToThen.split(".");
+            temp = temp + "<br>Rikishi moved to ";
+            for (var j = 0; j < names.length; j++) {
+              if (namesThen[j] !== "")
+                temp = temp + "<br>";
+              temp = temp + "<strong>" + 
+              e.entries[i].dataPoint.movedTo.split(".")[j] + "</strong>";
+              if (namesThen[j] !== "")
+                temp = temp + " (then " + namesThen[j] + ")";
+              if (j !== names.length - 1)
+                temp = temp + ", ";
+              if (j % 2 !== 0 && j !== names.length - 1) 
+                temp = temp + "<br>";
+            }
+          } 
+          else {
+            if (e.entries[i].dataPoint.movedTo === "Rikishi retire")
+              temp = temp + "<br>All of its rikishi retire"
+            else {
+              temp = temp + "<br>Rikishi moved to <strong>" + 
+              e.entries[i].dataPoint.movedTo + "</strong>";
+              if (e.entries[i].dataPoint.movedToThen !== "") {
+                temp = temp + " (then " + e.entries[i].dataPoint.movedToThen + ")";
+              }
+            }
+          }
+          temp = temp + "<br>after closure";
+        }
+      }
+
       str = str.concat(temp);
     }
 
@@ -374,7 +622,9 @@ window.onload = function() {
                   markerBorderThickness: 1,
                   markerBorderColor: "black",
                   shisho: hData[j][2],
-                  prevHeyaName: hData[j][5],
+                  heyaNameThen: hData[j][5],
+                  HBFrom: hData[j][6],
+                  HBFromNameThen: hData[j][7],
                   url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
                   dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
                   x: new Date(dates[0], dates[1] - 1),
@@ -387,7 +637,9 @@ window.onload = function() {
                   markerBorderThickness: 1,
                   markerBorderColor: "black",
                   shisho: hData[j][2],
-                  prevHeyaName: hData[j][5],
+                  heyaNameThen: hData[j][5],
+                  HBFrom: hData[j][6],
+                  HBFromNameThen: hData[j][7],
                   url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
                   dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
                   x: new Date(dates[0], dates[1] - 1),
@@ -395,7 +647,7 @@ window.onload = function() {
                   parseInt(hData[j][1])]
                 });
               }
-              else {
+              else if (hData[j][3] === "HT") {
                 dps[j].push({
                   markerSize: 6,
                   markerColor: "white",
@@ -403,7 +655,7 @@ window.onload = function() {
                   markerBorderThickness: 1,
                   markerBorderColor: "black",
                   shisho: hData[j][2],
-                  prevHeyaName: hData[j][5],
+                  heyaNameThen: hData[j][5],
                   url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
                   dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
                   x: new Date(dates[0], dates[1] - 1),
@@ -416,7 +668,162 @@ window.onload = function() {
                   markerBorderThickness: 1,
                   markerBorderColor: "black",
                   shisho: hData[j][2],
-                  prevHeyaName: hData[j][5],
+                  heyaNameThen: hData[j][5],
+                  url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                  dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
+                  x: new Date(dates[0], dates[1] - 1),
+                  y: [parseInt(hData[j][0]), parseInt(hData[j][0]) -
+                  parseInt(hData[j][1])]
+                });
+              }
+              else if (hData[j][3] === "HTBO") {
+                dps[j].push({
+                  markerSize: 6,
+                  markerColor: "white",
+                  markerType: "triangle",
+                  markerBorderThickness: 1,
+                  markerBorderColor: "black",
+                  shisho: hData[j][2],
+                  heyaNameThen: hData[j][5],
+                  branchOuter: hData[j][6],
+                  BOHName: hData[j][7],
+                  BOHNameThen: hData[j][8],
+                  url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                  dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
+                  x: new Date(dates[0], dates[1] - 1),
+                  y: parseInt(hData[j][0])
+                });
+                dpsB[j].push({
+                  markerSize: 6,
+                  markerColor: "white",
+                  markerType: "triangle",
+                  markerBorderThickness: 1,
+                  markerBorderColor: "black",
+                  shisho: hData[j][2],
+                  heyaNameThen: hData[j][5],
+                  branchOuter: hData[j][6],
+                  BOHName: hData[j][7],
+                  BOHNameThen: hData[j][8],
+                  url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                  dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
+                  x: new Date(dates[0], dates[1] - 1),
+                  y: [parseInt(hData[j][0]), parseInt(hData[j][0]) -
+                  parseInt(hData[j][1])]
+                });
+              }
+              else if (hData[j][3] === "HTHM") {
+                dps[j].push({
+                  markerSize: 6,
+                  markerColor: "white",
+                  markerType: "triangle",
+                  markerBorderThickness: 1,
+                  markerBorderColor: "black",
+                  shisho: hData[j][2],
+                  heyaNameThen: hData[j][5],
+                  HMHName: hData[j][6],
+                  url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                  dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
+                  x: new Date(dates[0], dates[1] - 1),
+                  y: parseInt(hData[j][0])
+                });
+                dpsB[j].push({
+                  markerSize: 6,
+                  markerColor: "white",
+                  markerType: "triangle",
+                  markerBorderThickness: 1,
+                  markerBorderColor: "black",
+                  shisho: hData[j][2],
+                  heyaNameThen: hData[j][5],
+                  HMHName: hData[j][6],
+                  url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                  dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
+                  x: new Date(dates[0], dates[1] - 1),
+                  y: [parseInt(hData[j][0]), parseInt(hData[j][0]) -
+                  parseInt(hData[j][1])]
+                });
+              }
+              else if (hData[j][3] === "BO") {
+                dps[j].push({
+                  markerSize: 6,
+                  markerColor: "black",
+                  markerType: "cross",
+                  shisho: hData[j][2],
+                  heyaNameThen: hData[j][5],
+                  branchOuter: hData[j][6],
+                  BOHName: hData[j][7],
+                  BOHNameThen: hData[j][8],
+                  url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                  dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
+                  x: new Date(dates[0], dates[1] - 1),
+                  y: parseInt(hData[j][0])
+                });
+                dpsB[j].push({
+                  markerSize: 6,
+                  markerColor: "black",
+                  markerType: "cross",
+                  shisho: hData[j][2],
+                  heyaNameThen: hData[j][5],
+                  branchOuter: hData[j][6],
+                  BOHName: hData[j][7],
+                  BOHNameThen: hData[j][8],
+                  url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                  dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
+                  x: new Date(dates[0], dates[1] - 1),
+                  y: [parseInt(hData[j][0]), parseInt(hData[j][0]) -
+                  parseInt(hData[j][1])]
+                });
+              }
+              else if (hData[j][3] === "HM") {
+                dps[j].push({
+                  markerSize: 6,
+                  markerColor: "black",
+                  markerType: "square",
+                  shisho: hData[j][2],
+                  heyaNameThen: hData[j][5],
+                  HMHName: hData[j][6],
+                  url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                  dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
+                  x: new Date(dates[0], dates[1] - 1),
+                  y: parseInt(hData[j][0])
+                });
+                dpsB[j].push({
+                  markerSize: 6,
+                  markerColor: "black",
+                  markerType: "square",
+                  shisho: hData[j][2],
+                  heyaNameThen: hData[j][5],
+                  HMHName: hData[j][6],
+                  url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                  dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
+                  x: new Date(dates[0], dates[1] - 1),
+                  y: [parseInt(hData[j][0]), parseInt(hData[j][0]) -
+                  parseInt(hData[j][1])]
+                });
+              }
+              else if (hData[j][3] === "HS") {
+                dps[j].push({
+                  markerSize: 6,
+                  markerColor: "black",
+                  markerType: "circle",
+                  markerBorderThickness: 1,
+                  markerBorderColor: "black",
+                  shisho: hData[j][2],
+                  movedTo: hData[j][6],
+                  movedToThen: hData[j][7],
+                  url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                  dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
+                  x: new Date(dates[0], dates[1] - 1),
+                  y: parseInt(hData[j][0])
+                });
+                dpsB[j].push({
+                  markerSize: 6,
+                  markerColor: "black",
+                  markerType: "circle",
+                  markerBorderThickness: 1,
+                  markerBorderColor: "black",
+                  shisho: hData[j][2],
+                  movedTo: hData[j][6],
+                  movedToThen: hData[j][7],
                   url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
                   dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
                   x: new Date(dates[0], dates[1] - 1),
@@ -428,7 +835,7 @@ window.onload = function() {
               dps[j].push({
                 shisho: hData[j][2],
                 label: hData[j][3],
-                prevHeyaName: hData[j][5],
+                heyaNameThen: hData[j][5],
                 url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
                 dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
                 x: new Date(dates[0], dates[1] - 1),
@@ -437,7 +844,7 @@ window.onload = function() {
               dpsB[j].push({
                 shisho: hData[j][2],
                 label: hData[j][3],
-                prevHeyaName: hData[j][5],
+                heyaNameThen: hData[j][5],
                 url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
                 dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
                 x: new Date(dates[0], dates[1] - 1),
@@ -452,12 +859,136 @@ window.onload = function() {
     chart.render();
   }
 
+  $.get("https://raw.githubusercontent.com/chiyotasuke/chiyotasuke/main/heya_active_extra.csv",
+    getDataActiveExtra);
+
+  function getDataActiveExtra(csv) {
+    var csvLines = heya = dates = [];
+    var hData = Create2DArray(HEYA_COUNT + 1);
+
+    csvLines = csv.split(/[\r?\n|\r|\n]+/);
+    for (var i = 1; i < csvLines.length; i++) {
+      if (csvLines[i].length > 0) {
+        heya = csvLines[i].split(",");
+        dates = heya[0].split(".");
+        for (var j = 1; j <= HEYA_COUNT; j++) {
+          hData[j] = heya[j+1].split("-");
+          if (heya[j+1] !== "") {
+            if (hData[j][0] === "") {
+              dpsExtra[j].push({
+                x: new Date(dates[0], dates[1] - 1),
+                y: null
+              });
+            }
+            else if (hData[j][4] === "HB") {
+              dpsExtra[j].push({
+                markerSize: 6,
+                markerColor: "white",
+                markerType: "circle",
+                markerBorderThickness: 1,
+                markerBorderColor: "dimgray",
+                click: function(e) {
+                  window.open(e.dataPoint.url);
+                },
+                heyaName: hData[j][0],
+                heyaNameThen: hData[j][6],
+                shisho: hData[j][3],
+                HBFrom: hData[j][7],
+                HBFromNameThen: hData[j][8],
+                url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                dates[1] + "&heya=" + hData[j][5] + "&shusshin=-1",
+                x: new Date(dates[0], dates[1] - 1),
+                y: parseInt(hData[j][1])
+              });
+            } 
+            else if (hData[j][4] === "BO") {
+              dpsExtra[j].push({
+                markerSize: 6,
+                markerColor: "dimgray",
+                markerType: "cross",
+                click: function(e) {
+                  window.open(e.dataPoint.url);
+                },
+                heyaName: hData[j][0],
+                heyaNameThen: hData[j][6],
+                shisho: hData[j][3],
+                branchOuter: hData[j][7],
+                BOHName: hData[j][8],
+                BOHNameThen: hData[j][9],
+                url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                dates[1] + "&heya=" + hData[j][5] + "&shusshin=-1",
+                x: new Date(dates[0], dates[1] - 1),
+                y: parseInt(hData[j][1])
+              });
+            } 
+            else if (hData[j][4] === "HM") {
+              dpsExtra[j].push({
+                markerSize: 6,
+                markerColor: "dimgray",
+                markerType: "square",
+                markerBorderThickness: 1,
+                markerBorderColor: "dimgray",
+                click: function(e) {
+                  window.open(e.dataPoint.url);
+                },
+                heyaName: hData[j][0],
+                heyaNameThen: hData[j][6],
+                shisho: hData[j][3],
+                HMHName: hData[j][7],
+                url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                dates[1] + "&heya=" + hData[j][5] + "&shusshin=-1",
+                x: new Date(dates[0], dates[1] - 1),
+                y: parseInt(hData[j][1])
+              });
+            } 
+            else if (hData[j][4] === "HS") {
+              dpsExtra[j].push({
+                markerSize: 6,
+                markerColor: "dimgray",
+                markerType: "circle",
+                markerBorderThickness: 1,
+                markerBorderColor: "dimgray",
+                click: function(e) {
+                  window.open(e.dataPoint.url);
+                },
+                heyaName: hData[j][0],
+                shisho: hData[j][3],
+                movedTo: hData[j][7],
+                movedToThen: hData[j][8],
+                url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                dates[1] + "&heya=" + hData[j][5] + "&shusshin=-1",
+                x: new Date(dates[0], dates[1] - 1),
+                y: parseInt(hData[j][1])
+              });
+            } 
+            else {
+              dpsExtra[j].push({
+                markerColor: "darkgray",
+                click: function(e) {
+                  window.open(e.dataPoint.url);
+                },
+                heyaName: hData[j][0],
+                heyaNameThen: hData[j][6],
+                shisho: hData[j][3],
+                url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                dates[1] + "&heya=" + hData[j][5] + "&shusshin=-1",
+                x: new Date(dates[0], dates[1] - 1),
+                y: parseInt(hData[j][1])
+              });
+            }
+          }
+        }
+      }
+    }
+    chart.render();
+  }
+
   $.get("https://raw.githubusercontent.com/chiyotasuke/chiyotasuke/main/heya_data_def.csv",
     getDataDef);
 
   function getDataDef(csv) {
     var csvLines = heya = dates = [];
-    var hData = Create2DArray(HEYA_COUNT + 1);
+    var hData = Create2DArray(DEF_HEYA_COUNT);
 
     csvLines = csv.split(/[\r?\n|\r|\n]+/);
     for (var i = 1; i < csvLines.length; i++) {
@@ -479,21 +1010,22 @@ window.onload = function() {
             }
             else if (hData[j][2] === "None") {
               dps[j+HEYA_COUNT+1].push({
-                lineColor: "gray",
+                color: "dimgray",
+                lineColor: "dimgray",
                 shisho: hData[j][2],
                 label: hData[j][3],
-                prevHeyaName: hData[j][5],
+                heyaNameThen: hData[j][5],
                 url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
                 dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
                 x: new Date(dates[0], dates[1] - 1),
                 y: parseInt(hData[j][0])
               });
               dpsB[j+HEYA_COUNT+1].push({
-                lineColor: "gray",
-                fillOpacity: .2,
+                color: "dimgray",
+                lineColor: "dimgray",
                 shisho: hData[j][2],
                 label: hData[j][3],
-                prevHeyaName: hData[j][5],
+                heyaNameThen: hData[j][5],
                 url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
                 dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
                 x: new Date(dates[0], dates[1] - 1),
@@ -510,7 +1042,9 @@ window.onload = function() {
                   markerBorderThickness: 1,
                   markerBorderColor: "black",
                   shisho: hData[j][2],
-                  prevHeyaName: hData[j][5],
+                  heyaNameThen: hData[j][5],
+                  HBFrom: hData[j][6],
+                  HBFromNameThen: hData[j][7],
                   url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
                   dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
                   x: new Date(dates[0], dates[1] - 1),
@@ -523,7 +1057,9 @@ window.onload = function() {
                   markerBorderThickness: 1,
                   markerBorderColor: "black",
                   shisho: hData[j][2],
-                  prevHeyaName: hData[j][5],
+                  heyaNameThen: hData[j][5],
+                  HBFrom: hData[j][6],
+                  HBFromNameThen: hData[j][7],
                   url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
                   dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
                   x: new Date(dates[0], dates[1] - 1),
@@ -531,15 +1067,18 @@ window.onload = function() {
                   parseInt(hData[j][1])]
                 });
               }
-              else if (hData[j][3] === "HT"){
+              else if (hData[j][3] === "HBHM") {
                 dps[j+HEYA_COUNT+1].push({
                   markerSize: 6,
                   markerColor: "white",
-                  markerType: "triangle",
+                  markerType: "circle",
                   markerBorderThickness: 1,
                   markerBorderColor: "black",
                   shisho: hData[j][2],
-                  prevHeyaName: hData[j][5],
+                  heyaNameThen: hData[j][5],
+                  HMHName: hData[j][8],
+                  HBFrom: hData[j][6],
+                  HBFromNameThen: hData[j][7],
                   url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
                   dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
                   x: new Date(dates[0], dates[1] - 1),
@@ -548,39 +1087,14 @@ window.onload = function() {
                 dpsB[j+HEYA_COUNT+1].push({
                   markerSize: 6,
                   markerColor: "white",
-                  markerType: "triangle",
-                  markerBorderThickness: 1,
-                  markerBorderColor: "black",
-                  shisho: hData[j][2],
-                  prevHeyaName: hData[j][5],
-                  url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
-                  dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
-                  x: new Date(dates[0], dates[1] - 1),
-                  y: [parseInt(hData[j][0]), parseInt(hData[j][0]) -
-                  parseInt(hData[j][1])]
-                });
-              } else {
-                dps[j+HEYA_COUNT+1].push({
-                  markerSize: 6,
-                  markerColor: "black",
                   markerType: "circle",
                   markerBorderThickness: 1,
                   markerBorderColor: "black",
                   shisho: hData[j][2],
-                  prevHeyaName: hData[j][5],
-                  url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
-                  dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
-                  x: new Date(dates[0], dates[1] - 1),
-                  y: parseInt(hData[j][0])
-                });
-                dpsB[j+HEYA_COUNT+1].push({
-                  markerSize: 6,
-                  markerColor: "black",
-                  markerType: "circle",
-                  markerBorderThickness: 1,
-                  markerBorderColor: "black",
-                  shisho: hData[j][2],
-                  prevHeyaName: hData[j][5],
+                  heyaNameThen: hData[j][5],
+                  HMHName: hData[j][8],
+                  HBFrom: hData[j][6],
+                  HBFromNameThen: hData[j][7],
                   url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
                   dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
                   x: new Date(dates[0], dates[1] - 1),
@@ -588,11 +1102,265 @@ window.onload = function() {
                   parseInt(hData[j][1])]
                 });
               }
-            } else {
+              else if (hData[j][3] === "HT") {
+                dps[j+HEYA_COUNT+1].push({
+                  markerSize: 6,
+                  markerColor: "white",
+                  markerType: "triangle",
+                  markerBorderThickness: 1,
+                  markerBorderColor: "black",
+                  shisho: hData[j][2],
+                  heyaNameThen: hData[j][5],
+                  url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                  dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
+                  x: new Date(dates[0], dates[1] - 1),
+                  y: parseInt(hData[j][0])
+                });
+                dpsB[j+HEYA_COUNT+1].push({
+                  markerSize: 6,
+                  markerColor: "white",
+                  markerType: "triangle",
+                  markerBorderThickness: 1,
+                  markerBorderColor: "black",
+                  shisho: hData[j][2],
+                  heyaNameThen: hData[j][5],
+                  url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                  dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
+                  x: new Date(dates[0], dates[1] - 1),
+                  y: [parseInt(hData[j][0]), parseInt(hData[j][0]) -
+                  parseInt(hData[j][1])]
+                });
+              }
+              else if (hData[j][3] === "HTBO") {
+                dps[j+HEYA_COUNT+1].push({
+                  markerSize: 6,
+                  markerColor: "white",
+                  markerType: "triangle",
+                  markerBorderThickness: 1,
+                  markerBorderColor: "black",
+                  shisho: hData[j][2],
+                  heyaNameThen: hData[j][5],
+                  branchOuter: hData[j][6],
+                  BOHName: hData[j][7],
+                  BOHNameThen: hData[j][8],
+                  url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                  dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
+                  x: new Date(dates[0], dates[1] - 1),
+                  y: parseInt(hData[j][0])
+                });
+                dpsB[j+HEYA_COUNT+1].push({
+                  markerSize: 6,
+                  markerColor: "white",
+                  markerType: "triangle",
+                  markerBorderThickness: 1,
+                  markerBorderColor: "black",
+                  shisho: hData[j][2],
+                  heyaNameThen: hData[j][5],
+                  branchOuter: hData[j][6],
+                  BOHName: hData[j][7],
+                  BOHNameThen: hData[j][8],
+                  url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                  dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
+                  x: new Date(dates[0], dates[1] - 1),
+                  y: [parseInt(hData[j][0]), parseInt(hData[j][0]) -
+                  parseInt(hData[j][1])]
+                });
+              }
+              else if (hData[j][3] === "HTHM") {
+                dps[j+HEYA_COUNT+1].push({
+                  markerSize: 6,
+                  markerColor: "white",
+                  markerType: "triangle",
+                  markerBorderThickness: 1,
+                  markerBorderColor: "black",
+                  shisho: hData[j][2],
+                  heyaNameThen: hData[j][5],
+                  HMHName: hData[j][6],
+                  url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                  dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
+                  x: new Date(dates[0], dates[1] - 1),
+                  y: parseInt(hData[j][0])
+                });
+                dpsB[j+HEYA_COUNT+1].push({
+                  markerSize: 6,
+                  markerColor: "white",
+                  markerType: "triangle",
+                  markerBorderThickness: 1,
+                  markerBorderColor: "black",
+                  shisho: hData[j][2],
+                  heyaNameThen: hData[j][5],
+                  HMHName: hData[j][6],
+                  url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                  dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
+                  x: new Date(dates[0], dates[1] - 1),
+                  y: [parseInt(hData[j][0]), parseInt(hData[j][0]) -
+                  parseInt(hData[j][1])]
+                });
+              }
+              else if (hData[j][3] === "HTHS") {
+                dps[j+HEYA_COUNT+1].push({
+                  markerSize: 6,
+                  markerColor: "white",
+                  markerType: "triangle",
+                  markerBorderThickness: 1,
+                  markerBorderColor: "black",
+                  shisho: hData[j][2],
+                  movedTo: hData[j][6],
+                  movedToThen: hData[j][7],
+                  url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                  dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
+                  x: new Date(dates[0], dates[1] - 1),
+                  y: parseInt(hData[j][0])
+                });
+                dpsB[j+HEYA_COUNT+1].push({
+                  markerSize: 6,
+                  markerColor: "white",
+                  markerType: "triangle",
+                  markerBorderThickness: 1,
+                  markerBorderColor: "black",
+                  shisho: hData[j][2],
+                  movedTo: hData[j][6],
+                  movedToThen: hData[j][7],
+                  url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                  dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
+                  x: new Date(dates[0], dates[1] - 1),
+                  y: [parseInt(hData[j][0]), parseInt(hData[j][0]) -
+                  parseInt(hData[j][1])]
+                });
+              }
+              else if (hData[j][3] === "BO") {
+                dps[j+HEYA_COUNT+1].push({
+                  markerSize: 6,
+                  markerColor: "black",
+                  markerType: "cross",
+                  shisho: hData[j][2],
+                  heyaNameThen: hData[j][5],
+                  branchOuter: hData[j][6],
+                  BOHName: hData[j][7],
+                  BOHNameThen: hData[j][8],
+                  url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                  dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
+                  x: new Date(dates[0], dates[1] - 1),
+                  y: parseInt(hData[j][0])
+                });
+                dpsB[j+HEYA_COUNT+1].push({
+                  markerSize: 6,
+                  markerColor: "black",
+                  markerType: "cross",
+                  shisho: hData[j][2],
+                  heyaNameThen: hData[j][5],
+                  branchOuter: hData[j][6],
+                  BOHName: hData[j][7],
+                  BOHNameThen: hData[j][8],
+                  url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                  dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
+                  x: new Date(dates[0], dates[1] - 1),
+                  y: [parseInt(hData[j][0]), parseInt(hData[j][0]) -
+                  parseInt(hData[j][1])]
+                });
+              }
+              else if (hData[j][3] === "HM") {
+                dps[j+HEYA_COUNT+1].push({
+                  markerSize: 6,
+                  markerColor: "black",
+                  markerType: "square",
+                  shisho: hData[j][2],
+                  heyaNameThen: hData[j][5],
+                  HMHName: hData[j][6],
+                  url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                  dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
+                  x: new Date(dates[0], dates[1] - 1),
+                  y: parseInt(hData[j][0])
+                });
+                dpsB[j+HEYA_COUNT+1].push({
+                  markerSize: 6,
+                  markerColor: "black",
+                  markerType: "square",
+                  shisho: hData[j][2],
+                  heyaNameThen: hData[j][5],
+                  HMHName: hData[j][6],
+                  url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                  dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
+                  x: new Date(dates[0], dates[1] - 1),
+                  y: [parseInt(hData[j][0]), parseInt(hData[j][0]) -
+                  parseInt(hData[j][1])]
+                });
+              }
+              else if (hData[j][3] === "HS") {
+                dps[j+HEYA_COUNT+1].push({
+                  markerSize: 6,
+                  markerColor: "black",
+                  markerType: "circle",
+                  markerBorderThickness: 1,
+                  markerBorderColor: "black",
+                  shisho: hData[j][2],
+                  movedTo: hData[j][6],
+                  movedToThen: hData[j][7],
+                  url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                  dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
+                  x: new Date(dates[0], dates[1] - 1),
+                  y: parseInt(hData[j][0])
+                });
+                dpsB[j+HEYA_COUNT+1].push({
+                  markerSize: 6,
+                  markerColor: "black",
+                  markerType: "circle",
+                  markerBorderThickness: 1,
+                  markerBorderColor: "black",
+                  shisho: hData[j][2],
+                  movedTo: hData[j][6],
+                  movedToThen: hData[j][7],
+                  url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                  dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
+                  x: new Date(dates[0], dates[1] - 1),
+                  y: [parseInt(hData[j][0]), parseInt(hData[j][0]) -
+                  parseInt(hData[j][1])]
+                });
+              }
+            
+              else if (hData[j][3] === "HSBO") {
+                dps[j+HEYA_COUNT+1].push({
+                  markerSize: 6,
+                  markerColor: "black",
+                  markerType: "cross",
+                  markerBorderThickness: 1,
+                  markerBorderColor: "black",
+                  shisho: hData[j][2],
+                  movedTo: hData[j][6],
+                  movedToThen: hData[j][7],
+                  branchOuter: hData[j][8],
+                  BOHName: hData[j][9],
+                  BOHNameThen: hData[j][10],
+                  url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                  dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
+                  x: new Date(dates[0], dates[1] - 1),
+                  y: parseInt(hData[j][0])
+                });
+                dpsB[j+HEYA_COUNT+1].push({
+                  markerSize: 6,
+                  markerColor: "black",
+                  markerType: "cross",
+                  markerBorderThickness: 1,
+                  markerBorderColor: "black",
+                  shisho: hData[j][2],
+                  movedTo: hData[j][6],
+                  movedToThen: hData[j][7],
+                  branchOuter: hData[j][8],
+                  BOHName: hData[j][9],
+                  BOHNameThen: hData[j][10],
+                  url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                  dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
+                  x: new Date(dates[0], dates[1] - 1),
+                  y: [parseInt(hData[j][0]), parseInt(hData[j][0]) -
+                  parseInt(hData[j][1])]
+                });
+              }
+            }
+            else {
               dps[j+HEYA_COUNT+1].push({
                 shisho: hData[j][2],
                 label: hData[j][3],
-                prevHeyaName: hData[j][5],
+                heyaNameThen: hData[j][5],
                 url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
                 dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
                 x: new Date(dates[0], dates[1] - 1),
@@ -601,7 +1369,7 @@ window.onload = function() {
               dpsB[j+HEYA_COUNT+1].push({
                 shisho: hData[j][2],
                 label: hData[j][3],
-                prevHeyaName: hData[j][5],
+                heyaNameThen: hData[j][5],
                 url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
                 dates[1] + "&heya=" + hData[j][4] + "&shusshin=-1",
                 x: new Date(dates[0], dates[1] - 1),
@@ -616,14 +1384,193 @@ window.onload = function() {
     chart.render();
   }
 
-  var viewportButton = document.getElementById("setViewport");
+  $.get("https://raw.githubusercontent.com/chiyotasuke/chiyotasuke/main/heya_def_extra.csv",
+    getDataDefExtra);
+
+  function getDataDefExtra(csv) {
+    var csvLines = heya = dates = [];
+    var hData = Create2DArray(DEF_HEYA_COUNT);
+
+    csvLines = csv.split(/[\r?\n|\r|\n]+/);
+    for (var i = 1; i < csvLines.length; i++) {
+      if (csvLines[i].length > 0) {
+        heya = csvLines[i].split(",");
+        dates = heya[0].split(".");
+        for (var j = 0; j < DEF_HEYA_COUNT; j++) {
+          hData[j] = heya[j+1].split("-");
+          if (heya[j+1] !== "") {
+            if (hData[j][0] === "") {
+              dpsExtra[j+HEYA_COUNT+1].push({
+                x: new Date(dates[0], dates[1] - 1),
+                y: null
+              });
+            }
+            else if (hData[j][4] === "HB") {
+              dpsExtra[j+HEYA_COUNT+1].push({
+                markerSize: 6,
+                markerColor: "white",
+                markerType: "circle",
+                markerBorderThickness: 1,
+                markerBorderColor: "dimgray",
+                click: function(e) {
+                  window.open(e.dataPoint.url);
+                },
+                heyaName: hData[j][0],
+                heyaNameThen: hData[j][6],
+                shisho: hData[j][3],
+                HBFrom: hData[j][7],
+                HBFromNameThen: hData[j][8],
+                url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                dates[1] + "&heya=" + hData[j][5] + "&shusshin=-1",
+                x: new Date(dates[0], dates[1] - 1),
+                y: parseInt(hData[j][1])
+              });
+            } 
+            else if (hData[j][4] === "BO") {
+              dpsExtra[j+HEYA_COUNT+1].push({
+                markerSize: 6,
+                markerColor: "dimgray",
+                markerType: "cross",
+                click: function(e) {
+                  window.open(e.dataPoint.url);
+                },
+                heyaName: hData[j][0],
+                heyaNameThen: hData[j][6],
+                shisho: hData[j][3],
+                branchOuter: hData[j][7],
+                BOHName: hData[j][8],
+                BOHNameThen: hData[j][9],
+                url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                dates[1] + "&heya=" + hData[j][5] + "&shusshin=-1",
+                x: new Date(dates[0], dates[1] - 1),
+                y: parseInt(hData[j][1])
+              });
+            } 
+            else if (hData[j][4] === "HM") {
+              dpsExtra[j+HEYA_COUNT+1].push({
+                markerSize: 6,
+                markerColor: "dimgray",
+                markerType: "square",
+                markerBorderThickness: 1,
+                markerBorderColor: "dimgray",
+                click: function(e) {
+                  window.open(e.dataPoint.url);
+                },
+                heyaName: hData[j][0],
+                heyaNameThen: hData[j][6],
+                shisho: hData[j][3],
+                HMHName: hData[j][7],
+                url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                dates[1] + "&heya=" + hData[j][5] + "&shusshin=-1",
+                x: new Date(dates[0], dates[1] - 1),
+                y: parseInt(hData[j][1])
+              });
+            } 
+            else if (hData[j][4] === "HBHM") {
+              dpsExtra[j+HEYA_COUNT+1].push({
+                markerSize: 6,
+                markerColor: "white",
+                markerType: "circle",
+                markerBorderThickness: 1,
+                markerBorderColor: "dimgray",
+                shisho: hData[j][3],
+                heyaName: hData[j][0],
+                heyaNameThen: hData[j][6],
+                HMHName: hData[j][9],
+                HBFrom: hData[j][7],
+                HBFromNameThen: hData[j][8],
+                url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                dates[1] + "&heya=" + hData[j][5] + "&shusshin=-1",
+                x: new Date(dates[0], dates[1] - 1),
+                y: parseInt(hData[j][1])
+              });
+            }
+            else if (hData[j][4] === "HTBO") {
+              dpsExtra[j+HEYA_COUNT+1].push({
+                markerSize: 6,
+                markerColor: "white",
+                markerType: "triangle",
+                markerBorderThickness: 1,
+                markerBorderColor: "dimgray",
+                shisho: hData[j][3],
+                heyaName: hData[j][0],
+                heyaNameThen: hData[j][6],
+                branchOuter: hData[j][7],
+                BOHName: hData[j][8],
+                BOHNameThen: hData[j][9],
+                url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                dates[1] + "&heya=" + hData[j][5] + "&shusshin=-1",
+                x: new Date(dates[0], dates[1] - 1),
+                y: parseInt(hData[j][1])
+              });
+            }
+            else if (hData[j][4] === "HTHM") {
+              dpsExtra[j+HEYA_COUNT+1].push({
+                markerSize: 6,
+                markerColor: "white",
+                markerType: "triangle",
+                markerBorderThickness: 1,
+                markerBorderColor: "dimgray",
+                shisho: hData[j][3],
+                heyaName: hData[j][0],
+                heyaNameThen: hData[j][6],
+                HMHName: hData[j][7],
+                url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                dates[1] + "&heya=" + hData[j][5] + "&shusshin=-1",
+                x: new Date(dates[0], dates[1] - 1),
+                y: parseInt(hData[j][1])
+              });
+            }
+            else if (hData[j][4] === "HS") {
+              dpsExtra[j+HEYA_COUNT+1].push({
+                markerSize: 6,
+                markerColor: "dimgray",
+                markerType: "circle",
+                markerBorderThickness: 1,
+                markerBorderColor: "dimgray",
+                click: function(e) {
+                  window.open(e.dataPoint.url);
+                },
+                heyaName: hData[j][0],
+                shisho: hData[j][3],
+                movedTo: hData[j][7],
+                movedToThen: hData[j][8],
+                url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                dates[1] + "&heya=" + hData[j][5] + "&shusshin=-1",
+                x: new Date(dates[0], dates[1] - 1),
+                y: parseInt(hData[j][1])
+              });
+            } 
+            else {
+              dpsExtra[j+HEYA_COUNT+1].push({
+                markerColor: "darkgray",
+                click: function(e) {
+                  window.open(e.dataPoint.url);
+                },
+                heyaName: hData[j][0],
+                heyaNameThen: hData[j][6],
+                shisho: hData[j][3],
+                url: "https://sumodb.sumogames.de/Banzuke.aspx?b=" + dates[0] + 
+                dates[1] + "&heya=" + hData[j][5] + "&shusshin=-1",
+                x: new Date(dates[0], dates[1] - 1),
+                y: parseInt(hData[j][1])
+              });
+            }
+          }
+        }
+      }
+    }
+    chart.render();
+  }
+
+  var viewportButton = document.getElementById("setViewportButton");
   var vRange = document.getElementById("viewportRange");
   viewportButton.addEventListener("click", setViewport);
 
 
   vRange.addEventListener("keydown", function (e) {
     if (e.code === "Enter") {  //checks whether the pressed key is "Enter"
-        setViewport();
+      setViewport();
     }
   });
 
@@ -643,7 +1590,7 @@ window.onload = function() {
     updateViewportText();
   }
 
-  var resetViewportButton = document.getElementById("resetViewport");
+  var resetViewportButton = document.getElementById("resetViewportButton");
   resetViewportButton.addEventListener("click", resetViewport);
 
   function resetViewport() {
@@ -681,19 +1628,20 @@ window.onload = function() {
     updateViewportText();
   });
 
-
   var legendListId = document.getElementById("legendList");
   customLegends();
 
   function customLegends() {
     for (var i = 0; i <= HEYA_COUNT; i++) { 
       var li = document.createElement("li");
-      li.style.color = "#A9A9A9";
+      li.style.color = "gray";
       li.appendChild(document.createTextNode(hNamesAlpha[i]));
       legendListId.appendChild(li); 
       $('li').each(function (i) {
-          $(this).attr('id', "name" + String(i));
+        $(this).attr('id', "name" + String(i));
+        $(this).tooltip({title: hNamesTooltip[i], delay: {show: 400}});
       });
+      
     }
       
     $('li').mouseover(function(event) {
@@ -701,18 +1649,18 @@ window.onload = function() {
         if (chart.options.data[i].name === this.innerText) {
           chart.options.data[i].lineThickness = 3;
           chart.options.data[i].fillOpacity = .6;
-          chart.options.data[i].indexLabelFontWeight = "bolder";
+          this.style.textDecoration = "underline";
         }
       }
       chart.render();
     });
-
+    
     $('li').mouseout(function(event) {
       for (var i = 0; i <= HEYA_COUNT; i++) {
         if (chart.options.data[i].name === this.innerText) {
           chart.options.data[i].lineThickness = 2;
           chart.options.data[i].fillOpacity = .4;
-          chart.options.data[i].indexLabelFontWeight = "normal";
+          this.style.textDecoration = "none";
         }
       }
       chart.render();
@@ -724,7 +1672,8 @@ window.onload = function() {
           if (typeof(chart.options.data[i].visible) === "undefined" || 
             chart.options.data[i].visible) {
             chart.options.data[i].visible = false;
-            this.style.color = "#A9A9A9";
+            chart.options.data[i + DEF_HEYA_COUNT + HEYA_COUNT + 1].visible = false;
+            this.style.color = "gray";
             this.style.fontWeight = "normal";
           } else {
             if (document.getElementById("toggleSekitori").checked === true) {
@@ -735,6 +1684,10 @@ window.onload = function() {
               chart.data[i].set("type", "line");
               chart.options.data[i].dataPoints = dps[i];
             }
+            if (document.getElementById("hideExtra").checked === true)
+              chart.options.data[i + DEF_HEYA_COUNT + HEYA_COUNT + 1].visible = false;
+            else
+              chart.options.data[i + DEF_HEYA_COUNT + HEYA_COUNT + 1].visible = true;
             chart.options.data[i].visible = true;
             this.style.color = dataColors[i];
             this.style.fontWeight = "bold";
@@ -752,11 +1705,13 @@ window.onload = function() {
   function customLegendsDef() {
     for (var i = HEYA_COUNT + 1; i < HEYA_COUNT + DEF_HEYA_COUNT + 1; i++)  { 
       var li = document.createElement("li");
-      li.style.color = "#A9A9A9";
+      li.style.color = "gray";
       li.appendChild(document.createTextNode(hNamesDefAlpha[i-(HEYA_COUNT + 1)]));
       legendListIdDef.appendChild(li); 
       $('li').each(function (i) {
-          $(this).attr('id', "name" + String(i));
+        $(this).attr('id', "name" + String(i));
+        $(this).tooltip({title: hNamesTooltipDef[i-(HEYA_COUNT + 1)], 
+          delay: {show: 400} });
       });
     }
       
@@ -765,7 +1720,7 @@ window.onload = function() {
         if (chart.options.data[i].name === this.innerText) {
           chart.options.data[i].lineThickness = 3;
           chart.options.data[i].fillOpacity = .6;
-          chart.options.data[i].indexLabelFontWeight = "bolder";
+          this.style.textDecoration = "underline";
         }
       }
       chart.render();
@@ -776,7 +1731,7 @@ window.onload = function() {
         if (chart.options.data[i].name === this.innerText) {
           chart.options.data[i].lineThickness = 2;
           chart.options.data[i].fillOpacity = .4;
-          chart.options.data[i].indexLabelFontWeight = "normal";
+          this.style.textDecoration = "none";
         }
       }
       chart.render();
@@ -788,7 +1743,8 @@ window.onload = function() {
           if (typeof(chart.options.data[i].visible) === "undefined" || 
             chart.options.data[i].visible) {
             chart.options.data[i].visible = false;
-            this.style.color = "#A9A9A9";
+            chart.options.data[i + DEF_HEYA_COUNT + HEYA_COUNT + 1].visible = false;
+            this.style.color = "gray";
             this.style.fontWeight = "normal";
           } else {
             if (document.getElementById("toggleSekitori").checked === true) {
@@ -799,6 +1755,10 @@ window.onload = function() {
               chart.data[i].set("type", "line");
               chart.options.data[i].dataPoints = dps[i];
             }
+            if (document.getElementById("hideExtra").checked === true)
+              chart.options.data[i + DEF_HEYA_COUNT + HEYA_COUNT + 1].visible = false;
+            else
+              chart.options.data[i + DEF_HEYA_COUNT + HEYA_COUNT + 1].visible = true;
             chart.options.data[i].visible = true;
             this.style.color = dataColors[i];
             this.style.fontWeight = "bold";
@@ -809,6 +1769,10 @@ window.onload = function() {
       updateViewportText();
     });
   }
+  
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
 
   var hideAllButton = document.getElementById("hideAll");
   hideAllButton.addEventListener("click", hideAll);
@@ -816,9 +1780,28 @@ window.onload = function() {
   function hideAll() {
     const legend = [...document.querySelectorAll("li")];
     for (var i = 0; i < DEF_HEYA_COUNT + HEYA_COUNT + 1; i++) {
-      if (chart.options.data[i].visible) 
+      if (chart.options.data[i].visible) {
         chart.options.data[i].visible = false;
-      legend[i].style.color = "#A9A9A9";
+        chart.options.data[i + DEF_HEYA_COUNT + HEYA_COUNT + 1].visible = false;
+      }
+      legend[i].style.color = "gray";
+      legend[i].style.fontWeight = "normal";
+    }
+    chart.render();
+    updateViewportText();
+  }
+
+  var hideAllButton = document.getElementById("hideAll");
+  hideAllButton.addEventListener("click", hideAll);
+
+  function hideAll() {
+    const legend = [...document.querySelectorAll("li")];
+    for (var i = 0; i < DEF_HEYA_COUNT + HEYA_COUNT + 1; i++) {
+      if (chart.options.data[i].visible) {
+        chart.options.data[i].visible = false;
+        chart.options.data[i + DEF_HEYA_COUNT + HEYA_COUNT + 1].visible = false;
+      }
+      legend[i].style.color = "gray";
       legend[i].style.fontWeight = "normal";
     }
     chart.render();
@@ -862,52 +1845,6 @@ window.onload = function() {
 
   }
 
-  var sortNames = document.getElementById("sortDropdown");
-  sortNames.addEventListener("change", function() {
-    switch(sortNames.value) {
-      case "alphabetic":
-        for (var i = 0; i <= HEYA_COUNT; i++) {
-          var li = document.getElementById("name" + String(i));
-          li.innerText = hNamesAlpha[i];
-        }
-        for (var i = HEYA_COUNT + 1; i < HEYA_COUNT + DEF_HEYA_COUNT + 1; i++) {
-          var li = document.getElementById("name" + String(i));
-          li.innerText = hNamesDefAlpha[i-(HEYA_COUNT + 1)];
-        }
-        break;
-      case "newest":
-        for (var i = 0; i <= HEYA_COUNT; i++) {
-          var li = document.getElementById("name" + String(i));
-          li.innerText = hNamesNew[i];
-        }
-        for (var i = HEYA_COUNT + 1; i < HEYA_COUNT + DEF_HEYA_COUNT + 1; i++) {
-          var li = document.getElementById("name" + String(i));
-          li.innerText = hNamesDefNew[i-(HEYA_COUNT + 1)];
-        }
-        break;
-      case "oldest":
-        for (var i = 0; i <= HEYA_COUNT; i++) {
-          var li = document.getElementById("name" + String(i));
-          li.innerText = hNamesOld[i];
-        }
-        for (var i = HEYA_COUNT + 1; i < HEYA_COUNT + DEF_HEYA_COUNT + 1; i++) {
-          var li = document.getElementById("name" + String(i));
-          li.innerText = hNamesDefOld[i-(HEYA_COUNT + 1)];
-        }
-        break;
-      default:
-        for (var i = 0; i <= HEYA_COUNT; i++) {
-          var li = document.getElementById("name" + String(i));
-          li.innerText = hNamesAlpha[i];
-        }
-        for (var i = HEYA_COUNT + 1; i < HEYA_COUNT + DEF_HEYA_COUNT + 1; i++) {
-          var li = document.getElementById("name" + String(i));
-          li.innerText = hNamesDefClo[i-(HEYA_COUNT + 1)];
-        }
-    }
-    hideAll();
-  });
-
 }
 
     </script>
@@ -916,52 +1853,52 @@ window.onload = function() {
     <body>
       <title>Heya Graph</title>
       <div id="header">
-        <a id="titleText">Heya Graph</a><a href="https://sumodb.sumogames.de/">Sumo Reference</a><a id="creditText">data compiled from</a>
+        <a id="titleText">Heya Graph</a>
+        <a href="https://sumodb.sumogames.de/">Sumo Reference</a><a id="creditText">data compiled from</a>
       </div>
       <fieldset id="graphView">
-        <div class="setViewportRange">
+        <div class="setViewport">
           Set view range: <input id="viewportRange" type="text" placeholder="yyyy.m - yyyy.m" autocomplete="off"> 
-          <button id="setViewport" type="button" value="viewportButton">Set</button>
+          <button id="setViewportButton" type="button" value="viewportButton">Set</button>
         </div>
-        <button id="resetViewport" type="button" value="resetViewportButton">↻ Reset</button>
-        <div id="range-selector">
+        │
+        <button id="resetViewportButton" type="button" value="resetViewportButton">↻ Reset</button>
+        │
+        <div id="rangeSelector">
           Zoom to: 
           <input type="button" id="5y" class="period ui-button" value="5 yrs"/>
           <input type="button" id="10y" class="period ui-button" value="10 yrs"/>
           <input type="button" id="20y" class="period ui-button" value="20 yrs"/>
           <input type="button" id="50y" class="period ui-button" value="50 yrs"/>
         </div>
+        <div class="currentViewport">
+          <label>Viewing: <input id="viewportX" type="text" size=14 placeholder=". . ." readonly></label>
+        </div>
       </fieldset>
     <div id="chartContainer"></div>
     <fieldset id="graphSettings">
-      <div class="currentViewport">
-        <label>Viewing: <input id="viewportX" type="text" size=14 placeholder=". . ." readonly></label>
-      </div>
       <label><input id="toggleSekitori" type="checkbox" name="checkbox" autocomplete="off">Enable Sekitori</label>
+      <label><input id="hideExtra" type="checkbox" name="checkbox" autocomplete="off">Hide Extra Lines</label>
       <button id="hideAll" type="button" value="hideAllButton">Hide All Graphs</button>
-      <label id="sortHNames">Sort heya names </label>
-        <select id="sortDropdown" autocomplete="off">
-          <option value="alphabetic">alphabetically</option>
-          <option value="newest">newest first</option>
-          <option value="oldest">oldest first</option>
-          <option value="closed">recently closed first</option>
-        </select>
     </fieldset>
-    <label><div id="legendTitle">Active heya (43) ▾</div></label>
+    <label><div id="legendTitle">▾ Active heya (43)</div></label>
     <div id="legends" autocomplete="off">
       <ul id="legendList">
       </ul>
     </div>
-    <label><div id="legendTitleDef">Defunct heya (66) <small>(shut down since WWII) ▾</small></div></label>
+    <label><div id="legendTitleDef">▾ Defunct heya (66) <small>(shut down since WWII)</small></div></label>
     <div id="legendsDef" autocomplete="off">
       <ul id="legendListDef">
       </ul>
     </div>
     <button type="button" class="collapsible">▾ INFORMATION</button>
     <div class="content">
-      <p><div class="whiteCircle"></div> - Heya Opening</p>
-      <p>△ - Heya Takeover</p>
-      <p><div class="blackCircle"></div> - Heya Closure</p>
+      <p><div class="whiteCircle"></div> - Heya opening</p>
+      <p>△ - Heya takeover</p>
+      <p><div class="blackCircle"></div> - Heya closure</p>
+      <p>🞫 - Heya branch-out</p>
+      <p><div class="blackSquare"></div> - Rikishi transfer from another heya</p>
+      <hr>
       <p>- Click-and-drag across graph to zoom in</p>
       <p>- Clicking on data points redirects you to Sumo Reference banzuke page with heya filtered</p>
       <p>- Graph on the lighter pink area of the graph (before 1988.03) can be inaccurate since its banzuke contain rikishi with no heya information</p>
@@ -969,6 +1906,8 @@ window.onload = function() {
     </div>
     <span id="display"></span>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type='text/javascript' src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
   </body>
 </html>
