@@ -548,9 +548,13 @@ window.onload = function() {
         else
           temp = temp + "Former " + e.entries[i].dataPoint.shisho;
       }
-      temp = temp + "<br><strong>" + e.entries[i].dataPoint.y[0] +
+      if (e.entries[i].dataPoint.y[1]) {
+        temp = temp + "<br><strong>" + e.entries[i].dataPoint.y[0] +
         "</strong> rikishi, <strong>" + (e.entries[i].dataPoint.y[0] - 
         e.entries[i].dataPoint.y[1]) + "</strong> sekitori";
+      }
+      else
+        temp = temp + "<br><strong>" + e.entries[i].dataPoint.y + "</strong> rikishi";
       if (e.entries[i].dataPoint.HBFrom) {
         temp = temp + "<br>Branched out of ";
         if (e.entries[i].dataPoint.HBFromNameThen !== "") {
