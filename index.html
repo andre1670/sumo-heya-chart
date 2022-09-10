@@ -1,3 +1,4 @@
+
 <!DOCTYPE HTML>
 <html lang="en">
 <html>
@@ -341,7 +342,7 @@ window.onload = function() {
   } 
 
   // Defunct heya extra
-  for (var i = DEF_HEYA_COUNT + (HEYA_COUNT * 2) + 2; i < (DEF_HEYA_COUNT + HEYA_COUNT + 1) * 2 - 1; i++) {
+  for (var i = DEF_HEYA_COUNT + (HEYA_COUNT * 2) + 2; i < (DEF_HEYA_COUNT + HEYA_COUNT + 1) * 2; i++) {
     chart.options.data[i] = {
       type: "line",
       markerSize: 0,
@@ -1781,7 +1782,7 @@ window.onload = function() {
     });
 
     $('li').click(function(event) {
-      for (var i = HEYA_COUNT + 1; i < HEYA_COUNT + DEF_HEYA_COUNT + 1; i++) {
+      for (var i = HEYA_COUNT + 1; i <= HEYA_COUNT + DEF_HEYA_COUNT + 1; i++) {
         if (chart.options.data[i].name === this.innerText) {
           if (typeof(chart.options.data[i].visible) === "undefined" || 
             chart.options.data[i].visible) {
@@ -1798,11 +1799,11 @@ window.onload = function() {
               chart.data[i].set("type", "line");
               chart.options.data[i].dataPoints = dps[i];
             }
+            chart.options.data[i].visible = true;
             if (document.getElementById("hideExtra").checked === true)
               chart.options.data[i + DEF_HEYA_COUNT + HEYA_COUNT + 1].visible = false;
             else
               chart.options.data[i + DEF_HEYA_COUNT + HEYA_COUNT + 1].visible = true;
-            chart.options.data[i].visible = true;
             this.style.color = dataColors[i];
             this.style.fontWeight = "bold";
           }
