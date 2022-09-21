@@ -17,6 +17,11 @@ body {
   font-family: Verdana;
   font-size: 120%;
   font-weight: bolder;
+  float: left;
+}
+
+#shusshinGraphLink {
+  float: left;
 }
 
 #creditText, [href] {
@@ -107,7 +112,7 @@ li {
 }
 
 #name0 {
-  text-decoration: underline;
+  font-style: italic;
 }
 
 .tooltip {
