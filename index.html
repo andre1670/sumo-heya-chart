@@ -290,7 +290,7 @@ window.onload = function() {
     fontFamily: "Arial",
     shared: false,
     cornerRadius: 0,
-    contentFormatter: tooltipNoSekitori
+    contentFormatter: dataPointTooltip
   };
 
   chart.options.data = [];
@@ -390,7 +390,6 @@ window.onload = function() {
           chart.options.data[i].dataPoints = dpsB[i];
         }
       }
-      chart.options.toolTip.contentFormatter = tooltipSekitori;
     } else {
       for (var i = 0; i < DEF_HEYA_COUNT + HEYA_COUNT + 1; i++) {
         if (chart.options.data[i].visible === true) {
@@ -398,7 +397,6 @@ window.onload = function() {
           chart.options.data[i].dataPoints = dps[i];
         }
       }
-      chart.options.toolTip.contentFormatter = tooltipNoSekitori;
     }
     chart.render();
   }
@@ -421,11 +419,12 @@ window.onload = function() {
     chart.render();
   }
 
-  function tooltipNoSekitori(e) {
+  function dataPointTooltip(e) {
     var str = "";
     var names = namesThen = [];
 
     for (var i = 0; i < e.entries.length; i++) {
+
       var temp = CanvasJS.formatDate(e.entries[i].dataPoint.x, "YYYY.MM") +
         " - <strong>";
 
@@ -433,131 +432,35 @@ window.onload = function() {
         temp = temp + e.entries[i].dataPoint.heyaName + "</strong> Beya";
       else
         temp = temp + e.entries[i].dataSeries.name + "</strong> Beya";
-      if (e.entries[i].dataPoint.heyaNameThen !== "" && 
-        typeof(e.entries[i].dataPoint.heyaNameThen) !== "undefined") 
+
+      if (typeof(e.entries[i].dataPoint.heyaNameThen) !== "undefined" && 
+        e.entries[i].dataPoint.heyaNameThen !== "") 
         temp = temp + "<br>(then " + e.entries[i].dataPoint.heyaNameThen + ")";
+
       if (e.entries[i].dataPoint.shisho !== "") {
         temp = temp + "<br>Shisho: ";
+
         if (e.entries[i].dataPoint.heyaNameThen === "Futabayama Dojo" || 
-          e.entries[i].dataPoint.heyaNameThen === "Yoshibayama Dojo")
+          e.entries[i].dataPoint.heyaNameThen === "Yoshibayama Dojo" ||
+          e.entries[i].dataPoint.shisho === "Yokozuna Tamanishiki")
           temp = temp + e.entries[i].dataPoint.shisho;
         else if (e.entries[i].dataPoint.shisho === "None") 
           temp = temp + "None";
         else
           temp = temp + "Former " + e.entries[i].dataPoint.shisho;
       }
-      temp = temp + "<br><strong>" + e.entries[i].dataPoint.y +
-        "</strong> rikishi";
-      if (e.entries[i].dataPoint.HBFrom) {
-        temp = temp + "<br>Branched out of ";
-        if (e.entries[i].dataPoint.HBFromNameThen !== "") {
-          temp = temp + e.entries[i].dataPoint.HBFromNameThen + 
-          " Beya (later <strong>" + e.entries[i].dataPoint.HBFrom + "</strong>)";
-        }
-        else
-          temp = temp + "<strong>" + e.entries[i].dataPoint.HBFrom + "</strong> Beya";
-      }
-      if (e.entries[i].dataPoint.branchOuter) {
-        if (e.entries[i].dataPoint.branchOuter === "Yokozuna Yoshibayama" ||
-          e.entries[i].dataPoint.branchOuter === "Yokozuna Futabayama") {
-          temp = temp + "<br>Active " + e.entries[i].dataPoint.branchOuter +
-          "<br>branched out and opened<br>" + e.entries[i].dataPoint.BOHNameThen + 
-          " (later <strong>" + e.entries[i].dataPoint.BOHName + "</strong> beya)";
-        } else {
-          temp = temp + "<br>Former " + e.entries[i].dataPoint.branchOuter +
-          "<br>branched out and opened<br>";
-          if (e.entries[i].dataPoint.BOHNameThen !== "") {
-            temp = temp + e.entries[i].dataPoint.BOHNameThen + " Beya (later <strong>" +
-            e.entries[i].dataPoint.BOHName + "</strong>)";
-          }
-          else {
-            temp = temp + "<strong>" + e.entries[i].dataPoint.BOHName + 
-            "</strong> Beya";
-          }
-        }
-      }
-      if (e.entries[i].dataPoint.HMHName) {
-        temp = temp + "<br>Rikishi moved from <strong>" + 
-        e.entries[i].dataPoint.HMHName + "</strong><br>Beya after its closure";
-      }
-      if (e.entries[i].dataPoint.movedTo) {
-        if (e.entries[i].dataPoint.movedTo !== "") {
-          if (e.entries[i].dataPoint.movedTo.includes(".") === true) {
-            names = e.entries[i].dataPoint.movedTo.split(".");
-            namesThen = e.entries[i].dataPoint.movedToThen.split(".");
-            temp = temp + "<br>Rikishi moved to ";
-            for (var j = 0; j < names.length; j++) {
-              if (namesThen[j] !== "")
-                temp = temp + "<br>";
-              temp = temp + "<strong>" + 
-              e.entries[i].dataPoint.movedTo.split(".")[j] + "</strong>";
-              if (namesThen[j] !== "")
-                temp = temp + " (then " + namesThen[j] + ")";
-              if (j !== names.length - 1)
-                temp = temp + ", ";
-              if (j % 2 !== 0 && j !== names.length - 1) 
-                temp = temp + "<br>";
-            }
-            temp = temp + " Beya"
-          } 
-          else {
-            if (e.entries[i].dataPoint.movedTo === "Rikishi retire")
-              temp = temp + "<br>All of its rikishi retire"
-            else {
-              temp = temp + "<br>Rikishi moved to ";
-              if (e.entries[i].dataPoint.movedToThen !== "") {
-                temp = temp + e.entries[i].dataPoint.movedToThen + " Beya (later <strong>" + 
-                e.entries[i].dataPoint.movedTo + "</strong>)";
-              }
-              else
-                temp = temp + "<strong>" + e.entries[i].dataPoint.movedTo + "</strong> Beya";
-              
-            }
-          }
-          temp = temp + "<br>after closure";
-        }
-      }
 
-      str = str.concat(temp);
-    }
-
-    return str;
-  }
-
-  function tooltipSekitori(e) {
-    var str = "";
-    var names = namesThen = [];
-
-    for (var i = 0; i < e.entries.length; i++) {
-      var temp = CanvasJS.formatDate(e.entries[i].dataPoint.x, "YYYY.MM") +
-        " - <strong>";
-
-      if (e.entries[i].dataPoint.heyaName)
-        temp = temp + e.entries[i].dataPoint.heyaName + "</strong> Beya";
-      else
-        temp = temp + e.entries[i].dataSeries.name + "</strong> Beya";
-      if (e.entries[i].dataPoint.heyaNameThen !== "" && 
-        typeof(e.entries[i].dataPoint.heyaNameThen) !== "undefined") 
-        temp = temp + "<br>(then " + e.entries[i].dataPoint.heyaNameThen + ")";
-      if (e.entries[i].dataPoint.shisho !== "") {
-        temp = temp + "<br>Shisho: ";
-        if (e.entries[i].dataPoint.heyaNameThen === "Futabayama Dojo" || 
-          e.entries[i].dataPoint.heyaNameThen === "Yoshibayama Dojo")
-          temp = temp + e.entries[i].dataPoint.shisho;
-        else if (e.entries[i].dataPoint.shisho === "None") 
-          temp = temp + "None";
-        else
-          temp = temp + "Former " + e.entries[i].dataPoint.shisho;
-      }
-      if (e.entries[i].dataPoint.y[1]) {
+      if (e.entries[i].dataPoint.y[0] || e.entries[i].dataPoint.y[1]) {
         temp = temp + "<br><strong>" + e.entries[i].dataPoint.y[0] +
         "</strong> rikishi, <strong>" + (e.entries[i].dataPoint.y[0] - 
         e.entries[i].dataPoint.y[1]) + "</strong> sekitori";
-      }
+      } 
       else
-        temp = temp + "<br><strong>" + e.entries[i].dataPoint.y + "</strong> rikishi";
+        temp = temp + "<br><strong>" + e.entries[i].dataPoint.y +"</strong> rikishi";
+
       if (e.entries[i].dataPoint.HBFrom) {
         temp = temp + "<br>Branched out of ";
+
         if (e.entries[i].dataPoint.HBFromNameThen !== "") {
           temp = temp + e.entries[i].dataPoint.HBFromNameThen + 
           " Beya (later <strong>" + e.entries[i].dataPoint.HBFrom + "</strong>)";
@@ -565,15 +468,19 @@ window.onload = function() {
         else
           temp = temp + "<strong>" + e.entries[i].dataPoint.HBFrom + "</strong> Beya";
       }
+
       if (e.entries[i].dataPoint.branchOuter) {
         if (e.entries[i].dataPoint.branchOuter === "Yokozuna Yoshibayama" ||
-          e.entries[i].dataPoint.branchOuter === "Yokozuna Futabayama") {
+          e.entries[i].dataPoint.branchOuter === "Yokozuna Futabayama" ||
+          e.entries[i].dataPoint.branchOuter === "Yokozuna Tamanishiki") {
           temp = temp + "<br>Active " + e.entries[i].dataPoint.branchOuter +
           "<br>branched out and opened<br>" + e.entries[i].dataPoint.BOHNameThen + 
           " (later <strong>" + e.entries[i].dataPoint.BOHName + "</strong> beya)";
-        } else {
+        } 
+        else {
           temp = temp + "<br>Former " + e.entries[i].dataPoint.branchOuter +
           "<br>branched out and opened<br>";
+
           if (e.entries[i].dataPoint.BOHNameThen !== "") {
             temp = temp + e.entries[i].dataPoint.BOHNameThen + " Beya (later <strong>" +
             e.entries[i].dataPoint.BOHName + "</strong>)";
@@ -584,21 +491,26 @@ window.onload = function() {
           }
         }
       }
+
       if (e.entries[i].dataPoint.HMHName) {
         temp = temp + "<br>Rikishi moved from <strong>" + 
         e.entries[i].dataPoint.HMHName + "</strong><br>Beya after its closure";
       }
+
       if (e.entries[i].dataPoint.movedTo) {
         if (e.entries[i].dataPoint.movedTo !== "") {
           if (e.entries[i].dataPoint.movedTo.includes(".") === true) {
             names = e.entries[i].dataPoint.movedTo.split(".");
             namesThen = e.entries[i].dataPoint.movedToThen.split(".");
             temp = temp + "<br>Rikishi moved to ";
+
             for (var j = 0; j < names.length; j++) {
               if (namesThen[j] !== "")
                 temp = temp + "<br>";
+
               temp = temp + "<strong>" + 
               e.entries[i].dataPoint.movedTo.split(".")[j] + "</strong>";
+
               if (namesThen[j] !== "")
                 temp = temp + " (then " + namesThen[j] + ")";
               if (j !== names.length - 1)
@@ -613,22 +525,20 @@ window.onload = function() {
               temp = temp + "<br>All of its rikishi retire"
             else {
               temp = temp + "<br>Rikishi moved to ";
+
               if (e.entries[i].dataPoint.movedToThen !== "") {
                 temp = temp + e.entries[i].dataPoint.movedToThen + " Beya (later <strong>" + 
                 e.entries[i].dataPoint.movedTo + "</strong>)";
               }
               else
                 temp = temp + "<strong>" + e.entries[i].dataPoint.movedTo + "</strong> Beya";
-              
             }
           }
           temp = temp + "<br>after closure";
         }
       }
-
-      str = str.concat(temp);
     }
-
+    str = str.concat(temp);
     return str;
   }
 
@@ -657,6 +567,7 @@ window.onload = function() {
                 y: null
               });
             }
+
             else if (hData[j][3] !== "") {
               if (hData[j][3] === "HB") {
                 dps[j].push({
@@ -875,7 +786,9 @@ window.onload = function() {
                   parseInt(hData[j][1])]
                 });
               }
-            } else {
+            }
+
+            else {
               dps[j].push({
                 shisho: hData[j][2],
                 label: hData[j][3],
@@ -1035,6 +948,7 @@ window.onload = function() {
     var hData = Create2DArray(DEF_HEYA_COUNT);
 
     csvLines = csv.split(/[\r?\n|\r|\n]+/);
+
     for (var i = 1; i < csvLines.length; i++) {
       if (csvLines[i].length > 0) {
         heya = csvLines[i].split(",");
@@ -1886,7 +1800,6 @@ window.onload = function() {
         legendDef.style.display = "block";
       }
     });
-
   }
 
 }
@@ -1898,8 +1811,10 @@ window.onload = function() {
       <title>Heya Graph</title>
       <div id="header">
         <a id="titleText">Heya Graph</a>
+        <a id="shusshinGraphLink" href="">Shusshin Graph</a>
         <a href="https://sumodb.sumogames.de/">Sumo Reference</a><a id="creditText">data compiled from</a>
       </div>
+      <br><br>
       <fieldset id="graphView">
         <div class="setViewport">
           Set view range: <input id="viewportRange" type="text" placeholder="yyyy.m - yyyy.m" autocomplete="off"> 
