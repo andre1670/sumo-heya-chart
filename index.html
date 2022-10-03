@@ -303,6 +303,7 @@ window.onload = function() {
       markerSize: 0,
       visible: false,
       cursor: "pointer",
+      lineThickness: 3,
       click: function(e) {
         window.open(e.dataPoint.url);
       },
@@ -318,6 +319,7 @@ window.onload = function() {
       markerSize: 0,
       visible: false,
       cursor: "pointer",
+      lineThickness: 3,
       click: function(e) {
         window.open(e.dataPoint.url);
       },
@@ -1605,7 +1607,7 @@ window.onload = function() {
     $('li').mouseover(function(event) {
       for (var i = 0; i <= HEYA_COUNT; i++) {
         if (chart.options.data[i].name === this.innerText) {
-          chart.options.data[i].lineThickness = 3;
+          chart.options.data[i].lineThickness = 4;
           chart.options.data[i].fillOpacity = .6;
           this.style.textDecoration = "underline";
         }
@@ -1616,7 +1618,7 @@ window.onload = function() {
     $('li').mouseout(function(event) {
       for (var i = 0; i <= HEYA_COUNT; i++) {
         if (chart.options.data[i].name === this.innerText) {
-          chart.options.data[i].lineThickness = 2;
+          chart.options.data[i].lineThickness = 3;
           chart.options.data[i].fillOpacity = .4;
           this.style.textDecoration = "none";
         }
@@ -1676,7 +1678,7 @@ window.onload = function() {
     $('li').mouseover(function(event) {
       for (var i = HEYA_COUNT + 1; i < HEYA_COUNT + DEF_HEYA_COUNT + 1; i++) {
         if (chart.options.data[i].name === this.innerText) {
-          chart.options.data[i].lineThickness = 3;
+          chart.options.data[i].lineThickness = 4;
           chart.options.data[i].fillOpacity = .6;
           this.style.textDecoration = "underline";
         }
@@ -1687,7 +1689,7 @@ window.onload = function() {
     $('li').mouseout(function(event) {
       for (var i = HEYA_COUNT + 1; i < HEYA_COUNT + DEF_HEYA_COUNT + 1; i++) {
         if (chart.options.data[i].name === this.innerText) {
-          chart.options.data[i].lineThickness = 2;
+          chart.options.data[i].lineThickness = 3;
           chart.options.data[i].fillOpacity = .4;
           this.style.textDecoration = "none";
         }
