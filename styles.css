@@ -161,7 +161,7 @@ li:not(.lineThru, :hover) > a {
 }
 .jqtl-container {
     overflow-y: auto;
-    height: 75vh !important;
+    height: 85vh !important;
     border-style: solid none;
     width: 90% !important;
     margin: unset !important;
