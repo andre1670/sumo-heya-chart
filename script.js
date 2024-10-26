@@ -969,7 +969,7 @@ $(document).ready(async function() {
                         document.getElementById("graphContainer").scrollIntoView({
                             behavior: "smooth",
                             block: "nearest",
-                            inline: "start"
+                            inline: "center"
                         });
                         chart.series[index].setState("hover");
                         for (var i = 0; i < chart.series.length; i++) {

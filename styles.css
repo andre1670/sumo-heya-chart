@@ -16,6 +16,9 @@ h1 {
     color: blue;
     cursor: pointer;
 }
+#saveChart {
+    white-space: nowrap;
+}
 #saveChart, #zoomSection {
     vertical-align: bottom;
 }

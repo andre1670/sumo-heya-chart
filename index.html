@@ -9,10 +9,9 @@
 	<link rel="stylesheet" type="text/css" href="styles.css"/>
 </head>
 <body>
-	<h1>Heya charts</h1>
-	<span style="display: block; margin: 5px;">pictures credit to <a href="http://heyaaz.nagioff.com/" target="_blank">Sumo A-Z</a></span>
+	<h1>Heya family tree timeline</h1>
 	<div id="timelineLegend">
-		<h4><b>Heya timeline legend</b></h4>
+		<h4><b>Heya legend</b></h4>
 		<div>
 			<div><div class="legendSymbol"></div> - opening</div>
 			<div><div class="legendSymbol" style="border-radius: 50%;"></div> - take over</div>
@@ -50,13 +49,16 @@
 		<button autocomplete="off" type="button" class="zoomButton">+</button>
 		<button autocomplete="off" type="button" class="zoomButton">-</button>
 	</div>
+	<span style="margin: 5px; font-size: 15px; vertical-align: bottom; white-space: nowrap;">pictures credit goes to <a href="http://heyaaz.nagioff.com/" target="_blank">Sumo A-Z</a></span>
 	<div id="heyaTimeline">
 		<div class="timeline-events"></div>
 	</div>
 	<hr>
 	<div id="graphSection">
-		<label><input id="averageCheck" type="checkbox" autocomplete="off"> Average each year </label>
-		<button type="button" id="hideAll">Hide all graphs</button>
+		<div style="width: fit-content; margin: auto;">
+			<label><input id="averageCheck" type="checkbox" autocomplete="off"> Average each year </label>
+			<button type="button" id="hideAll">Hide all graphs</button>
+		</div>
 		<div id="graphContainer"></div>
 		<ul id="legends">
 		</ul>
