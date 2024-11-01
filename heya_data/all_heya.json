@@ -689,7 +689,7 @@
       },
       {
         "date": "1923/01",
-        "event": "HS",
+        "event": "HM",
         "relation": [
           "Dewanoumi-28"
         ]
@@ -801,7 +801,7 @@
     ]
   },
   {
-    "name": "Futagoyama",
+    "name": "Takanohana",
     "id": 102,
     "active": false,
     "row": 29,
@@ -818,11 +818,33 @@
       },
       {
         "date": "1993/02/01",
+        "event": "HT",
+        "shisho": "Fujishima-O-Takanohana-4056",
+        "reason": "before 65"
+      },
+      {
+        "date": "2004/02/01",
+        "event": "HI",
+        "heyaName": "Takanohana",
+        "shisho": "Takanohana-Y-Takanohana-2",
+        "reason": "health"
+      },
+      {
+        "date": "2010/01/08",
+        "event": "CI",
+        "ichimon": "None"
+      },
+      {
+        "date": "2012/07/01",
+        "event": "CI",
+        "ichimon": "Takanohana"
+      },
+      {
+        "date": "2018/10/02",
         "event": "HS",
         "relation": [
-          "Fujishima-104"
-        ],
-        "reason": "before 65"
+          "Chiganoura-107"
+        ]
       }
     ]
   },
@@ -862,10 +884,10 @@
     ]
   },
   {
-    "name": "Takanohana",
+    "name": "Fujishima",
     "id": 104,
     "active": false,
-    "row": 27,
+    "row": 26,
     "events": [
       {
         "date": "1982/02",
@@ -879,31 +901,9 @@
       },
       {
         "date": "1993/02/01",
-        "event": "CK",
-        "heyaName": "Futagoyama"
-      },
-      {
-        "date": "2004/02/01",
-        "event": "HI",
-        "heyaName": "Takanohana",
-        "shisho": "Takanohana-Y-Takanohana-2",
-        "reason": "health"
-      },
-      {
-        "date": "2010/01/08",
-        "event": "CI",
-        "ichimon": "None"
-      },
-      {
-        "date": "2012/07/01",
-        "event": "CI",
-        "ichimon": "Takanohana"
-      },
-      {
-        "date": "2018/10/02",
-        "event": "HS",
+        "event": "HM",
         "relation": [
-          "Chiganoura-107"
+          "Futagoyama-102"
         ]
       }
     ]
@@ -1084,7 +1084,7 @@
     "name": "Hanaregoma",
     "id": 110,
     "active": true,
-    "row": 28,
+    "row": 27,
     "events": [
       {
         "date": "1990/02/18",
@@ -1404,7 +1404,7 @@
     "name": "Araiso",
     "id": 121,
     "active": false,
-    "row": 26,
+    "row": 28,
     "events": [
       {
         "date": "1993/05/27",
@@ -1413,7 +1413,7 @@
         "ichimon": "Nishonoseki",
         "shisho": "Araiso-K-Futagodake-4045",
         "relation": [
-          "Futagoyama-104"
+          "Futagoyama-102"
         ]
       },
       {
@@ -2204,7 +2204,7 @@
       },
       {
         "date": "1963/05/29",
-        "event": "HS",
+        "event": "HM",
         "relation": [
           "Asahiyama-208"
         ]
@@ -2411,7 +2411,7 @@
       },
       {
         "date": "1951/01/11",
-        "event": "HS",
+        "event": "HM",
         "relation": [
           "Takashima-201"
         ]
@@ -3207,9 +3207,9 @@
     ]
   },
   {
-    "name": "Takasago",
+    "name": "Wakamatsu",
     "id": 400,
-    "active": true,
+    "active": false,
     "row": 19,
     "events": [
       {
@@ -3247,22 +3247,18 @@
       },
       {
         "date": "2002/02/05",
-        "event": "CK",
-        "heyaName": "Takasago"
-      },
-      {
-        "date": "2020/11/26",
-        "event": "HT",
-        "shisho": "Nishikijima-S-Asasekiryu-1009",
-        "reason": "before 65"
+        "event": "HM",
+        "relation": [
+          "Takasago-401"
+        ]
       }
     ]
   },
   {
     "name": "Takasago",
     "id": 401,
-    "active": false,
-    "row": 22,
+    "active": true,
+    "row": 21,
     "events": [
       {
         "date": "1910/01",
@@ -3296,10 +3292,14 @@
       },
       {
         "date": "2002/02/05",
-        "event": "HS",
-        "relation": [
-          "Wakamatsu-400"
-        ],
+        "event": "HT",
+        "shisho": "Wakamatsu-O-Asashio IV-1379",
+        "reason": "before 65"
+      },
+      {
+        "date": "2020/11/26",
+        "event": "HT",
+        "shisho": "Nishikijima-S-Asasekiryu-1009",
         "reason": "before 65"
       }
     ]
@@ -3329,19 +3329,20 @@
     "row": 17,
     "events": [
       {
-        "date": "1974/07",
+        "date": "1967/01/31",
         "event": "HB",
-        "heyaName": "Izutsu",
+        "heyaName": "Kokonoe",
         "ichimon": "Takasago",
-        "shisho": "Retired-Y-Kitanofuji-4025",
+        "shisho": "Kokonoe-Y-Chiyonoyama-3867",
         "relation": [
-          "Kokonoe-404"
+          "Dewanoumi-28"
         ]
       },
       {
         "date": "1977/11",
-        "event": "CK",
-        "heyaName": "Kokonoe"
+        "event": "HT",
+        "shisho": "Izutsu-Y-Kitanofuji-4025",
+        "reason": "decease"
       },
       {
         "date": "1992/04/01",
@@ -3357,28 +3358,27 @@
     ]
   },
   {
-    "name": "Kokonoe",
+    "name": "Izutsu",
     "id": 404,
     "active": false,
     "row": 16,
     "events": [
       {
-        "date": "1967/01/31",
+        "date": "1974/07",
         "event": "HB",
-        "heyaName": "Kokonoe",
+        "heyaName": "Izutsu",
         "ichimon": "Takasago",
-        "shisho": "Kokonoe-Y-Chiyonoyama-3867",
+        "shisho": "Retired-Y-Kitanofuji-4025",
         "relation": [
-          "Dewanoumi-28"
+          "Kokonoe-403"
         ]
       },
       {
         "date": "1977/11",
-        "event": "HS",
+        "event": "HM",
         "relation": [
-          "Izutsu-403"
-        ],
-        "reason": "decease"
+          "Kokonoe-403"
+        ]
       }
     ]
   },
@@ -3395,7 +3395,7 @@
         "ichimon": "Takasago",
         "shisho": "Nishikido-S-Mitoizumi-28",
         "relation": [
-          "Takasago-400"
+          "Takasago-401"
         ]
       }
     ]
@@ -3404,7 +3404,7 @@
     "name": "Nakamura",
     "id": 406,
     "active": false,
-    "row": 23,
+    "row": 22,
     "events": [
       {
         "date": "1986/05/30",
@@ -3430,7 +3430,7 @@
     "name": "Azumazeki",
     "id": 407,
     "active": false,
-    "row": 21,
+    "row": 23,
     "events": [
       {
         "date": "1986/02/02",
@@ -3467,7 +3467,7 @@
     "name": "Furiwake",
     "id": 408,
     "active": false,
-    "row": 23,
+    "row": 22,
     "events": [
       {
         "date": "1962/09",
@@ -3489,7 +3489,7 @@
     "name": "Sanoyama",
     "id": 410,
     "active": false,
-    "row": 21,
+    "row": 23,
     "events": [
       {
         "date": "1955/03",
@@ -3590,7 +3590,7 @@
     "name": "Sadogatake",
     "id": 414,
     "active": false,
-    "row": 23,
+    "row": 22,
     "events": [
       {
         "date": "1929/05",
@@ -3638,7 +3638,7 @@
     "name": "Onoe",
     "id": 416,
     "active": false,
-    "row": 23,
+    "row": 24,
     "events": [
       {
         "date": "1950/01",
@@ -3699,7 +3699,7 @@
     "name": "Inagawa",
     "id": 418,
     "active": false,
-    "row": 21,
+    "row": 22,
     "events": [
       {
         "date": "1910/01",
@@ -4645,9 +4645,13 @@
       },
       {
         "date": "1916/05",
-        "event": "HT/CI",
-        "ichimon": "Isegahama",
+        "event": "HT",
         "shisho": "Active-Y-Otori-3594"
+      },
+      {
+        "date": "1944/01",
+        "event": "CI",
+        "ichimon": "Isegahama"
       },
       {
         "date": "1956/11/16",
