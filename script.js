@@ -177,6 +177,7 @@ $(document).ready(async function() {
                         else if (event[k] == "HBa")
                             eventObj.size = 13;
                         break;
+                    case "HM":
                     case "HS":
                         eventObj.extend.shape = "square";
                         if (dates.length == 0)
@@ -201,7 +202,9 @@ $(document).ready(async function() {
                                         invis: ""
                                     }
                                 };
-                                if (mergingHeya.row > heya[i].row)
+                                if (event[k] == "HM")
+                                    eventObj.image = "imgs/letterm.svg";
+                                else if (mergingHeya.row > heya[i].row)
                                     eventObj.image = "imgs/xmark-linelow.svg";
                                 else eventObj.image = "imgs/xmark-linehigh.svg";
 
@@ -876,10 +879,11 @@ $(document).ready(async function() {
                         case "CK":
                         case "HI":
                         case "HS":
+                        case "HM":
                             var kabu = thisEventDetails.hasOwnProperty("heyaName") ? thisEventDetails.heyaName : heyaName;
                             var clauses = [];
                             
-                            if (event != "HS") {
+                            if (event != "HS" && event != "HM") {
                                 if (!thisEventDetails.hasOwnProperty("shisho"))
                                     shishoInfo += heyaName + "-oyakata";
                                 if (shishoStatus == "Retired")
@@ -890,8 +894,12 @@ $(document).ready(async function() {
                                     clauses.push("changed kabu to <i>" + kabu + "</i>");
                                 shishoInfo += ' ';
                             }
-                            else
+                            else if (event == "HS")
                                 clauses.push("The heya was closed down");
+                            else {
+                                clauses.push("The heya was merged with ");
+                                clauses[clauses.length - 1] += thisEventDetails.relation[0].split('-')[0] + "-beya";
+                            }
 
                             if (event.startsWith("HB"))
                                 clauses.push("branched out from " + thisEventDetails.relation[0].split('-')[0] + "-beya");
